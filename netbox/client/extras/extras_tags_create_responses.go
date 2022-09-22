@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasTagsCreateReader is a Reader for the ExtrasTagsCreate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasTagsCreateReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return result, nil
 	default:
-		result := NewExtrasTagsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasTagsCreateCreated() *ExtrasTagsCreateCreated {
 	return &ExtrasTagsCreateCreated{}
 }
 
-/* ExtrasTagsCreateCreated describes a response with status code 201, with default header values.
+/*
+ExtrasTagsCreateCreated describes a response with status code 201, with default header values.
 
 ExtrasTagsCreateCreated extras tags create created
 */
@@ -69,9 +63,39 @@ type ExtrasTagsCreateCreated struct {
 	Payload *models.Tag
 }
 
+// IsSuccess returns true when this extras tags create created response has a 2xx status code
+func (o *ExtrasTagsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras tags create created response has a 3xx status code
+func (o *ExtrasTagsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras tags create created response has a 4xx status code
+func (o *ExtrasTagsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras tags create created response has a 5xx status code
+func (o *ExtrasTagsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras tags create created response a status code equal to that given
+func (o *ExtrasTagsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *ExtrasTagsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /extras/tags/][%d] extrasTagsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *ExtrasTagsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /extras/tags/][%d] extrasTagsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *ExtrasTagsCreateCreated) GetPayload() *models.Tag {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasTagsCreateCreated) readResponse(response runtime.ClientResponse, 
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasTagsCreateDefault creates a ExtrasTagsCreateDefault with default headers values
-func NewExtrasTagsCreateDefault(code int) *ExtrasTagsCreateDefault {
-	return &ExtrasTagsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasTagsCreateDefault describes a response with status code -1, with default header values.
-
-ExtrasTagsCreateDefault extras tags create default
-*/
-type ExtrasTagsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras tags create default response
-func (o *ExtrasTagsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasTagsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /extras/tags/][%d] extras_tags_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasTagsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasTagsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

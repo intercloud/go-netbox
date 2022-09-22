@@ -56,8 +56,8 @@ type WritableIPAddress struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -74,14 +74,14 @@ type WritableIPAddress struct {
 	//
 	// Hostname or FQDN (not case-sensitive)
 	// Max Length: 255
-	// Pattern: ^([0-9A-Za-z_-]+|\*)(\.[0-9A-Za-z_-]+)*\.?$
+	// Pattern: ^[0-9A-Za-z._-]+$
 	DNSName string `json:"dns_name,omitempty"`
 
 	// Family
 	// Read Only: true
 	Family string `json:"family,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -102,7 +102,7 @@ type WritableIPAddress struct {
 	// Role
 	//
 	// The functional role of this IP
-	// Enum: [loopback secondary anycast vip vrrp hsrp glbp carp g]
+	// Enum: [loopback secondary anycast vip vrrp hsrp glbp carp]
 	Role string `json:"role,omitempty"`
 
 	// Status
@@ -112,7 +112,7 @@ type WritableIPAddress struct {
 	Status string `json:"status,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Tenant
 	Tenant *int64 `json:"tenant,omitempty"`
@@ -206,7 +206,7 @@ func (m *WritableIPAddress) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -234,7 +234,7 @@ func (m *WritableIPAddress) validateDNSName(formats strfmt.Registry) error {
 		return err
 	}
 
-	if err := validate.Pattern("dns_name", "body", m.DNSName, `^([0-9A-Za-z_-]+|\*)(\.[0-9A-Za-z_-]+)*\.?$`); err != nil {
+	if err := validate.Pattern("dns_name", "body", m.DNSName, `^[0-9A-Za-z._-]+$`); err != nil {
 		return err
 	}
 
@@ -257,7 +257,7 @@ var writableIpAddressTypeRolePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["loopback","secondary","anycast","vip","vrrp","hsrp","glbp","carp","g"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["loopback","secondary","anycast","vip","vrrp","hsrp","glbp","carp"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -290,9 +290,6 @@ const (
 
 	// WritableIPAddressRoleCarp captures enum value "carp"
 	WritableIPAddressRoleCarp string = "carp"
-
-	// WritableIPAddressRoleG captures enum value "g"
-	WritableIPAddressRoleG string = "g"
 )
 
 // prop value enum
@@ -458,7 +455,7 @@ func (m *WritableIPAddress) contextValidateAssignedObject(ctx context.Context, f
 
 func (m *WritableIPAddress) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

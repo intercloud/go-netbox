@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimPowerOutletsUpdateParams creates a new DcimPowerOutletsUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimPowerOutletsUpdateParamsWithHTTPClient(client *http.Client) *DcimPow
 	}
 }
 
-/* DcimPowerOutletsUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim power outlets update operation.
+/*
+DcimPowerOutletsUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim power outlets update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimPowerOutletsUpdateParams struct {
 

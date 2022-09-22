@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRackReservationsListReader is a Reader for the DcimRackReservationsList structure.
@@ -50,14 +50,7 @@ func (o *DcimRackReservationsListReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewDcimRackReservationsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimRackReservationsListOK() *DcimRackReservationsListOK {
 	return &DcimRackReservationsListOK{}
 }
 
-/* DcimRackReservationsListOK describes a response with status code 200, with default header values.
+/*
+DcimRackReservationsListOK describes a response with status code 200, with default header values.
 
 DcimRackReservationsListOK dcim rack reservations list o k
 */
@@ -74,9 +68,39 @@ type DcimRackReservationsListOK struct {
 	Payload *DcimRackReservationsListOKBody
 }
 
+// IsSuccess returns true when this dcim rack reservations list o k response has a 2xx status code
+func (o *DcimRackReservationsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rack reservations list o k response has a 3xx status code
+func (o *DcimRackReservationsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rack reservations list o k response has a 4xx status code
+func (o *DcimRackReservationsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rack reservations list o k response has a 5xx status code
+func (o *DcimRackReservationsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rack reservations list o k response a status code equal to that given
+func (o *DcimRackReservationsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRackReservationsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/rack-reservations/][%d] dcimRackReservationsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRackReservationsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/rack-reservations/][%d] dcimRackReservationsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRackReservationsListOK) GetPayload() *DcimRackReservationsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimRackReservationsListOK) readResponse(response runtime.ClientRespons
 	return nil
 }
 
-// NewDcimRackReservationsListDefault creates a DcimRackReservationsListDefault with default headers values
-func NewDcimRackReservationsListDefault(code int) *DcimRackReservationsListDefault {
-	return &DcimRackReservationsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRackReservationsListDefault describes a response with status code -1, with default header values.
-
-DcimRackReservationsListDefault dcim rack reservations list default
-*/
-type DcimRackReservationsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rack reservations list default response
-func (o *DcimRackReservationsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRackReservationsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/rack-reservations/][%d] dcim_rack-reservations_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRackReservationsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRackReservationsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimRackReservationsListOKBody dcim rack reservations list o k body
+/*
+DcimRackReservationsListOKBody dcim rack reservations list o k body
 swagger:model DcimRackReservationsListOKBody
 */
 type DcimRackReservationsListOKBody struct {

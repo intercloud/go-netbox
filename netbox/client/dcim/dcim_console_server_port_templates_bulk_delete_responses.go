@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimConsoleServerPortTemplatesBulkDeleteReader) ReadResponse(response r
 		}
 		return result, nil
 	default:
-		result := NewDcimConsoleServerPortTemplatesBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimConsoleServerPortTemplatesBulkDeleteNoContent() *DcimConsoleServerPo
 	return &DcimConsoleServerPortTemplatesBulkDeleteNoContent{}
 }
 
-/* DcimConsoleServerPortTemplatesBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimConsoleServerPortTemplatesBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimConsoleServerPortTemplatesBulkDeleteNoContent dcim console server port templates bulk delete no content
 */
 type DcimConsoleServerPortTemplatesBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim console server port templates bulk delete no content response has a 2xx status code
+func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim console server port templates bulk delete no content response has a 3xx status code
+func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim console server port templates bulk delete no content response has a 4xx status code
+func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim console server port templates bulk delete no content response has a 5xx status code
+func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim console server port templates bulk delete no content response a status code equal to that given
+func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/console-server-port-templates/][%d] dcimConsoleServerPortTemplatesBulkDeleteNoContent ", 204)
 }
 
+func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/console-server-port-templates/][%d] dcimConsoleServerPortTemplatesBulkDeleteNoContent ", 204)
+}
+
 func (o *DcimConsoleServerPortTemplatesBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimConsoleServerPortTemplatesBulkDeleteDefault creates a DcimConsoleServerPortTemplatesBulkDeleteDefault with default headers values
-func NewDcimConsoleServerPortTemplatesBulkDeleteDefault(code int) *DcimConsoleServerPortTemplatesBulkDeleteDefault {
-	return &DcimConsoleServerPortTemplatesBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimConsoleServerPortTemplatesBulkDeleteDefault describes a response with status code -1, with default header values.
-
-DcimConsoleServerPortTemplatesBulkDeleteDefault dcim console server port templates bulk delete default
-*/
-type DcimConsoleServerPortTemplatesBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim console server port templates bulk delete default response
-func (o *DcimConsoleServerPortTemplatesBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimConsoleServerPortTemplatesBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/console-server-port-templates/][%d] dcim_console-server-port-templates_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimConsoleServerPortTemplatesBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimConsoleServerPortTemplatesBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -22,7 +22,6 @@ package ipam
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *IpamFhrpGroupsDeleteReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewIpamFhrpGroupsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewIpamFhrpGroupsDeleteNoContent() *IpamFhrpGroupsDeleteNoContent {
 	return &IpamFhrpGroupsDeleteNoContent{}
 }
 
-/* IpamFhrpGroupsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamFhrpGroupsDeleteNoContent describes a response with status code 204, with default header values.
 
 IpamFhrpGroupsDeleteNoContent ipam fhrp groups delete no content
 */
 type IpamFhrpGroupsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this ipam fhrp groups delete no content response has a 2xx status code
+func (o *IpamFhrpGroupsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam fhrp groups delete no content response has a 3xx status code
+func (o *IpamFhrpGroupsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam fhrp groups delete no content response has a 4xx status code
+func (o *IpamFhrpGroupsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam fhrp groups delete no content response has a 5xx status code
+func (o *IpamFhrpGroupsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam fhrp groups delete no content response a status code equal to that given
+func (o *IpamFhrpGroupsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *IpamFhrpGroupsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /ipam/fhrp-groups/{id}/][%d] ipamFhrpGroupsDeleteNoContent ", 204)
 }
 
+func (o *IpamFhrpGroupsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /ipam/fhrp-groups/{id}/][%d] ipamFhrpGroupsDeleteNoContent ", 204)
+}
+
 func (o *IpamFhrpGroupsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewIpamFhrpGroupsDeleteDefault creates a IpamFhrpGroupsDeleteDefault with default headers values
-func NewIpamFhrpGroupsDeleteDefault(code int) *IpamFhrpGroupsDeleteDefault {
-	return &IpamFhrpGroupsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamFhrpGroupsDeleteDefault describes a response with status code -1, with default header values.
-
-IpamFhrpGroupsDeleteDefault ipam fhrp groups delete default
-*/
-type IpamFhrpGroupsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam fhrp groups delete default response
-func (o *IpamFhrpGroupsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamFhrpGroupsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/fhrp-groups/{id}/][%d] ipam_fhrp-groups_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamFhrpGroupsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamFhrpGroupsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

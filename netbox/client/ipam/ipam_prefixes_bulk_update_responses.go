@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamPrefixesBulkUpdateReader is a Reader for the IpamPrefixesBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *IpamPrefixesBulkUpdateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewIpamPrefixesBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamPrefixesBulkUpdateOK() *IpamPrefixesBulkUpdateOK {
 	return &IpamPrefixesBulkUpdateOK{}
 }
 
-/* IpamPrefixesBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+IpamPrefixesBulkUpdateOK describes a response with status code 200, with default header values.
 
 IpamPrefixesBulkUpdateOK ipam prefixes bulk update o k
 */
@@ -69,9 +63,39 @@ type IpamPrefixesBulkUpdateOK struct {
 	Payload *models.Prefix
 }
 
+// IsSuccess returns true when this ipam prefixes bulk update o k response has a 2xx status code
+func (o *IpamPrefixesBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam prefixes bulk update o k response has a 3xx status code
+func (o *IpamPrefixesBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam prefixes bulk update o k response has a 4xx status code
+func (o *IpamPrefixesBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam prefixes bulk update o k response has a 5xx status code
+func (o *IpamPrefixesBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam prefixes bulk update o k response a status code equal to that given
+func (o *IpamPrefixesBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamPrefixesBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /ipam/prefixes/][%d] ipamPrefixesBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamPrefixesBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /ipam/prefixes/][%d] ipamPrefixesBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamPrefixesBulkUpdateOK) GetPayload() *models.Prefix {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamPrefixesBulkUpdateOK) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamPrefixesBulkUpdateDefault creates a IpamPrefixesBulkUpdateDefault with default headers values
-func NewIpamPrefixesBulkUpdateDefault(code int) *IpamPrefixesBulkUpdateDefault {
-	return &IpamPrefixesBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamPrefixesBulkUpdateDefault describes a response with status code -1, with default header values.
-
-IpamPrefixesBulkUpdateDefault ipam prefixes bulk update default
-*/
-type IpamPrefixesBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam prefixes bulk update default response
-func (o *IpamPrefixesBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamPrefixesBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /ipam/prefixes/][%d] ipam_prefixes_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamPrefixesBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamPrefixesBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

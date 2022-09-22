@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewCircuitsCircuitsCreateParams creates a new CircuitsCircuitsCreateParams object,
@@ -69,10 +69,12 @@ func NewCircuitsCircuitsCreateParamsWithHTTPClient(client *http.Client) *Circuit
 	}
 }
 
-/* CircuitsCircuitsCreateParams contains all the parameters to send to the API endpoint
-   for the circuits circuits create operation.
+/*
+CircuitsCircuitsCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the circuits circuits create operation.
+
+	Typically these are written to a http.Request.
 */
 type CircuitsCircuitsCreateParams struct {
 

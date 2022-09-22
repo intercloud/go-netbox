@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimInterfacesBulkUpdateReader is a Reader for the DcimInterfacesBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimInterfacesBulkUpdateReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewDcimInterfacesBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimInterfacesBulkUpdateOK() *DcimInterfacesBulkUpdateOK {
 	return &DcimInterfacesBulkUpdateOK{}
 }
 
-/* DcimInterfacesBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimInterfacesBulkUpdateOK describes a response with status code 200, with default header values.
 
 DcimInterfacesBulkUpdateOK dcim interfaces bulk update o k
 */
@@ -69,9 +63,39 @@ type DcimInterfacesBulkUpdateOK struct {
 	Payload *models.Interface
 }
 
+// IsSuccess returns true when this dcim interfaces bulk update o k response has a 2xx status code
+func (o *DcimInterfacesBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim interfaces bulk update o k response has a 3xx status code
+func (o *DcimInterfacesBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim interfaces bulk update o k response has a 4xx status code
+func (o *DcimInterfacesBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim interfaces bulk update o k response has a 5xx status code
+func (o *DcimInterfacesBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim interfaces bulk update o k response a status code equal to that given
+func (o *DcimInterfacesBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimInterfacesBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /dcim/interfaces/][%d] dcimInterfacesBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimInterfacesBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /dcim/interfaces/][%d] dcimInterfacesBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimInterfacesBulkUpdateOK) GetPayload() *models.Interface {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimInterfacesBulkUpdateOK) readResponse(response runtime.ClientRespons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimInterfacesBulkUpdateDefault creates a DcimInterfacesBulkUpdateDefault with default headers values
-func NewDcimInterfacesBulkUpdateDefault(code int) *DcimInterfacesBulkUpdateDefault {
-	return &DcimInterfacesBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInterfacesBulkUpdateDefault describes a response with status code -1, with default header values.
-
-DcimInterfacesBulkUpdateDefault dcim interfaces bulk update default
-*/
-type DcimInterfacesBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim interfaces bulk update default response
-func (o *DcimInterfacesBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInterfacesBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /dcim/interfaces/][%d] dcim_interfaces_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInterfacesBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInterfacesBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

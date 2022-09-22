@@ -22,7 +22,6 @@ package wireless
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *WirelessWirelessLansDeleteReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewWirelessWirelessLansDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewWirelessWirelessLansDeleteNoContent() *WirelessWirelessLansDeleteNoConte
 	return &WirelessWirelessLansDeleteNoContent{}
 }
 
-/* WirelessWirelessLansDeleteNoContent describes a response with status code 204, with default header values.
+/*
+WirelessWirelessLansDeleteNoContent describes a response with status code 204, with default header values.
 
 WirelessWirelessLansDeleteNoContent wireless wireless lans delete no content
 */
 type WirelessWirelessLansDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this wireless wireless lans delete no content response has a 2xx status code
+func (o *WirelessWirelessLansDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this wireless wireless lans delete no content response has a 3xx status code
+func (o *WirelessWirelessLansDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this wireless wireless lans delete no content response has a 4xx status code
+func (o *WirelessWirelessLansDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this wireless wireless lans delete no content response has a 5xx status code
+func (o *WirelessWirelessLansDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this wireless wireless lans delete no content response a status code equal to that given
+func (o *WirelessWirelessLansDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *WirelessWirelessLansDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /wireless/wireless-lans/{id}/][%d] wirelessWirelessLansDeleteNoContent ", 204)
 }
 
+func (o *WirelessWirelessLansDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /wireless/wireless-lans/{id}/][%d] wirelessWirelessLansDeleteNoContent ", 204)
+}
+
 func (o *WirelessWirelessLansDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewWirelessWirelessLansDeleteDefault creates a WirelessWirelessLansDeleteDefault with default headers values
-func NewWirelessWirelessLansDeleteDefault(code int) *WirelessWirelessLansDeleteDefault {
-	return &WirelessWirelessLansDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* WirelessWirelessLansDeleteDefault describes a response with status code -1, with default header values.
-
-WirelessWirelessLansDeleteDefault wireless wireless lans delete default
-*/
-type WirelessWirelessLansDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the wireless wireless lans delete default response
-func (o *WirelessWirelessLansDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *WirelessWirelessLansDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /wireless/wireless-lans/{id}/][%d] wireless_wireless-lans_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *WirelessWirelessLansDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *WirelessWirelessLansDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

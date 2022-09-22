@@ -22,7 +22,6 @@ package virtualization
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *VirtualizationClusterGroupsBulkDeleteReader) ReadResponse(response runt
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationClusterGroupsBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewVirtualizationClusterGroupsBulkDeleteNoContent() *VirtualizationClusterG
 	return &VirtualizationClusterGroupsBulkDeleteNoContent{}
 }
 
-/* VirtualizationClusterGroupsBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+VirtualizationClusterGroupsBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 VirtualizationClusterGroupsBulkDeleteNoContent virtualization cluster groups bulk delete no content
 */
 type VirtualizationClusterGroupsBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this virtualization cluster groups bulk delete no content response has a 2xx status code
+func (o *VirtualizationClusterGroupsBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization cluster groups bulk delete no content response has a 3xx status code
+func (o *VirtualizationClusterGroupsBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization cluster groups bulk delete no content response has a 4xx status code
+func (o *VirtualizationClusterGroupsBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization cluster groups bulk delete no content response has a 5xx status code
+func (o *VirtualizationClusterGroupsBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization cluster groups bulk delete no content response a status code equal to that given
+func (o *VirtualizationClusterGroupsBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *VirtualizationClusterGroupsBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /virtualization/cluster-groups/][%d] virtualizationClusterGroupsBulkDeleteNoContent ", 204)
 }
 
+func (o *VirtualizationClusterGroupsBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /virtualization/cluster-groups/][%d] virtualizationClusterGroupsBulkDeleteNoContent ", 204)
+}
+
 func (o *VirtualizationClusterGroupsBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewVirtualizationClusterGroupsBulkDeleteDefault creates a VirtualizationClusterGroupsBulkDeleteDefault with default headers values
-func NewVirtualizationClusterGroupsBulkDeleteDefault(code int) *VirtualizationClusterGroupsBulkDeleteDefault {
-	return &VirtualizationClusterGroupsBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationClusterGroupsBulkDeleteDefault describes a response with status code -1, with default header values.
-
-VirtualizationClusterGroupsBulkDeleteDefault virtualization cluster groups bulk delete default
-*/
-type VirtualizationClusterGroupsBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization cluster groups bulk delete default response
-func (o *VirtualizationClusterGroupsBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationClusterGroupsBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /virtualization/cluster-groups/][%d] virtualization_cluster-groups_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationClusterGroupsBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationClusterGroupsBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

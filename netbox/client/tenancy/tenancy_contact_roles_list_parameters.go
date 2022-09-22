@@ -68,10 +68,12 @@ func NewTenancyContactRolesListParamsWithHTTPClient(client *http.Client) *Tenanc
 	}
 }
 
-/* TenancyContactRolesListParams contains all the parameters to send to the API endpoint
-   for the tenancy contact roles list operation.
+/*
+TenancyContactRolesListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the tenancy contact roles list operation.
+
+	Typically these are written to a http.Request.
 */
 type TenancyContactRolesListParams struct {
 
@@ -83,36 +85,6 @@ type TenancyContactRolesListParams struct {
 
 	// CreatedLte.
 	CreatedLte *string
-
-	// Description.
-	Description *string
-
-	// DescriptionIc.
-	DescriptionIc *string
-
-	// DescriptionIe.
-	DescriptionIe *string
-
-	// DescriptionIew.
-	DescriptionIew *string
-
-	// DescriptionIsw.
-	DescriptionIsw *string
-
-	// Descriptionn.
-	Descriptionn *string
-
-	// DescriptionNic.
-	DescriptionNic *string
-
-	// DescriptionNie.
-	DescriptionNie *string
-
-	// DescriptionNiew.
-	DescriptionNiew *string
-
-	// DescriptionNisw.
-	DescriptionNisw *string
 
 	// ID.
 	ID *string
@@ -149,6 +121,9 @@ type TenancyContactRolesListParams struct {
 
 	// Name.
 	Name *string
+
+	// NameEmpty.
+	NameEmpty *string
 
 	// NameIc.
 	NameIc *string
@@ -188,6 +163,9 @@ type TenancyContactRolesListParams struct {
 
 	// Slug.
 	Slug *string
+
+	// SlugEmpty.
+	SlugEmpty *string
 
 	// SlugIc.
 	SlugIc *string
@@ -306,116 +284,6 @@ func (o *TenancyContactRolesListParams) WithCreatedLte(createdLte *string) *Tena
 // SetCreatedLte adds the createdLte to the tenancy contact roles list params
 func (o *TenancyContactRolesListParams) SetCreatedLte(createdLte *string) {
 	o.CreatedLte = createdLte
-}
-
-// WithDescription adds the description to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescription(description *string) *TenancyContactRolesListParams {
-	o.SetDescription(description)
-	return o
-}
-
-// SetDescription adds the description to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescription(description *string) {
-	o.Description = description
-}
-
-// WithDescriptionIc adds the descriptionIc to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionIc(descriptionIc *string) *TenancyContactRolesListParams {
-	o.SetDescriptionIc(descriptionIc)
-	return o
-}
-
-// SetDescriptionIc adds the descriptionIc to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionIc(descriptionIc *string) {
-	o.DescriptionIc = descriptionIc
-}
-
-// WithDescriptionIe adds the descriptionIe to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionIe(descriptionIe *string) *TenancyContactRolesListParams {
-	o.SetDescriptionIe(descriptionIe)
-	return o
-}
-
-// SetDescriptionIe adds the descriptionIe to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionIe(descriptionIe *string) {
-	o.DescriptionIe = descriptionIe
-}
-
-// WithDescriptionIew adds the descriptionIew to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionIew(descriptionIew *string) *TenancyContactRolesListParams {
-	o.SetDescriptionIew(descriptionIew)
-	return o
-}
-
-// SetDescriptionIew adds the descriptionIew to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionIew(descriptionIew *string) {
-	o.DescriptionIew = descriptionIew
-}
-
-// WithDescriptionIsw adds the descriptionIsw to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionIsw(descriptionIsw *string) *TenancyContactRolesListParams {
-	o.SetDescriptionIsw(descriptionIsw)
-	return o
-}
-
-// SetDescriptionIsw adds the descriptionIsw to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionIsw(descriptionIsw *string) {
-	o.DescriptionIsw = descriptionIsw
-}
-
-// WithDescriptionn adds the descriptionn to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionn(descriptionn *string) *TenancyContactRolesListParams {
-	o.SetDescriptionn(descriptionn)
-	return o
-}
-
-// SetDescriptionn adds the descriptionN to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionn(descriptionn *string) {
-	o.Descriptionn = descriptionn
-}
-
-// WithDescriptionNic adds the descriptionNic to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionNic(descriptionNic *string) *TenancyContactRolesListParams {
-	o.SetDescriptionNic(descriptionNic)
-	return o
-}
-
-// SetDescriptionNic adds the descriptionNic to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionNic(descriptionNic *string) {
-	o.DescriptionNic = descriptionNic
-}
-
-// WithDescriptionNie adds the descriptionNie to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionNie(descriptionNie *string) *TenancyContactRolesListParams {
-	o.SetDescriptionNie(descriptionNie)
-	return o
-}
-
-// SetDescriptionNie adds the descriptionNie to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionNie(descriptionNie *string) {
-	o.DescriptionNie = descriptionNie
-}
-
-// WithDescriptionNiew adds the descriptionNiew to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionNiew(descriptionNiew *string) *TenancyContactRolesListParams {
-	o.SetDescriptionNiew(descriptionNiew)
-	return o
-}
-
-// SetDescriptionNiew adds the descriptionNiew to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionNiew(descriptionNiew *string) {
-	o.DescriptionNiew = descriptionNiew
-}
-
-// WithDescriptionNisw adds the descriptionNisw to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) WithDescriptionNisw(descriptionNisw *string) *TenancyContactRolesListParams {
-	o.SetDescriptionNisw(descriptionNisw)
-	return o
-}
-
-// SetDescriptionNisw adds the descriptionNisw to the tenancy contact roles list params
-func (o *TenancyContactRolesListParams) SetDescriptionNisw(descriptionNisw *string) {
-	o.DescriptionNisw = descriptionNisw
 }
 
 // WithID adds the id to the tenancy contact roles list params
@@ -537,6 +405,17 @@ func (o *TenancyContactRolesListParams) WithName(name *string) *TenancyContactRo
 // SetName adds the name to the tenancy contact roles list params
 func (o *TenancyContactRolesListParams) SetName(name *string) {
 	o.Name = name
+}
+
+// WithNameEmpty adds the nameEmpty to the tenancy contact roles list params
+func (o *TenancyContactRolesListParams) WithNameEmpty(nameEmpty *string) *TenancyContactRolesListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the tenancy contact roles list params
+func (o *TenancyContactRolesListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
 }
 
 // WithNameIc adds the nameIc to the tenancy contact roles list params
@@ -669,6 +548,17 @@ func (o *TenancyContactRolesListParams) WithSlug(slug *string) *TenancyContactRo
 // SetSlug adds the slug to the tenancy contact roles list params
 func (o *TenancyContactRolesListParams) SetSlug(slug *string) {
 	o.Slug = slug
+}
+
+// WithSlugEmpty adds the slugEmpty to the tenancy contact roles list params
+func (o *TenancyContactRolesListParams) WithSlugEmpty(slugEmpty *string) *TenancyContactRolesListParams {
+	o.SetSlugEmpty(slugEmpty)
+	return o
+}
+
+// SetSlugEmpty adds the slugEmpty to the tenancy contact roles list params
+func (o *TenancyContactRolesListParams) SetSlugEmpty(slugEmpty *string) {
+	o.SlugEmpty = slugEmpty
 }
 
 // WithSlugIc adds the slugIc to the tenancy contact roles list params
@@ -846,176 +736,6 @@ func (o *TenancyContactRolesListParams) WriteToRequest(r runtime.ClientRequest, 
 		if qCreatedLte != "" {
 
 			if err := r.SetQueryParam("created__lte", qCreatedLte); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Description != nil {
-
-		// query param description
-		var qrDescription string
-
-		if o.Description != nil {
-			qrDescription = *o.Description
-		}
-		qDescription := qrDescription
-		if qDescription != "" {
-
-			if err := r.SetQueryParam("description", qDescription); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIc != nil {
-
-		// query param description__ic
-		var qrDescriptionIc string
-
-		if o.DescriptionIc != nil {
-			qrDescriptionIc = *o.DescriptionIc
-		}
-		qDescriptionIc := qrDescriptionIc
-		if qDescriptionIc != "" {
-
-			if err := r.SetQueryParam("description__ic", qDescriptionIc); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIe != nil {
-
-		// query param description__ie
-		var qrDescriptionIe string
-
-		if o.DescriptionIe != nil {
-			qrDescriptionIe = *o.DescriptionIe
-		}
-		qDescriptionIe := qrDescriptionIe
-		if qDescriptionIe != "" {
-
-			if err := r.SetQueryParam("description__ie", qDescriptionIe); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIew != nil {
-
-		// query param description__iew
-		var qrDescriptionIew string
-
-		if o.DescriptionIew != nil {
-			qrDescriptionIew = *o.DescriptionIew
-		}
-		qDescriptionIew := qrDescriptionIew
-		if qDescriptionIew != "" {
-
-			if err := r.SetQueryParam("description__iew", qDescriptionIew); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIsw != nil {
-
-		// query param description__isw
-		var qrDescriptionIsw string
-
-		if o.DescriptionIsw != nil {
-			qrDescriptionIsw = *o.DescriptionIsw
-		}
-		qDescriptionIsw := qrDescriptionIsw
-		if qDescriptionIsw != "" {
-
-			if err := r.SetQueryParam("description__isw", qDescriptionIsw); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Descriptionn != nil {
-
-		// query param description__n
-		var qrDescriptionn string
-
-		if o.Descriptionn != nil {
-			qrDescriptionn = *o.Descriptionn
-		}
-		qDescriptionn := qrDescriptionn
-		if qDescriptionn != "" {
-
-			if err := r.SetQueryParam("description__n", qDescriptionn); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNic != nil {
-
-		// query param description__nic
-		var qrDescriptionNic string
-
-		if o.DescriptionNic != nil {
-			qrDescriptionNic = *o.DescriptionNic
-		}
-		qDescriptionNic := qrDescriptionNic
-		if qDescriptionNic != "" {
-
-			if err := r.SetQueryParam("description__nic", qDescriptionNic); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNie != nil {
-
-		// query param description__nie
-		var qrDescriptionNie string
-
-		if o.DescriptionNie != nil {
-			qrDescriptionNie = *o.DescriptionNie
-		}
-		qDescriptionNie := qrDescriptionNie
-		if qDescriptionNie != "" {
-
-			if err := r.SetQueryParam("description__nie", qDescriptionNie); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNiew != nil {
-
-		// query param description__niew
-		var qrDescriptionNiew string
-
-		if o.DescriptionNiew != nil {
-			qrDescriptionNiew = *o.DescriptionNiew
-		}
-		qDescriptionNiew := qrDescriptionNiew
-		if qDescriptionNiew != "" {
-
-			if err := r.SetQueryParam("description__niew", qDescriptionNiew); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNisw != nil {
-
-		// query param description__nisw
-		var qrDescriptionNisw string
-
-		if o.DescriptionNisw != nil {
-			qrDescriptionNisw = *o.DescriptionNisw
-		}
-		qDescriptionNisw := qrDescriptionNisw
-		if qDescriptionNisw != "" {
-
-			if err := r.SetQueryParam("description__nisw", qDescriptionNisw); err != nil {
 				return err
 			}
 		}
@@ -1203,6 +923,23 @@ func (o *TenancyContactRolesListParams) WriteToRequest(r runtime.ClientRequest, 
 		if qName != "" {
 
 			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
 				return err
 			}
 		}
@@ -1407,6 +1144,23 @@ func (o *TenancyContactRolesListParams) WriteToRequest(r runtime.ClientRequest, 
 		if qSlug != "" {
 
 			if err := r.SetQueryParam("slug", qSlug); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SlugEmpty != nil {
+
+		// query param slug__empty
+		var qrSlugEmpty string
+
+		if o.SlugEmpty != nil {
+			qrSlugEmpty = *o.SlugEmpty
+		}
+		qSlugEmpty := qrSlugEmpty
+		if qSlugEmpty != "" {
+
+			if err := r.SetQueryParam("slug__empty", qSlugEmpty); err != nil {
 				return err
 			}
 		}

@@ -45,8 +45,8 @@ type WritableDeviceType struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -64,7 +64,7 @@ type WritableDeviceType struct {
 	// Format: uri
 	FrontImage strfmt.URI `json:"front_image,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -113,7 +113,7 @@ type WritableDeviceType struct {
 	SubdeviceRole string `json:"subdevice_role,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Height (U)
 	// Maximum: 32767
@@ -247,7 +247,7 @@ func (m *WritableDeviceType) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -493,7 +493,7 @@ func (m *WritableDeviceType) ContextValidate(ctx context.Context, formats strfmt
 
 func (m *WritableDeviceType) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

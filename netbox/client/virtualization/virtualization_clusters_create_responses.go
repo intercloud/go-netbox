@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationClustersCreateReader is a Reader for the VirtualizationClustersCreate structure.
@@ -45,14 +45,7 @@ func (o *VirtualizationClustersCreateReader) ReadResponse(response runtime.Clien
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationClustersCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewVirtualizationClustersCreateCreated() *VirtualizationClustersCreateCreat
 	return &VirtualizationClustersCreateCreated{}
 }
 
-/* VirtualizationClustersCreateCreated describes a response with status code 201, with default header values.
+/*
+VirtualizationClustersCreateCreated describes a response with status code 201, with default header values.
 
 VirtualizationClustersCreateCreated virtualization clusters create created
 */
@@ -69,9 +63,39 @@ type VirtualizationClustersCreateCreated struct {
 	Payload *models.Cluster
 }
 
+// IsSuccess returns true when this virtualization clusters create created response has a 2xx status code
+func (o *VirtualizationClustersCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization clusters create created response has a 3xx status code
+func (o *VirtualizationClustersCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization clusters create created response has a 4xx status code
+func (o *VirtualizationClustersCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization clusters create created response has a 5xx status code
+func (o *VirtualizationClustersCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization clusters create created response a status code equal to that given
+func (o *VirtualizationClustersCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *VirtualizationClustersCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /virtualization/clusters/][%d] virtualizationClustersCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *VirtualizationClustersCreateCreated) String() string {
+	return fmt.Sprintf("[POST /virtualization/clusters/][%d] virtualizationClustersCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *VirtualizationClustersCreateCreated) GetPayload() *models.Cluster {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *VirtualizationClustersCreateCreated) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewVirtualizationClustersCreateDefault creates a VirtualizationClustersCreateDefault with default headers values
-func NewVirtualizationClustersCreateDefault(code int) *VirtualizationClustersCreateDefault {
-	return &VirtualizationClustersCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationClustersCreateDefault describes a response with status code -1, with default header values.
-
-VirtualizationClustersCreateDefault virtualization clusters create default
-*/
-type VirtualizationClustersCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization clusters create default response
-func (o *VirtualizationClustersCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationClustersCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /virtualization/clusters/][%d] virtualization_clusters_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationClustersCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationClustersCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

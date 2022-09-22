@@ -68,10 +68,12 @@ func NewDcimCablesListParamsWithHTTPClient(client *http.Client) *DcimCablesListP
 	}
 }
 
-/* DcimCablesListParams contains all the parameters to send to the API endpoint
-   for the dcim cables list operation.
+/*
+DcimCablesListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim cables list operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimCablesListParams struct {
 
@@ -116,6 +118,9 @@ type DcimCablesListParams struct {
 
 	// Label.
 	Label *string
+
+	// LabelEmpty.
+	LabelEmpty *string
 
 	// LabelIc.
 	LabelIc *string
@@ -499,6 +504,17 @@ func (o *DcimCablesListParams) WithLabel(label *string) *DcimCablesListParams {
 // SetLabel adds the label to the dcim cables list params
 func (o *DcimCablesListParams) SetLabel(label *string) {
 	o.Label = label
+}
+
+// WithLabelEmpty adds the labelEmpty to the dcim cables list params
+func (o *DcimCablesListParams) WithLabelEmpty(labelEmpty *string) *DcimCablesListParams {
+	o.SetLabelEmpty(labelEmpty)
+	return o
+}
+
+// SetLabelEmpty adds the labelEmpty to the dcim cables list params
+func (o *DcimCablesListParams) SetLabelEmpty(labelEmpty *string) {
+	o.LabelEmpty = labelEmpty
 }
 
 // WithLabelIc adds the labelIc to the dcim cables list params
@@ -1369,6 +1385,23 @@ func (o *DcimCablesListParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		if qLabel != "" {
 
 			if err := r.SetQueryParam("label", qLabel); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LabelEmpty != nil {
+
+		// query param label__empty
+		var qrLabelEmpty string
+
+		if o.LabelEmpty != nil {
+			qrLabelEmpty = *o.LabelEmpty
+		}
+		qLabelEmpty := qrLabelEmpty
+		if qLabelEmpty != "" {
+
+			if err := r.SetQueryParam("label__empty", qLabelEmpty); err != nil {
 				return err
 			}
 		}

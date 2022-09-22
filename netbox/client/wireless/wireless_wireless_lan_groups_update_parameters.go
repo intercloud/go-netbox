@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewWirelessWirelessLanGroupsUpdateParams creates a new WirelessWirelessLanGroupsUpdateParams object,
@@ -70,10 +70,12 @@ func NewWirelessWirelessLanGroupsUpdateParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* WirelessWirelessLanGroupsUpdateParams contains all the parameters to send to the API endpoint
-   for the wireless wireless lan groups update operation.
+/*
+WirelessWirelessLanGroupsUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the wireless wireless lan groups update operation.
+
+	Typically these are written to a http.Request.
 */
 type WirelessWirelessLanGroupsUpdateParams struct {
 

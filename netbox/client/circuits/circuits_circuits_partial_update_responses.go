@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // CircuitsCircuitsPartialUpdateReader is a Reader for the CircuitsCircuitsPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *CircuitsCircuitsPartialUpdateReader) ReadResponse(response runtime.Clie
 		}
 		return result, nil
 	default:
-		result := NewCircuitsCircuitsPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewCircuitsCircuitsPartialUpdateOK() *CircuitsCircuitsPartialUpdateOK {
 	return &CircuitsCircuitsPartialUpdateOK{}
 }
 
-/* CircuitsCircuitsPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+CircuitsCircuitsPartialUpdateOK describes a response with status code 200, with default header values.
 
 CircuitsCircuitsPartialUpdateOK circuits circuits partial update o k
 */
@@ -69,9 +63,39 @@ type CircuitsCircuitsPartialUpdateOK struct {
 	Payload *models.Circuit
 }
 
+// IsSuccess returns true when this circuits circuits partial update o k response has a 2xx status code
+func (o *CircuitsCircuitsPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits circuits partial update o k response has a 3xx status code
+func (o *CircuitsCircuitsPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits circuits partial update o k response has a 4xx status code
+func (o *CircuitsCircuitsPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits circuits partial update o k response has a 5xx status code
+func (o *CircuitsCircuitsPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits circuits partial update o k response a status code equal to that given
+func (o *CircuitsCircuitsPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CircuitsCircuitsPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /circuits/circuits/{id}/][%d] circuitsCircuitsPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *CircuitsCircuitsPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /circuits/circuits/{id}/][%d] circuitsCircuitsPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *CircuitsCircuitsPartialUpdateOK) GetPayload() *models.Circuit {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *CircuitsCircuitsPartialUpdateOK) readResponse(response runtime.ClientRe
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewCircuitsCircuitsPartialUpdateDefault creates a CircuitsCircuitsPartialUpdateDefault with default headers values
-func NewCircuitsCircuitsPartialUpdateDefault(code int) *CircuitsCircuitsPartialUpdateDefault {
-	return &CircuitsCircuitsPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsCircuitsPartialUpdateDefault describes a response with status code -1, with default header values.
-
-CircuitsCircuitsPartialUpdateDefault circuits circuits partial update default
-*/
-type CircuitsCircuitsPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits circuits partial update default response
-func (o *CircuitsCircuitsPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsCircuitsPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /circuits/circuits/{id}/][%d] circuits_circuits_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsCircuitsPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsCircuitsPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

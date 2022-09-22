@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimInterfaceTemplatesDeleteReader) ReadResponse(response runtime.Clien
 		}
 		return result, nil
 	default:
-		result := NewDcimInterfaceTemplatesDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimInterfaceTemplatesDeleteNoContent() *DcimInterfaceTemplatesDeleteNoC
 	return &DcimInterfaceTemplatesDeleteNoContent{}
 }
 
-/* DcimInterfaceTemplatesDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimInterfaceTemplatesDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimInterfaceTemplatesDeleteNoContent dcim interface templates delete no content
 */
 type DcimInterfaceTemplatesDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim interface templates delete no content response has a 2xx status code
+func (o *DcimInterfaceTemplatesDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim interface templates delete no content response has a 3xx status code
+func (o *DcimInterfaceTemplatesDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim interface templates delete no content response has a 4xx status code
+func (o *DcimInterfaceTemplatesDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim interface templates delete no content response has a 5xx status code
+func (o *DcimInterfaceTemplatesDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim interface templates delete no content response a status code equal to that given
+func (o *DcimInterfaceTemplatesDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimInterfaceTemplatesDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/interface-templates/{id}/][%d] dcimInterfaceTemplatesDeleteNoContent ", 204)
 }
 
+func (o *DcimInterfaceTemplatesDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/interface-templates/{id}/][%d] dcimInterfaceTemplatesDeleteNoContent ", 204)
+}
+
 func (o *DcimInterfaceTemplatesDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimInterfaceTemplatesDeleteDefault creates a DcimInterfaceTemplatesDeleteDefault with default headers values
-func NewDcimInterfaceTemplatesDeleteDefault(code int) *DcimInterfaceTemplatesDeleteDefault {
-	return &DcimInterfaceTemplatesDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInterfaceTemplatesDeleteDefault describes a response with status code -1, with default header values.
-
-DcimInterfaceTemplatesDeleteDefault dcim interface templates delete default
-*/
-type DcimInterfaceTemplatesDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim interface templates delete default response
-func (o *DcimInterfaceTemplatesDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInterfaceTemplatesDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/interface-templates/{id}/][%d] dcim_interface-templates_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInterfaceTemplatesDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInterfaceTemplatesDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamRouteTargetsPartialUpdateParams creates a new IpamRouteTargetsPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewIpamRouteTargetsPartialUpdateParamsWithHTTPClient(client *http.Client) *
 	}
 }
 
-/* IpamRouteTargetsPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam route targets partial update operation.
+/*
+IpamRouteTargetsPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam route targets partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamRouteTargetsPartialUpdateParams struct {
 

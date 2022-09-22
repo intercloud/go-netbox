@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamVlansPartialUpdateReader is a Reader for the IpamVlansPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *IpamVlansPartialUpdateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewIpamVlansPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamVlansPartialUpdateOK() *IpamVlansPartialUpdateOK {
 	return &IpamVlansPartialUpdateOK{}
 }
 
-/* IpamVlansPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+IpamVlansPartialUpdateOK describes a response with status code 200, with default header values.
 
 IpamVlansPartialUpdateOK ipam vlans partial update o k
 */
@@ -69,9 +63,39 @@ type IpamVlansPartialUpdateOK struct {
 	Payload *models.VLAN
 }
 
+// IsSuccess returns true when this ipam vlans partial update o k response has a 2xx status code
+func (o *IpamVlansPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam vlans partial update o k response has a 3xx status code
+func (o *IpamVlansPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam vlans partial update o k response has a 4xx status code
+func (o *IpamVlansPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam vlans partial update o k response has a 5xx status code
+func (o *IpamVlansPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam vlans partial update o k response a status code equal to that given
+func (o *IpamVlansPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamVlansPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /ipam/vlans/{id}/][%d] ipamVlansPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamVlansPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /ipam/vlans/{id}/][%d] ipamVlansPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamVlansPartialUpdateOK) GetPayload() *models.VLAN {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamVlansPartialUpdateOK) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamVlansPartialUpdateDefault creates a IpamVlansPartialUpdateDefault with default headers values
-func NewIpamVlansPartialUpdateDefault(code int) *IpamVlansPartialUpdateDefault {
-	return &IpamVlansPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamVlansPartialUpdateDefault describes a response with status code -1, with default header values.
-
-IpamVlansPartialUpdateDefault ipam vlans partial update default
-*/
-type IpamVlansPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam vlans partial update default response
-func (o *IpamVlansPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamVlansPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/vlans/{id}/][%d] ipam_vlans_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamVlansPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamVlansPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

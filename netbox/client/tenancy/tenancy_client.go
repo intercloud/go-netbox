@@ -21,6 +21,8 @@ package tenancy
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -155,7 +157,7 @@ type ClientService interface {
 }
 
 /*
-  TenancyContactAssignmentsBulkDelete tenancy contact assignments bulk delete API
+TenancyContactAssignmentsBulkDelete tenancy contact assignments bulk delete API
 */
 func (a *Client) TenancyContactAssignmentsBulkDelete(params *TenancyContactAssignmentsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -188,12 +190,13 @@ func (a *Client) TenancyContactAssignmentsBulkDelete(params *TenancyContactAssig
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsBulkPartialUpdate tenancy contact assignments bulk partial update API
+TenancyContactAssignmentsBulkPartialUpdate tenancy contact assignments bulk partial update API
 */
 func (a *Client) TenancyContactAssignmentsBulkPartialUpdate(params *TenancyContactAssignmentsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -226,12 +229,13 @@ func (a *Client) TenancyContactAssignmentsBulkPartialUpdate(params *TenancyConta
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsBulkUpdate tenancy contact assignments bulk update API
+TenancyContactAssignmentsBulkUpdate tenancy contact assignments bulk update API
 */
 func (a *Client) TenancyContactAssignmentsBulkUpdate(params *TenancyContactAssignmentsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -264,12 +268,13 @@ func (a *Client) TenancyContactAssignmentsBulkUpdate(params *TenancyContactAssig
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsCreate tenancy contact assignments create API
+TenancyContactAssignmentsCreate tenancy contact assignments create API
 */
 func (a *Client) TenancyContactAssignmentsCreate(params *TenancyContactAssignmentsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -302,12 +307,13 @@ func (a *Client) TenancyContactAssignmentsCreate(params *TenancyContactAssignmen
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsDelete tenancy contact assignments delete API
+TenancyContactAssignmentsDelete tenancy contact assignments delete API
 */
 func (a *Client) TenancyContactAssignmentsDelete(params *TenancyContactAssignmentsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -340,12 +346,13 @@ func (a *Client) TenancyContactAssignmentsDelete(params *TenancyContactAssignmen
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsList Overrides ListModelMixin to allow processing ExportTemplates.
+TenancyContactAssignmentsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) TenancyContactAssignmentsList(params *TenancyContactAssignmentsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsListOK, error) {
 	// TODO: Validate the params before sending
@@ -378,12 +385,13 @@ func (a *Client) TenancyContactAssignmentsList(params *TenancyContactAssignments
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsPartialUpdate tenancy contact assignments partial update API
+TenancyContactAssignmentsPartialUpdate tenancy contact assignments partial update API
 */
 func (a *Client) TenancyContactAssignmentsPartialUpdate(params *TenancyContactAssignmentsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -416,12 +424,13 @@ func (a *Client) TenancyContactAssignmentsPartialUpdate(params *TenancyContactAs
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsRead tenancy contact assignments read API
+TenancyContactAssignmentsRead tenancy contact assignments read API
 */
 func (a *Client) TenancyContactAssignmentsRead(params *TenancyContactAssignmentsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -454,12 +463,13 @@ func (a *Client) TenancyContactAssignmentsRead(params *TenancyContactAssignments
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactAssignmentsUpdate tenancy contact assignments update API
+TenancyContactAssignmentsUpdate tenancy contact assignments update API
 */
 func (a *Client) TenancyContactAssignmentsUpdate(params *TenancyContactAssignmentsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactAssignmentsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -492,12 +502,13 @@ func (a *Client) TenancyContactAssignmentsUpdate(params *TenancyContactAssignmen
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactAssignmentsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-assignments_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsBulkDelete tenancy contact groups bulk delete API
+TenancyContactGroupsBulkDelete tenancy contact groups bulk delete API
 */
 func (a *Client) TenancyContactGroupsBulkDelete(params *TenancyContactGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -530,12 +541,13 @@ func (a *Client) TenancyContactGroupsBulkDelete(params *TenancyContactGroupsBulk
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsBulkPartialUpdate tenancy contact groups bulk partial update API
+TenancyContactGroupsBulkPartialUpdate tenancy contact groups bulk partial update API
 */
 func (a *Client) TenancyContactGroupsBulkPartialUpdate(params *TenancyContactGroupsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -568,12 +580,13 @@ func (a *Client) TenancyContactGroupsBulkPartialUpdate(params *TenancyContactGro
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsBulkUpdate tenancy contact groups bulk update API
+TenancyContactGroupsBulkUpdate tenancy contact groups bulk update API
 */
 func (a *Client) TenancyContactGroupsBulkUpdate(params *TenancyContactGroupsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -606,12 +619,13 @@ func (a *Client) TenancyContactGroupsBulkUpdate(params *TenancyContactGroupsBulk
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsCreate tenancy contact groups create API
+TenancyContactGroupsCreate tenancy contact groups create API
 */
 func (a *Client) TenancyContactGroupsCreate(params *TenancyContactGroupsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -644,12 +658,13 @@ func (a *Client) TenancyContactGroupsCreate(params *TenancyContactGroupsCreatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsDelete tenancy contact groups delete API
+TenancyContactGroupsDelete tenancy contact groups delete API
 */
 func (a *Client) TenancyContactGroupsDelete(params *TenancyContactGroupsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -682,12 +697,13 @@ func (a *Client) TenancyContactGroupsDelete(params *TenancyContactGroupsDeletePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
+TenancyContactGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) TenancyContactGroupsList(params *TenancyContactGroupsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsListOK, error) {
 	// TODO: Validate the params before sending
@@ -720,12 +736,13 @@ func (a *Client) TenancyContactGroupsList(params *TenancyContactGroupsListParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsPartialUpdate tenancy contact groups partial update API
+TenancyContactGroupsPartialUpdate tenancy contact groups partial update API
 */
 func (a *Client) TenancyContactGroupsPartialUpdate(params *TenancyContactGroupsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -758,12 +775,13 @@ func (a *Client) TenancyContactGroupsPartialUpdate(params *TenancyContactGroupsP
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsRead tenancy contact groups read API
+TenancyContactGroupsRead tenancy contact groups read API
 */
 func (a *Client) TenancyContactGroupsRead(params *TenancyContactGroupsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -796,12 +814,13 @@ func (a *Client) TenancyContactGroupsRead(params *TenancyContactGroupsReadParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactGroupsUpdate tenancy contact groups update API
+TenancyContactGroupsUpdate tenancy contact groups update API
 */
 func (a *Client) TenancyContactGroupsUpdate(params *TenancyContactGroupsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactGroupsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -834,12 +853,13 @@ func (a *Client) TenancyContactGroupsUpdate(params *TenancyContactGroupsUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactGroupsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-groups_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesBulkDelete tenancy contact roles bulk delete API
+TenancyContactRolesBulkDelete tenancy contact roles bulk delete API
 */
 func (a *Client) TenancyContactRolesBulkDelete(params *TenancyContactRolesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -872,12 +892,13 @@ func (a *Client) TenancyContactRolesBulkDelete(params *TenancyContactRolesBulkDe
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesBulkPartialUpdate tenancy contact roles bulk partial update API
+TenancyContactRolesBulkPartialUpdate tenancy contact roles bulk partial update API
 */
 func (a *Client) TenancyContactRolesBulkPartialUpdate(params *TenancyContactRolesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -910,12 +931,13 @@ func (a *Client) TenancyContactRolesBulkPartialUpdate(params *TenancyContactRole
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesBulkUpdate tenancy contact roles bulk update API
+TenancyContactRolesBulkUpdate tenancy contact roles bulk update API
 */
 func (a *Client) TenancyContactRolesBulkUpdate(params *TenancyContactRolesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -948,12 +970,13 @@ func (a *Client) TenancyContactRolesBulkUpdate(params *TenancyContactRolesBulkUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesCreate tenancy contact roles create API
+TenancyContactRolesCreate tenancy contact roles create API
 */
 func (a *Client) TenancyContactRolesCreate(params *TenancyContactRolesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -986,12 +1009,13 @@ func (a *Client) TenancyContactRolesCreate(params *TenancyContactRolesCreatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesDelete tenancy contact roles delete API
+TenancyContactRolesDelete tenancy contact roles delete API
 */
 func (a *Client) TenancyContactRolesDelete(params *TenancyContactRolesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1024,12 +1048,13 @@ func (a *Client) TenancyContactRolesDelete(params *TenancyContactRolesDeletePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesList Overrides ListModelMixin to allow processing ExportTemplates.
+TenancyContactRolesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) TenancyContactRolesList(params *TenancyContactRolesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesListOK, error) {
 	// TODO: Validate the params before sending
@@ -1062,12 +1087,13 @@ func (a *Client) TenancyContactRolesList(params *TenancyContactRolesListParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesPartialUpdate tenancy contact roles partial update API
+TenancyContactRolesPartialUpdate tenancy contact roles partial update API
 */
 func (a *Client) TenancyContactRolesPartialUpdate(params *TenancyContactRolesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1100,12 +1126,13 @@ func (a *Client) TenancyContactRolesPartialUpdate(params *TenancyContactRolesPar
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesRead tenancy contact roles read API
+TenancyContactRolesRead tenancy contact roles read API
 */
 func (a *Client) TenancyContactRolesRead(params *TenancyContactRolesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1138,12 +1165,13 @@ func (a *Client) TenancyContactRolesRead(params *TenancyContactRolesReadParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactRolesUpdate tenancy contact roles update API
+TenancyContactRolesUpdate tenancy contact roles update API
 */
 func (a *Client) TenancyContactRolesUpdate(params *TenancyContactRolesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactRolesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1176,12 +1204,13 @@ func (a *Client) TenancyContactRolesUpdate(params *TenancyContactRolesUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactRolesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contact-roles_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsBulkDelete tenancy contacts bulk delete API
+TenancyContactsBulkDelete tenancy contacts bulk delete API
 */
 func (a *Client) TenancyContactsBulkDelete(params *TenancyContactsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1214,12 +1243,13 @@ func (a *Client) TenancyContactsBulkDelete(params *TenancyContactsBulkDeletePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsBulkPartialUpdate tenancy contacts bulk partial update API
+TenancyContactsBulkPartialUpdate tenancy contacts bulk partial update API
 */
 func (a *Client) TenancyContactsBulkPartialUpdate(params *TenancyContactsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1252,12 +1282,13 @@ func (a *Client) TenancyContactsBulkPartialUpdate(params *TenancyContactsBulkPar
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsBulkUpdate tenancy contacts bulk update API
+TenancyContactsBulkUpdate tenancy contacts bulk update API
 */
 func (a *Client) TenancyContactsBulkUpdate(params *TenancyContactsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1290,12 +1321,13 @@ func (a *Client) TenancyContactsBulkUpdate(params *TenancyContactsBulkUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsCreate tenancy contacts create API
+TenancyContactsCreate tenancy contacts create API
 */
 func (a *Client) TenancyContactsCreate(params *TenancyContactsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1328,12 +1360,13 @@ func (a *Client) TenancyContactsCreate(params *TenancyContactsCreateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsDelete tenancy contacts delete API
+TenancyContactsDelete tenancy contacts delete API
 */
 func (a *Client) TenancyContactsDelete(params *TenancyContactsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1366,12 +1399,13 @@ func (a *Client) TenancyContactsDelete(params *TenancyContactsDeleteParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsList Overrides ListModelMixin to allow processing ExportTemplates.
+TenancyContactsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) TenancyContactsList(params *TenancyContactsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsListOK, error) {
 	// TODO: Validate the params before sending
@@ -1404,12 +1438,13 @@ func (a *Client) TenancyContactsList(params *TenancyContactsListParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsPartialUpdate tenancy contacts partial update API
+TenancyContactsPartialUpdate tenancy contacts partial update API
 */
 func (a *Client) TenancyContactsPartialUpdate(params *TenancyContactsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1442,12 +1477,13 @@ func (a *Client) TenancyContactsPartialUpdate(params *TenancyContactsPartialUpda
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsRead tenancy contacts read API
+TenancyContactsRead tenancy contacts read API
 */
 func (a *Client) TenancyContactsRead(params *TenancyContactsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1480,12 +1516,13 @@ func (a *Client) TenancyContactsRead(params *TenancyContactsReadParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyContactsUpdate tenancy contacts update API
+TenancyContactsUpdate tenancy contacts update API
 */
 func (a *Client) TenancyContactsUpdate(params *TenancyContactsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyContactsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1518,12 +1555,13 @@ func (a *Client) TenancyContactsUpdate(params *TenancyContactsUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyContactsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_contacts_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsBulkDelete tenancy tenant groups bulk delete API
+TenancyTenantGroupsBulkDelete tenancy tenant groups bulk delete API
 */
 func (a *Client) TenancyTenantGroupsBulkDelete(params *TenancyTenantGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1556,12 +1594,13 @@ func (a *Client) TenancyTenantGroupsBulkDelete(params *TenancyTenantGroupsBulkDe
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsBulkPartialUpdate tenancy tenant groups bulk partial update API
+TenancyTenantGroupsBulkPartialUpdate tenancy tenant groups bulk partial update API
 */
 func (a *Client) TenancyTenantGroupsBulkPartialUpdate(params *TenancyTenantGroupsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1594,12 +1633,13 @@ func (a *Client) TenancyTenantGroupsBulkPartialUpdate(params *TenancyTenantGroup
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsBulkUpdate tenancy tenant groups bulk update API
+TenancyTenantGroupsBulkUpdate tenancy tenant groups bulk update API
 */
 func (a *Client) TenancyTenantGroupsBulkUpdate(params *TenancyTenantGroupsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1632,12 +1672,13 @@ func (a *Client) TenancyTenantGroupsBulkUpdate(params *TenancyTenantGroupsBulkUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsCreate tenancy tenant groups create API
+TenancyTenantGroupsCreate tenancy tenant groups create API
 */
 func (a *Client) TenancyTenantGroupsCreate(params *TenancyTenantGroupsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1670,12 +1711,13 @@ func (a *Client) TenancyTenantGroupsCreate(params *TenancyTenantGroupsCreatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsDelete tenancy tenant groups delete API
+TenancyTenantGroupsDelete tenancy tenant groups delete API
 */
 func (a *Client) TenancyTenantGroupsDelete(params *TenancyTenantGroupsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1708,12 +1750,13 @@ func (a *Client) TenancyTenantGroupsDelete(params *TenancyTenantGroupsDeletePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
+TenancyTenantGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) TenancyTenantGroupsList(params *TenancyTenantGroupsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsListOK, error) {
 	// TODO: Validate the params before sending
@@ -1746,12 +1789,13 @@ func (a *Client) TenancyTenantGroupsList(params *TenancyTenantGroupsListParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsPartialUpdate tenancy tenant groups partial update API
+TenancyTenantGroupsPartialUpdate tenancy tenant groups partial update API
 */
 func (a *Client) TenancyTenantGroupsPartialUpdate(params *TenancyTenantGroupsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1784,12 +1828,13 @@ func (a *Client) TenancyTenantGroupsPartialUpdate(params *TenancyTenantGroupsPar
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsRead tenancy tenant groups read API
+TenancyTenantGroupsRead tenancy tenant groups read API
 */
 func (a *Client) TenancyTenantGroupsRead(params *TenancyTenantGroupsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1822,12 +1867,13 @@ func (a *Client) TenancyTenantGroupsRead(params *TenancyTenantGroupsReadParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantGroupsUpdate tenancy tenant groups update API
+TenancyTenantGroupsUpdate tenancy tenant groups update API
 */
 func (a *Client) TenancyTenantGroupsUpdate(params *TenancyTenantGroupsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantGroupsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1860,12 +1906,13 @@ func (a *Client) TenancyTenantGroupsUpdate(params *TenancyTenantGroupsUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantGroupsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenant-groups_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsBulkDelete tenancy tenants bulk delete API
+TenancyTenantsBulkDelete tenancy tenants bulk delete API
 */
 func (a *Client) TenancyTenantsBulkDelete(params *TenancyTenantsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1898,12 +1945,13 @@ func (a *Client) TenancyTenantsBulkDelete(params *TenancyTenantsBulkDeleteParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsBulkPartialUpdate tenancy tenants bulk partial update API
+TenancyTenantsBulkPartialUpdate tenancy tenants bulk partial update API
 */
 func (a *Client) TenancyTenantsBulkPartialUpdate(params *TenancyTenantsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1936,12 +1984,13 @@ func (a *Client) TenancyTenantsBulkPartialUpdate(params *TenancyTenantsBulkParti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsBulkUpdate tenancy tenants bulk update API
+TenancyTenantsBulkUpdate tenancy tenants bulk update API
 */
 func (a *Client) TenancyTenantsBulkUpdate(params *TenancyTenantsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1974,12 +2023,13 @@ func (a *Client) TenancyTenantsBulkUpdate(params *TenancyTenantsBulkUpdateParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsCreate tenancy tenants create API
+TenancyTenantsCreate tenancy tenants create API
 */
 func (a *Client) TenancyTenantsCreate(params *TenancyTenantsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -2012,12 +2062,13 @@ func (a *Client) TenancyTenantsCreate(params *TenancyTenantsCreateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsDelete tenancy tenants delete API
+TenancyTenantsDelete tenancy tenants delete API
 */
 func (a *Client) TenancyTenantsDelete(params *TenancyTenantsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -2050,12 +2101,13 @@ func (a *Client) TenancyTenantsDelete(params *TenancyTenantsDeleteParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsList Overrides ListModelMixin to allow processing ExportTemplates.
+TenancyTenantsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) TenancyTenantsList(params *TenancyTenantsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsListOK, error) {
 	// TODO: Validate the params before sending
@@ -2088,12 +2140,13 @@ func (a *Client) TenancyTenantsList(params *TenancyTenantsListParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsPartialUpdate tenancy tenants partial update API
+TenancyTenantsPartialUpdate tenancy tenants partial update API
 */
 func (a *Client) TenancyTenantsPartialUpdate(params *TenancyTenantsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2126,12 +2179,13 @@ func (a *Client) TenancyTenantsPartialUpdate(params *TenancyTenantsPartialUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsRead tenancy tenants read API
+TenancyTenantsRead tenancy tenants read API
 */
 func (a *Client) TenancyTenantsRead(params *TenancyTenantsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -2164,12 +2218,13 @@ func (a *Client) TenancyTenantsRead(params *TenancyTenantsReadParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  TenancyTenantsUpdate tenancy tenants update API
+TenancyTenantsUpdate tenancy tenants update API
 */
 func (a *Client) TenancyTenantsUpdate(params *TenancyTenantsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TenancyTenantsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2202,8 +2257,9 @@ func (a *Client) TenancyTenantsUpdate(params *TenancyTenantsUpdateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*TenancyTenantsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for tenancy_tenants_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

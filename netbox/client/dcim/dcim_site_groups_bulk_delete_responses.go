@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimSiteGroupsBulkDeleteReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewDcimSiteGroupsBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimSiteGroupsBulkDeleteNoContent() *DcimSiteGroupsBulkDeleteNoContent {
 	return &DcimSiteGroupsBulkDeleteNoContent{}
 }
 
-/* DcimSiteGroupsBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimSiteGroupsBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimSiteGroupsBulkDeleteNoContent dcim site groups bulk delete no content
 */
 type DcimSiteGroupsBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim site groups bulk delete no content response has a 2xx status code
+func (o *DcimSiteGroupsBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim site groups bulk delete no content response has a 3xx status code
+func (o *DcimSiteGroupsBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim site groups bulk delete no content response has a 4xx status code
+func (o *DcimSiteGroupsBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim site groups bulk delete no content response has a 5xx status code
+func (o *DcimSiteGroupsBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim site groups bulk delete no content response a status code equal to that given
+func (o *DcimSiteGroupsBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimSiteGroupsBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/site-groups/][%d] dcimSiteGroupsBulkDeleteNoContent ", 204)
 }
 
+func (o *DcimSiteGroupsBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/site-groups/][%d] dcimSiteGroupsBulkDeleteNoContent ", 204)
+}
+
 func (o *DcimSiteGroupsBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimSiteGroupsBulkDeleteDefault creates a DcimSiteGroupsBulkDeleteDefault with default headers values
-func NewDcimSiteGroupsBulkDeleteDefault(code int) *DcimSiteGroupsBulkDeleteDefault {
-	return &DcimSiteGroupsBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimSiteGroupsBulkDeleteDefault describes a response with status code -1, with default header values.
-
-DcimSiteGroupsBulkDeleteDefault dcim site groups bulk delete default
-*/
-type DcimSiteGroupsBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim site groups bulk delete default response
-func (o *DcimSiteGroupsBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimSiteGroupsBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/site-groups/][%d] dcim_site-groups_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimSiteGroupsBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimSiteGroupsBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

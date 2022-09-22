@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamRolesListReader is a Reader for the IpamRolesList structure.
@@ -50,14 +50,7 @@ func (o *IpamRolesListReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return result, nil
 	default:
-		result := NewIpamRolesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewIpamRolesListOK() *IpamRolesListOK {
 	return &IpamRolesListOK{}
 }
 
-/* IpamRolesListOK describes a response with status code 200, with default header values.
+/*
+IpamRolesListOK describes a response with status code 200, with default header values.
 
 IpamRolesListOK ipam roles list o k
 */
@@ -74,9 +68,39 @@ type IpamRolesListOK struct {
 	Payload *IpamRolesListOKBody
 }
 
+// IsSuccess returns true when this ipam roles list o k response has a 2xx status code
+func (o *IpamRolesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam roles list o k response has a 3xx status code
+func (o *IpamRolesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam roles list o k response has a 4xx status code
+func (o *IpamRolesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam roles list o k response has a 5xx status code
+func (o *IpamRolesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam roles list o k response a status code equal to that given
+func (o *IpamRolesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamRolesListOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/roles/][%d] ipamRolesListOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamRolesListOK) String() string {
+	return fmt.Sprintf("[GET /ipam/roles/][%d] ipamRolesListOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamRolesListOK) GetPayload() *IpamRolesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *IpamRolesListOK) readResponse(response runtime.ClientResponse, consumer
 	return nil
 }
 
-// NewIpamRolesListDefault creates a IpamRolesListDefault with default headers values
-func NewIpamRolesListDefault(code int) *IpamRolesListDefault {
-	return &IpamRolesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamRolesListDefault describes a response with status code -1, with default header values.
-
-IpamRolesListDefault ipam roles list default
-*/
-type IpamRolesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam roles list default response
-func (o *IpamRolesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamRolesListDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/roles/][%d] ipam_roles_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamRolesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamRolesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*IpamRolesListOKBody ipam roles list o k body
+/*
+IpamRolesListOKBody ipam roles list o k body
 swagger:model IpamRolesListOKBody
 */
 type IpamRolesListOKBody struct {

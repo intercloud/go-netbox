@@ -46,12 +46,8 @@ type CustomField struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
-
-	// Data type
-	// Read Only: true
-	DataType string `json:"data_type,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Default
 	//
@@ -69,7 +65,7 @@ type CustomField struct {
 	// filter logic
 	FilterLogic *CustomFieldFilterLogic `json:"filter_logic,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -92,9 +88,6 @@ type CustomField struct {
 	// Min Length: 1
 	// Pattern: ^[a-z0-9_]+$
 	Name *string `json:"name"`
-
-	// Object type
-	ObjectType string `json:"object_type,omitempty"`
 
 	// Required
 	//
@@ -242,7 +235,7 @@ func (m *CustomField) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -425,10 +418,6 @@ func (m *CustomField) ContextValidate(ctx context.Context, formats strfmt.Regist
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateDataType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateDisplay(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -461,16 +450,7 @@ func (m *CustomField) ContextValidate(ctx context.Context, formats strfmt.Regist
 
 func (m *CustomField) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CustomField) contextValidateDataType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "data_type", "body", string(m.DataType)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 
@@ -719,12 +699,12 @@ type CustomFieldType struct {
 
 	// label
 	// Required: true
-	// Enum: [Text Text (long) Integer Boolean (true/false) Date URL JSON Selection Multiple selection Object Multiple objects]
+	// Enum: [Text Text (long) Integer Boolean (true/false) Date URL JSON Selection Multiple selection]
 	Label *string `json:"label"`
 
 	// value
 	// Required: true
-	// Enum: [text longtext integer boolean date url json select multiselect object multiobject]
+	// Enum: [text longtext integer boolean date url json select multiselect]
 	Value *string `json:"value"`
 }
 
@@ -750,7 +730,7 @@ var customFieldTypeTypeLabelPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["Text","Text (long)","Integer","Boolean (true/false)","Date","URL","JSON","Selection","Multiple selection","Object","Multiple objects"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["Text","Text (long)","Integer","Boolean (true/false)","Date","URL","JSON","Selection","Multiple selection"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -786,12 +766,6 @@ const (
 
 	// CustomFieldTypeLabelMultipleSelection captures enum value "Multiple selection"
 	CustomFieldTypeLabelMultipleSelection string = "Multiple selection"
-
-	// CustomFieldTypeLabelObject captures enum value "Object"
-	CustomFieldTypeLabelObject string = "Object"
-
-	// CustomFieldTypeLabelMultipleObjects captures enum value "Multiple objects"
-	CustomFieldTypeLabelMultipleObjects string = "Multiple objects"
 )
 
 // prop value enum
@@ -820,7 +794,7 @@ var customFieldTypeTypeValuePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["text","longtext","integer","boolean","date","url","json","select","multiselect","object","multiobject"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["text","longtext","integer","boolean","date","url","json","select","multiselect"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -856,12 +830,6 @@ const (
 
 	// CustomFieldTypeValueMultiselect captures enum value "multiselect"
 	CustomFieldTypeValueMultiselect string = "multiselect"
-
-	// CustomFieldTypeValueObject captures enum value "object"
-	CustomFieldTypeValueObject string = "object"
-
-	// CustomFieldTypeValueMultiobject captures enum value "multiobject"
-	CustomFieldTypeValueMultiobject string = "multiobject"
 )
 
 // prop value enum

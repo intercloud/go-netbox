@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // CircuitsCircuitTypesUpdateReader is a Reader for the CircuitsCircuitTypesUpdate structure.
@@ -45,14 +45,7 @@ func (o *CircuitsCircuitTypesUpdateReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewCircuitsCircuitTypesUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewCircuitsCircuitTypesUpdateOK() *CircuitsCircuitTypesUpdateOK {
 	return &CircuitsCircuitTypesUpdateOK{}
 }
 
-/* CircuitsCircuitTypesUpdateOK describes a response with status code 200, with default header values.
+/*
+CircuitsCircuitTypesUpdateOK describes a response with status code 200, with default header values.
 
 CircuitsCircuitTypesUpdateOK circuits circuit types update o k
 */
@@ -69,9 +63,39 @@ type CircuitsCircuitTypesUpdateOK struct {
 	Payload *models.CircuitType
 }
 
+// IsSuccess returns true when this circuits circuit types update o k response has a 2xx status code
+func (o *CircuitsCircuitTypesUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits circuit types update o k response has a 3xx status code
+func (o *CircuitsCircuitTypesUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits circuit types update o k response has a 4xx status code
+func (o *CircuitsCircuitTypesUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits circuit types update o k response has a 5xx status code
+func (o *CircuitsCircuitTypesUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits circuit types update o k response a status code equal to that given
+func (o *CircuitsCircuitTypesUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CircuitsCircuitTypesUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /circuits/circuit-types/{id}/][%d] circuitsCircuitTypesUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *CircuitsCircuitTypesUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /circuits/circuit-types/{id}/][%d] circuitsCircuitTypesUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *CircuitsCircuitTypesUpdateOK) GetPayload() *models.CircuitType {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *CircuitsCircuitTypesUpdateOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewCircuitsCircuitTypesUpdateDefault creates a CircuitsCircuitTypesUpdateDefault with default headers values
-func NewCircuitsCircuitTypesUpdateDefault(code int) *CircuitsCircuitTypesUpdateDefault {
-	return &CircuitsCircuitTypesUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsCircuitTypesUpdateDefault describes a response with status code -1, with default header values.
-
-CircuitsCircuitTypesUpdateDefault circuits circuit types update default
-*/
-type CircuitsCircuitTypesUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits circuit types update default response
-func (o *CircuitsCircuitTypesUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsCircuitTypesUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /circuits/circuit-types/{id}/][%d] circuits_circuit-types_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsCircuitTypesUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsCircuitTypesUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

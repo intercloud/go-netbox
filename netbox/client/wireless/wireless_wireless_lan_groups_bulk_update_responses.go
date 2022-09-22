@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // WirelessWirelessLanGroupsBulkUpdateReader is a Reader for the WirelessWirelessLanGroupsBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *WirelessWirelessLanGroupsBulkUpdateReader) ReadResponse(response runtim
 		}
 		return result, nil
 	default:
-		result := NewWirelessWirelessLanGroupsBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewWirelessWirelessLanGroupsBulkUpdateOK() *WirelessWirelessLanGroupsBulkUp
 	return &WirelessWirelessLanGroupsBulkUpdateOK{}
 }
 
-/* WirelessWirelessLanGroupsBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+WirelessWirelessLanGroupsBulkUpdateOK describes a response with status code 200, with default header values.
 
 WirelessWirelessLanGroupsBulkUpdateOK wireless wireless lan groups bulk update o k
 */
@@ -69,9 +63,39 @@ type WirelessWirelessLanGroupsBulkUpdateOK struct {
 	Payload *models.WirelessLANGroup
 }
 
+// IsSuccess returns true when this wireless wireless lan groups bulk update o k response has a 2xx status code
+func (o *WirelessWirelessLanGroupsBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this wireless wireless lan groups bulk update o k response has a 3xx status code
+func (o *WirelessWirelessLanGroupsBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this wireless wireless lan groups bulk update o k response has a 4xx status code
+func (o *WirelessWirelessLanGroupsBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this wireless wireless lan groups bulk update o k response has a 5xx status code
+func (o *WirelessWirelessLanGroupsBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this wireless wireless lan groups bulk update o k response a status code equal to that given
+func (o *WirelessWirelessLanGroupsBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *WirelessWirelessLanGroupsBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /wireless/wireless-lan-groups/][%d] wirelessWirelessLanGroupsBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *WirelessWirelessLanGroupsBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /wireless/wireless-lan-groups/][%d] wirelessWirelessLanGroupsBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *WirelessWirelessLanGroupsBulkUpdateOK) GetPayload() *models.WirelessLANGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *WirelessWirelessLanGroupsBulkUpdateOK) readResponse(response runtime.Cl
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewWirelessWirelessLanGroupsBulkUpdateDefault creates a WirelessWirelessLanGroupsBulkUpdateDefault with default headers values
-func NewWirelessWirelessLanGroupsBulkUpdateDefault(code int) *WirelessWirelessLanGroupsBulkUpdateDefault {
-	return &WirelessWirelessLanGroupsBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* WirelessWirelessLanGroupsBulkUpdateDefault describes a response with status code -1, with default header values.
-
-WirelessWirelessLanGroupsBulkUpdateDefault wireless wireless lan groups bulk update default
-*/
-type WirelessWirelessLanGroupsBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the wireless wireless lan groups bulk update default response
-func (o *WirelessWirelessLanGroupsBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *WirelessWirelessLanGroupsBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /wireless/wireless-lan-groups/][%d] wireless_wireless-lan-groups_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *WirelessWirelessLanGroupsBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *WirelessWirelessLanGroupsBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

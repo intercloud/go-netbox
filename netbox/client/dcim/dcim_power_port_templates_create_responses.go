@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPowerPortTemplatesCreateReader is a Reader for the DcimPowerPortTemplatesCreate structure.
@@ -45,14 +45,7 @@ func (o *DcimPowerPortTemplatesCreateReader) ReadResponse(response runtime.Clien
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerPortTemplatesCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimPowerPortTemplatesCreateCreated() *DcimPowerPortTemplatesCreateCreat
 	return &DcimPowerPortTemplatesCreateCreated{}
 }
 
-/* DcimPowerPortTemplatesCreateCreated describes a response with status code 201, with default header values.
+/*
+DcimPowerPortTemplatesCreateCreated describes a response with status code 201, with default header values.
 
 DcimPowerPortTemplatesCreateCreated dcim power port templates create created
 */
@@ -69,9 +63,39 @@ type DcimPowerPortTemplatesCreateCreated struct {
 	Payload *models.PowerPortTemplate
 }
 
+// IsSuccess returns true when this dcim power port templates create created response has a 2xx status code
+func (o *DcimPowerPortTemplatesCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power port templates create created response has a 3xx status code
+func (o *DcimPowerPortTemplatesCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power port templates create created response has a 4xx status code
+func (o *DcimPowerPortTemplatesCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power port templates create created response has a 5xx status code
+func (o *DcimPowerPortTemplatesCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power port templates create created response a status code equal to that given
+func (o *DcimPowerPortTemplatesCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *DcimPowerPortTemplatesCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /dcim/power-port-templates/][%d] dcimPowerPortTemplatesCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *DcimPowerPortTemplatesCreateCreated) String() string {
+	return fmt.Sprintf("[POST /dcim/power-port-templates/][%d] dcimPowerPortTemplatesCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *DcimPowerPortTemplatesCreateCreated) GetPayload() *models.PowerPortTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimPowerPortTemplatesCreateCreated) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimPowerPortTemplatesCreateDefault creates a DcimPowerPortTemplatesCreateDefault with default headers values
-func NewDcimPowerPortTemplatesCreateDefault(code int) *DcimPowerPortTemplatesCreateDefault {
-	return &DcimPowerPortTemplatesCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerPortTemplatesCreateDefault describes a response with status code -1, with default header values.
-
-DcimPowerPortTemplatesCreateDefault dcim power port templates create default
-*/
-type DcimPowerPortTemplatesCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power port templates create default response
-func (o *DcimPowerPortTemplatesCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerPortTemplatesCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /dcim/power-port-templates/][%d] dcim_power-port-templates_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerPortTemplatesCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerPortTemplatesCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

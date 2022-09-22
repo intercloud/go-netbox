@@ -68,10 +68,12 @@ func NewExtrasCustomLinksListParamsWithHTTPClient(client *http.Client) *ExtrasCu
 	}
 }
 
-/* ExtrasCustomLinksListParams contains all the parameters to send to the API endpoint
-   for the extras custom links list operation.
+/*
+ExtrasCustomLinksListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the extras custom links list operation.
+
+	Typically these are written to a http.Request.
 */
 type ExtrasCustomLinksListParams struct {
 
@@ -81,11 +83,11 @@ type ExtrasCustomLinksListParams struct {
 	// ContentTypen.
 	ContentTypen *string
 
-	// Enabled.
-	Enabled *string
-
 	// GroupName.
 	GroupName *string
+
+	// GroupNameEmpty.
+	GroupNameEmpty *string
 
 	// GroupNameIc.
 	GroupNameIc *string
@@ -141,6 +143,9 @@ type ExtrasCustomLinksListParams struct {
 	// LinkText.
 	LinkText *string
 
+	// LinkTextEmpty.
+	LinkTextEmpty *string
+
 	// LinkTextIc.
 	LinkTextIc *string
 
@@ -171,6 +176,9 @@ type ExtrasCustomLinksListParams struct {
 	// LinkURL.
 	LinkURL *string
 
+	// LinkURLEmpty.
+	LinkURLEmpty *string
+
 	// LinkURLIc.
 	LinkURLIc *string
 
@@ -200,6 +208,9 @@ type ExtrasCustomLinksListParams struct {
 
 	// Name.
 	Name *string
+
+	// NameEmpty.
+	NameEmpty *string
 
 	// NameIc.
 	NameIc *string
@@ -333,17 +344,6 @@ func (o *ExtrasCustomLinksListParams) SetContentTypen(contentTypen *string) {
 	o.ContentTypen = contentTypen
 }
 
-// WithEnabled adds the enabled to the extras custom links list params
-func (o *ExtrasCustomLinksListParams) WithEnabled(enabled *string) *ExtrasCustomLinksListParams {
-	o.SetEnabled(enabled)
-	return o
-}
-
-// SetEnabled adds the enabled to the extras custom links list params
-func (o *ExtrasCustomLinksListParams) SetEnabled(enabled *string) {
-	o.Enabled = enabled
-}
-
 // WithGroupName adds the groupName to the extras custom links list params
 func (o *ExtrasCustomLinksListParams) WithGroupName(groupName *string) *ExtrasCustomLinksListParams {
 	o.SetGroupName(groupName)
@@ -353,6 +353,17 @@ func (o *ExtrasCustomLinksListParams) WithGroupName(groupName *string) *ExtrasCu
 // SetGroupName adds the groupName to the extras custom links list params
 func (o *ExtrasCustomLinksListParams) SetGroupName(groupName *string) {
 	o.GroupName = groupName
+}
+
+// WithGroupNameEmpty adds the groupNameEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) WithGroupNameEmpty(groupNameEmpty *string) *ExtrasCustomLinksListParams {
+	o.SetGroupNameEmpty(groupNameEmpty)
+	return o
+}
+
+// SetGroupNameEmpty adds the groupNameEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) SetGroupNameEmpty(groupNameEmpty *string) {
+	o.GroupNameEmpty = groupNameEmpty
 }
 
 // WithGroupNameIc adds the groupNameIc to the extras custom links list params
@@ -542,6 +553,17 @@ func (o *ExtrasCustomLinksListParams) SetLinkText(linkText *string) {
 	o.LinkText = linkText
 }
 
+// WithLinkTextEmpty adds the linkTextEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) WithLinkTextEmpty(linkTextEmpty *string) *ExtrasCustomLinksListParams {
+	o.SetLinkTextEmpty(linkTextEmpty)
+	return o
+}
+
+// SetLinkTextEmpty adds the linkTextEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) SetLinkTextEmpty(linkTextEmpty *string) {
+	o.LinkTextEmpty = linkTextEmpty
+}
+
 // WithLinkTextIc adds the linkTextIc to the extras custom links list params
 func (o *ExtrasCustomLinksListParams) WithLinkTextIc(linkTextIc *string) *ExtrasCustomLinksListParams {
 	o.SetLinkTextIc(linkTextIc)
@@ -652,6 +674,17 @@ func (o *ExtrasCustomLinksListParams) SetLinkURL(linkURL *string) {
 	o.LinkURL = linkURL
 }
 
+// WithLinkURLEmpty adds the linkURLEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) WithLinkURLEmpty(linkURLEmpty *string) *ExtrasCustomLinksListParams {
+	o.SetLinkURLEmpty(linkURLEmpty)
+	return o
+}
+
+// SetLinkURLEmpty adds the linkUrlEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) SetLinkURLEmpty(linkURLEmpty *string) {
+	o.LinkURLEmpty = linkURLEmpty
+}
+
 // WithLinkURLIc adds the linkURLIc to the extras custom links list params
 func (o *ExtrasCustomLinksListParams) WithLinkURLIc(linkURLIc *string) *ExtrasCustomLinksListParams {
 	o.SetLinkURLIc(linkURLIc)
@@ -760,6 +793,17 @@ func (o *ExtrasCustomLinksListParams) WithName(name *string) *ExtrasCustomLinksL
 // SetName adds the name to the extras custom links list params
 func (o *ExtrasCustomLinksListParams) SetName(name *string) {
 	o.Name = name
+}
+
+// WithNameEmpty adds the nameEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) WithNameEmpty(nameEmpty *string) *ExtrasCustomLinksListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the extras custom links list params
+func (o *ExtrasCustomLinksListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
 }
 
 // WithNameIc adds the nameIc to the extras custom links list params
@@ -1002,23 +1046,6 @@ func (o *ExtrasCustomLinksListParams) WriteToRequest(r runtime.ClientRequest, re
 		}
 	}
 
-	if o.Enabled != nil {
-
-		// query param enabled
-		var qrEnabled string
-
-		if o.Enabled != nil {
-			qrEnabled = *o.Enabled
-		}
-		qEnabled := qrEnabled
-		if qEnabled != "" {
-
-			if err := r.SetQueryParam("enabled", qEnabled); err != nil {
-				return err
-			}
-		}
-	}
-
 	if o.GroupName != nil {
 
 		// query param group_name
@@ -1031,6 +1058,23 @@ func (o *ExtrasCustomLinksListParams) WriteToRequest(r runtime.ClientRequest, re
 		if qGroupName != "" {
 
 			if err := r.SetQueryParam("group_name", qGroupName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.GroupNameEmpty != nil {
+
+		// query param group_name__empty
+		var qrGroupNameEmpty string
+
+		if o.GroupNameEmpty != nil {
+			qrGroupNameEmpty = *o.GroupNameEmpty
+		}
+		qGroupNameEmpty := qrGroupNameEmpty
+		if qGroupNameEmpty != "" {
+
+			if err := r.SetQueryParam("group_name__empty", qGroupNameEmpty); err != nil {
 				return err
 			}
 		}
@@ -1325,6 +1369,23 @@ func (o *ExtrasCustomLinksListParams) WriteToRequest(r runtime.ClientRequest, re
 		}
 	}
 
+	if o.LinkTextEmpty != nil {
+
+		// query param link_text__empty
+		var qrLinkTextEmpty string
+
+		if o.LinkTextEmpty != nil {
+			qrLinkTextEmpty = *o.LinkTextEmpty
+		}
+		qLinkTextEmpty := qrLinkTextEmpty
+		if qLinkTextEmpty != "" {
+
+			if err := r.SetQueryParam("link_text__empty", qLinkTextEmpty); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.LinkTextIc != nil {
 
 		// query param link_text__ic
@@ -1495,6 +1556,23 @@ func (o *ExtrasCustomLinksListParams) WriteToRequest(r runtime.ClientRequest, re
 		}
 	}
 
+	if o.LinkURLEmpty != nil {
+
+		// query param link_url__empty
+		var qrLinkURLEmpty string
+
+		if o.LinkURLEmpty != nil {
+			qrLinkURLEmpty = *o.LinkURLEmpty
+		}
+		qLinkURLEmpty := qrLinkURLEmpty
+		if qLinkURLEmpty != "" {
+
+			if err := r.SetQueryParam("link_url__empty", qLinkURLEmpty); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.LinkURLIc != nil {
 
 		// query param link_url__ic
@@ -1660,6 +1738,23 @@ func (o *ExtrasCustomLinksListParams) WriteToRequest(r runtime.ClientRequest, re
 		if qName != "" {
 
 			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
 				return err
 			}
 		}

@@ -21,6 +21,8 @@ package circuits
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -139,7 +141,7 @@ type ClientService interface {
 }
 
 /*
-  CircuitsCircuitTerminationsBulkDelete circuits circuit terminations bulk delete API
+CircuitsCircuitTerminationsBulkDelete circuits circuit terminations bulk delete API
 */
 func (a *Client) CircuitsCircuitTerminationsBulkDelete(params *CircuitsCircuitTerminationsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -172,12 +174,13 @@ func (a *Client) CircuitsCircuitTerminationsBulkDelete(params *CircuitsCircuitTe
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsBulkPartialUpdate circuits circuit terminations bulk partial update API
+CircuitsCircuitTerminationsBulkPartialUpdate circuits circuit terminations bulk partial update API
 */
 func (a *Client) CircuitsCircuitTerminationsBulkPartialUpdate(params *CircuitsCircuitTerminationsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -210,12 +213,13 @@ func (a *Client) CircuitsCircuitTerminationsBulkPartialUpdate(params *CircuitsCi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsBulkUpdate circuits circuit terminations bulk update API
+CircuitsCircuitTerminationsBulkUpdate circuits circuit terminations bulk update API
 */
 func (a *Client) CircuitsCircuitTerminationsBulkUpdate(params *CircuitsCircuitTerminationsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -248,12 +252,13 @@ func (a *Client) CircuitsCircuitTerminationsBulkUpdate(params *CircuitsCircuitTe
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsCreate circuits circuit terminations create API
+CircuitsCircuitTerminationsCreate circuits circuit terminations create API
 */
 func (a *Client) CircuitsCircuitTerminationsCreate(params *CircuitsCircuitTerminationsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -286,12 +291,13 @@ func (a *Client) CircuitsCircuitTerminationsCreate(params *CircuitsCircuitTermin
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsDelete circuits circuit terminations delete API
+CircuitsCircuitTerminationsDelete circuits circuit terminations delete API
 */
 func (a *Client) CircuitsCircuitTerminationsDelete(params *CircuitsCircuitTerminationsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -324,12 +330,13 @@ func (a *Client) CircuitsCircuitTerminationsDelete(params *CircuitsCircuitTermin
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsList Overrides ListModelMixin to allow processing ExportTemplates.
+CircuitsCircuitTerminationsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) CircuitsCircuitTerminationsList(params *CircuitsCircuitTerminationsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsListOK, error) {
 	// TODO: Validate the params before sending
@@ -362,12 +369,13 @@ func (a *Client) CircuitsCircuitTerminationsList(params *CircuitsCircuitTerminat
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsPartialUpdate circuits circuit terminations partial update API
+CircuitsCircuitTerminationsPartialUpdate circuits circuit terminations partial update API
 */
 func (a *Client) CircuitsCircuitTerminationsPartialUpdate(params *CircuitsCircuitTerminationsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -400,12 +408,13 @@ func (a *Client) CircuitsCircuitTerminationsPartialUpdate(params *CircuitsCircui
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsPaths Return all CablePaths which traverse a given pass-through port.
+CircuitsCircuitTerminationsPaths Return all CablePaths which traverse a given pass-through port.
 */
 func (a *Client) CircuitsCircuitTerminationsPaths(params *CircuitsCircuitTerminationsPathsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsPathsOK, error) {
 	// TODO: Validate the params before sending
@@ -438,12 +447,13 @@ func (a *Client) CircuitsCircuitTerminationsPaths(params *CircuitsCircuitTermina
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsPathsDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_paths: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsRead circuits circuit terminations read API
+CircuitsCircuitTerminationsRead circuits circuit terminations read API
 */
 func (a *Client) CircuitsCircuitTerminationsRead(params *CircuitsCircuitTerminationsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -476,12 +486,13 @@ func (a *Client) CircuitsCircuitTerminationsRead(params *CircuitsCircuitTerminat
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTerminationsUpdate circuits circuit terminations update API
+CircuitsCircuitTerminationsUpdate circuits circuit terminations update API
 */
 func (a *Client) CircuitsCircuitTerminationsUpdate(params *CircuitsCircuitTerminationsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTerminationsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -514,12 +525,13 @@ func (a *Client) CircuitsCircuitTerminationsUpdate(params *CircuitsCircuitTermin
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTerminationsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-terminations_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesBulkDelete circuits circuit types bulk delete API
+CircuitsCircuitTypesBulkDelete circuits circuit types bulk delete API
 */
 func (a *Client) CircuitsCircuitTypesBulkDelete(params *CircuitsCircuitTypesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -552,12 +564,13 @@ func (a *Client) CircuitsCircuitTypesBulkDelete(params *CircuitsCircuitTypesBulk
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesBulkPartialUpdate circuits circuit types bulk partial update API
+CircuitsCircuitTypesBulkPartialUpdate circuits circuit types bulk partial update API
 */
 func (a *Client) CircuitsCircuitTypesBulkPartialUpdate(params *CircuitsCircuitTypesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -590,12 +603,13 @@ func (a *Client) CircuitsCircuitTypesBulkPartialUpdate(params *CircuitsCircuitTy
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesBulkUpdate circuits circuit types bulk update API
+CircuitsCircuitTypesBulkUpdate circuits circuit types bulk update API
 */
 func (a *Client) CircuitsCircuitTypesBulkUpdate(params *CircuitsCircuitTypesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -628,12 +642,13 @@ func (a *Client) CircuitsCircuitTypesBulkUpdate(params *CircuitsCircuitTypesBulk
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesCreate circuits circuit types create API
+CircuitsCircuitTypesCreate circuits circuit types create API
 */
 func (a *Client) CircuitsCircuitTypesCreate(params *CircuitsCircuitTypesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -666,12 +681,13 @@ func (a *Client) CircuitsCircuitTypesCreate(params *CircuitsCircuitTypesCreatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesDelete circuits circuit types delete API
+CircuitsCircuitTypesDelete circuits circuit types delete API
 */
 func (a *Client) CircuitsCircuitTypesDelete(params *CircuitsCircuitTypesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -704,12 +720,13 @@ func (a *Client) CircuitsCircuitTypesDelete(params *CircuitsCircuitTypesDeletePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesList Overrides ListModelMixin to allow processing ExportTemplates.
+CircuitsCircuitTypesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) CircuitsCircuitTypesList(params *CircuitsCircuitTypesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesListOK, error) {
 	// TODO: Validate the params before sending
@@ -742,12 +759,13 @@ func (a *Client) CircuitsCircuitTypesList(params *CircuitsCircuitTypesListParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesPartialUpdate circuits circuit types partial update API
+CircuitsCircuitTypesPartialUpdate circuits circuit types partial update API
 */
 func (a *Client) CircuitsCircuitTypesPartialUpdate(params *CircuitsCircuitTypesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -780,12 +798,13 @@ func (a *Client) CircuitsCircuitTypesPartialUpdate(params *CircuitsCircuitTypesP
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesRead circuits circuit types read API
+CircuitsCircuitTypesRead circuits circuit types read API
 */
 func (a *Client) CircuitsCircuitTypesRead(params *CircuitsCircuitTypesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -818,12 +837,13 @@ func (a *Client) CircuitsCircuitTypesRead(params *CircuitsCircuitTypesReadParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitTypesUpdate circuits circuit types update API
+CircuitsCircuitTypesUpdate circuits circuit types update API
 */
 func (a *Client) CircuitsCircuitTypesUpdate(params *CircuitsCircuitTypesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitTypesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -856,12 +876,13 @@ func (a *Client) CircuitsCircuitTypesUpdate(params *CircuitsCircuitTypesUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitTypesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuit-types_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsBulkDelete circuits circuits bulk delete API
+CircuitsCircuitsBulkDelete circuits circuits bulk delete API
 */
 func (a *Client) CircuitsCircuitsBulkDelete(params *CircuitsCircuitsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -894,12 +915,13 @@ func (a *Client) CircuitsCircuitsBulkDelete(params *CircuitsCircuitsBulkDeletePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsBulkPartialUpdate circuits circuits bulk partial update API
+CircuitsCircuitsBulkPartialUpdate circuits circuits bulk partial update API
 */
 func (a *Client) CircuitsCircuitsBulkPartialUpdate(params *CircuitsCircuitsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -932,12 +954,13 @@ func (a *Client) CircuitsCircuitsBulkPartialUpdate(params *CircuitsCircuitsBulkP
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsBulkUpdate circuits circuits bulk update API
+CircuitsCircuitsBulkUpdate circuits circuits bulk update API
 */
 func (a *Client) CircuitsCircuitsBulkUpdate(params *CircuitsCircuitsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -970,12 +993,13 @@ func (a *Client) CircuitsCircuitsBulkUpdate(params *CircuitsCircuitsBulkUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsCreate circuits circuits create API
+CircuitsCircuitsCreate circuits circuits create API
 */
 func (a *Client) CircuitsCircuitsCreate(params *CircuitsCircuitsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1008,12 +1032,13 @@ func (a *Client) CircuitsCircuitsCreate(params *CircuitsCircuitsCreateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsDelete circuits circuits delete API
+CircuitsCircuitsDelete circuits circuits delete API
 */
 func (a *Client) CircuitsCircuitsDelete(params *CircuitsCircuitsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1046,12 +1071,13 @@ func (a *Client) CircuitsCircuitsDelete(params *CircuitsCircuitsDeleteParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsList Overrides ListModelMixin to allow processing ExportTemplates.
+CircuitsCircuitsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) CircuitsCircuitsList(params *CircuitsCircuitsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsListOK, error) {
 	// TODO: Validate the params before sending
@@ -1084,12 +1110,13 @@ func (a *Client) CircuitsCircuitsList(params *CircuitsCircuitsListParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsPartialUpdate circuits circuits partial update API
+CircuitsCircuitsPartialUpdate circuits circuits partial update API
 */
 func (a *Client) CircuitsCircuitsPartialUpdate(params *CircuitsCircuitsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1122,12 +1149,13 @@ func (a *Client) CircuitsCircuitsPartialUpdate(params *CircuitsCircuitsPartialUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsRead circuits circuits read API
+CircuitsCircuitsRead circuits circuits read API
 */
 func (a *Client) CircuitsCircuitsRead(params *CircuitsCircuitsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1160,12 +1188,13 @@ func (a *Client) CircuitsCircuitsRead(params *CircuitsCircuitsReadParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsCircuitsUpdate circuits circuits update API
+CircuitsCircuitsUpdate circuits circuits update API
 */
 func (a *Client) CircuitsCircuitsUpdate(params *CircuitsCircuitsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsCircuitsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1198,12 +1227,13 @@ func (a *Client) CircuitsCircuitsUpdate(params *CircuitsCircuitsUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsCircuitsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_circuits_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksBulkDelete circuits provider networks bulk delete API
+CircuitsProviderNetworksBulkDelete circuits provider networks bulk delete API
 */
 func (a *Client) CircuitsProviderNetworksBulkDelete(params *CircuitsProviderNetworksBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1236,12 +1266,13 @@ func (a *Client) CircuitsProviderNetworksBulkDelete(params *CircuitsProviderNetw
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksBulkPartialUpdate circuits provider networks bulk partial update API
+CircuitsProviderNetworksBulkPartialUpdate circuits provider networks bulk partial update API
 */
 func (a *Client) CircuitsProviderNetworksBulkPartialUpdate(params *CircuitsProviderNetworksBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1274,12 +1305,13 @@ func (a *Client) CircuitsProviderNetworksBulkPartialUpdate(params *CircuitsProvi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksBulkUpdate circuits provider networks bulk update API
+CircuitsProviderNetworksBulkUpdate circuits provider networks bulk update API
 */
 func (a *Client) CircuitsProviderNetworksBulkUpdate(params *CircuitsProviderNetworksBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1312,12 +1344,13 @@ func (a *Client) CircuitsProviderNetworksBulkUpdate(params *CircuitsProviderNetw
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksCreate circuits provider networks create API
+CircuitsProviderNetworksCreate circuits provider networks create API
 */
 func (a *Client) CircuitsProviderNetworksCreate(params *CircuitsProviderNetworksCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1350,12 +1383,13 @@ func (a *Client) CircuitsProviderNetworksCreate(params *CircuitsProviderNetworks
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksDelete circuits provider networks delete API
+CircuitsProviderNetworksDelete circuits provider networks delete API
 */
 func (a *Client) CircuitsProviderNetworksDelete(params *CircuitsProviderNetworksDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1388,12 +1422,13 @@ func (a *Client) CircuitsProviderNetworksDelete(params *CircuitsProviderNetworks
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksList Overrides ListModelMixin to allow processing ExportTemplates.
+CircuitsProviderNetworksList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) CircuitsProviderNetworksList(params *CircuitsProviderNetworksListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksListOK, error) {
 	// TODO: Validate the params before sending
@@ -1426,12 +1461,13 @@ func (a *Client) CircuitsProviderNetworksList(params *CircuitsProviderNetworksLi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksPartialUpdate circuits provider networks partial update API
+CircuitsProviderNetworksPartialUpdate circuits provider networks partial update API
 */
 func (a *Client) CircuitsProviderNetworksPartialUpdate(params *CircuitsProviderNetworksPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1464,12 +1500,13 @@ func (a *Client) CircuitsProviderNetworksPartialUpdate(params *CircuitsProviderN
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksRead circuits provider networks read API
+CircuitsProviderNetworksRead circuits provider networks read API
 */
 func (a *Client) CircuitsProviderNetworksRead(params *CircuitsProviderNetworksReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1502,12 +1539,13 @@ func (a *Client) CircuitsProviderNetworksRead(params *CircuitsProviderNetworksRe
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProviderNetworksUpdate circuits provider networks update API
+CircuitsProviderNetworksUpdate circuits provider networks update API
 */
 func (a *Client) CircuitsProviderNetworksUpdate(params *CircuitsProviderNetworksUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProviderNetworksUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1540,12 +1578,13 @@ func (a *Client) CircuitsProviderNetworksUpdate(params *CircuitsProviderNetworks
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProviderNetworksUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_provider-networks_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersBulkDelete circuits providers bulk delete API
+CircuitsProvidersBulkDelete circuits providers bulk delete API
 */
 func (a *Client) CircuitsProvidersBulkDelete(params *CircuitsProvidersBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1578,12 +1617,13 @@ func (a *Client) CircuitsProvidersBulkDelete(params *CircuitsProvidersBulkDelete
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersBulkPartialUpdate circuits providers bulk partial update API
+CircuitsProvidersBulkPartialUpdate circuits providers bulk partial update API
 */
 func (a *Client) CircuitsProvidersBulkPartialUpdate(params *CircuitsProvidersBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1616,12 +1656,13 @@ func (a *Client) CircuitsProvidersBulkPartialUpdate(params *CircuitsProvidersBul
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersBulkUpdate circuits providers bulk update API
+CircuitsProvidersBulkUpdate circuits providers bulk update API
 */
 func (a *Client) CircuitsProvidersBulkUpdate(params *CircuitsProvidersBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1654,12 +1695,13 @@ func (a *Client) CircuitsProvidersBulkUpdate(params *CircuitsProvidersBulkUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersCreate circuits providers create API
+CircuitsProvidersCreate circuits providers create API
 */
 func (a *Client) CircuitsProvidersCreate(params *CircuitsProvidersCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1692,12 +1734,13 @@ func (a *Client) CircuitsProvidersCreate(params *CircuitsProvidersCreateParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersDelete circuits providers delete API
+CircuitsProvidersDelete circuits providers delete API
 */
 func (a *Client) CircuitsProvidersDelete(params *CircuitsProvidersDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1730,12 +1773,13 @@ func (a *Client) CircuitsProvidersDelete(params *CircuitsProvidersDeleteParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersList Overrides ListModelMixin to allow processing ExportTemplates.
+CircuitsProvidersList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) CircuitsProvidersList(params *CircuitsProvidersListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersListOK, error) {
 	// TODO: Validate the params before sending
@@ -1768,12 +1812,13 @@ func (a *Client) CircuitsProvidersList(params *CircuitsProvidersListParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersPartialUpdate circuits providers partial update API
+CircuitsProvidersPartialUpdate circuits providers partial update API
 */
 func (a *Client) CircuitsProvidersPartialUpdate(params *CircuitsProvidersPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1806,12 +1851,13 @@ func (a *Client) CircuitsProvidersPartialUpdate(params *CircuitsProvidersPartial
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersRead circuits providers read API
+CircuitsProvidersRead circuits providers read API
 */
 func (a *Client) CircuitsProvidersRead(params *CircuitsProvidersReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1844,12 +1890,13 @@ func (a *Client) CircuitsProvidersRead(params *CircuitsProvidersReadParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  CircuitsProvidersUpdate circuits providers update API
+CircuitsProvidersUpdate circuits providers update API
 */
 func (a *Client) CircuitsProvidersUpdate(params *CircuitsProvidersUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CircuitsProvidersUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1882,8 +1929,9 @@ func (a *Client) CircuitsProvidersUpdate(params *CircuitsProvidersUpdateParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*CircuitsProvidersUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for circuits_providers_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

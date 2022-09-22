@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimPowerPortTemplatesBulkDeleteReader) ReadResponse(response runtime.C
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerPortTemplatesBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimPowerPortTemplatesBulkDeleteNoContent() *DcimPowerPortTemplatesBulkD
 	return &DcimPowerPortTemplatesBulkDeleteNoContent{}
 }
 
-/* DcimPowerPortTemplatesBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimPowerPortTemplatesBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimPowerPortTemplatesBulkDeleteNoContent dcim power port templates bulk delete no content
 */
 type DcimPowerPortTemplatesBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim power port templates bulk delete no content response has a 2xx status code
+func (o *DcimPowerPortTemplatesBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power port templates bulk delete no content response has a 3xx status code
+func (o *DcimPowerPortTemplatesBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power port templates bulk delete no content response has a 4xx status code
+func (o *DcimPowerPortTemplatesBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power port templates bulk delete no content response has a 5xx status code
+func (o *DcimPowerPortTemplatesBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power port templates bulk delete no content response a status code equal to that given
+func (o *DcimPowerPortTemplatesBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimPowerPortTemplatesBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/power-port-templates/][%d] dcimPowerPortTemplatesBulkDeleteNoContent ", 204)
 }
 
+func (o *DcimPowerPortTemplatesBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/power-port-templates/][%d] dcimPowerPortTemplatesBulkDeleteNoContent ", 204)
+}
+
 func (o *DcimPowerPortTemplatesBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimPowerPortTemplatesBulkDeleteDefault creates a DcimPowerPortTemplatesBulkDeleteDefault with default headers values
-func NewDcimPowerPortTemplatesBulkDeleteDefault(code int) *DcimPowerPortTemplatesBulkDeleteDefault {
-	return &DcimPowerPortTemplatesBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerPortTemplatesBulkDeleteDefault describes a response with status code -1, with default header values.
-
-DcimPowerPortTemplatesBulkDeleteDefault dcim power port templates bulk delete default
-*/
-type DcimPowerPortTemplatesBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power port templates bulk delete default response
-func (o *DcimPowerPortTemplatesBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerPortTemplatesBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/power-port-templates/][%d] dcim_power-port-templates_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerPortTemplatesBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerPortTemplatesBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

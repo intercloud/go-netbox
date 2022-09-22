@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimManufacturersListReader is a Reader for the DcimManufacturersList structure.
@@ -50,14 +50,7 @@ func (o *DcimManufacturersListReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 	default:
-		result := NewDcimManufacturersListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimManufacturersListOK() *DcimManufacturersListOK {
 	return &DcimManufacturersListOK{}
 }
 
-/* DcimManufacturersListOK describes a response with status code 200, with default header values.
+/*
+DcimManufacturersListOK describes a response with status code 200, with default header values.
 
 DcimManufacturersListOK dcim manufacturers list o k
 */
@@ -74,9 +68,39 @@ type DcimManufacturersListOK struct {
 	Payload *DcimManufacturersListOKBody
 }
 
+// IsSuccess returns true when this dcim manufacturers list o k response has a 2xx status code
+func (o *DcimManufacturersListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim manufacturers list o k response has a 3xx status code
+func (o *DcimManufacturersListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim manufacturers list o k response has a 4xx status code
+func (o *DcimManufacturersListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim manufacturers list o k response has a 5xx status code
+func (o *DcimManufacturersListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim manufacturers list o k response a status code equal to that given
+func (o *DcimManufacturersListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimManufacturersListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/manufacturers/][%d] dcimManufacturersListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimManufacturersListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/manufacturers/][%d] dcimManufacturersListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimManufacturersListOK) GetPayload() *DcimManufacturersListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimManufacturersListOK) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-// NewDcimManufacturersListDefault creates a DcimManufacturersListDefault with default headers values
-func NewDcimManufacturersListDefault(code int) *DcimManufacturersListDefault {
-	return &DcimManufacturersListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimManufacturersListDefault describes a response with status code -1, with default header values.
-
-DcimManufacturersListDefault dcim manufacturers list default
-*/
-type DcimManufacturersListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim manufacturers list default response
-func (o *DcimManufacturersListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimManufacturersListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/manufacturers/][%d] dcim_manufacturers_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimManufacturersListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimManufacturersListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimManufacturersListOKBody dcim manufacturers list o k body
+/*
+DcimManufacturersListOKBody dcim manufacturers list o k body
 swagger:model DcimManufacturersListOKBody
 */
 type DcimManufacturersListOKBody struct {

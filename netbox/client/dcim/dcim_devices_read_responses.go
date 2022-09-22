@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDevicesReadReader is a Reader for the DcimDevicesRead structure.
@@ -45,14 +45,7 @@ func (o *DcimDevicesReadReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return result, nil
 	default:
-		result := NewDcimDevicesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimDevicesReadOK() *DcimDevicesReadOK {
 	return &DcimDevicesReadOK{}
 }
 
-/* DcimDevicesReadOK describes a response with status code 200, with default header values.
+/*
+DcimDevicesReadOK describes a response with status code 200, with default header values.
 
 DcimDevicesReadOK dcim devices read o k
 */
@@ -69,9 +63,39 @@ type DcimDevicesReadOK struct {
 	Payload *models.DeviceWithConfigContext
 }
 
+// IsSuccess returns true when this dcim devices read o k response has a 2xx status code
+func (o *DcimDevicesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim devices read o k response has a 3xx status code
+func (o *DcimDevicesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim devices read o k response has a 4xx status code
+func (o *DcimDevicesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim devices read o k response has a 5xx status code
+func (o *DcimDevicesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim devices read o k response a status code equal to that given
+func (o *DcimDevicesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDevicesReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/devices/{id}/][%d] dcimDevicesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDevicesReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/devices/{id}/][%d] dcimDevicesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDevicesReadOK) GetPayload() *models.DeviceWithConfigContext {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimDevicesReadOK) readResponse(response runtime.ClientResponse, consum
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimDevicesReadDefault creates a DcimDevicesReadDefault with default headers values
-func NewDcimDevicesReadDefault(code int) *DcimDevicesReadDefault {
-	return &DcimDevicesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDevicesReadDefault describes a response with status code -1, with default header values.
-
-DcimDevicesReadDefault dcim devices read default
-*/
-type DcimDevicesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim devices read default response
-func (o *DcimDevicesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDevicesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/devices/{id}/][%d] dcim_devices_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDevicesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDevicesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimInterfacesCreateReader is a Reader for the DcimInterfacesCreate structure.
@@ -45,14 +45,7 @@ func (o *DcimInterfacesCreateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewDcimInterfacesCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimInterfacesCreateCreated() *DcimInterfacesCreateCreated {
 	return &DcimInterfacesCreateCreated{}
 }
 
-/* DcimInterfacesCreateCreated describes a response with status code 201, with default header values.
+/*
+DcimInterfacesCreateCreated describes a response with status code 201, with default header values.
 
 DcimInterfacesCreateCreated dcim interfaces create created
 */
@@ -69,9 +63,39 @@ type DcimInterfacesCreateCreated struct {
 	Payload *models.Interface
 }
 
+// IsSuccess returns true when this dcim interfaces create created response has a 2xx status code
+func (o *DcimInterfacesCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim interfaces create created response has a 3xx status code
+func (o *DcimInterfacesCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim interfaces create created response has a 4xx status code
+func (o *DcimInterfacesCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim interfaces create created response has a 5xx status code
+func (o *DcimInterfacesCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim interfaces create created response a status code equal to that given
+func (o *DcimInterfacesCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *DcimInterfacesCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /dcim/interfaces/][%d] dcimInterfacesCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *DcimInterfacesCreateCreated) String() string {
+	return fmt.Sprintf("[POST /dcim/interfaces/][%d] dcimInterfacesCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *DcimInterfacesCreateCreated) GetPayload() *models.Interface {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimInterfacesCreateCreated) readResponse(response runtime.ClientRespon
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimInterfacesCreateDefault creates a DcimInterfacesCreateDefault with default headers values
-func NewDcimInterfacesCreateDefault(code int) *DcimInterfacesCreateDefault {
-	return &DcimInterfacesCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInterfacesCreateDefault describes a response with status code -1, with default header values.
-
-DcimInterfacesCreateDefault dcim interfaces create default
-*/
-type DcimInterfacesCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim interfaces create default response
-func (o *DcimInterfacesCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInterfacesCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /dcim/interfaces/][%d] dcim_interfaces_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInterfacesCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInterfacesCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

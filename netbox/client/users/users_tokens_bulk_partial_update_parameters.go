@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewUsersTokensBulkPartialUpdateParams creates a new UsersTokensBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewUsersTokensBulkPartialUpdateParamsWithHTTPClient(client *http.Client) *U
 	}
 }
 
-/* UsersTokensBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the users tokens bulk partial update operation.
+/*
+UsersTokensBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the users tokens bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type UsersTokensBulkPartialUpdateParams struct {
 

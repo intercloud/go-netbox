@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewCircuitsProvidersBulkUpdateParams creates a new CircuitsProvidersBulkUpdateParams object,
@@ -69,15 +69,17 @@ func NewCircuitsProvidersBulkUpdateParamsWithHTTPClient(client *http.Client) *Ci
 	}
 }
 
-/* CircuitsProvidersBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the circuits providers bulk update operation.
+/*
+CircuitsProvidersBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the circuits providers bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type CircuitsProvidersBulkUpdateParams struct {
 
 	// Data.
-	Data *models.WritableProvider
+	Data *models.Provider
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,13 +135,13 @@ func (o *CircuitsProvidersBulkUpdateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithData adds the data to the circuits providers bulk update params
-func (o *CircuitsProvidersBulkUpdateParams) WithData(data *models.WritableProvider) *CircuitsProvidersBulkUpdateParams {
+func (o *CircuitsProvidersBulkUpdateParams) WithData(data *models.Provider) *CircuitsProvidersBulkUpdateParams {
 	o.SetData(data)
 	return o
 }
 
 // SetData adds the data to the circuits providers bulk update params
-func (o *CircuitsProvidersBulkUpdateParams) SetData(data *models.WritableProvider) {
+func (o *CircuitsProvidersBulkUpdateParams) SetData(data *models.Provider) {
 	o.Data = data
 }
 

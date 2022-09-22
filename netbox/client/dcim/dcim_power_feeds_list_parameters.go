@@ -68,10 +68,12 @@ func NewDcimPowerFeedsListParamsWithHTTPClient(client *http.Client) *DcimPowerFe
 	}
 }
 
-/* DcimPowerFeedsListParams contains all the parameters to send to the API endpoint
-   for the dcim power feeds list operation.
+/*
+DcimPowerFeedsListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim power feeds list operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimPowerFeedsListParams struct {
 
@@ -161,6 +163,9 @@ type DcimPowerFeedsListParams struct {
 
 	// Name.
 	Name *string
+
+	// NameEmpty.
+	NameEmpty *string
 
 	// NameIc.
 	NameIc *string
@@ -653,6 +658,17 @@ func (o *DcimPowerFeedsListParams) WithName(name *string) *DcimPowerFeedsListPar
 // SetName adds the name to the dcim power feeds list params
 func (o *DcimPowerFeedsListParams) SetName(name *string) {
 	o.Name = name
+}
+
+// WithNameEmpty adds the nameEmpty to the dcim power feeds list params
+func (o *DcimPowerFeedsListParams) WithNameEmpty(nameEmpty *string) *DcimPowerFeedsListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the dcim power feeds list params
+func (o *DcimPowerFeedsListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
 }
 
 // WithNameIc adds the nameIc to the dcim power feeds list params
@@ -1607,6 +1623,23 @@ func (o *DcimPowerFeedsListParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qName != "" {
 
 			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
 				return err
 			}
 		}

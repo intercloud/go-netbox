@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamAsnsUpdateParams creates a new IpamAsnsUpdateParams object,
@@ -70,10 +70,12 @@ func NewIpamAsnsUpdateParamsWithHTTPClient(client *http.Client) *IpamAsnsUpdateP
 	}
 }
 
-/* IpamAsnsUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam asns update operation.
+/*
+IpamAsnsUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam asns update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamAsnsUpdateParams struct {
 

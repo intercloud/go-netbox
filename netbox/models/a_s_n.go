@@ -45,8 +45,8 @@ type ASN struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -59,7 +59,7 @@ type ASN struct {
 	// Read Only: true
 	Display string `json:"display,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -67,10 +67,6 @@ type ASN struct {
 	// Read Only: true
 	// Format: date-time
 	LastUpdated strfmt.DateTime `json:"last_updated,omitempty"`
-
-	// Provider count
-	// Read Only: true
-	ProviderCount int64 `json:"provider_count,omitempty"`
 
 	// RIR
 	// Required: true
@@ -81,7 +77,7 @@ type ASN struct {
 	SiteCount int64 `json:"site_count,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// tenant
 	Tenant *NestedTenant `json:"tenant,omitempty"`
@@ -156,7 +152,7 @@ func (m *ASN) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -273,10 +269,6 @@ func (m *ASN) ContextValidate(ctx context.Context, formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateProviderCount(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSiteCount(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -301,7 +293,7 @@ func (m *ASN) ContextValidate(ctx context.Context, formats strfmt.Registry) erro
 
 func (m *ASN) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 
@@ -329,15 +321,6 @@ func (m *ASN) contextValidateID(ctx context.Context, formats strfmt.Registry) er
 func (m *ASN) contextValidateLastUpdated(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "last_updated", "body", strfmt.DateTime(m.LastUpdated)); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *ASN) contextValidateProviderCount(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "provider_count", "body", int64(m.ProviderCount)); err != nil {
 		return err
 	}
 

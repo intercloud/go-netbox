@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersPermissionsBulkPartialUpdateReader is a Reader for the UsersPermissionsBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *UsersPermissionsBulkPartialUpdateReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewUsersPermissionsBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersPermissionsBulkPartialUpdateOK() *UsersPermissionsBulkPartialUpdate
 	return &UsersPermissionsBulkPartialUpdateOK{}
 }
 
-/* UsersPermissionsBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+UsersPermissionsBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 UsersPermissionsBulkPartialUpdateOK users permissions bulk partial update o k
 */
@@ -69,9 +63,39 @@ type UsersPermissionsBulkPartialUpdateOK struct {
 	Payload *models.ObjectPermission
 }
 
+// IsSuccess returns true when this users permissions bulk partial update o k response has a 2xx status code
+func (o *UsersPermissionsBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users permissions bulk partial update o k response has a 3xx status code
+func (o *UsersPermissionsBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users permissions bulk partial update o k response has a 4xx status code
+func (o *UsersPermissionsBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users permissions bulk partial update o k response has a 5xx status code
+func (o *UsersPermissionsBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users permissions bulk partial update o k response a status code equal to that given
+func (o *UsersPermissionsBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UsersPermissionsBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /users/permissions/][%d] usersPermissionsBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *UsersPermissionsBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /users/permissions/][%d] usersPermissionsBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *UsersPermissionsBulkPartialUpdateOK) GetPayload() *models.ObjectPermission {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersPermissionsBulkPartialUpdateOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersPermissionsBulkPartialUpdateDefault creates a UsersPermissionsBulkPartialUpdateDefault with default headers values
-func NewUsersPermissionsBulkPartialUpdateDefault(code int) *UsersPermissionsBulkPartialUpdateDefault {
-	return &UsersPermissionsBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersPermissionsBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-UsersPermissionsBulkPartialUpdateDefault users permissions bulk partial update default
-*/
-type UsersPermissionsBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users permissions bulk partial update default response
-func (o *UsersPermissionsBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersPermissionsBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /users/permissions/][%d] users_permissions_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersPermissionsBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersPermissionsBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

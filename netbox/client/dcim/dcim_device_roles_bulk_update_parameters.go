@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimDeviceRolesBulkUpdateParams creates a new DcimDeviceRolesBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewDcimDeviceRolesBulkUpdateParamsWithHTTPClient(client *http.Client) *Dcim
 	}
 }
 
-/* DcimDeviceRolesBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim device roles bulk update operation.
+/*
+DcimDeviceRolesBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim device roles bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimDeviceRolesBulkUpdateParams struct {
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRacksBulkPartialUpdateReader is a Reader for the DcimRacksBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimRacksBulkPartialUpdateReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimRacksBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimRacksBulkPartialUpdateOK() *DcimRacksBulkPartialUpdateOK {
 	return &DcimRacksBulkPartialUpdateOK{}
 }
 
-/* DcimRacksBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimRacksBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimRacksBulkPartialUpdateOK dcim racks bulk partial update o k
 */
@@ -69,9 +63,39 @@ type DcimRacksBulkPartialUpdateOK struct {
 	Payload *models.Rack
 }
 
+// IsSuccess returns true when this dcim racks bulk partial update o k response has a 2xx status code
+func (o *DcimRacksBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim racks bulk partial update o k response has a 3xx status code
+func (o *DcimRacksBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim racks bulk partial update o k response has a 4xx status code
+func (o *DcimRacksBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim racks bulk partial update o k response has a 5xx status code
+func (o *DcimRacksBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim racks bulk partial update o k response a status code equal to that given
+func (o *DcimRacksBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRacksBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/racks/][%d] dcimRacksBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRacksBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/racks/][%d] dcimRacksBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRacksBulkPartialUpdateOK) GetPayload() *models.Rack {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimRacksBulkPartialUpdateOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimRacksBulkPartialUpdateDefault creates a DcimRacksBulkPartialUpdateDefault with default headers values
-func NewDcimRacksBulkPartialUpdateDefault(code int) *DcimRacksBulkPartialUpdateDefault {
-	return &DcimRacksBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRacksBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimRacksBulkPartialUpdateDefault dcim racks bulk partial update default
-*/
-type DcimRacksBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim racks bulk partial update default response
-func (o *DcimRacksBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRacksBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/racks/][%d] dcim_racks_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRacksBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRacksBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

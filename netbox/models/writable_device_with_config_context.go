@@ -36,10 +36,6 @@ import (
 // swagger:model WritableDeviceWithConfigContext
 type WritableDeviceWithConfigContext struct {
 
-	// Airflow
-	// Enum: [front-to-rear rear-to-front left-to-right right-to-left side-to-rear passive]
-	Airflow string `json:"airflow,omitempty"`
-
 	// Asset tag
 	//
 	// A unique tag used to identify this device
@@ -58,8 +54,8 @@ type WritableDeviceWithConfigContext struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -81,7 +77,7 @@ type WritableDeviceWithConfigContext struct {
 	// Enum: [front rear]
 	Face *string `json:"face"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -138,7 +134,7 @@ type WritableDeviceWithConfigContext struct {
 	Status string `json:"status,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Tenant
 	// Required: true
@@ -167,10 +163,6 @@ type WritableDeviceWithConfigContext struct {
 // Validate validates this writable device with config context
 func (m *WritableDeviceWithConfigContext) Validate(formats strfmt.Registry) error {
 	var res []error
-
-	if err := m.validateAirflow(formats); err != nil {
-		res = append(res, err)
-	}
 
 	if err := m.validateAssetTag(formats); err != nil {
 		res = append(res, err)
@@ -254,60 +246,6 @@ func (m *WritableDeviceWithConfigContext) Validate(formats strfmt.Registry) erro
 	return nil
 }
 
-var writableDeviceWithConfigContextTypeAirflowPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["front-to-rear","rear-to-front","left-to-right","right-to-left","side-to-rear","passive"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		writableDeviceWithConfigContextTypeAirflowPropEnum = append(writableDeviceWithConfigContextTypeAirflowPropEnum, v)
-	}
-}
-
-const (
-
-	// WritableDeviceWithConfigContextAirflowFrontDashToDashRear captures enum value "front-to-rear"
-	WritableDeviceWithConfigContextAirflowFrontDashToDashRear string = "front-to-rear"
-
-	// WritableDeviceWithConfigContextAirflowRearDashToDashFront captures enum value "rear-to-front"
-	WritableDeviceWithConfigContextAirflowRearDashToDashFront string = "rear-to-front"
-
-	// WritableDeviceWithConfigContextAirflowLeftDashToDashRight captures enum value "left-to-right"
-	WritableDeviceWithConfigContextAirflowLeftDashToDashRight string = "left-to-right"
-
-	// WritableDeviceWithConfigContextAirflowRightDashToDashLeft captures enum value "right-to-left"
-	WritableDeviceWithConfigContextAirflowRightDashToDashLeft string = "right-to-left"
-
-	// WritableDeviceWithConfigContextAirflowSideDashToDashRear captures enum value "side-to-rear"
-	WritableDeviceWithConfigContextAirflowSideDashToDashRear string = "side-to-rear"
-
-	// WritableDeviceWithConfigContextAirflowPassive captures enum value "passive"
-	WritableDeviceWithConfigContextAirflowPassive string = "passive"
-)
-
-// prop value enum
-func (m *WritableDeviceWithConfigContext) validateAirflowEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, writableDeviceWithConfigContextTypeAirflowPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *WritableDeviceWithConfigContext) validateAirflow(formats strfmt.Registry) error {
-	if swag.IsZero(m.Airflow) { // not required
-		return nil
-	}
-
-	// value enum
-	if err := m.validateAirflowEnum("airflow", "body", m.Airflow); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *WritableDeviceWithConfigContext) validateAssetTag(formats strfmt.Registry) error {
 	if swag.IsZero(m.AssetTag) { // not required
 		return nil
@@ -325,7 +263,7 @@ func (m *WritableDeviceWithConfigContext) validateCreated(formats strfmt.Registr
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -677,7 +615,7 @@ func (m *WritableDeviceWithConfigContext) contextValidateConfigContext(ctx conte
 
 func (m *WritableDeviceWithConfigContext) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

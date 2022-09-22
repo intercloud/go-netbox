@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPowerFeedsListReader is a Reader for the DcimPowerFeedsList structure.
@@ -50,14 +50,7 @@ func (o *DcimPowerFeedsListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerFeedsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimPowerFeedsListOK() *DcimPowerFeedsListOK {
 	return &DcimPowerFeedsListOK{}
 }
 
-/* DcimPowerFeedsListOK describes a response with status code 200, with default header values.
+/*
+DcimPowerFeedsListOK describes a response with status code 200, with default header values.
 
 DcimPowerFeedsListOK dcim power feeds list o k
 */
@@ -74,9 +68,39 @@ type DcimPowerFeedsListOK struct {
 	Payload *DcimPowerFeedsListOKBody
 }
 
+// IsSuccess returns true when this dcim power feeds list o k response has a 2xx status code
+func (o *DcimPowerFeedsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power feeds list o k response has a 3xx status code
+func (o *DcimPowerFeedsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power feeds list o k response has a 4xx status code
+func (o *DcimPowerFeedsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power feeds list o k response has a 5xx status code
+func (o *DcimPowerFeedsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power feeds list o k response a status code equal to that given
+func (o *DcimPowerFeedsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimPowerFeedsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/power-feeds/][%d] dcimPowerFeedsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimPowerFeedsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/power-feeds/][%d] dcimPowerFeedsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimPowerFeedsListOK) GetPayload() *DcimPowerFeedsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimPowerFeedsListOK) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-// NewDcimPowerFeedsListDefault creates a DcimPowerFeedsListDefault with default headers values
-func NewDcimPowerFeedsListDefault(code int) *DcimPowerFeedsListDefault {
-	return &DcimPowerFeedsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerFeedsListDefault describes a response with status code -1, with default header values.
-
-DcimPowerFeedsListDefault dcim power feeds list default
-*/
-type DcimPowerFeedsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power feeds list default response
-func (o *DcimPowerFeedsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerFeedsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/power-feeds/][%d] dcim_power-feeds_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerFeedsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerFeedsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimPowerFeedsListOKBody dcim power feeds list o k body
+/*
+DcimPowerFeedsListOKBody dcim power feeds list o k body
 swagger:model DcimPowerFeedsListOKBody
 */
 type DcimPowerFeedsListOKBody struct {

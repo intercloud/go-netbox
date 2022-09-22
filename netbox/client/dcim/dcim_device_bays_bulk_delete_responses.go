@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimDeviceBaysBulkDeleteReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewDcimDeviceBaysBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimDeviceBaysBulkDeleteNoContent() *DcimDeviceBaysBulkDeleteNoContent {
 	return &DcimDeviceBaysBulkDeleteNoContent{}
 }
 
-/* DcimDeviceBaysBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimDeviceBaysBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimDeviceBaysBulkDeleteNoContent dcim device bays bulk delete no content
 */
 type DcimDeviceBaysBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim device bays bulk delete no content response has a 2xx status code
+func (o *DcimDeviceBaysBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim device bays bulk delete no content response has a 3xx status code
+func (o *DcimDeviceBaysBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim device bays bulk delete no content response has a 4xx status code
+func (o *DcimDeviceBaysBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim device bays bulk delete no content response has a 5xx status code
+func (o *DcimDeviceBaysBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim device bays bulk delete no content response a status code equal to that given
+func (o *DcimDeviceBaysBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimDeviceBaysBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/device-bays/][%d] dcimDeviceBaysBulkDeleteNoContent ", 204)
 }
 
+func (o *DcimDeviceBaysBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/device-bays/][%d] dcimDeviceBaysBulkDeleteNoContent ", 204)
+}
+
 func (o *DcimDeviceBaysBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimDeviceBaysBulkDeleteDefault creates a DcimDeviceBaysBulkDeleteDefault with default headers values
-func NewDcimDeviceBaysBulkDeleteDefault(code int) *DcimDeviceBaysBulkDeleteDefault {
-	return &DcimDeviceBaysBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDeviceBaysBulkDeleteDefault describes a response with status code -1, with default header values.
-
-DcimDeviceBaysBulkDeleteDefault dcim device bays bulk delete default
-*/
-type DcimDeviceBaysBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim device bays bulk delete default response
-func (o *DcimDeviceBaysBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDeviceBaysBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/device-bays/][%d] dcim_device-bays_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDeviceBaysBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDeviceBaysBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

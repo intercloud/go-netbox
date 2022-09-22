@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimInterfacesListReader is a Reader for the DcimInterfacesList structure.
@@ -50,14 +50,7 @@ func (o *DcimInterfacesListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 	default:
-		result := NewDcimInterfacesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimInterfacesListOK() *DcimInterfacesListOK {
 	return &DcimInterfacesListOK{}
 }
 
-/* DcimInterfacesListOK describes a response with status code 200, with default header values.
+/*
+DcimInterfacesListOK describes a response with status code 200, with default header values.
 
 DcimInterfacesListOK dcim interfaces list o k
 */
@@ -74,9 +68,39 @@ type DcimInterfacesListOK struct {
 	Payload *DcimInterfacesListOKBody
 }
 
+// IsSuccess returns true when this dcim interfaces list o k response has a 2xx status code
+func (o *DcimInterfacesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim interfaces list o k response has a 3xx status code
+func (o *DcimInterfacesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim interfaces list o k response has a 4xx status code
+func (o *DcimInterfacesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim interfaces list o k response has a 5xx status code
+func (o *DcimInterfacesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim interfaces list o k response a status code equal to that given
+func (o *DcimInterfacesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimInterfacesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/interfaces/][%d] dcimInterfacesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimInterfacesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/interfaces/][%d] dcimInterfacesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimInterfacesListOK) GetPayload() *DcimInterfacesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimInterfacesListOK) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-// NewDcimInterfacesListDefault creates a DcimInterfacesListDefault with default headers values
-func NewDcimInterfacesListDefault(code int) *DcimInterfacesListDefault {
-	return &DcimInterfacesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInterfacesListDefault describes a response with status code -1, with default header values.
-
-DcimInterfacesListDefault dcim interfaces list default
-*/
-type DcimInterfacesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim interfaces list default response
-func (o *DcimInterfacesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInterfacesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/interfaces/][%d] dcim_interfaces_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInterfacesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInterfacesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimInterfacesListOKBody dcim interfaces list o k body
+/*
+DcimInterfacesListOKBody dcim interfaces list o k body
 swagger:model DcimInterfacesListOKBody
 */
 type DcimInterfacesListOKBody struct {

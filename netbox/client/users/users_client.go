@@ -21,6 +21,8 @@ package users
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -123,7 +125,7 @@ type ClientService interface {
 }
 
 /*
-  UsersConfigList Return the UserConfig for the currently authenticated User.
+UsersConfigList Return the UserConfig for the currently authenticated User.
 */
 func (a *Client) UsersConfigList(params *UsersConfigListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersConfigListOK, error) {
 	// TODO: Validate the params before sending
@@ -156,12 +158,13 @@ func (a *Client) UsersConfigList(params *UsersConfigListParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersConfigListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_config_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsBulkDelete users groups bulk delete API
+UsersGroupsBulkDelete users groups bulk delete API
 */
 func (a *Client) UsersGroupsBulkDelete(params *UsersGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -194,12 +197,13 @@ func (a *Client) UsersGroupsBulkDelete(params *UsersGroupsBulkDeleteParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsBulkPartialUpdate users groups bulk partial update API
+UsersGroupsBulkPartialUpdate users groups bulk partial update API
 */
 func (a *Client) UsersGroupsBulkPartialUpdate(params *UsersGroupsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -232,12 +236,13 @@ func (a *Client) UsersGroupsBulkPartialUpdate(params *UsersGroupsBulkPartialUpda
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsBulkUpdate users groups bulk update API
+UsersGroupsBulkUpdate users groups bulk update API
 */
 func (a *Client) UsersGroupsBulkUpdate(params *UsersGroupsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -270,12 +275,13 @@ func (a *Client) UsersGroupsBulkUpdate(params *UsersGroupsBulkUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsCreate users groups create API
+UsersGroupsCreate users groups create API
 */
 func (a *Client) UsersGroupsCreate(params *UsersGroupsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -308,12 +314,13 @@ func (a *Client) UsersGroupsCreate(params *UsersGroupsCreateParams, authInfo run
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsDelete users groups delete API
+UsersGroupsDelete users groups delete API
 */
 func (a *Client) UsersGroupsDelete(params *UsersGroupsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -346,12 +353,13 @@ func (a *Client) UsersGroupsDelete(params *UsersGroupsDeleteParams, authInfo run
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
+UsersGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) UsersGroupsList(params *UsersGroupsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsListOK, error) {
 	// TODO: Validate the params before sending
@@ -384,12 +392,13 @@ func (a *Client) UsersGroupsList(params *UsersGroupsListParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsPartialUpdate users groups partial update API
+UsersGroupsPartialUpdate users groups partial update API
 */
 func (a *Client) UsersGroupsPartialUpdate(params *UsersGroupsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -422,12 +431,13 @@ func (a *Client) UsersGroupsPartialUpdate(params *UsersGroupsPartialUpdateParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsRead users groups read API
+UsersGroupsRead users groups read API
 */
 func (a *Client) UsersGroupsRead(params *UsersGroupsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -460,12 +470,13 @@ func (a *Client) UsersGroupsRead(params *UsersGroupsReadParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersGroupsUpdate users groups update API
+UsersGroupsUpdate users groups update API
 */
 func (a *Client) UsersGroupsUpdate(params *UsersGroupsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersGroupsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -498,12 +509,13 @@ func (a *Client) UsersGroupsUpdate(params *UsersGroupsUpdateParams, authInfo run
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersGroupsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_groups_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsBulkDelete users permissions bulk delete API
+UsersPermissionsBulkDelete users permissions bulk delete API
 */
 func (a *Client) UsersPermissionsBulkDelete(params *UsersPermissionsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -536,12 +548,13 @@ func (a *Client) UsersPermissionsBulkDelete(params *UsersPermissionsBulkDeletePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsBulkPartialUpdate users permissions bulk partial update API
+UsersPermissionsBulkPartialUpdate users permissions bulk partial update API
 */
 func (a *Client) UsersPermissionsBulkPartialUpdate(params *UsersPermissionsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -574,12 +587,13 @@ func (a *Client) UsersPermissionsBulkPartialUpdate(params *UsersPermissionsBulkP
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsBulkUpdate users permissions bulk update API
+UsersPermissionsBulkUpdate users permissions bulk update API
 */
 func (a *Client) UsersPermissionsBulkUpdate(params *UsersPermissionsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -612,12 +626,13 @@ func (a *Client) UsersPermissionsBulkUpdate(params *UsersPermissionsBulkUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsCreate users permissions create API
+UsersPermissionsCreate users permissions create API
 */
 func (a *Client) UsersPermissionsCreate(params *UsersPermissionsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -650,12 +665,13 @@ func (a *Client) UsersPermissionsCreate(params *UsersPermissionsCreateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsDelete users permissions delete API
+UsersPermissionsDelete users permissions delete API
 */
 func (a *Client) UsersPermissionsDelete(params *UsersPermissionsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -688,12 +704,13 @@ func (a *Client) UsersPermissionsDelete(params *UsersPermissionsDeleteParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsList Overrides ListModelMixin to allow processing ExportTemplates.
+UsersPermissionsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) UsersPermissionsList(params *UsersPermissionsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsListOK, error) {
 	// TODO: Validate the params before sending
@@ -726,12 +743,13 @@ func (a *Client) UsersPermissionsList(params *UsersPermissionsListParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsPartialUpdate users permissions partial update API
+UsersPermissionsPartialUpdate users permissions partial update API
 */
 func (a *Client) UsersPermissionsPartialUpdate(params *UsersPermissionsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -764,12 +782,13 @@ func (a *Client) UsersPermissionsPartialUpdate(params *UsersPermissionsPartialUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsRead users permissions read API
+UsersPermissionsRead users permissions read API
 */
 func (a *Client) UsersPermissionsRead(params *UsersPermissionsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -802,12 +821,13 @@ func (a *Client) UsersPermissionsRead(params *UsersPermissionsReadParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersPermissionsUpdate users permissions update API
+UsersPermissionsUpdate users permissions update API
 */
 func (a *Client) UsersPermissionsUpdate(params *UsersPermissionsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersPermissionsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -840,12 +860,13 @@ func (a *Client) UsersPermissionsUpdate(params *UsersPermissionsUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersPermissionsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_permissions_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensBulkDelete users tokens bulk delete API
+UsersTokensBulkDelete users tokens bulk delete API
 */
 func (a *Client) UsersTokensBulkDelete(params *UsersTokensBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -878,12 +899,13 @@ func (a *Client) UsersTokensBulkDelete(params *UsersTokensBulkDeleteParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensBulkPartialUpdate users tokens bulk partial update API
+UsersTokensBulkPartialUpdate users tokens bulk partial update API
 */
 func (a *Client) UsersTokensBulkPartialUpdate(params *UsersTokensBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -916,12 +938,13 @@ func (a *Client) UsersTokensBulkPartialUpdate(params *UsersTokensBulkPartialUpda
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensBulkUpdate users tokens bulk update API
+UsersTokensBulkUpdate users tokens bulk update API
 */
 func (a *Client) UsersTokensBulkUpdate(params *UsersTokensBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -954,12 +977,13 @@ func (a *Client) UsersTokensBulkUpdate(params *UsersTokensBulkUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensCreate users tokens create API
+UsersTokensCreate users tokens create API
 */
 func (a *Client) UsersTokensCreate(params *UsersTokensCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -992,12 +1016,13 @@ func (a *Client) UsersTokensCreate(params *UsersTokensCreateParams, authInfo run
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensDelete users tokens delete API
+UsersTokensDelete users tokens delete API
 */
 func (a *Client) UsersTokensDelete(params *UsersTokensDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1030,12 +1055,13 @@ func (a *Client) UsersTokensDelete(params *UsersTokensDeleteParams, authInfo run
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensList Overrides ListModelMixin to allow processing ExportTemplates.
+UsersTokensList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) UsersTokensList(params *UsersTokensListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensListOK, error) {
 	// TODO: Validate the params before sending
@@ -1068,12 +1094,13 @@ func (a *Client) UsersTokensList(params *UsersTokensListParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensPartialUpdate users tokens partial update API
+UsersTokensPartialUpdate users tokens partial update API
 */
 func (a *Client) UsersTokensPartialUpdate(params *UsersTokensPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1106,12 +1133,13 @@ func (a *Client) UsersTokensPartialUpdate(params *UsersTokensPartialUpdateParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensProvisionCreate Non-authenticated REST API endpoint via which a user may create a Token.
+UsersTokensProvisionCreate Non-authenticated REST API endpoint via which a user may create a Token.
 */
 func (a *Client) UsersTokensProvisionCreate(params *UsersTokensProvisionCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensProvisionCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1144,12 +1172,13 @@ func (a *Client) UsersTokensProvisionCreate(params *UsersTokensProvisionCreatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensProvisionCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_provision_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensRead users tokens read API
+UsersTokensRead users tokens read API
 */
 func (a *Client) UsersTokensRead(params *UsersTokensReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1182,12 +1211,13 @@ func (a *Client) UsersTokensRead(params *UsersTokensReadParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersTokensUpdate users tokens update API
+UsersTokensUpdate users tokens update API
 */
 func (a *Client) UsersTokensUpdate(params *UsersTokensUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersTokensUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1220,12 +1250,13 @@ func (a *Client) UsersTokensUpdate(params *UsersTokensUpdateParams, authInfo run
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersTokensUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_tokens_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersBulkDelete users users bulk delete API
+UsersUsersBulkDelete users users bulk delete API
 */
 func (a *Client) UsersUsersBulkDelete(params *UsersUsersBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1258,12 +1289,13 @@ func (a *Client) UsersUsersBulkDelete(params *UsersUsersBulkDeleteParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersBulkPartialUpdate users users bulk partial update API
+UsersUsersBulkPartialUpdate users users bulk partial update API
 */
 func (a *Client) UsersUsersBulkPartialUpdate(params *UsersUsersBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1296,12 +1328,13 @@ func (a *Client) UsersUsersBulkPartialUpdate(params *UsersUsersBulkPartialUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersBulkUpdate users users bulk update API
+UsersUsersBulkUpdate users users bulk update API
 */
 func (a *Client) UsersUsersBulkUpdate(params *UsersUsersBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1334,12 +1367,13 @@ func (a *Client) UsersUsersBulkUpdate(params *UsersUsersBulkUpdateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersCreate users users create API
+UsersUsersCreate users users create API
 */
 func (a *Client) UsersUsersCreate(params *UsersUsersCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1372,12 +1406,13 @@ func (a *Client) UsersUsersCreate(params *UsersUsersCreateParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersDelete users users delete API
+UsersUsersDelete users users delete API
 */
 func (a *Client) UsersUsersDelete(params *UsersUsersDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1410,12 +1445,13 @@ func (a *Client) UsersUsersDelete(params *UsersUsersDeleteParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersList Overrides ListModelMixin to allow processing ExportTemplates.
+UsersUsersList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) UsersUsersList(params *UsersUsersListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersListOK, error) {
 	// TODO: Validate the params before sending
@@ -1448,12 +1484,13 @@ func (a *Client) UsersUsersList(params *UsersUsersListParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersPartialUpdate users users partial update API
+UsersUsersPartialUpdate users users partial update API
 */
 func (a *Client) UsersUsersPartialUpdate(params *UsersUsersPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1486,12 +1523,13 @@ func (a *Client) UsersUsersPartialUpdate(params *UsersUsersPartialUpdateParams, 
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersRead users users read API
+UsersUsersRead users users read API
 */
 func (a *Client) UsersUsersRead(params *UsersUsersReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1524,12 +1562,13 @@ func (a *Client) UsersUsersRead(params *UsersUsersReadParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  UsersUsersUpdate users users update API
+UsersUsersUpdate users users update API
 */
 func (a *Client) UsersUsersUpdate(params *UsersUsersUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UsersUsersUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1562,8 +1601,9 @@ func (a *Client) UsersUsersUpdate(params *UsersUsersUpdateParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*UsersUsersUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for users_users_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

@@ -22,7 +22,6 @@ package ipam
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *IpamPrefixesBulkDeleteReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewIpamPrefixesBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewIpamPrefixesBulkDeleteNoContent() *IpamPrefixesBulkDeleteNoContent {
 	return &IpamPrefixesBulkDeleteNoContent{}
 }
 
-/* IpamPrefixesBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamPrefixesBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 IpamPrefixesBulkDeleteNoContent ipam prefixes bulk delete no content
 */
 type IpamPrefixesBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this ipam prefixes bulk delete no content response has a 2xx status code
+func (o *IpamPrefixesBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam prefixes bulk delete no content response has a 3xx status code
+func (o *IpamPrefixesBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam prefixes bulk delete no content response has a 4xx status code
+func (o *IpamPrefixesBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam prefixes bulk delete no content response has a 5xx status code
+func (o *IpamPrefixesBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam prefixes bulk delete no content response a status code equal to that given
+func (o *IpamPrefixesBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *IpamPrefixesBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /ipam/prefixes/][%d] ipamPrefixesBulkDeleteNoContent ", 204)
 }
 
+func (o *IpamPrefixesBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /ipam/prefixes/][%d] ipamPrefixesBulkDeleteNoContent ", 204)
+}
+
 func (o *IpamPrefixesBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewIpamPrefixesBulkDeleteDefault creates a IpamPrefixesBulkDeleteDefault with default headers values
-func NewIpamPrefixesBulkDeleteDefault(code int) *IpamPrefixesBulkDeleteDefault {
-	return &IpamPrefixesBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamPrefixesBulkDeleteDefault describes a response with status code -1, with default header values.
-
-IpamPrefixesBulkDeleteDefault ipam prefixes bulk delete default
-*/
-type IpamPrefixesBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam prefixes bulk delete default response
-func (o *IpamPrefixesBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamPrefixesBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/prefixes/][%d] ipam_prefixes_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamPrefixesBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamPrefixesBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

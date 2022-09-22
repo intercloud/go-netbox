@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimRacksUpdateParams creates a new DcimRacksUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimRacksUpdateParamsWithHTTPClient(client *http.Client) *DcimRacksUpdat
 	}
 }
 
-/* DcimRacksUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim racks update operation.
+/*
+DcimRacksUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim racks update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimRacksUpdateParams struct {
 

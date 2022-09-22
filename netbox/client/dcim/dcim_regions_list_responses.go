@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRegionsListReader is a Reader for the DcimRegionsList structure.
@@ -50,14 +50,7 @@ func (o *DcimRegionsListReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return result, nil
 	default:
-		result := NewDcimRegionsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimRegionsListOK() *DcimRegionsListOK {
 	return &DcimRegionsListOK{}
 }
 
-/* DcimRegionsListOK describes a response with status code 200, with default header values.
+/*
+DcimRegionsListOK describes a response with status code 200, with default header values.
 
 DcimRegionsListOK dcim regions list o k
 */
@@ -74,9 +68,39 @@ type DcimRegionsListOK struct {
 	Payload *DcimRegionsListOKBody
 }
 
+// IsSuccess returns true when this dcim regions list o k response has a 2xx status code
+func (o *DcimRegionsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim regions list o k response has a 3xx status code
+func (o *DcimRegionsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim regions list o k response has a 4xx status code
+func (o *DcimRegionsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim regions list o k response has a 5xx status code
+func (o *DcimRegionsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim regions list o k response a status code equal to that given
+func (o *DcimRegionsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRegionsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/regions/][%d] dcimRegionsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRegionsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/regions/][%d] dcimRegionsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRegionsListOK) GetPayload() *DcimRegionsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimRegionsListOK) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-// NewDcimRegionsListDefault creates a DcimRegionsListDefault with default headers values
-func NewDcimRegionsListDefault(code int) *DcimRegionsListDefault {
-	return &DcimRegionsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRegionsListDefault describes a response with status code -1, with default header values.
-
-DcimRegionsListDefault dcim regions list default
-*/
-type DcimRegionsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim regions list default response
-func (o *DcimRegionsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRegionsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/regions/][%d] dcim_regions_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRegionsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRegionsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimRegionsListOKBody dcim regions list o k body
+/*
+DcimRegionsListOKBody dcim regions list o k body
 swagger:model DcimRegionsListOKBody
 */
 type DcimRegionsListOKBody struct {

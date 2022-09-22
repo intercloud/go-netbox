@@ -46,12 +46,8 @@ type WritableCustomField struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
-
-	// Data type
-	// Read Only: true
-	DataType string `json:"data_type,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Default
 	//
@@ -72,7 +68,7 @@ type WritableCustomField struct {
 	// Enum: [disabled loose exact]
 	FilterLogic string `json:"filter_logic,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -96,18 +92,13 @@ type WritableCustomField struct {
 	// Pattern: ^[a-z0-9_]+$
 	Name *string `json:"name"`
 
-	// Object type
-	ObjectType string `json:"object_type,omitempty"`
-
 	// Required
 	//
 	// If true, this field is required when creating new objects or editing an existing object.
 	Required bool `json:"required,omitempty"`
 
 	// Type
-	//
-	// The type of data this custom field holds
-	// Enum: [text longtext integer boolean date url json select multiselect object multiobject]
+	// Enum: [text longtext integer boolean date url json select multiselect]
 	Type string `json:"type,omitempty"`
 
 	// Url
@@ -247,7 +238,7 @@ func (m *WritableCustomField) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -360,7 +351,7 @@ var writableCustomFieldTypeTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["text","longtext","integer","boolean","date","url","json","select","multiselect","object","multiobject"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["text","longtext","integer","boolean","date","url","json","select","multiselect"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -396,12 +387,6 @@ const (
 
 	// WritableCustomFieldTypeMultiselect captures enum value "multiselect"
 	WritableCustomFieldTypeMultiselect string = "multiselect"
-
-	// WritableCustomFieldTypeObject captures enum value "object"
-	WritableCustomFieldTypeObject string = "object"
-
-	// WritableCustomFieldTypeMultiobject captures enum value "multiobject"
-	WritableCustomFieldTypeMultiobject string = "multiobject"
 )
 
 // prop value enum
@@ -505,10 +490,6 @@ func (m *WritableCustomField) ContextValidate(ctx context.Context, formats strfm
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateDataType(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateDisplay(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -533,16 +514,7 @@ func (m *WritableCustomField) ContextValidate(ctx context.Context, formats strfm
 
 func (m *WritableCustomField) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *WritableCustomField) contextValidateDataType(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "data_type", "body", string(m.DataType)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

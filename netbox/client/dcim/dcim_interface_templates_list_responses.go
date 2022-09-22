@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimInterfaceTemplatesListReader is a Reader for the DcimInterfaceTemplatesList structure.
@@ -50,14 +50,7 @@ func (o *DcimInterfaceTemplatesListReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimInterfaceTemplatesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimInterfaceTemplatesListOK() *DcimInterfaceTemplatesListOK {
 	return &DcimInterfaceTemplatesListOK{}
 }
 
-/* DcimInterfaceTemplatesListOK describes a response with status code 200, with default header values.
+/*
+DcimInterfaceTemplatesListOK describes a response with status code 200, with default header values.
 
 DcimInterfaceTemplatesListOK dcim interface templates list o k
 */
@@ -74,9 +68,39 @@ type DcimInterfaceTemplatesListOK struct {
 	Payload *DcimInterfaceTemplatesListOKBody
 }
 
+// IsSuccess returns true when this dcim interface templates list o k response has a 2xx status code
+func (o *DcimInterfaceTemplatesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim interface templates list o k response has a 3xx status code
+func (o *DcimInterfaceTemplatesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim interface templates list o k response has a 4xx status code
+func (o *DcimInterfaceTemplatesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim interface templates list o k response has a 5xx status code
+func (o *DcimInterfaceTemplatesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim interface templates list o k response a status code equal to that given
+func (o *DcimInterfaceTemplatesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimInterfaceTemplatesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/interface-templates/][%d] dcimInterfaceTemplatesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimInterfaceTemplatesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/interface-templates/][%d] dcimInterfaceTemplatesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimInterfaceTemplatesListOK) GetPayload() *DcimInterfaceTemplatesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimInterfaceTemplatesListOK) readResponse(response runtime.ClientRespo
 	return nil
 }
 
-// NewDcimInterfaceTemplatesListDefault creates a DcimInterfaceTemplatesListDefault with default headers values
-func NewDcimInterfaceTemplatesListDefault(code int) *DcimInterfaceTemplatesListDefault {
-	return &DcimInterfaceTemplatesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInterfaceTemplatesListDefault describes a response with status code -1, with default header values.
-
-DcimInterfaceTemplatesListDefault dcim interface templates list default
-*/
-type DcimInterfaceTemplatesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim interface templates list default response
-func (o *DcimInterfaceTemplatesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInterfaceTemplatesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/interface-templates/][%d] dcim_interface-templates_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInterfaceTemplatesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInterfaceTemplatesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimInterfaceTemplatesListOKBody dcim interface templates list o k body
+/*
+DcimInterfaceTemplatesListOKBody dcim interface templates list o k body
 swagger:model DcimInterfaceTemplatesListOKBody
 */
 type DcimInterfaceTemplatesListOKBody struct {

@@ -22,7 +22,6 @@ package extras
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *ExtrasExportTemplatesDeleteReader) ReadResponse(response runtime.Client
 		}
 		return result, nil
 	default:
-		result := NewExtrasExportTemplatesDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewExtrasExportTemplatesDeleteNoContent() *ExtrasExportTemplatesDeleteNoCon
 	return &ExtrasExportTemplatesDeleteNoContent{}
 }
 
-/* ExtrasExportTemplatesDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ExtrasExportTemplatesDeleteNoContent describes a response with status code 204, with default header values.
 
 ExtrasExportTemplatesDeleteNoContent extras export templates delete no content
 */
 type ExtrasExportTemplatesDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this extras export templates delete no content response has a 2xx status code
+func (o *ExtrasExportTemplatesDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras export templates delete no content response has a 3xx status code
+func (o *ExtrasExportTemplatesDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras export templates delete no content response has a 4xx status code
+func (o *ExtrasExportTemplatesDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras export templates delete no content response has a 5xx status code
+func (o *ExtrasExportTemplatesDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras export templates delete no content response a status code equal to that given
+func (o *ExtrasExportTemplatesDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *ExtrasExportTemplatesDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /extras/export-templates/{id}/][%d] extrasExportTemplatesDeleteNoContent ", 204)
 }
 
+func (o *ExtrasExportTemplatesDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /extras/export-templates/{id}/][%d] extrasExportTemplatesDeleteNoContent ", 204)
+}
+
 func (o *ExtrasExportTemplatesDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewExtrasExportTemplatesDeleteDefault creates a ExtrasExportTemplatesDeleteDefault with default headers values
-func NewExtrasExportTemplatesDeleteDefault(code int) *ExtrasExportTemplatesDeleteDefault {
-	return &ExtrasExportTemplatesDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasExportTemplatesDeleteDefault describes a response with status code -1, with default header values.
-
-ExtrasExportTemplatesDeleteDefault extras export templates delete default
-*/
-type ExtrasExportTemplatesDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras export templates delete default response
-func (o *ExtrasExportTemplatesDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasExportTemplatesDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /extras/export-templates/{id}/][%d] extras_export-templates_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasExportTemplatesDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasExportTemplatesDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

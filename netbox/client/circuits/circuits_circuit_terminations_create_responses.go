@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // CircuitsCircuitTerminationsCreateReader is a Reader for the CircuitsCircuitTerminationsCreate structure.
@@ -45,14 +45,7 @@ func (o *CircuitsCircuitTerminationsCreateReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewCircuitsCircuitTerminationsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewCircuitsCircuitTerminationsCreateCreated() *CircuitsCircuitTerminationsC
 	return &CircuitsCircuitTerminationsCreateCreated{}
 }
 
-/* CircuitsCircuitTerminationsCreateCreated describes a response with status code 201, with default header values.
+/*
+CircuitsCircuitTerminationsCreateCreated describes a response with status code 201, with default header values.
 
 CircuitsCircuitTerminationsCreateCreated circuits circuit terminations create created
 */
@@ -69,9 +63,39 @@ type CircuitsCircuitTerminationsCreateCreated struct {
 	Payload *models.CircuitTermination
 }
 
+// IsSuccess returns true when this circuits circuit terminations create created response has a 2xx status code
+func (o *CircuitsCircuitTerminationsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits circuit terminations create created response has a 3xx status code
+func (o *CircuitsCircuitTerminationsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits circuit terminations create created response has a 4xx status code
+func (o *CircuitsCircuitTerminationsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits circuit terminations create created response has a 5xx status code
+func (o *CircuitsCircuitTerminationsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits circuit terminations create created response a status code equal to that given
+func (o *CircuitsCircuitTerminationsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *CircuitsCircuitTerminationsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /circuits/circuit-terminations/][%d] circuitsCircuitTerminationsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *CircuitsCircuitTerminationsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /circuits/circuit-terminations/][%d] circuitsCircuitTerminationsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *CircuitsCircuitTerminationsCreateCreated) GetPayload() *models.CircuitTermination {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *CircuitsCircuitTerminationsCreateCreated) readResponse(response runtime
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewCircuitsCircuitTerminationsCreateDefault creates a CircuitsCircuitTerminationsCreateDefault with default headers values
-func NewCircuitsCircuitTerminationsCreateDefault(code int) *CircuitsCircuitTerminationsCreateDefault {
-	return &CircuitsCircuitTerminationsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsCircuitTerminationsCreateDefault describes a response with status code -1, with default header values.
-
-CircuitsCircuitTerminationsCreateDefault circuits circuit terminations create default
-*/
-type CircuitsCircuitTerminationsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits circuit terminations create default response
-func (o *CircuitsCircuitTerminationsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsCircuitTerminationsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /circuits/circuit-terminations/][%d] circuits_circuit-terminations_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsCircuitTerminationsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsCircuitTerminationsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

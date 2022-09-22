@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasJournalEntriesReadReader is a Reader for the ExtrasJournalEntriesRead structure.
@@ -45,14 +45,7 @@ func (o *ExtrasJournalEntriesReadReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewExtrasJournalEntriesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasJournalEntriesReadOK() *ExtrasJournalEntriesReadOK {
 	return &ExtrasJournalEntriesReadOK{}
 }
 
-/* ExtrasJournalEntriesReadOK describes a response with status code 200, with default header values.
+/*
+ExtrasJournalEntriesReadOK describes a response with status code 200, with default header values.
 
 ExtrasJournalEntriesReadOK extras journal entries read o k
 */
@@ -69,9 +63,39 @@ type ExtrasJournalEntriesReadOK struct {
 	Payload *models.JournalEntry
 }
 
+// IsSuccess returns true when this extras journal entries read o k response has a 2xx status code
+func (o *ExtrasJournalEntriesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras journal entries read o k response has a 3xx status code
+func (o *ExtrasJournalEntriesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras journal entries read o k response has a 4xx status code
+func (o *ExtrasJournalEntriesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras journal entries read o k response has a 5xx status code
+func (o *ExtrasJournalEntriesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras journal entries read o k response a status code equal to that given
+func (o *ExtrasJournalEntriesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasJournalEntriesReadOK) Error() string {
 	return fmt.Sprintf("[GET /extras/journal-entries/{id}/][%d] extrasJournalEntriesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasJournalEntriesReadOK) String() string {
+	return fmt.Sprintf("[GET /extras/journal-entries/{id}/][%d] extrasJournalEntriesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasJournalEntriesReadOK) GetPayload() *models.JournalEntry {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasJournalEntriesReadOK) readResponse(response runtime.ClientRespons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasJournalEntriesReadDefault creates a ExtrasJournalEntriesReadDefault with default headers values
-func NewExtrasJournalEntriesReadDefault(code int) *ExtrasJournalEntriesReadDefault {
-	return &ExtrasJournalEntriesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasJournalEntriesReadDefault describes a response with status code -1, with default header values.
-
-ExtrasJournalEntriesReadDefault extras journal entries read default
-*/
-type ExtrasJournalEntriesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras journal entries read default response
-func (o *ExtrasJournalEntriesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasJournalEntriesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/journal-entries/{id}/][%d] extras_journal-entries_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasJournalEntriesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasJournalEntriesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

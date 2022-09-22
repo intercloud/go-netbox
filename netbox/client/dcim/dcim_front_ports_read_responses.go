@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimFrontPortsReadReader is a Reader for the DcimFrontPortsRead structure.
@@ -45,14 +45,7 @@ func (o *DcimFrontPortsReadReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 	default:
-		result := NewDcimFrontPortsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimFrontPortsReadOK() *DcimFrontPortsReadOK {
 	return &DcimFrontPortsReadOK{}
 }
 
-/* DcimFrontPortsReadOK describes a response with status code 200, with default header values.
+/*
+DcimFrontPortsReadOK describes a response with status code 200, with default header values.
 
 DcimFrontPortsReadOK dcim front ports read o k
 */
@@ -69,9 +63,39 @@ type DcimFrontPortsReadOK struct {
 	Payload *models.FrontPort
 }
 
+// IsSuccess returns true when this dcim front ports read o k response has a 2xx status code
+func (o *DcimFrontPortsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim front ports read o k response has a 3xx status code
+func (o *DcimFrontPortsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim front ports read o k response has a 4xx status code
+func (o *DcimFrontPortsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim front ports read o k response has a 5xx status code
+func (o *DcimFrontPortsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim front ports read o k response a status code equal to that given
+func (o *DcimFrontPortsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimFrontPortsReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/front-ports/{id}/][%d] dcimFrontPortsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimFrontPortsReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/front-ports/{id}/][%d] dcimFrontPortsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimFrontPortsReadOK) GetPayload() *models.FrontPort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimFrontPortsReadOK) readResponse(response runtime.ClientResponse, con
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimFrontPortsReadDefault creates a DcimFrontPortsReadDefault with default headers values
-func NewDcimFrontPortsReadDefault(code int) *DcimFrontPortsReadDefault {
-	return &DcimFrontPortsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimFrontPortsReadDefault describes a response with status code -1, with default header values.
-
-DcimFrontPortsReadDefault dcim front ports read default
-*/
-type DcimFrontPortsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim front ports read default response
-func (o *DcimFrontPortsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimFrontPortsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/front-ports/{id}/][%d] dcim_front-ports_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimFrontPortsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimFrontPortsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

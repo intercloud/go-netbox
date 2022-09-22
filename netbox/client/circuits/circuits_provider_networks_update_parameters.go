@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewCircuitsProviderNetworksUpdateParams creates a new CircuitsProviderNetworksUpdateParams object,
@@ -70,10 +70,12 @@ func NewCircuitsProviderNetworksUpdateParamsWithHTTPClient(client *http.Client) 
 	}
 }
 
-/* CircuitsProviderNetworksUpdateParams contains all the parameters to send to the API endpoint
-   for the circuits provider networks update operation.
+/*
+CircuitsProviderNetworksUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the circuits provider networks update operation.
+
+	Typically these are written to a http.Request.
 */
 type CircuitsProviderNetworksUpdateParams struct {
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDevicesPartialUpdateReader is a Reader for the DcimDevicesPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimDevicesPartialUpdateReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewDcimDevicesPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimDevicesPartialUpdateOK() *DcimDevicesPartialUpdateOK {
 	return &DcimDevicesPartialUpdateOK{}
 }
 
-/* DcimDevicesPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimDevicesPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimDevicesPartialUpdateOK dcim devices partial update o k
 */
@@ -69,9 +63,39 @@ type DcimDevicesPartialUpdateOK struct {
 	Payload *models.DeviceWithConfigContext
 }
 
+// IsSuccess returns true when this dcim devices partial update o k response has a 2xx status code
+func (o *DcimDevicesPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim devices partial update o k response has a 3xx status code
+func (o *DcimDevicesPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim devices partial update o k response has a 4xx status code
+func (o *DcimDevicesPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim devices partial update o k response has a 5xx status code
+func (o *DcimDevicesPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim devices partial update o k response a status code equal to that given
+func (o *DcimDevicesPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDevicesPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/devices/{id}/][%d] dcimDevicesPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDevicesPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/devices/{id}/][%d] dcimDevicesPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDevicesPartialUpdateOK) GetPayload() *models.DeviceWithConfigContext {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimDevicesPartialUpdateOK) readResponse(response runtime.ClientRespons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimDevicesPartialUpdateDefault creates a DcimDevicesPartialUpdateDefault with default headers values
-func NewDcimDevicesPartialUpdateDefault(code int) *DcimDevicesPartialUpdateDefault {
-	return &DcimDevicesPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDevicesPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimDevicesPartialUpdateDefault dcim devices partial update default
-*/
-type DcimDevicesPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim devices partial update default response
-func (o *DcimDevicesPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDevicesPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/devices/{id}/][%d] dcim_devices_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDevicesPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDevicesPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

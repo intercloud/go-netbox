@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamIPAddressesListReader is a Reader for the IpamIPAddressesList structure.
@@ -50,14 +50,7 @@ func (o *IpamIPAddressesListReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewIpamIPAddressesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewIpamIPAddressesListOK() *IpamIPAddressesListOK {
 	return &IpamIPAddressesListOK{}
 }
 
-/* IpamIPAddressesListOK describes a response with status code 200, with default header values.
+/*
+IpamIPAddressesListOK describes a response with status code 200, with default header values.
 
 IpamIPAddressesListOK ipam Ip addresses list o k
 */
@@ -74,9 +68,39 @@ type IpamIPAddressesListOK struct {
 	Payload *IpamIPAddressesListOKBody
 }
 
+// IsSuccess returns true when this ipam Ip addresses list o k response has a 2xx status code
+func (o *IpamIPAddressesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam Ip addresses list o k response has a 3xx status code
+func (o *IpamIPAddressesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam Ip addresses list o k response has a 4xx status code
+func (o *IpamIPAddressesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam Ip addresses list o k response has a 5xx status code
+func (o *IpamIPAddressesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam Ip addresses list o k response a status code equal to that given
+func (o *IpamIPAddressesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamIPAddressesListOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/ip-addresses/][%d] ipamIpAddressesListOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamIPAddressesListOK) String() string {
+	return fmt.Sprintf("[GET /ipam/ip-addresses/][%d] ipamIpAddressesListOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamIPAddressesListOK) GetPayload() *IpamIPAddressesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *IpamIPAddressesListOK) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-// NewIpamIPAddressesListDefault creates a IpamIPAddressesListDefault with default headers values
-func NewIpamIPAddressesListDefault(code int) *IpamIPAddressesListDefault {
-	return &IpamIPAddressesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamIPAddressesListDefault describes a response with status code -1, with default header values.
-
-IpamIPAddressesListDefault ipam ip addresses list default
-*/
-type IpamIPAddressesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam ip addresses list default response
-func (o *IpamIPAddressesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamIPAddressesListDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/ip-addresses/][%d] ipam_ip-addresses_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamIPAddressesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamIPAddressesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*IpamIPAddressesListOKBody ipam IP addresses list o k body
+/*
+IpamIPAddressesListOKBody ipam IP addresses list o k body
 swagger:model IpamIPAddressesListOKBody
 */
 type IpamIPAddressesListOKBody struct {

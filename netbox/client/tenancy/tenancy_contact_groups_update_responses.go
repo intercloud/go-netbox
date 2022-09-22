@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyContactGroupsUpdateReader is a Reader for the TenancyContactGroupsUpdate structure.
@@ -45,14 +45,7 @@ func (o *TenancyContactGroupsUpdateReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactGroupsUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyContactGroupsUpdateOK() *TenancyContactGroupsUpdateOK {
 	return &TenancyContactGroupsUpdateOK{}
 }
 
-/* TenancyContactGroupsUpdateOK describes a response with status code 200, with default header values.
+/*
+TenancyContactGroupsUpdateOK describes a response with status code 200, with default header values.
 
 TenancyContactGroupsUpdateOK tenancy contact groups update o k
 */
@@ -69,9 +63,39 @@ type TenancyContactGroupsUpdateOK struct {
 	Payload *models.ContactGroup
 }
 
+// IsSuccess returns true when this tenancy contact groups update o k response has a 2xx status code
+func (o *TenancyContactGroupsUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact groups update o k response has a 3xx status code
+func (o *TenancyContactGroupsUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact groups update o k response has a 4xx status code
+func (o *TenancyContactGroupsUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact groups update o k response has a 5xx status code
+func (o *TenancyContactGroupsUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact groups update o k response a status code equal to that given
+func (o *TenancyContactGroupsUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyContactGroupsUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /tenancy/contact-groups/{id}/][%d] tenancyContactGroupsUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyContactGroupsUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /tenancy/contact-groups/{id}/][%d] tenancyContactGroupsUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyContactGroupsUpdateOK) GetPayload() *models.ContactGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyContactGroupsUpdateOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyContactGroupsUpdateDefault creates a TenancyContactGroupsUpdateDefault with default headers values
-func NewTenancyContactGroupsUpdateDefault(code int) *TenancyContactGroupsUpdateDefault {
-	return &TenancyContactGroupsUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactGroupsUpdateDefault describes a response with status code -1, with default header values.
-
-TenancyContactGroupsUpdateDefault tenancy contact groups update default
-*/
-type TenancyContactGroupsUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact groups update default response
-func (o *TenancyContactGroupsUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactGroupsUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /tenancy/contact-groups/{id}/][%d] tenancy_contact-groups_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactGroupsUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactGroupsUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

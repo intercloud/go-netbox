@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersUsersListReader is a Reader for the UsersUsersList structure.
@@ -50,14 +50,7 @@ func (o *UsersUsersListReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 	default:
-		result := NewUsersUsersListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewUsersUsersListOK() *UsersUsersListOK {
 	return &UsersUsersListOK{}
 }
 
-/* UsersUsersListOK describes a response with status code 200, with default header values.
+/*
+UsersUsersListOK describes a response with status code 200, with default header values.
 
 UsersUsersListOK users users list o k
 */
@@ -74,9 +68,39 @@ type UsersUsersListOK struct {
 	Payload *UsersUsersListOKBody
 }
 
+// IsSuccess returns true when this users users list o k response has a 2xx status code
+func (o *UsersUsersListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users users list o k response has a 3xx status code
+func (o *UsersUsersListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users users list o k response has a 4xx status code
+func (o *UsersUsersListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users users list o k response has a 5xx status code
+func (o *UsersUsersListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users users list o k response a status code equal to that given
+func (o *UsersUsersListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UsersUsersListOK) Error() string {
 	return fmt.Sprintf("[GET /users/users/][%d] usersUsersListOK  %+v", 200, o.Payload)
 }
+
+func (o *UsersUsersListOK) String() string {
+	return fmt.Sprintf("[GET /users/users/][%d] usersUsersListOK  %+v", 200, o.Payload)
+}
+
 func (o *UsersUsersListOK) GetPayload() *UsersUsersListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *UsersUsersListOK) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-// NewUsersUsersListDefault creates a UsersUsersListDefault with default headers values
-func NewUsersUsersListDefault(code int) *UsersUsersListDefault {
-	return &UsersUsersListDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersUsersListDefault describes a response with status code -1, with default header values.
-
-UsersUsersListDefault users users list default
-*/
-type UsersUsersListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users users list default response
-func (o *UsersUsersListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersUsersListDefault) Error() string {
-	return fmt.Sprintf("[GET /users/users/][%d] users_users_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersUsersListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersUsersListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*UsersUsersListOKBody users users list o k body
+/*
+UsersUsersListOKBody users users list o k body
 swagger:model UsersUsersListOKBody
 */
 type UsersUsersListOKBody struct {

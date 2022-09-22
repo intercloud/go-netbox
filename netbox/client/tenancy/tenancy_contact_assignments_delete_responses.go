@@ -22,7 +22,6 @@ package tenancy
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *TenancyContactAssignmentsDeleteReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactAssignmentsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewTenancyContactAssignmentsDeleteNoContent() *TenancyContactAssignmentsDel
 	return &TenancyContactAssignmentsDeleteNoContent{}
 }
 
-/* TenancyContactAssignmentsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+TenancyContactAssignmentsDeleteNoContent describes a response with status code 204, with default header values.
 
 TenancyContactAssignmentsDeleteNoContent tenancy contact assignments delete no content
 */
 type TenancyContactAssignmentsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this tenancy contact assignments delete no content response has a 2xx status code
+func (o *TenancyContactAssignmentsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact assignments delete no content response has a 3xx status code
+func (o *TenancyContactAssignmentsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact assignments delete no content response has a 4xx status code
+func (o *TenancyContactAssignmentsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact assignments delete no content response has a 5xx status code
+func (o *TenancyContactAssignmentsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact assignments delete no content response a status code equal to that given
+func (o *TenancyContactAssignmentsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *TenancyContactAssignmentsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /tenancy/contact-assignments/{id}/][%d] tenancyContactAssignmentsDeleteNoContent ", 204)
 }
 
+func (o *TenancyContactAssignmentsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /tenancy/contact-assignments/{id}/][%d] tenancyContactAssignmentsDeleteNoContent ", 204)
+}
+
 func (o *TenancyContactAssignmentsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewTenancyContactAssignmentsDeleteDefault creates a TenancyContactAssignmentsDeleteDefault with default headers values
-func NewTenancyContactAssignmentsDeleteDefault(code int) *TenancyContactAssignmentsDeleteDefault {
-	return &TenancyContactAssignmentsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactAssignmentsDeleteDefault describes a response with status code -1, with default header values.
-
-TenancyContactAssignmentsDeleteDefault tenancy contact assignments delete default
-*/
-type TenancyContactAssignmentsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact assignments delete default response
-func (o *TenancyContactAssignmentsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactAssignmentsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /tenancy/contact-assignments/{id}/][%d] tenancy_contact-assignments_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactAssignmentsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactAssignmentsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

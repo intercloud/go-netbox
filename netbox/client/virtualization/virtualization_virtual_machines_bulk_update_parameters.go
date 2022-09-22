@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewVirtualizationVirtualMachinesBulkUpdateParams creates a new VirtualizationVirtualMachinesBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewVirtualizationVirtualMachinesBulkUpdateParamsWithHTTPClient(client *http
 	}
 }
 
-/* VirtualizationVirtualMachinesBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the virtualization virtual machines bulk update operation.
+/*
+VirtualizationVirtualMachinesBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the virtualization virtual machines bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type VirtualizationVirtualMachinesBulkUpdateParams struct {
 

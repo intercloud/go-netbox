@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimPowerPortTemplatesCreateParams creates a new DcimPowerPortTemplatesCreateParams object,
@@ -69,10 +69,12 @@ func NewDcimPowerPortTemplatesCreateParamsWithHTTPClient(client *http.Client) *D
 	}
 }
 
-/* DcimPowerPortTemplatesCreateParams contains all the parameters to send to the API endpoint
-   for the dcim power port templates create operation.
+/*
+DcimPowerPortTemplatesCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim power port templates create operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimPowerPortTemplatesCreateParams struct {
 

@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamRouteTargetsBulkPartialUpdateParams creates a new IpamRouteTargetsBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewIpamRouteTargetsBulkPartialUpdateParamsWithHTTPClient(client *http.Clien
 	}
 }
 
-/* IpamRouteTargetsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam route targets bulk partial update operation.
+/*
+IpamRouteTargetsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam route targets bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamRouteTargetsBulkPartialUpdateParams struct {
 

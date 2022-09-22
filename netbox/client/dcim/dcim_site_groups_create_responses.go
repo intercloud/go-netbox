@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimSiteGroupsCreateReader is a Reader for the DcimSiteGroupsCreate structure.
@@ -45,14 +45,7 @@ func (o *DcimSiteGroupsCreateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewDcimSiteGroupsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimSiteGroupsCreateCreated() *DcimSiteGroupsCreateCreated {
 	return &DcimSiteGroupsCreateCreated{}
 }
 
-/* DcimSiteGroupsCreateCreated describes a response with status code 201, with default header values.
+/*
+DcimSiteGroupsCreateCreated describes a response with status code 201, with default header values.
 
 DcimSiteGroupsCreateCreated dcim site groups create created
 */
@@ -69,9 +63,39 @@ type DcimSiteGroupsCreateCreated struct {
 	Payload *models.SiteGroup
 }
 
+// IsSuccess returns true when this dcim site groups create created response has a 2xx status code
+func (o *DcimSiteGroupsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim site groups create created response has a 3xx status code
+func (o *DcimSiteGroupsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim site groups create created response has a 4xx status code
+func (o *DcimSiteGroupsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim site groups create created response has a 5xx status code
+func (o *DcimSiteGroupsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim site groups create created response a status code equal to that given
+func (o *DcimSiteGroupsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *DcimSiteGroupsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /dcim/site-groups/][%d] dcimSiteGroupsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *DcimSiteGroupsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /dcim/site-groups/][%d] dcimSiteGroupsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *DcimSiteGroupsCreateCreated) GetPayload() *models.SiteGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimSiteGroupsCreateCreated) readResponse(response runtime.ClientRespon
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimSiteGroupsCreateDefault creates a DcimSiteGroupsCreateDefault with default headers values
-func NewDcimSiteGroupsCreateDefault(code int) *DcimSiteGroupsCreateDefault {
-	return &DcimSiteGroupsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimSiteGroupsCreateDefault describes a response with status code -1, with default header values.
-
-DcimSiteGroupsCreateDefault dcim site groups create default
-*/
-type DcimSiteGroupsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim site groups create default response
-func (o *DcimSiteGroupsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimSiteGroupsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /dcim/site-groups/][%d] dcim_site-groups_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimSiteGroupsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimSiteGroupsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

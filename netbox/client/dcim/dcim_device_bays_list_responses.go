@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDeviceBaysListReader is a Reader for the DcimDeviceBaysList structure.
@@ -50,14 +50,7 @@ func (o *DcimDeviceBaysListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 	default:
-		result := NewDcimDeviceBaysListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimDeviceBaysListOK() *DcimDeviceBaysListOK {
 	return &DcimDeviceBaysListOK{}
 }
 
-/* DcimDeviceBaysListOK describes a response with status code 200, with default header values.
+/*
+DcimDeviceBaysListOK describes a response with status code 200, with default header values.
 
 DcimDeviceBaysListOK dcim device bays list o k
 */
@@ -74,9 +68,39 @@ type DcimDeviceBaysListOK struct {
 	Payload *DcimDeviceBaysListOKBody
 }
 
+// IsSuccess returns true when this dcim device bays list o k response has a 2xx status code
+func (o *DcimDeviceBaysListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim device bays list o k response has a 3xx status code
+func (o *DcimDeviceBaysListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim device bays list o k response has a 4xx status code
+func (o *DcimDeviceBaysListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim device bays list o k response has a 5xx status code
+func (o *DcimDeviceBaysListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim device bays list o k response a status code equal to that given
+func (o *DcimDeviceBaysListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDeviceBaysListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/device-bays/][%d] dcimDeviceBaysListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDeviceBaysListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/device-bays/][%d] dcimDeviceBaysListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDeviceBaysListOK) GetPayload() *DcimDeviceBaysListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimDeviceBaysListOK) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-// NewDcimDeviceBaysListDefault creates a DcimDeviceBaysListDefault with default headers values
-func NewDcimDeviceBaysListDefault(code int) *DcimDeviceBaysListDefault {
-	return &DcimDeviceBaysListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDeviceBaysListDefault describes a response with status code -1, with default header values.
-
-DcimDeviceBaysListDefault dcim device bays list default
-*/
-type DcimDeviceBaysListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim device bays list default response
-func (o *DcimDeviceBaysListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDeviceBaysListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/device-bays/][%d] dcim_device-bays_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDeviceBaysListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDeviceBaysListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimDeviceBaysListOKBody dcim device bays list o k body
+/*
+DcimDeviceBaysListOKBody dcim device bays list o k body
 swagger:model DcimDeviceBaysListOKBody
 */
 type DcimDeviceBaysListOKBody struct {

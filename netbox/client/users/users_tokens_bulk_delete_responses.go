@@ -22,7 +22,6 @@ package users
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *UsersTokensBulkDeleteReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 	default:
-		result := NewUsersTokensBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewUsersTokensBulkDeleteNoContent() *UsersTokensBulkDeleteNoContent {
 	return &UsersTokensBulkDeleteNoContent{}
 }
 
-/* UsersTokensBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+UsersTokensBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 UsersTokensBulkDeleteNoContent users tokens bulk delete no content
 */
 type UsersTokensBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this users tokens bulk delete no content response has a 2xx status code
+func (o *UsersTokensBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users tokens bulk delete no content response has a 3xx status code
+func (o *UsersTokensBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users tokens bulk delete no content response has a 4xx status code
+func (o *UsersTokensBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users tokens bulk delete no content response has a 5xx status code
+func (o *UsersTokensBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users tokens bulk delete no content response a status code equal to that given
+func (o *UsersTokensBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *UsersTokensBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /users/tokens/][%d] usersTokensBulkDeleteNoContent ", 204)
 }
 
+func (o *UsersTokensBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /users/tokens/][%d] usersTokensBulkDeleteNoContent ", 204)
+}
+
 func (o *UsersTokensBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewUsersTokensBulkDeleteDefault creates a UsersTokensBulkDeleteDefault with default headers values
-func NewUsersTokensBulkDeleteDefault(code int) *UsersTokensBulkDeleteDefault {
-	return &UsersTokensBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersTokensBulkDeleteDefault describes a response with status code -1, with default header values.
-
-UsersTokensBulkDeleteDefault users tokens bulk delete default
-*/
-type UsersTokensBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users tokens bulk delete default response
-func (o *UsersTokensBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersTokensBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /users/tokens/][%d] users_tokens_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersTokensBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersTokensBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

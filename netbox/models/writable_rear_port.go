@@ -50,8 +50,8 @@ type WritableRearPort struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -68,7 +68,7 @@ type WritableRearPort struct {
 	// Read Only: true
 	Display string `json:"display,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -100,9 +100,6 @@ type WritableRearPort struct {
 	// Treat as if a cable is connected
 	MarkConnected bool `json:"mark_connected,omitempty"`
 
-	// Module
-	Module *int64 `json:"module,omitempty"`
-
 	// Name
 	// Required: true
 	// Max Length: 64
@@ -115,11 +112,11 @@ type WritableRearPort struct {
 	Positions int64 `json:"positions,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Type
 	// Required: true
-	// Enum: [8p8c 8p6c 8p4c 8p2c 6p6c 6p4c 6p2c 4p4c 4p2c gg45 tera-4p tera-2p tera-1p 110-punch bnc f n mrj21 fc lc lc-pc lc-upc lc-apc lsh lsh-pc lsh-upc lsh-apc mpo mtrj sc sc-pc sc-upc sc-apc st cs sn sma-905 sma-906 urm-p2 urm-p4 urm-p8 splice]
+	// Enum: [8p8c 8p6c 8p4c 8p2c 6p6c 6p4c 6p2c 4p4c 4p2c gg45 tera-4p tera-2p tera-1p 110-punch bnc f n mrj21 fc lc lc-apc lsh lsh-apc mpo mtrj sc sc-apc st cs sn sma-905 sma-906 urm-p2 urm-p4 urm-p8 splice]
 	Type *string `json:"type"`
 
 	// Url
@@ -226,7 +223,7 @@ func (m *WritableRearPort) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -341,7 +338,7 @@ var writableRearPortTypeTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["8p8c","8p6c","8p4c","8p2c","6p6c","6p4c","6p2c","4p4c","4p2c","gg45","tera-4p","tera-2p","tera-1p","110-punch","bnc","f","n","mrj21","fc","lc","lc-pc","lc-upc","lc-apc","lsh","lsh-pc","lsh-upc","lsh-apc","mpo","mtrj","sc","sc-pc","sc-upc","sc-apc","st","cs","sn","sma-905","sma-906","urm-p2","urm-p4","urm-p8","splice"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["8p8c","8p6c","8p4c","8p2c","6p6c","6p4c","6p2c","4p4c","4p2c","gg45","tera-4p","tera-2p","tera-1p","110-punch","bnc","f","n","mrj21","fc","lc","lc-apc","lsh","lsh-apc","mpo","mtrj","sc","sc-apc","st","cs","sn","sma-905","sma-906","urm-p2","urm-p4","urm-p8","splice"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -411,23 +408,11 @@ const (
 	// WritableRearPortTypeLc captures enum value "lc"
 	WritableRearPortTypeLc string = "lc"
 
-	// WritableRearPortTypeLcDashPc captures enum value "lc-pc"
-	WritableRearPortTypeLcDashPc string = "lc-pc"
-
-	// WritableRearPortTypeLcDashUpc captures enum value "lc-upc"
-	WritableRearPortTypeLcDashUpc string = "lc-upc"
-
 	// WritableRearPortTypeLcDashApc captures enum value "lc-apc"
 	WritableRearPortTypeLcDashApc string = "lc-apc"
 
 	// WritableRearPortTypeLsh captures enum value "lsh"
 	WritableRearPortTypeLsh string = "lsh"
-
-	// WritableRearPortTypeLshDashPc captures enum value "lsh-pc"
-	WritableRearPortTypeLshDashPc string = "lsh-pc"
-
-	// WritableRearPortTypeLshDashUpc captures enum value "lsh-upc"
-	WritableRearPortTypeLshDashUpc string = "lsh-upc"
 
 	// WritableRearPortTypeLshDashApc captures enum value "lsh-apc"
 	WritableRearPortTypeLshDashApc string = "lsh-apc"
@@ -440,12 +425,6 @@ const (
 
 	// WritableRearPortTypeSc captures enum value "sc"
 	WritableRearPortTypeSc string = "sc"
-
-	// WritableRearPortTypeScDashPc captures enum value "sc-pc"
-	WritableRearPortTypeScDashPc string = "sc-pc"
-
-	// WritableRearPortTypeScDashUpc captures enum value "sc-upc"
-	WritableRearPortTypeScDashUpc string = "sc-upc"
 
 	// WritableRearPortTypeScDashApc captures enum value "sc-apc"
 	WritableRearPortTypeScDashApc string = "sc-apc"
@@ -589,7 +568,7 @@ func (m *WritableRearPort) contextValidateCable(ctx context.Context, formats str
 
 func (m *WritableRearPort) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

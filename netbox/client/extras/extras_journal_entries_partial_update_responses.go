@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasJournalEntriesPartialUpdateReader is a Reader for the ExtrasJournalEntriesPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasJournalEntriesPartialUpdateReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewExtrasJournalEntriesPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasJournalEntriesPartialUpdateOK() *ExtrasJournalEntriesPartialUpdate
 	return &ExtrasJournalEntriesPartialUpdateOK{}
 }
 
-/* ExtrasJournalEntriesPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+ExtrasJournalEntriesPartialUpdateOK describes a response with status code 200, with default header values.
 
 ExtrasJournalEntriesPartialUpdateOK extras journal entries partial update o k
 */
@@ -69,9 +63,39 @@ type ExtrasJournalEntriesPartialUpdateOK struct {
 	Payload *models.JournalEntry
 }
 
+// IsSuccess returns true when this extras journal entries partial update o k response has a 2xx status code
+func (o *ExtrasJournalEntriesPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras journal entries partial update o k response has a 3xx status code
+func (o *ExtrasJournalEntriesPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras journal entries partial update o k response has a 4xx status code
+func (o *ExtrasJournalEntriesPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras journal entries partial update o k response has a 5xx status code
+func (o *ExtrasJournalEntriesPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras journal entries partial update o k response a status code equal to that given
+func (o *ExtrasJournalEntriesPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasJournalEntriesPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /extras/journal-entries/{id}/][%d] extrasJournalEntriesPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasJournalEntriesPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /extras/journal-entries/{id}/][%d] extrasJournalEntriesPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasJournalEntriesPartialUpdateOK) GetPayload() *models.JournalEntry {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasJournalEntriesPartialUpdateOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasJournalEntriesPartialUpdateDefault creates a ExtrasJournalEntriesPartialUpdateDefault with default headers values
-func NewExtrasJournalEntriesPartialUpdateDefault(code int) *ExtrasJournalEntriesPartialUpdateDefault {
-	return &ExtrasJournalEntriesPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasJournalEntriesPartialUpdateDefault describes a response with status code -1, with default header values.
-
-ExtrasJournalEntriesPartialUpdateDefault extras journal entries partial update default
-*/
-type ExtrasJournalEntriesPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras journal entries partial update default response
-func (o *ExtrasJournalEntriesPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasJournalEntriesPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /extras/journal-entries/{id}/][%d] extras_journal-entries_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasJournalEntriesPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasJournalEntriesPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamAsnsReadReader is a Reader for the IpamAsnsRead structure.
@@ -45,14 +45,7 @@ func (o *IpamAsnsReadReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return result, nil
 	default:
-		result := NewIpamAsnsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamAsnsReadOK() *IpamAsnsReadOK {
 	return &IpamAsnsReadOK{}
 }
 
-/* IpamAsnsReadOK describes a response with status code 200, with default header values.
+/*
+IpamAsnsReadOK describes a response with status code 200, with default header values.
 
 IpamAsnsReadOK ipam asns read o k
 */
@@ -69,9 +63,39 @@ type IpamAsnsReadOK struct {
 	Payload *models.ASN
 }
 
+// IsSuccess returns true when this ipam asns read o k response has a 2xx status code
+func (o *IpamAsnsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam asns read o k response has a 3xx status code
+func (o *IpamAsnsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam asns read o k response has a 4xx status code
+func (o *IpamAsnsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam asns read o k response has a 5xx status code
+func (o *IpamAsnsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam asns read o k response a status code equal to that given
+func (o *IpamAsnsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamAsnsReadOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/asns/{id}/][%d] ipamAsnsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamAsnsReadOK) String() string {
+	return fmt.Sprintf("[GET /ipam/asns/{id}/][%d] ipamAsnsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamAsnsReadOK) GetPayload() *models.ASN {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamAsnsReadOK) readResponse(response runtime.ClientResponse, consumer 
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamAsnsReadDefault creates a IpamAsnsReadDefault with default headers values
-func NewIpamAsnsReadDefault(code int) *IpamAsnsReadDefault {
-	return &IpamAsnsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamAsnsReadDefault describes a response with status code -1, with default header values.
-
-IpamAsnsReadDefault ipam asns read default
-*/
-type IpamAsnsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam asns read default response
-func (o *IpamAsnsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamAsnsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/asns/{id}/][%d] ipam_asns_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamAsnsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamAsnsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

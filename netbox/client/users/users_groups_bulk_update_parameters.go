@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewUsersGroupsBulkUpdateParams creates a new UsersGroupsBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewUsersGroupsBulkUpdateParamsWithHTTPClient(client *http.Client) *UsersGro
 	}
 }
 
-/* UsersGroupsBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the users groups bulk update operation.
+/*
+UsersGroupsBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the users groups bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type UsersGroupsBulkUpdateParams struct {
 

@@ -44,8 +44,8 @@ type Contact struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -62,7 +62,7 @@ type Contact struct {
 	// group
 	Group *NestedContactGroup `json:"group,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -70,11 +70,6 @@ type Contact struct {
 	// Read Only: true
 	// Format: date-time
 	LastUpdated strfmt.DateTime `json:"last_updated,omitempty"`
-
-	// Link
-	// Max Length: 200
-	// Format: uri
-	Link strfmt.URI `json:"link,omitempty"`
 
 	// Name
 	// Required: true
@@ -87,7 +82,7 @@ type Contact struct {
 	Phone string `json:"phone,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Title
 	// Max Length: 100
@@ -120,10 +115,6 @@ func (m *Contact) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastUpdated(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateLink(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -170,7 +161,7 @@ func (m *Contact) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -218,22 +209,6 @@ func (m *Contact) validateLastUpdated(formats strfmt.Registry) error {
 	}
 
 	if err := validate.FormatOf("last_updated", "body", "date-time", m.LastUpdated.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *Contact) validateLink(formats strfmt.Registry) error {
-	if swag.IsZero(m.Link) { // not required
-		return nil
-	}
-
-	if err := validate.MaxLength("link", "body", m.Link.String(), 200); err != nil {
-		return err
-	}
-
-	if err := validate.FormatOf("link", "body", "uri", m.Link.String(), formats); err != nil {
 		return err
 	}
 
@@ -359,7 +334,7 @@ func (m *Contact) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 
 func (m *Contact) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

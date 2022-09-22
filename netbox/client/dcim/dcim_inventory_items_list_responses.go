@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimInventoryItemsListReader is a Reader for the DcimInventoryItemsList structure.
@@ -50,14 +50,7 @@ func (o *DcimInventoryItemsListReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewDcimInventoryItemsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimInventoryItemsListOK() *DcimInventoryItemsListOK {
 	return &DcimInventoryItemsListOK{}
 }
 
-/* DcimInventoryItemsListOK describes a response with status code 200, with default header values.
+/*
+DcimInventoryItemsListOK describes a response with status code 200, with default header values.
 
 DcimInventoryItemsListOK dcim inventory items list o k
 */
@@ -74,9 +68,39 @@ type DcimInventoryItemsListOK struct {
 	Payload *DcimInventoryItemsListOKBody
 }
 
+// IsSuccess returns true when this dcim inventory items list o k response has a 2xx status code
+func (o *DcimInventoryItemsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim inventory items list o k response has a 3xx status code
+func (o *DcimInventoryItemsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim inventory items list o k response has a 4xx status code
+func (o *DcimInventoryItemsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim inventory items list o k response has a 5xx status code
+func (o *DcimInventoryItemsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim inventory items list o k response a status code equal to that given
+func (o *DcimInventoryItemsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimInventoryItemsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/inventory-items/][%d] dcimInventoryItemsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimInventoryItemsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/inventory-items/][%d] dcimInventoryItemsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimInventoryItemsListOK) GetPayload() *DcimInventoryItemsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimInventoryItemsListOK) readResponse(response runtime.ClientResponse,
 	return nil
 }
 
-// NewDcimInventoryItemsListDefault creates a DcimInventoryItemsListDefault with default headers values
-func NewDcimInventoryItemsListDefault(code int) *DcimInventoryItemsListDefault {
-	return &DcimInventoryItemsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInventoryItemsListDefault describes a response with status code -1, with default header values.
-
-DcimInventoryItemsListDefault dcim inventory items list default
-*/
-type DcimInventoryItemsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim inventory items list default response
-func (o *DcimInventoryItemsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInventoryItemsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/inventory-items/][%d] dcim_inventory-items_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInventoryItemsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInventoryItemsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimInventoryItemsListOKBody dcim inventory items list o k body
+/*
+DcimInventoryItemsListOKBody dcim inventory items list o k body
 swagger:model DcimInventoryItemsListOKBody
 */
 type DcimInventoryItemsListOKBody struct {

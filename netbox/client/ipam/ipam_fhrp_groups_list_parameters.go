@@ -68,15 +68,20 @@ func NewIpamFhrpGroupsListParamsWithHTTPClient(client *http.Client) *IpamFhrpGro
 	}
 }
 
-/* IpamFhrpGroupsListParams contains all the parameters to send to the API endpoint
-   for the ipam fhrp groups list operation.
+/*
+IpamFhrpGroupsListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam fhrp groups list operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamFhrpGroupsListParams struct {
 
 	// AuthKey.
 	AuthKey *string
+
+	// AuthKeyEmpty.
+	AuthKeyEmpty *string
 
 	// AuthKeyIc.
 	AuthKeyIc *string
@@ -257,6 +262,17 @@ func (o *IpamFhrpGroupsListParams) WithAuthKey(authKey *string) *IpamFhrpGroupsL
 // SetAuthKey adds the authKey to the ipam fhrp groups list params
 func (o *IpamFhrpGroupsListParams) SetAuthKey(authKey *string) {
 	o.AuthKey = authKey
+}
+
+// WithAuthKeyEmpty adds the authKeyEmpty to the ipam fhrp groups list params
+func (o *IpamFhrpGroupsListParams) WithAuthKeyEmpty(authKeyEmpty *string) *IpamFhrpGroupsListParams {
+	o.SetAuthKeyEmpty(authKeyEmpty)
+	return o
+}
+
+// SetAuthKeyEmpty adds the authKeyEmpty to the ipam fhrp groups list params
+func (o *IpamFhrpGroupsListParams) SetAuthKeyEmpty(authKeyEmpty *string) {
+	o.AuthKeyEmpty = authKeyEmpty
 }
 
 // WithAuthKeyIc adds the authKeyIc to the ipam fhrp groups list params
@@ -686,6 +702,23 @@ func (o *IpamFhrpGroupsListParams) WriteToRequest(r runtime.ClientRequest, reg s
 		if qAuthKey != "" {
 
 			if err := r.SetQueryParam("auth_key", qAuthKey); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AuthKeyEmpty != nil {
+
+		// query param auth_key__empty
+		var qrAuthKeyEmpty string
+
+		if o.AuthKeyEmpty != nil {
+			qrAuthKeyEmpty = *o.AuthKeyEmpty
+		}
+		qAuthKeyEmpty := qrAuthKeyEmpty
+		if qAuthKeyEmpty != "" {
+
+			if err := r.SetQueryParam("auth_key__empty", qAuthKeyEmpty); err != nil {
 				return err
 			}
 		}

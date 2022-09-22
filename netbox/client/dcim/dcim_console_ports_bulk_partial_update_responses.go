@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimConsolePortsBulkPartialUpdateReader is a Reader for the DcimConsolePortsBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimConsolePortsBulkPartialUpdateReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewDcimConsolePortsBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimConsolePortsBulkPartialUpdateOK() *DcimConsolePortsBulkPartialUpdate
 	return &DcimConsolePortsBulkPartialUpdateOK{}
 }
 
-/* DcimConsolePortsBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimConsolePortsBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimConsolePortsBulkPartialUpdateOK dcim console ports bulk partial update o k
 */
@@ -69,9 +63,39 @@ type DcimConsolePortsBulkPartialUpdateOK struct {
 	Payload *models.ConsolePort
 }
 
+// IsSuccess returns true when this dcim console ports bulk partial update o k response has a 2xx status code
+func (o *DcimConsolePortsBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim console ports bulk partial update o k response has a 3xx status code
+func (o *DcimConsolePortsBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim console ports bulk partial update o k response has a 4xx status code
+func (o *DcimConsolePortsBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim console ports bulk partial update o k response has a 5xx status code
+func (o *DcimConsolePortsBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim console ports bulk partial update o k response a status code equal to that given
+func (o *DcimConsolePortsBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimConsolePortsBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/console-ports/][%d] dcimConsolePortsBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimConsolePortsBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/console-ports/][%d] dcimConsolePortsBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimConsolePortsBulkPartialUpdateOK) GetPayload() *models.ConsolePort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimConsolePortsBulkPartialUpdateOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimConsolePortsBulkPartialUpdateDefault creates a DcimConsolePortsBulkPartialUpdateDefault with default headers values
-func NewDcimConsolePortsBulkPartialUpdateDefault(code int) *DcimConsolePortsBulkPartialUpdateDefault {
-	return &DcimConsolePortsBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimConsolePortsBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimConsolePortsBulkPartialUpdateDefault dcim console ports bulk partial update default
-*/
-type DcimConsolePortsBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim console ports bulk partial update default response
-func (o *DcimConsolePortsBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimConsolePortsBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/console-ports/][%d] dcim_console-ports_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimConsolePortsBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimConsolePortsBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

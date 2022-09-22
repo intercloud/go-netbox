@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamRouteTargetsReadReader is a Reader for the IpamRouteTargetsRead structure.
@@ -45,14 +45,7 @@ func (o *IpamRouteTargetsReadReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewIpamRouteTargetsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamRouteTargetsReadOK() *IpamRouteTargetsReadOK {
 	return &IpamRouteTargetsReadOK{}
 }
 
-/* IpamRouteTargetsReadOK describes a response with status code 200, with default header values.
+/*
+IpamRouteTargetsReadOK describes a response with status code 200, with default header values.
 
 IpamRouteTargetsReadOK ipam route targets read o k
 */
@@ -69,9 +63,39 @@ type IpamRouteTargetsReadOK struct {
 	Payload *models.RouteTarget
 }
 
+// IsSuccess returns true when this ipam route targets read o k response has a 2xx status code
+func (o *IpamRouteTargetsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam route targets read o k response has a 3xx status code
+func (o *IpamRouteTargetsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam route targets read o k response has a 4xx status code
+func (o *IpamRouteTargetsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam route targets read o k response has a 5xx status code
+func (o *IpamRouteTargetsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam route targets read o k response a status code equal to that given
+func (o *IpamRouteTargetsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamRouteTargetsReadOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/route-targets/{id}/][%d] ipamRouteTargetsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamRouteTargetsReadOK) String() string {
+	return fmt.Sprintf("[GET /ipam/route-targets/{id}/][%d] ipamRouteTargetsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamRouteTargetsReadOK) GetPayload() *models.RouteTarget {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamRouteTargetsReadOK) readResponse(response runtime.ClientResponse, c
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamRouteTargetsReadDefault creates a IpamRouteTargetsReadDefault with default headers values
-func NewIpamRouteTargetsReadDefault(code int) *IpamRouteTargetsReadDefault {
-	return &IpamRouteTargetsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamRouteTargetsReadDefault describes a response with status code -1, with default header values.
-
-IpamRouteTargetsReadDefault ipam route targets read default
-*/
-type IpamRouteTargetsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam route targets read default response
-func (o *IpamRouteTargetsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamRouteTargetsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/route-targets/{id}/][%d] ipam_route-targets_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamRouteTargetsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamRouteTargetsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

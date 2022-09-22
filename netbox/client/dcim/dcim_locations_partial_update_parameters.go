@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimLocationsPartialUpdateParams creates a new DcimLocationsPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimLocationsPartialUpdateParamsWithHTTPClient(client *http.Client) *Dci
 	}
 }
 
-/* DcimLocationsPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim locations partial update operation.
+/*
+DcimLocationsPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim locations partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimLocationsPartialUpdateParams struct {
 

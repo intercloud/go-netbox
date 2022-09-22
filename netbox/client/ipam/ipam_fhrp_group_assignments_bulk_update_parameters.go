@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamFhrpGroupAssignmentsBulkUpdateParams creates a new IpamFhrpGroupAssignmentsBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewIpamFhrpGroupAssignmentsBulkUpdateParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* IpamFhrpGroupAssignmentsBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam fhrp group assignments bulk update operation.
+/*
+IpamFhrpGroupAssignmentsBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam fhrp group assignments bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamFhrpGroupAssignmentsBulkUpdateParams struct {
 

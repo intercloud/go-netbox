@@ -22,7 +22,6 @@ package tenancy
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *TenancyTenantsDeleteReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewTenancyTenantsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewTenancyTenantsDeleteNoContent() *TenancyTenantsDeleteNoContent {
 	return &TenancyTenantsDeleteNoContent{}
 }
 
-/* TenancyTenantsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+TenancyTenantsDeleteNoContent describes a response with status code 204, with default header values.
 
 TenancyTenantsDeleteNoContent tenancy tenants delete no content
 */
 type TenancyTenantsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this tenancy tenants delete no content response has a 2xx status code
+func (o *TenancyTenantsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy tenants delete no content response has a 3xx status code
+func (o *TenancyTenantsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy tenants delete no content response has a 4xx status code
+func (o *TenancyTenantsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy tenants delete no content response has a 5xx status code
+func (o *TenancyTenantsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy tenants delete no content response a status code equal to that given
+func (o *TenancyTenantsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *TenancyTenantsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /tenancy/tenants/{id}/][%d] tenancyTenantsDeleteNoContent ", 204)
 }
 
+func (o *TenancyTenantsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /tenancy/tenants/{id}/][%d] tenancyTenantsDeleteNoContent ", 204)
+}
+
 func (o *TenancyTenantsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewTenancyTenantsDeleteDefault creates a TenancyTenantsDeleteDefault with default headers values
-func NewTenancyTenantsDeleteDefault(code int) *TenancyTenantsDeleteDefault {
-	return &TenancyTenantsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyTenantsDeleteDefault describes a response with status code -1, with default header values.
-
-TenancyTenantsDeleteDefault tenancy tenants delete default
-*/
-type TenancyTenantsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy tenants delete default response
-func (o *TenancyTenantsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyTenantsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /tenancy/tenants/{id}/][%d] tenancy_tenants_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyTenantsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyTenantsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

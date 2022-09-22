@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyContactGroupsCreateReader is a Reader for the TenancyContactGroupsCreate structure.
@@ -45,14 +45,7 @@ func (o *TenancyContactGroupsCreateReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactGroupsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyContactGroupsCreateCreated() *TenancyContactGroupsCreateCreated {
 	return &TenancyContactGroupsCreateCreated{}
 }
 
-/* TenancyContactGroupsCreateCreated describes a response with status code 201, with default header values.
+/*
+TenancyContactGroupsCreateCreated describes a response with status code 201, with default header values.
 
 TenancyContactGroupsCreateCreated tenancy contact groups create created
 */
@@ -69,9 +63,39 @@ type TenancyContactGroupsCreateCreated struct {
 	Payload *models.ContactGroup
 }
 
+// IsSuccess returns true when this tenancy contact groups create created response has a 2xx status code
+func (o *TenancyContactGroupsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact groups create created response has a 3xx status code
+func (o *TenancyContactGroupsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact groups create created response has a 4xx status code
+func (o *TenancyContactGroupsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact groups create created response has a 5xx status code
+func (o *TenancyContactGroupsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact groups create created response a status code equal to that given
+func (o *TenancyContactGroupsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *TenancyContactGroupsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /tenancy/contact-groups/][%d] tenancyContactGroupsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *TenancyContactGroupsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /tenancy/contact-groups/][%d] tenancyContactGroupsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *TenancyContactGroupsCreateCreated) GetPayload() *models.ContactGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyContactGroupsCreateCreated) readResponse(response runtime.Client
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyContactGroupsCreateDefault creates a TenancyContactGroupsCreateDefault with default headers values
-func NewTenancyContactGroupsCreateDefault(code int) *TenancyContactGroupsCreateDefault {
-	return &TenancyContactGroupsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactGroupsCreateDefault describes a response with status code -1, with default header values.
-
-TenancyContactGroupsCreateDefault tenancy contact groups create default
-*/
-type TenancyContactGroupsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact groups create default response
-func (o *TenancyContactGroupsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactGroupsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /tenancy/contact-groups/][%d] tenancy_contact-groups_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactGroupsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactGroupsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

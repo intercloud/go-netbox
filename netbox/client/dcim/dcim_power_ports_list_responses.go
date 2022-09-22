@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPowerPortsListReader is a Reader for the DcimPowerPortsList structure.
@@ -50,14 +50,7 @@ func (o *DcimPowerPortsListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerPortsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimPowerPortsListOK() *DcimPowerPortsListOK {
 	return &DcimPowerPortsListOK{}
 }
 
-/* DcimPowerPortsListOK describes a response with status code 200, with default header values.
+/*
+DcimPowerPortsListOK describes a response with status code 200, with default header values.
 
 DcimPowerPortsListOK dcim power ports list o k
 */
@@ -74,9 +68,39 @@ type DcimPowerPortsListOK struct {
 	Payload *DcimPowerPortsListOKBody
 }
 
+// IsSuccess returns true when this dcim power ports list o k response has a 2xx status code
+func (o *DcimPowerPortsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power ports list o k response has a 3xx status code
+func (o *DcimPowerPortsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power ports list o k response has a 4xx status code
+func (o *DcimPowerPortsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power ports list o k response has a 5xx status code
+func (o *DcimPowerPortsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power ports list o k response a status code equal to that given
+func (o *DcimPowerPortsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimPowerPortsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/power-ports/][%d] dcimPowerPortsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimPowerPortsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/power-ports/][%d] dcimPowerPortsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimPowerPortsListOK) GetPayload() *DcimPowerPortsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimPowerPortsListOK) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-// NewDcimPowerPortsListDefault creates a DcimPowerPortsListDefault with default headers values
-func NewDcimPowerPortsListDefault(code int) *DcimPowerPortsListDefault {
-	return &DcimPowerPortsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerPortsListDefault describes a response with status code -1, with default header values.
-
-DcimPowerPortsListDefault dcim power ports list default
-*/
-type DcimPowerPortsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power ports list default response
-func (o *DcimPowerPortsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerPortsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/power-ports/][%d] dcim_power-ports_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerPortsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerPortsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimPowerPortsListOKBody dcim power ports list o k body
+/*
+DcimPowerPortsListOKBody dcim power ports list o k body
 swagger:model DcimPowerPortsListOKBody
 */
 type DcimPowerPortsListOKBody struct {

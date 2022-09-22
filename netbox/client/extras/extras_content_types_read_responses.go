@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasContentTypesReadReader is a Reader for the ExtrasContentTypesRead structure.
@@ -45,14 +45,7 @@ func (o *ExtrasContentTypesReadReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewExtrasContentTypesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasContentTypesReadOK() *ExtrasContentTypesReadOK {
 	return &ExtrasContentTypesReadOK{}
 }
 
-/* ExtrasContentTypesReadOK describes a response with status code 200, with default header values.
+/*
+ExtrasContentTypesReadOK describes a response with status code 200, with default header values.
 
 ExtrasContentTypesReadOK extras content types read o k
 */
@@ -69,9 +63,39 @@ type ExtrasContentTypesReadOK struct {
 	Payload *models.ContentType
 }
 
+// IsSuccess returns true when this extras content types read o k response has a 2xx status code
+func (o *ExtrasContentTypesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras content types read o k response has a 3xx status code
+func (o *ExtrasContentTypesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras content types read o k response has a 4xx status code
+func (o *ExtrasContentTypesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras content types read o k response has a 5xx status code
+func (o *ExtrasContentTypesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras content types read o k response a status code equal to that given
+func (o *ExtrasContentTypesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasContentTypesReadOK) Error() string {
 	return fmt.Sprintf("[GET /extras/content-types/{id}/][%d] extrasContentTypesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasContentTypesReadOK) String() string {
+	return fmt.Sprintf("[GET /extras/content-types/{id}/][%d] extrasContentTypesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasContentTypesReadOK) GetPayload() *models.ContentType {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasContentTypesReadOK) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasContentTypesReadDefault creates a ExtrasContentTypesReadDefault with default headers values
-func NewExtrasContentTypesReadDefault(code int) *ExtrasContentTypesReadDefault {
-	return &ExtrasContentTypesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasContentTypesReadDefault describes a response with status code -1, with default header values.
-
-ExtrasContentTypesReadDefault extras content types read default
-*/
-type ExtrasContentTypesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras content types read default response
-func (o *ExtrasContentTypesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasContentTypesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/content-types/{id}/][%d] extras_content-types_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasContentTypesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasContentTypesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

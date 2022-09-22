@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersGroupsCreateReader is a Reader for the UsersGroupsCreate structure.
@@ -45,14 +45,7 @@ func (o *UsersGroupsCreateReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewUsersGroupsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersGroupsCreateCreated() *UsersGroupsCreateCreated {
 	return &UsersGroupsCreateCreated{}
 }
 
-/* UsersGroupsCreateCreated describes a response with status code 201, with default header values.
+/*
+UsersGroupsCreateCreated describes a response with status code 201, with default header values.
 
 UsersGroupsCreateCreated users groups create created
 */
@@ -69,9 +63,39 @@ type UsersGroupsCreateCreated struct {
 	Payload *models.Group
 }
 
+// IsSuccess returns true when this users groups create created response has a 2xx status code
+func (o *UsersGroupsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users groups create created response has a 3xx status code
+func (o *UsersGroupsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users groups create created response has a 4xx status code
+func (o *UsersGroupsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users groups create created response has a 5xx status code
+func (o *UsersGroupsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users groups create created response a status code equal to that given
+func (o *UsersGroupsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *UsersGroupsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /users/groups/][%d] usersGroupsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *UsersGroupsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /users/groups/][%d] usersGroupsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *UsersGroupsCreateCreated) GetPayload() *models.Group {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersGroupsCreateCreated) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersGroupsCreateDefault creates a UsersGroupsCreateDefault with default headers values
-func NewUsersGroupsCreateDefault(code int) *UsersGroupsCreateDefault {
-	return &UsersGroupsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersGroupsCreateDefault describes a response with status code -1, with default header values.
-
-UsersGroupsCreateDefault users groups create default
-*/
-type UsersGroupsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users groups create default response
-func (o *UsersGroupsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersGroupsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /users/groups/][%d] users_groups_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersGroupsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersGroupsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

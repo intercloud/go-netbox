@@ -45,22 +45,10 @@ type WritableInventoryItem struct {
 	// Max Length: 50
 	AssetTag *string `json:"asset_tag,omitempty"`
 
-	// Component
-	// Read Only: true
-	Component map[string]*string `json:"component,omitempty"`
-
-	// Component id
-	// Maximum: 2.147483647e+09
-	// Minimum: 0
-	ComponentID *int64 `json:"component_id,omitempty"`
-
-	// Component type
-	ComponentType *string `json:"component_type,omitempty"`
-
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -82,7 +70,7 @@ type WritableInventoryItem struct {
 	// Read Only: true
 	Display string `json:"display,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -115,15 +103,12 @@ type WritableInventoryItem struct {
 	// Max Length: 50
 	PartID string `json:"part_id,omitempty"`
 
-	// Role
-	Role *int64 `json:"role,omitempty"`
-
 	// Serial number
 	// Max Length: 50
 	Serial string `json:"serial,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Url
 	// Read Only: true
@@ -136,10 +121,6 @@ func (m *WritableInventoryItem) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAssetTag(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateComponentID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -201,28 +182,12 @@ func (m *WritableInventoryItem) validateAssetTag(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *WritableInventoryItem) validateComponentID(formats strfmt.Registry) error {
-	if swag.IsZero(m.ComponentID) { // not required
-		return nil
-	}
-
-	if err := validate.MinimumInt("component_id", "body", *m.ComponentID, 0, false); err != nil {
-		return err
-	}
-
-	if err := validate.MaximumInt("component_id", "body", *m.ComponentID, 2.147483647e+09, false); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func (m *WritableInventoryItem) validateCreated(formats strfmt.Registry) error {
 	if swag.IsZero(m.Created) { // not required
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -361,10 +326,6 @@ func (m *WritableInventoryItem) ContextValidate(ctx context.Context, formats str
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateComponent(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateCreated(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -404,14 +365,9 @@ func (m *WritableInventoryItem) contextValidateDepth(ctx context.Context, format
 	return nil
 }
 
-func (m *WritableInventoryItem) contextValidateComponent(ctx context.Context, formats strfmt.Registry) error {
-
-	return nil
-}
-
 func (m *WritableInventoryItem) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

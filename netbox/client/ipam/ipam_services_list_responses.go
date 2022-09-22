@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamServicesListReader is a Reader for the IpamServicesList structure.
@@ -50,14 +50,7 @@ func (o *IpamServicesListReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return result, nil
 	default:
-		result := NewIpamServicesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewIpamServicesListOK() *IpamServicesListOK {
 	return &IpamServicesListOK{}
 }
 
-/* IpamServicesListOK describes a response with status code 200, with default header values.
+/*
+IpamServicesListOK describes a response with status code 200, with default header values.
 
 IpamServicesListOK ipam services list o k
 */
@@ -74,9 +68,39 @@ type IpamServicesListOK struct {
 	Payload *IpamServicesListOKBody
 }
 
+// IsSuccess returns true when this ipam services list o k response has a 2xx status code
+func (o *IpamServicesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam services list o k response has a 3xx status code
+func (o *IpamServicesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam services list o k response has a 4xx status code
+func (o *IpamServicesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam services list o k response has a 5xx status code
+func (o *IpamServicesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam services list o k response a status code equal to that given
+func (o *IpamServicesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamServicesListOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/services/][%d] ipamServicesListOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamServicesListOK) String() string {
+	return fmt.Sprintf("[GET /ipam/services/][%d] ipamServicesListOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamServicesListOK) GetPayload() *IpamServicesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *IpamServicesListOK) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-// NewIpamServicesListDefault creates a IpamServicesListDefault with default headers values
-func NewIpamServicesListDefault(code int) *IpamServicesListDefault {
-	return &IpamServicesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamServicesListDefault describes a response with status code -1, with default header values.
-
-IpamServicesListDefault ipam services list default
-*/
-type IpamServicesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam services list default response
-func (o *IpamServicesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamServicesListDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/services/][%d] ipam_services_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamServicesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamServicesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*IpamServicesListOKBody ipam services list o k body
+/*
+IpamServicesListOKBody ipam services list o k body
 swagger:model IpamServicesListOKBody
 */
 type IpamServicesListOKBody struct {

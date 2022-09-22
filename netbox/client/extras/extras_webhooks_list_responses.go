@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasWebhooksListReader is a Reader for the ExtrasWebhooksList structure.
@@ -50,14 +50,7 @@ func (o *ExtrasWebhooksListReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 	default:
-		result := NewExtrasWebhooksListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewExtrasWebhooksListOK() *ExtrasWebhooksListOK {
 	return &ExtrasWebhooksListOK{}
 }
 
-/* ExtrasWebhooksListOK describes a response with status code 200, with default header values.
+/*
+ExtrasWebhooksListOK describes a response with status code 200, with default header values.
 
 ExtrasWebhooksListOK extras webhooks list o k
 */
@@ -74,9 +68,39 @@ type ExtrasWebhooksListOK struct {
 	Payload *ExtrasWebhooksListOKBody
 }
 
+// IsSuccess returns true when this extras webhooks list o k response has a 2xx status code
+func (o *ExtrasWebhooksListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras webhooks list o k response has a 3xx status code
+func (o *ExtrasWebhooksListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras webhooks list o k response has a 4xx status code
+func (o *ExtrasWebhooksListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras webhooks list o k response has a 5xx status code
+func (o *ExtrasWebhooksListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras webhooks list o k response a status code equal to that given
+func (o *ExtrasWebhooksListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasWebhooksListOK) Error() string {
 	return fmt.Sprintf("[GET /extras/webhooks/][%d] extrasWebhooksListOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasWebhooksListOK) String() string {
+	return fmt.Sprintf("[GET /extras/webhooks/][%d] extrasWebhooksListOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasWebhooksListOK) GetPayload() *ExtrasWebhooksListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *ExtrasWebhooksListOK) readResponse(response runtime.ClientResponse, con
 	return nil
 }
 
-// NewExtrasWebhooksListDefault creates a ExtrasWebhooksListDefault with default headers values
-func NewExtrasWebhooksListDefault(code int) *ExtrasWebhooksListDefault {
-	return &ExtrasWebhooksListDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasWebhooksListDefault describes a response with status code -1, with default header values.
-
-ExtrasWebhooksListDefault extras webhooks list default
-*/
-type ExtrasWebhooksListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras webhooks list default response
-func (o *ExtrasWebhooksListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasWebhooksListDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/webhooks/][%d] extras_webhooks_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasWebhooksListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasWebhooksListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*ExtrasWebhooksListOKBody extras webhooks list o k body
+/*
+ExtrasWebhooksListOKBody extras webhooks list o k body
 swagger:model ExtrasWebhooksListOKBody
 */
 type ExtrasWebhooksListOKBody struct {

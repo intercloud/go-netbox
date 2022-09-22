@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPlatformsListReader is a Reader for the DcimPlatformsList structure.
@@ -50,14 +50,7 @@ func (o *DcimPlatformsListReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewDcimPlatformsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimPlatformsListOK() *DcimPlatformsListOK {
 	return &DcimPlatformsListOK{}
 }
 
-/* DcimPlatformsListOK describes a response with status code 200, with default header values.
+/*
+DcimPlatformsListOK describes a response with status code 200, with default header values.
 
 DcimPlatformsListOK dcim platforms list o k
 */
@@ -74,9 +68,39 @@ type DcimPlatformsListOK struct {
 	Payload *DcimPlatformsListOKBody
 }
 
+// IsSuccess returns true when this dcim platforms list o k response has a 2xx status code
+func (o *DcimPlatformsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim platforms list o k response has a 3xx status code
+func (o *DcimPlatformsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim platforms list o k response has a 4xx status code
+func (o *DcimPlatformsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim platforms list o k response has a 5xx status code
+func (o *DcimPlatformsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim platforms list o k response a status code equal to that given
+func (o *DcimPlatformsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimPlatformsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/platforms/][%d] dcimPlatformsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimPlatformsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/platforms/][%d] dcimPlatformsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimPlatformsListOK) GetPayload() *DcimPlatformsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimPlatformsListOK) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
-// NewDcimPlatformsListDefault creates a DcimPlatformsListDefault with default headers values
-func NewDcimPlatformsListDefault(code int) *DcimPlatformsListDefault {
-	return &DcimPlatformsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPlatformsListDefault describes a response with status code -1, with default header values.
-
-DcimPlatformsListDefault dcim platforms list default
-*/
-type DcimPlatformsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim platforms list default response
-func (o *DcimPlatformsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPlatformsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/platforms/][%d] dcim_platforms_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPlatformsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPlatformsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimPlatformsListOKBody dcim platforms list o k body
+/*
+DcimPlatformsListOKBody dcim platforms list o k body
 swagger:model DcimPlatformsListOKBody
 */
 type DcimPlatformsListOKBody struct {

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyContactRolesPartialUpdateReader is a Reader for the TenancyContactRolesPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *TenancyContactRolesPartialUpdateReader) ReadResponse(response runtime.C
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactRolesPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyContactRolesPartialUpdateOK() *TenancyContactRolesPartialUpdateOK
 	return &TenancyContactRolesPartialUpdateOK{}
 }
 
-/* TenancyContactRolesPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+TenancyContactRolesPartialUpdateOK describes a response with status code 200, with default header values.
 
 TenancyContactRolesPartialUpdateOK tenancy contact roles partial update o k
 */
@@ -69,9 +63,39 @@ type TenancyContactRolesPartialUpdateOK struct {
 	Payload *models.ContactRole
 }
 
+// IsSuccess returns true when this tenancy contact roles partial update o k response has a 2xx status code
+func (o *TenancyContactRolesPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact roles partial update o k response has a 3xx status code
+func (o *TenancyContactRolesPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact roles partial update o k response has a 4xx status code
+func (o *TenancyContactRolesPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact roles partial update o k response has a 5xx status code
+func (o *TenancyContactRolesPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact roles partial update o k response a status code equal to that given
+func (o *TenancyContactRolesPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyContactRolesPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /tenancy/contact-roles/{id}/][%d] tenancyContactRolesPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyContactRolesPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /tenancy/contact-roles/{id}/][%d] tenancyContactRolesPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyContactRolesPartialUpdateOK) GetPayload() *models.ContactRole {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyContactRolesPartialUpdateOK) readResponse(response runtime.Clien
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyContactRolesPartialUpdateDefault creates a TenancyContactRolesPartialUpdateDefault with default headers values
-func NewTenancyContactRolesPartialUpdateDefault(code int) *TenancyContactRolesPartialUpdateDefault {
-	return &TenancyContactRolesPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactRolesPartialUpdateDefault describes a response with status code -1, with default header values.
-
-TenancyContactRolesPartialUpdateDefault tenancy contact roles partial update default
-*/
-type TenancyContactRolesPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact roles partial update default response
-func (o *TenancyContactRolesPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactRolesPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /tenancy/contact-roles/{id}/][%d] tenancy_contact-roles_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactRolesPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactRolesPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

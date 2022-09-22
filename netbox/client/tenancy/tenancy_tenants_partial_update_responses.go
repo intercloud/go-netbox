@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyTenantsPartialUpdateReader is a Reader for the TenancyTenantsPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *TenancyTenantsPartialUpdateReader) ReadResponse(response runtime.Client
 		}
 		return result, nil
 	default:
-		result := NewTenancyTenantsPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyTenantsPartialUpdateOK() *TenancyTenantsPartialUpdateOK {
 	return &TenancyTenantsPartialUpdateOK{}
 }
 
-/* TenancyTenantsPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+TenancyTenantsPartialUpdateOK describes a response with status code 200, with default header values.
 
 TenancyTenantsPartialUpdateOK tenancy tenants partial update o k
 */
@@ -69,9 +63,39 @@ type TenancyTenantsPartialUpdateOK struct {
 	Payload *models.Tenant
 }
 
+// IsSuccess returns true when this tenancy tenants partial update o k response has a 2xx status code
+func (o *TenancyTenantsPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy tenants partial update o k response has a 3xx status code
+func (o *TenancyTenantsPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy tenants partial update o k response has a 4xx status code
+func (o *TenancyTenantsPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy tenants partial update o k response has a 5xx status code
+func (o *TenancyTenantsPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy tenants partial update o k response a status code equal to that given
+func (o *TenancyTenantsPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyTenantsPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /tenancy/tenants/{id}/][%d] tenancyTenantsPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyTenantsPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /tenancy/tenants/{id}/][%d] tenancyTenantsPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyTenantsPartialUpdateOK) GetPayload() *models.Tenant {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyTenantsPartialUpdateOK) readResponse(response runtime.ClientResp
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyTenantsPartialUpdateDefault creates a TenancyTenantsPartialUpdateDefault with default headers values
-func NewTenancyTenantsPartialUpdateDefault(code int) *TenancyTenantsPartialUpdateDefault {
-	return &TenancyTenantsPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyTenantsPartialUpdateDefault describes a response with status code -1, with default header values.
-
-TenancyTenantsPartialUpdateDefault tenancy tenants partial update default
-*/
-type TenancyTenantsPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy tenants partial update default response
-func (o *TenancyTenantsPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyTenantsPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /tenancy/tenants/{id}/][%d] tenancy_tenants_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyTenantsPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyTenantsPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

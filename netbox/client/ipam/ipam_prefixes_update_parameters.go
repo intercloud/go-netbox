@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamPrefixesUpdateParams creates a new IpamPrefixesUpdateParams object,
@@ -70,10 +70,12 @@ func NewIpamPrefixesUpdateParamsWithHTTPClient(client *http.Client) *IpamPrefixe
 	}
 }
 
-/* IpamPrefixesUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam prefixes update operation.
+/*
+IpamPrefixesUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam prefixes update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamPrefixesUpdateParams struct {
 

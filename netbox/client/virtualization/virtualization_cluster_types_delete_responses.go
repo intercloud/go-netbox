@@ -22,7 +22,6 @@ package virtualization
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *VirtualizationClusterTypesDeleteReader) ReadResponse(response runtime.C
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationClusterTypesDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewVirtualizationClusterTypesDeleteNoContent() *VirtualizationClusterTypesD
 	return &VirtualizationClusterTypesDeleteNoContent{}
 }
 
-/* VirtualizationClusterTypesDeleteNoContent describes a response with status code 204, with default header values.
+/*
+VirtualizationClusterTypesDeleteNoContent describes a response with status code 204, with default header values.
 
 VirtualizationClusterTypesDeleteNoContent virtualization cluster types delete no content
 */
 type VirtualizationClusterTypesDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this virtualization cluster types delete no content response has a 2xx status code
+func (o *VirtualizationClusterTypesDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization cluster types delete no content response has a 3xx status code
+func (o *VirtualizationClusterTypesDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization cluster types delete no content response has a 4xx status code
+func (o *VirtualizationClusterTypesDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization cluster types delete no content response has a 5xx status code
+func (o *VirtualizationClusterTypesDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization cluster types delete no content response a status code equal to that given
+func (o *VirtualizationClusterTypesDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *VirtualizationClusterTypesDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /virtualization/cluster-types/{id}/][%d] virtualizationClusterTypesDeleteNoContent ", 204)
 }
 
+func (o *VirtualizationClusterTypesDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /virtualization/cluster-types/{id}/][%d] virtualizationClusterTypesDeleteNoContent ", 204)
+}
+
 func (o *VirtualizationClusterTypesDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewVirtualizationClusterTypesDeleteDefault creates a VirtualizationClusterTypesDeleteDefault with default headers values
-func NewVirtualizationClusterTypesDeleteDefault(code int) *VirtualizationClusterTypesDeleteDefault {
-	return &VirtualizationClusterTypesDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationClusterTypesDeleteDefault describes a response with status code -1, with default header values.
-
-VirtualizationClusterTypesDeleteDefault virtualization cluster types delete default
-*/
-type VirtualizationClusterTypesDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization cluster types delete default response
-func (o *VirtualizationClusterTypesDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationClusterTypesDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /virtualization/cluster-types/{id}/][%d] virtualization_cluster-types_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationClusterTypesDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationClusterTypesDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

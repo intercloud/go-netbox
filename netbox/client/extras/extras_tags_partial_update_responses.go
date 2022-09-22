@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasTagsPartialUpdateReader is a Reader for the ExtrasTagsPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasTagsPartialUpdateReader) ReadResponse(response runtime.ClientResp
 		}
 		return result, nil
 	default:
-		result := NewExtrasTagsPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasTagsPartialUpdateOK() *ExtrasTagsPartialUpdateOK {
 	return &ExtrasTagsPartialUpdateOK{}
 }
 
-/* ExtrasTagsPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+ExtrasTagsPartialUpdateOK describes a response with status code 200, with default header values.
 
 ExtrasTagsPartialUpdateOK extras tags partial update o k
 */
@@ -69,9 +63,39 @@ type ExtrasTagsPartialUpdateOK struct {
 	Payload *models.Tag
 }
 
+// IsSuccess returns true when this extras tags partial update o k response has a 2xx status code
+func (o *ExtrasTagsPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras tags partial update o k response has a 3xx status code
+func (o *ExtrasTagsPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras tags partial update o k response has a 4xx status code
+func (o *ExtrasTagsPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras tags partial update o k response has a 5xx status code
+func (o *ExtrasTagsPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras tags partial update o k response a status code equal to that given
+func (o *ExtrasTagsPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasTagsPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /extras/tags/{id}/][%d] extrasTagsPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasTagsPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /extras/tags/{id}/][%d] extrasTagsPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasTagsPartialUpdateOK) GetPayload() *models.Tag {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasTagsPartialUpdateOK) readResponse(response runtime.ClientResponse
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasTagsPartialUpdateDefault creates a ExtrasTagsPartialUpdateDefault with default headers values
-func NewExtrasTagsPartialUpdateDefault(code int) *ExtrasTagsPartialUpdateDefault {
-	return &ExtrasTagsPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasTagsPartialUpdateDefault describes a response with status code -1, with default header values.
-
-ExtrasTagsPartialUpdateDefault extras tags partial update default
-*/
-type ExtrasTagsPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras tags partial update default response
-func (o *ExtrasTagsPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasTagsPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /extras/tags/{id}/][%d] extras_tags_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasTagsPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasTagsPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

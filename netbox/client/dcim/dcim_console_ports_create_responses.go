@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimConsolePortsCreateReader is a Reader for the DcimConsolePortsCreate structure.
@@ -45,14 +45,7 @@ func (o *DcimConsolePortsCreateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewDcimConsolePortsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimConsolePortsCreateCreated() *DcimConsolePortsCreateCreated {
 	return &DcimConsolePortsCreateCreated{}
 }
 
-/* DcimConsolePortsCreateCreated describes a response with status code 201, with default header values.
+/*
+DcimConsolePortsCreateCreated describes a response with status code 201, with default header values.
 
 DcimConsolePortsCreateCreated dcim console ports create created
 */
@@ -69,9 +63,39 @@ type DcimConsolePortsCreateCreated struct {
 	Payload *models.ConsolePort
 }
 
+// IsSuccess returns true when this dcim console ports create created response has a 2xx status code
+func (o *DcimConsolePortsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim console ports create created response has a 3xx status code
+func (o *DcimConsolePortsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim console ports create created response has a 4xx status code
+func (o *DcimConsolePortsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim console ports create created response has a 5xx status code
+func (o *DcimConsolePortsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim console ports create created response a status code equal to that given
+func (o *DcimConsolePortsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *DcimConsolePortsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /dcim/console-ports/][%d] dcimConsolePortsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *DcimConsolePortsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /dcim/console-ports/][%d] dcimConsolePortsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *DcimConsolePortsCreateCreated) GetPayload() *models.ConsolePort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimConsolePortsCreateCreated) readResponse(response runtime.ClientResp
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimConsolePortsCreateDefault creates a DcimConsolePortsCreateDefault with default headers values
-func NewDcimConsolePortsCreateDefault(code int) *DcimConsolePortsCreateDefault {
-	return &DcimConsolePortsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimConsolePortsCreateDefault describes a response with status code -1, with default header values.
-
-DcimConsolePortsCreateDefault dcim console ports create default
-*/
-type DcimConsolePortsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim console ports create default response
-func (o *DcimConsolePortsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimConsolePortsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /dcim/console-ports/][%d] dcim_console-ports_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimConsolePortsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimConsolePortsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

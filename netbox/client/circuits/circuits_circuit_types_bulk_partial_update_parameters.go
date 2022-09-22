@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewCircuitsCircuitTypesBulkPartialUpdateParams creates a new CircuitsCircuitTypesBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewCircuitsCircuitTypesBulkPartialUpdateParamsWithHTTPClient(client *http.C
 	}
 }
 
-/* CircuitsCircuitTypesBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the circuits circuit types bulk partial update operation.
+/*
+CircuitsCircuitTypesBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the circuits circuit types bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type CircuitsCircuitTypesBulkPartialUpdateParams struct {
 

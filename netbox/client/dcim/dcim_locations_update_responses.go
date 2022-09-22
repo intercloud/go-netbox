@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimLocationsUpdateReader is a Reader for the DcimLocationsUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimLocationsUpdateReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewDcimLocationsUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimLocationsUpdateOK() *DcimLocationsUpdateOK {
 	return &DcimLocationsUpdateOK{}
 }
 
-/* DcimLocationsUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimLocationsUpdateOK describes a response with status code 200, with default header values.
 
 DcimLocationsUpdateOK dcim locations update o k
 */
@@ -69,9 +63,39 @@ type DcimLocationsUpdateOK struct {
 	Payload *models.Location
 }
 
+// IsSuccess returns true when this dcim locations update o k response has a 2xx status code
+func (o *DcimLocationsUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim locations update o k response has a 3xx status code
+func (o *DcimLocationsUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim locations update o k response has a 4xx status code
+func (o *DcimLocationsUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim locations update o k response has a 5xx status code
+func (o *DcimLocationsUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim locations update o k response a status code equal to that given
+func (o *DcimLocationsUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimLocationsUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /dcim/locations/{id}/][%d] dcimLocationsUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimLocationsUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /dcim/locations/{id}/][%d] dcimLocationsUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimLocationsUpdateOK) GetPayload() *models.Location {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimLocationsUpdateOK) readResponse(response runtime.ClientResponse, co
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimLocationsUpdateDefault creates a DcimLocationsUpdateDefault with default headers values
-func NewDcimLocationsUpdateDefault(code int) *DcimLocationsUpdateDefault {
-	return &DcimLocationsUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimLocationsUpdateDefault describes a response with status code -1, with default header values.
-
-DcimLocationsUpdateDefault dcim locations update default
-*/
-type DcimLocationsUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim locations update default response
-func (o *DcimLocationsUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimLocationsUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /dcim/locations/{id}/][%d] dcim_locations_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimLocationsUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimLocationsUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

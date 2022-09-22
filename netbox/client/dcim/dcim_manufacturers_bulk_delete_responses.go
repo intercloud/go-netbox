@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimManufacturersBulkDeleteReader) ReadResponse(response runtime.Client
 		}
 		return result, nil
 	default:
-		result := NewDcimManufacturersBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimManufacturersBulkDeleteNoContent() *DcimManufacturersBulkDeleteNoCon
 	return &DcimManufacturersBulkDeleteNoContent{}
 }
 
-/* DcimManufacturersBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimManufacturersBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimManufacturersBulkDeleteNoContent dcim manufacturers bulk delete no content
 */
 type DcimManufacturersBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim manufacturers bulk delete no content response has a 2xx status code
+func (o *DcimManufacturersBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim manufacturers bulk delete no content response has a 3xx status code
+func (o *DcimManufacturersBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim manufacturers bulk delete no content response has a 4xx status code
+func (o *DcimManufacturersBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim manufacturers bulk delete no content response has a 5xx status code
+func (o *DcimManufacturersBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim manufacturers bulk delete no content response a status code equal to that given
+func (o *DcimManufacturersBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimManufacturersBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/manufacturers/][%d] dcimManufacturersBulkDeleteNoContent ", 204)
 }
 
+func (o *DcimManufacturersBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/manufacturers/][%d] dcimManufacturersBulkDeleteNoContent ", 204)
+}
+
 func (o *DcimManufacturersBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimManufacturersBulkDeleteDefault creates a DcimManufacturersBulkDeleteDefault with default headers values
-func NewDcimManufacturersBulkDeleteDefault(code int) *DcimManufacturersBulkDeleteDefault {
-	return &DcimManufacturersBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimManufacturersBulkDeleteDefault describes a response with status code -1, with default header values.
-
-DcimManufacturersBulkDeleteDefault dcim manufacturers bulk delete default
-*/
-type DcimManufacturersBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim manufacturers bulk delete default response
-func (o *DcimManufacturersBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimManufacturersBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/manufacturers/][%d] dcim_manufacturers_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimManufacturersBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimManufacturersBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

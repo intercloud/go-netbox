@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimLocationsReadReader is a Reader for the DcimLocationsRead structure.
@@ -45,14 +45,7 @@ func (o *DcimLocationsReadReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewDcimLocationsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimLocationsReadOK() *DcimLocationsReadOK {
 	return &DcimLocationsReadOK{}
 }
 
-/* DcimLocationsReadOK describes a response with status code 200, with default header values.
+/*
+DcimLocationsReadOK describes a response with status code 200, with default header values.
 
 DcimLocationsReadOK dcim locations read o k
 */
@@ -69,9 +63,39 @@ type DcimLocationsReadOK struct {
 	Payload *models.Location
 }
 
+// IsSuccess returns true when this dcim locations read o k response has a 2xx status code
+func (o *DcimLocationsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim locations read o k response has a 3xx status code
+func (o *DcimLocationsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim locations read o k response has a 4xx status code
+func (o *DcimLocationsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim locations read o k response has a 5xx status code
+func (o *DcimLocationsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim locations read o k response a status code equal to that given
+func (o *DcimLocationsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimLocationsReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/locations/{id}/][%d] dcimLocationsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimLocationsReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/locations/{id}/][%d] dcimLocationsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimLocationsReadOK) GetPayload() *models.Location {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimLocationsReadOK) readResponse(response runtime.ClientResponse, cons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimLocationsReadDefault creates a DcimLocationsReadDefault with default headers values
-func NewDcimLocationsReadDefault(code int) *DcimLocationsReadDefault {
-	return &DcimLocationsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimLocationsReadDefault describes a response with status code -1, with default header values.
-
-DcimLocationsReadDefault dcim locations read default
-*/
-type DcimLocationsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim locations read default response
-func (o *DcimLocationsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimLocationsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/locations/{id}/][%d] dcim_locations_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimLocationsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimLocationsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

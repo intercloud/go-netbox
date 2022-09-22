@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersTokensCreateReader is a Reader for the UsersTokensCreate structure.
@@ -45,14 +45,7 @@ func (o *UsersTokensCreateReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewUsersTokensCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersTokensCreateCreated() *UsersTokensCreateCreated {
 	return &UsersTokensCreateCreated{}
 }
 
-/* UsersTokensCreateCreated describes a response with status code 201, with default header values.
+/*
+UsersTokensCreateCreated describes a response with status code 201, with default header values.
 
 UsersTokensCreateCreated users tokens create created
 */
@@ -69,9 +63,39 @@ type UsersTokensCreateCreated struct {
 	Payload *models.Token
 }
 
+// IsSuccess returns true when this users tokens create created response has a 2xx status code
+func (o *UsersTokensCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users tokens create created response has a 3xx status code
+func (o *UsersTokensCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users tokens create created response has a 4xx status code
+func (o *UsersTokensCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users tokens create created response has a 5xx status code
+func (o *UsersTokensCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users tokens create created response a status code equal to that given
+func (o *UsersTokensCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *UsersTokensCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /users/tokens/][%d] usersTokensCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *UsersTokensCreateCreated) String() string {
+	return fmt.Sprintf("[POST /users/tokens/][%d] usersTokensCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *UsersTokensCreateCreated) GetPayload() *models.Token {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersTokensCreateCreated) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersTokensCreateDefault creates a UsersTokensCreateDefault with default headers values
-func NewUsersTokensCreateDefault(code int) *UsersTokensCreateDefault {
-	return &UsersTokensCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersTokensCreateDefault describes a response with status code -1, with default header values.
-
-UsersTokensCreateDefault users tokens create default
-*/
-type UsersTokensCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users tokens create default response
-func (o *UsersTokensCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersTokensCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /users/tokens/][%d] users_tokens_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersTokensCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersTokensCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

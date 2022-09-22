@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimManufacturersBulkUpdateParams creates a new DcimManufacturersBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewDcimManufacturersBulkUpdateParamsWithHTTPClient(client *http.Client) *Dc
 	}
 }
 
-/* DcimManufacturersBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim manufacturers bulk update operation.
+/*
+DcimManufacturersBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim manufacturers bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimManufacturersBulkUpdateParams struct {
 

@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewWirelessWirelessLansCreateParams creates a new WirelessWirelessLansCreateParams object,
@@ -69,10 +69,12 @@ func NewWirelessWirelessLansCreateParamsWithHTTPClient(client *http.Client) *Wir
 	}
 }
 
-/* WirelessWirelessLansCreateParams contains all the parameters to send to the API endpoint
-   for the wireless wireless lans create operation.
+/*
+WirelessWirelessLansCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the wireless wireless lans create operation.
+
+	Typically these are written to a http.Request.
 */
 type WirelessWirelessLansCreateParams struct {
 

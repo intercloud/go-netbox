@@ -22,7 +22,6 @@ package extras
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *ExtrasCustomLinksDeleteReader) ReadResponse(response runtime.ClientResp
 		}
 		return result, nil
 	default:
-		result := NewExtrasCustomLinksDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewExtrasCustomLinksDeleteNoContent() *ExtrasCustomLinksDeleteNoContent {
 	return &ExtrasCustomLinksDeleteNoContent{}
 }
 
-/* ExtrasCustomLinksDeleteNoContent describes a response with status code 204, with default header values.
+/*
+ExtrasCustomLinksDeleteNoContent describes a response with status code 204, with default header values.
 
 ExtrasCustomLinksDeleteNoContent extras custom links delete no content
 */
 type ExtrasCustomLinksDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this extras custom links delete no content response has a 2xx status code
+func (o *ExtrasCustomLinksDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras custom links delete no content response has a 3xx status code
+func (o *ExtrasCustomLinksDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras custom links delete no content response has a 4xx status code
+func (o *ExtrasCustomLinksDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras custom links delete no content response has a 5xx status code
+func (o *ExtrasCustomLinksDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras custom links delete no content response a status code equal to that given
+func (o *ExtrasCustomLinksDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *ExtrasCustomLinksDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /extras/custom-links/{id}/][%d] extrasCustomLinksDeleteNoContent ", 204)
 }
 
+func (o *ExtrasCustomLinksDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /extras/custom-links/{id}/][%d] extrasCustomLinksDeleteNoContent ", 204)
+}
+
 func (o *ExtrasCustomLinksDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewExtrasCustomLinksDeleteDefault creates a ExtrasCustomLinksDeleteDefault with default headers values
-func NewExtrasCustomLinksDeleteDefault(code int) *ExtrasCustomLinksDeleteDefault {
-	return &ExtrasCustomLinksDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasCustomLinksDeleteDefault describes a response with status code -1, with default header values.
-
-ExtrasCustomLinksDeleteDefault extras custom links delete default
-*/
-type ExtrasCustomLinksDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras custom links delete default response
-func (o *ExtrasCustomLinksDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasCustomLinksDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /extras/custom-links/{id}/][%d] extras_custom-links_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasCustomLinksDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasCustomLinksDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamRirsUpdateParams creates a new IpamRirsUpdateParams object,
@@ -70,10 +70,12 @@ func NewIpamRirsUpdateParamsWithHTTPClient(client *http.Client) *IpamRirsUpdateP
 	}
 }
 
-/* IpamRirsUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam rirs update operation.
+/*
+IpamRirsUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam rirs update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamRirsUpdateParams struct {
 

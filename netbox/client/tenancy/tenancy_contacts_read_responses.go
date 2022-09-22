@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyContactsReadReader is a Reader for the TenancyContactsRead structure.
@@ -45,14 +45,7 @@ func (o *TenancyContactsReadReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyContactsReadOK() *TenancyContactsReadOK {
 	return &TenancyContactsReadOK{}
 }
 
-/* TenancyContactsReadOK describes a response with status code 200, with default header values.
+/*
+TenancyContactsReadOK describes a response with status code 200, with default header values.
 
 TenancyContactsReadOK tenancy contacts read o k
 */
@@ -69,9 +63,39 @@ type TenancyContactsReadOK struct {
 	Payload *models.Contact
 }
 
+// IsSuccess returns true when this tenancy contacts read o k response has a 2xx status code
+func (o *TenancyContactsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contacts read o k response has a 3xx status code
+func (o *TenancyContactsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contacts read o k response has a 4xx status code
+func (o *TenancyContactsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contacts read o k response has a 5xx status code
+func (o *TenancyContactsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contacts read o k response a status code equal to that given
+func (o *TenancyContactsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyContactsReadOK) Error() string {
 	return fmt.Sprintf("[GET /tenancy/contacts/{id}/][%d] tenancyContactsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyContactsReadOK) String() string {
+	return fmt.Sprintf("[GET /tenancy/contacts/{id}/][%d] tenancyContactsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyContactsReadOK) GetPayload() *models.Contact {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyContactsReadOK) readResponse(response runtime.ClientResponse, co
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyContactsReadDefault creates a TenancyContactsReadDefault with default headers values
-func NewTenancyContactsReadDefault(code int) *TenancyContactsReadDefault {
-	return &TenancyContactsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactsReadDefault describes a response with status code -1, with default header values.
-
-TenancyContactsReadDefault tenancy contacts read default
-*/
-type TenancyContactsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contacts read default response
-func (o *TenancyContactsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /tenancy/contacts/{id}/][%d] tenancy_contacts_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

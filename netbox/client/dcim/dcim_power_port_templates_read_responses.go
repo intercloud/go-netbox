@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPowerPortTemplatesReadReader is a Reader for the DcimPowerPortTemplatesRead structure.
@@ -45,14 +45,7 @@ func (o *DcimPowerPortTemplatesReadReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerPortTemplatesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimPowerPortTemplatesReadOK() *DcimPowerPortTemplatesReadOK {
 	return &DcimPowerPortTemplatesReadOK{}
 }
 
-/* DcimPowerPortTemplatesReadOK describes a response with status code 200, with default header values.
+/*
+DcimPowerPortTemplatesReadOK describes a response with status code 200, with default header values.
 
 DcimPowerPortTemplatesReadOK dcim power port templates read o k
 */
@@ -69,9 +63,39 @@ type DcimPowerPortTemplatesReadOK struct {
 	Payload *models.PowerPortTemplate
 }
 
+// IsSuccess returns true when this dcim power port templates read o k response has a 2xx status code
+func (o *DcimPowerPortTemplatesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power port templates read o k response has a 3xx status code
+func (o *DcimPowerPortTemplatesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power port templates read o k response has a 4xx status code
+func (o *DcimPowerPortTemplatesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power port templates read o k response has a 5xx status code
+func (o *DcimPowerPortTemplatesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power port templates read o k response a status code equal to that given
+func (o *DcimPowerPortTemplatesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimPowerPortTemplatesReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/power-port-templates/{id}/][%d] dcimPowerPortTemplatesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimPowerPortTemplatesReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/power-port-templates/{id}/][%d] dcimPowerPortTemplatesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimPowerPortTemplatesReadOK) GetPayload() *models.PowerPortTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimPowerPortTemplatesReadOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimPowerPortTemplatesReadDefault creates a DcimPowerPortTemplatesReadDefault with default headers values
-func NewDcimPowerPortTemplatesReadDefault(code int) *DcimPowerPortTemplatesReadDefault {
-	return &DcimPowerPortTemplatesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerPortTemplatesReadDefault describes a response with status code -1, with default header values.
-
-DcimPowerPortTemplatesReadDefault dcim power port templates read default
-*/
-type DcimPowerPortTemplatesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power port templates read default response
-func (o *DcimPowerPortTemplatesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerPortTemplatesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/power-port-templates/{id}/][%d] dcim_power-port-templates_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerPortTemplatesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerPortTemplatesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamFhrpGroupsBulkUpdateReader is a Reader for the IpamFhrpGroupsBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *IpamFhrpGroupsBulkUpdateReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewIpamFhrpGroupsBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamFhrpGroupsBulkUpdateOK() *IpamFhrpGroupsBulkUpdateOK {
 	return &IpamFhrpGroupsBulkUpdateOK{}
 }
 
-/* IpamFhrpGroupsBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+IpamFhrpGroupsBulkUpdateOK describes a response with status code 200, with default header values.
 
 IpamFhrpGroupsBulkUpdateOK ipam fhrp groups bulk update o k
 */
@@ -69,9 +63,39 @@ type IpamFhrpGroupsBulkUpdateOK struct {
 	Payload *models.FHRPGroup
 }
 
+// IsSuccess returns true when this ipam fhrp groups bulk update o k response has a 2xx status code
+func (o *IpamFhrpGroupsBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam fhrp groups bulk update o k response has a 3xx status code
+func (o *IpamFhrpGroupsBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam fhrp groups bulk update o k response has a 4xx status code
+func (o *IpamFhrpGroupsBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam fhrp groups bulk update o k response has a 5xx status code
+func (o *IpamFhrpGroupsBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam fhrp groups bulk update o k response a status code equal to that given
+func (o *IpamFhrpGroupsBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamFhrpGroupsBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /ipam/fhrp-groups/][%d] ipamFhrpGroupsBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamFhrpGroupsBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /ipam/fhrp-groups/][%d] ipamFhrpGroupsBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamFhrpGroupsBulkUpdateOK) GetPayload() *models.FHRPGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamFhrpGroupsBulkUpdateOK) readResponse(response runtime.ClientRespons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamFhrpGroupsBulkUpdateDefault creates a IpamFhrpGroupsBulkUpdateDefault with default headers values
-func NewIpamFhrpGroupsBulkUpdateDefault(code int) *IpamFhrpGroupsBulkUpdateDefault {
-	return &IpamFhrpGroupsBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamFhrpGroupsBulkUpdateDefault describes a response with status code -1, with default header values.
-
-IpamFhrpGroupsBulkUpdateDefault ipam fhrp groups bulk update default
-*/
-type IpamFhrpGroupsBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam fhrp groups bulk update default response
-func (o *IpamFhrpGroupsBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamFhrpGroupsBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /ipam/fhrp-groups/][%d] ipam_fhrp-groups_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamFhrpGroupsBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamFhrpGroupsBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

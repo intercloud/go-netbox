@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyTenantGroupsBulkUpdateReader is a Reader for the TenancyTenantGroupsBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *TenancyTenantGroupsBulkUpdateReader) ReadResponse(response runtime.Clie
 		}
 		return result, nil
 	default:
-		result := NewTenancyTenantGroupsBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyTenantGroupsBulkUpdateOK() *TenancyTenantGroupsBulkUpdateOK {
 	return &TenancyTenantGroupsBulkUpdateOK{}
 }
 
-/* TenancyTenantGroupsBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+TenancyTenantGroupsBulkUpdateOK describes a response with status code 200, with default header values.
 
 TenancyTenantGroupsBulkUpdateOK tenancy tenant groups bulk update o k
 */
@@ -69,9 +63,39 @@ type TenancyTenantGroupsBulkUpdateOK struct {
 	Payload *models.TenantGroup
 }
 
+// IsSuccess returns true when this tenancy tenant groups bulk update o k response has a 2xx status code
+func (o *TenancyTenantGroupsBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy tenant groups bulk update o k response has a 3xx status code
+func (o *TenancyTenantGroupsBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy tenant groups bulk update o k response has a 4xx status code
+func (o *TenancyTenantGroupsBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy tenant groups bulk update o k response has a 5xx status code
+func (o *TenancyTenantGroupsBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy tenant groups bulk update o k response a status code equal to that given
+func (o *TenancyTenantGroupsBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyTenantGroupsBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /tenancy/tenant-groups/][%d] tenancyTenantGroupsBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyTenantGroupsBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /tenancy/tenant-groups/][%d] tenancyTenantGroupsBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyTenantGroupsBulkUpdateOK) GetPayload() *models.TenantGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyTenantGroupsBulkUpdateOK) readResponse(response runtime.ClientRe
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyTenantGroupsBulkUpdateDefault creates a TenancyTenantGroupsBulkUpdateDefault with default headers values
-func NewTenancyTenantGroupsBulkUpdateDefault(code int) *TenancyTenantGroupsBulkUpdateDefault {
-	return &TenancyTenantGroupsBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyTenantGroupsBulkUpdateDefault describes a response with status code -1, with default header values.
-
-TenancyTenantGroupsBulkUpdateDefault tenancy tenant groups bulk update default
-*/
-type TenancyTenantGroupsBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy tenant groups bulk update default response
-func (o *TenancyTenantGroupsBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyTenantGroupsBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /tenancy/tenant-groups/][%d] tenancy_tenant-groups_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyTenantGroupsBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyTenantGroupsBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasObjectChangesReadReader is a Reader for the ExtrasObjectChangesRead structure.
@@ -45,14 +45,7 @@ func (o *ExtrasObjectChangesReadReader) ReadResponse(response runtime.ClientResp
 		}
 		return result, nil
 	default:
-		result := NewExtrasObjectChangesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasObjectChangesReadOK() *ExtrasObjectChangesReadOK {
 	return &ExtrasObjectChangesReadOK{}
 }
 
-/* ExtrasObjectChangesReadOK describes a response with status code 200, with default header values.
+/*
+ExtrasObjectChangesReadOK describes a response with status code 200, with default header values.
 
 ExtrasObjectChangesReadOK extras object changes read o k
 */
@@ -69,9 +63,39 @@ type ExtrasObjectChangesReadOK struct {
 	Payload *models.ObjectChange
 }
 
+// IsSuccess returns true when this extras object changes read o k response has a 2xx status code
+func (o *ExtrasObjectChangesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras object changes read o k response has a 3xx status code
+func (o *ExtrasObjectChangesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras object changes read o k response has a 4xx status code
+func (o *ExtrasObjectChangesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras object changes read o k response has a 5xx status code
+func (o *ExtrasObjectChangesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras object changes read o k response a status code equal to that given
+func (o *ExtrasObjectChangesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasObjectChangesReadOK) Error() string {
 	return fmt.Sprintf("[GET /extras/object-changes/{id}/][%d] extrasObjectChangesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasObjectChangesReadOK) String() string {
+	return fmt.Sprintf("[GET /extras/object-changes/{id}/][%d] extrasObjectChangesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasObjectChangesReadOK) GetPayload() *models.ObjectChange {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasObjectChangesReadOK) readResponse(response runtime.ClientResponse
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasObjectChangesReadDefault creates a ExtrasObjectChangesReadDefault with default headers values
-func NewExtrasObjectChangesReadDefault(code int) *ExtrasObjectChangesReadDefault {
-	return &ExtrasObjectChangesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasObjectChangesReadDefault describes a response with status code -1, with default header values.
-
-ExtrasObjectChangesReadDefault extras object changes read default
-*/
-type ExtrasObjectChangesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras object changes read default response
-func (o *ExtrasObjectChangesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasObjectChangesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/object-changes/{id}/][%d] extras_object-changes_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasObjectChangesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasObjectChangesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

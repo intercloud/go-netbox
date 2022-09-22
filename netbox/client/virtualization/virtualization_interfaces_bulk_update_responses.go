@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationInterfacesBulkUpdateReader is a Reader for the VirtualizationInterfacesBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *VirtualizationInterfacesBulkUpdateReader) ReadResponse(response runtime
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationInterfacesBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewVirtualizationInterfacesBulkUpdateOK() *VirtualizationInterfacesBulkUpda
 	return &VirtualizationInterfacesBulkUpdateOK{}
 }
 
-/* VirtualizationInterfacesBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+VirtualizationInterfacesBulkUpdateOK describes a response with status code 200, with default header values.
 
 VirtualizationInterfacesBulkUpdateOK virtualization interfaces bulk update o k
 */
@@ -69,9 +63,39 @@ type VirtualizationInterfacesBulkUpdateOK struct {
 	Payload *models.VMInterface
 }
 
+// IsSuccess returns true when this virtualization interfaces bulk update o k response has a 2xx status code
+func (o *VirtualizationInterfacesBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization interfaces bulk update o k response has a 3xx status code
+func (o *VirtualizationInterfacesBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization interfaces bulk update o k response has a 4xx status code
+func (o *VirtualizationInterfacesBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization interfaces bulk update o k response has a 5xx status code
+func (o *VirtualizationInterfacesBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization interfaces bulk update o k response a status code equal to that given
+func (o *VirtualizationInterfacesBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VirtualizationInterfacesBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /virtualization/interfaces/][%d] virtualizationInterfacesBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *VirtualizationInterfacesBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /virtualization/interfaces/][%d] virtualizationInterfacesBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *VirtualizationInterfacesBulkUpdateOK) GetPayload() *models.VMInterface {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *VirtualizationInterfacesBulkUpdateOK) readResponse(response runtime.Cli
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewVirtualizationInterfacesBulkUpdateDefault creates a VirtualizationInterfacesBulkUpdateDefault with default headers values
-func NewVirtualizationInterfacesBulkUpdateDefault(code int) *VirtualizationInterfacesBulkUpdateDefault {
-	return &VirtualizationInterfacesBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationInterfacesBulkUpdateDefault describes a response with status code -1, with default header values.
-
-VirtualizationInterfacesBulkUpdateDefault virtualization interfaces bulk update default
-*/
-type VirtualizationInterfacesBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization interfaces bulk update default response
-func (o *VirtualizationInterfacesBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationInterfacesBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /virtualization/interfaces/][%d] virtualization_interfaces_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationInterfacesBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationInterfacesBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

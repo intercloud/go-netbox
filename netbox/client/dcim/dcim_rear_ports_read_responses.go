@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRearPortsReadReader is a Reader for the DcimRearPortsRead structure.
@@ -45,14 +45,7 @@ func (o *DcimRearPortsReadReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewDcimRearPortsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimRearPortsReadOK() *DcimRearPortsReadOK {
 	return &DcimRearPortsReadOK{}
 }
 
-/* DcimRearPortsReadOK describes a response with status code 200, with default header values.
+/*
+DcimRearPortsReadOK describes a response with status code 200, with default header values.
 
 DcimRearPortsReadOK dcim rear ports read o k
 */
@@ -69,9 +63,39 @@ type DcimRearPortsReadOK struct {
 	Payload *models.RearPort
 }
 
+// IsSuccess returns true when this dcim rear ports read o k response has a 2xx status code
+func (o *DcimRearPortsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rear ports read o k response has a 3xx status code
+func (o *DcimRearPortsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rear ports read o k response has a 4xx status code
+func (o *DcimRearPortsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rear ports read o k response has a 5xx status code
+func (o *DcimRearPortsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rear ports read o k response a status code equal to that given
+func (o *DcimRearPortsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRearPortsReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/rear-ports/{id}/][%d] dcimRearPortsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRearPortsReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/rear-ports/{id}/][%d] dcimRearPortsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRearPortsReadOK) GetPayload() *models.RearPort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimRearPortsReadOK) readResponse(response runtime.ClientResponse, cons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimRearPortsReadDefault creates a DcimRearPortsReadDefault with default headers values
-func NewDcimRearPortsReadDefault(code int) *DcimRearPortsReadDefault {
-	return &DcimRearPortsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRearPortsReadDefault describes a response with status code -1, with default header values.
-
-DcimRearPortsReadDefault dcim rear ports read default
-*/
-type DcimRearPortsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rear ports read default response
-func (o *DcimRearPortsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRearPortsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/rear-ports/{id}/][%d] dcim_rear-ports_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRearPortsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRearPortsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

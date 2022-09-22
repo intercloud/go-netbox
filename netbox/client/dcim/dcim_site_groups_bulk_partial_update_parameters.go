@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimSiteGroupsBulkPartialUpdateParams creates a new DcimSiteGroupsBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewDcimSiteGroupsBulkPartialUpdateParamsWithHTTPClient(client *http.Client)
 	}
 }
 
-/* DcimSiteGroupsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim site groups bulk partial update operation.
+/*
+DcimSiteGroupsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim site groups bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimSiteGroupsBulkPartialUpdateParams struct {
 

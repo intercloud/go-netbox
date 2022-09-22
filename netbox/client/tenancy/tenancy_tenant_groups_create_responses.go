@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyTenantGroupsCreateReader is a Reader for the TenancyTenantGroupsCreate structure.
@@ -45,14 +45,7 @@ func (o *TenancyTenantGroupsCreateReader) ReadResponse(response runtime.ClientRe
 		}
 		return result, nil
 	default:
-		result := NewTenancyTenantGroupsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyTenantGroupsCreateCreated() *TenancyTenantGroupsCreateCreated {
 	return &TenancyTenantGroupsCreateCreated{}
 }
 
-/* TenancyTenantGroupsCreateCreated describes a response with status code 201, with default header values.
+/*
+TenancyTenantGroupsCreateCreated describes a response with status code 201, with default header values.
 
 TenancyTenantGroupsCreateCreated tenancy tenant groups create created
 */
@@ -69,9 +63,39 @@ type TenancyTenantGroupsCreateCreated struct {
 	Payload *models.TenantGroup
 }
 
+// IsSuccess returns true when this tenancy tenant groups create created response has a 2xx status code
+func (o *TenancyTenantGroupsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy tenant groups create created response has a 3xx status code
+func (o *TenancyTenantGroupsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy tenant groups create created response has a 4xx status code
+func (o *TenancyTenantGroupsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy tenant groups create created response has a 5xx status code
+func (o *TenancyTenantGroupsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy tenant groups create created response a status code equal to that given
+func (o *TenancyTenantGroupsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *TenancyTenantGroupsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /tenancy/tenant-groups/][%d] tenancyTenantGroupsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *TenancyTenantGroupsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /tenancy/tenant-groups/][%d] tenancyTenantGroupsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *TenancyTenantGroupsCreateCreated) GetPayload() *models.TenantGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyTenantGroupsCreateCreated) readResponse(response runtime.ClientR
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyTenantGroupsCreateDefault creates a TenancyTenantGroupsCreateDefault with default headers values
-func NewTenancyTenantGroupsCreateDefault(code int) *TenancyTenantGroupsCreateDefault {
-	return &TenancyTenantGroupsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyTenantGroupsCreateDefault describes a response with status code -1, with default header values.
-
-TenancyTenantGroupsCreateDefault tenancy tenant groups create default
-*/
-type TenancyTenantGroupsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy tenant groups create default response
-func (o *TenancyTenantGroupsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyTenantGroupsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /tenancy/tenant-groups/][%d] tenancy_tenant-groups_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyTenantGroupsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyTenantGroupsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

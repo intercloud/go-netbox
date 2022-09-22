@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewTenancyContactAssignmentsBulkPartialUpdateParams creates a new TenancyContactAssignmentsBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewTenancyContactAssignmentsBulkPartialUpdateParamsWithHTTPClient(client *h
 	}
 }
 
-/* TenancyContactAssignmentsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the tenancy contact assignments bulk partial update operation.
+/*
+TenancyContactAssignmentsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the tenancy contact assignments bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type TenancyContactAssignmentsBulkPartialUpdateParams struct {
 

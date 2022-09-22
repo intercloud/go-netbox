@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamVrfsBulkPartialUpdateReader is a Reader for the IpamVrfsBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *IpamVrfsBulkPartialUpdateReader) ReadResponse(response runtime.ClientRe
 		}
 		return result, nil
 	default:
-		result := NewIpamVrfsBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamVrfsBulkPartialUpdateOK() *IpamVrfsBulkPartialUpdateOK {
 	return &IpamVrfsBulkPartialUpdateOK{}
 }
 
-/* IpamVrfsBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+IpamVrfsBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 IpamVrfsBulkPartialUpdateOK ipam vrfs bulk partial update o k
 */
@@ -69,9 +63,39 @@ type IpamVrfsBulkPartialUpdateOK struct {
 	Payload *models.VRF
 }
 
+// IsSuccess returns true when this ipam vrfs bulk partial update o k response has a 2xx status code
+func (o *IpamVrfsBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam vrfs bulk partial update o k response has a 3xx status code
+func (o *IpamVrfsBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam vrfs bulk partial update o k response has a 4xx status code
+func (o *IpamVrfsBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam vrfs bulk partial update o k response has a 5xx status code
+func (o *IpamVrfsBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam vrfs bulk partial update o k response a status code equal to that given
+func (o *IpamVrfsBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamVrfsBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /ipam/vrfs/][%d] ipamVrfsBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamVrfsBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /ipam/vrfs/][%d] ipamVrfsBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamVrfsBulkPartialUpdateOK) GetPayload() *models.VRF {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamVrfsBulkPartialUpdateOK) readResponse(response runtime.ClientRespon
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamVrfsBulkPartialUpdateDefault creates a IpamVrfsBulkPartialUpdateDefault with default headers values
-func NewIpamVrfsBulkPartialUpdateDefault(code int) *IpamVrfsBulkPartialUpdateDefault {
-	return &IpamVrfsBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamVrfsBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-IpamVrfsBulkPartialUpdateDefault ipam vrfs bulk partial update default
-*/
-type IpamVrfsBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam vrfs bulk partial update default response
-func (o *IpamVrfsBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamVrfsBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/vrfs/][%d] ipam_vrfs_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamVrfsBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamVrfsBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

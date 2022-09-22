@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimFrontPortTemplatesUpdateParams creates a new DcimFrontPortTemplatesUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimFrontPortTemplatesUpdateParamsWithHTTPClient(client *http.Client) *D
 	}
 }
 
-/* DcimFrontPortTemplatesUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim front port templates update operation.
+/*
+DcimFrontPortTemplatesUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim front port templates update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimFrontPortTemplatesUpdateParams struct {
 

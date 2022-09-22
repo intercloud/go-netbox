@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimConsoleServerPortsReadReader is a Reader for the DcimConsoleServerPortsRead structure.
@@ -45,14 +45,7 @@ func (o *DcimConsoleServerPortsReadReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimConsoleServerPortsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimConsoleServerPortsReadOK() *DcimConsoleServerPortsReadOK {
 	return &DcimConsoleServerPortsReadOK{}
 }
 
-/* DcimConsoleServerPortsReadOK describes a response with status code 200, with default header values.
+/*
+DcimConsoleServerPortsReadOK describes a response with status code 200, with default header values.
 
 DcimConsoleServerPortsReadOK dcim console server ports read o k
 */
@@ -69,9 +63,39 @@ type DcimConsoleServerPortsReadOK struct {
 	Payload *models.ConsoleServerPort
 }
 
+// IsSuccess returns true when this dcim console server ports read o k response has a 2xx status code
+func (o *DcimConsoleServerPortsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim console server ports read o k response has a 3xx status code
+func (o *DcimConsoleServerPortsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim console server ports read o k response has a 4xx status code
+func (o *DcimConsoleServerPortsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim console server ports read o k response has a 5xx status code
+func (o *DcimConsoleServerPortsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim console server ports read o k response a status code equal to that given
+func (o *DcimConsoleServerPortsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimConsoleServerPortsReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/console-server-ports/{id}/][%d] dcimConsoleServerPortsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimConsoleServerPortsReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/console-server-ports/{id}/][%d] dcimConsoleServerPortsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimConsoleServerPortsReadOK) GetPayload() *models.ConsoleServerPort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimConsoleServerPortsReadOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimConsoleServerPortsReadDefault creates a DcimConsoleServerPortsReadDefault with default headers values
-func NewDcimConsoleServerPortsReadDefault(code int) *DcimConsoleServerPortsReadDefault {
-	return &DcimConsoleServerPortsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimConsoleServerPortsReadDefault describes a response with status code -1, with default header values.
-
-DcimConsoleServerPortsReadDefault dcim console server ports read default
-*/
-type DcimConsoleServerPortsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim console server ports read default response
-func (o *DcimConsoleServerPortsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimConsoleServerPortsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/console-server-ports/{id}/][%d] dcim_console-server-ports_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimConsoleServerPortsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimConsoleServerPortsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

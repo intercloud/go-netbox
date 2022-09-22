@@ -22,7 +22,6 @@ package extras
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *ExtrasReportsListReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewExtrasReportsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewExtrasReportsListOK() *ExtrasReportsListOK {
 	return &ExtrasReportsListOK{}
 }
 
-/* ExtrasReportsListOK describes a response with status code 200, with default header values.
+/*
+ExtrasReportsListOK describes a response with status code 200, with default header values.
 
 ExtrasReportsListOK extras reports list o k
 */
 type ExtrasReportsListOK struct {
 }
 
+// IsSuccess returns true when this extras reports list o k response has a 2xx status code
+func (o *ExtrasReportsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras reports list o k response has a 3xx status code
+func (o *ExtrasReportsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras reports list o k response has a 4xx status code
+func (o *ExtrasReportsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras reports list o k response has a 5xx status code
+func (o *ExtrasReportsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras reports list o k response a status code equal to that given
+func (o *ExtrasReportsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasReportsListOK) Error() string {
 	return fmt.Sprintf("[GET /extras/reports/][%d] extrasReportsListOK ", 200)
 }
 
+func (o *ExtrasReportsListOK) String() string {
+	return fmt.Sprintf("[GET /extras/reports/][%d] extrasReportsListOK ", 200)
+}
+
 func (o *ExtrasReportsListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewExtrasReportsListDefault creates a ExtrasReportsListDefault with default headers values
-func NewExtrasReportsListDefault(code int) *ExtrasReportsListDefault {
-	return &ExtrasReportsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasReportsListDefault describes a response with status code -1, with default header values.
-
-ExtrasReportsListDefault extras reports list default
-*/
-type ExtrasReportsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras reports list default response
-func (o *ExtrasReportsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasReportsListDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/reports/][%d] extras_reports_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasReportsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasReportsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

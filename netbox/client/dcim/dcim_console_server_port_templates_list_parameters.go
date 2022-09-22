@@ -68,10 +68,12 @@ func NewDcimConsoleServerPortTemplatesListParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* DcimConsoleServerPortTemplatesListParams contains all the parameters to send to the API endpoint
-   for the dcim console server port templates list operation.
+/*
+DcimConsoleServerPortTemplatesListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim console server port templates list operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimConsoleServerPortTemplatesListParams struct {
 
@@ -123,14 +125,11 @@ type DcimConsoleServerPortTemplatesListParams struct {
 	*/
 	Limit *int64
 
-	// ModuletypeID.
-	ModuletypeID *string
-
-	// ModuletypeIDn.
-	ModuletypeIDn *string
-
 	// Name.
 	Name *string
+
+	// NameEmpty.
+	NameEmpty *string
 
 	// NameIc.
 	NameIc *string
@@ -392,28 +391,6 @@ func (o *DcimConsoleServerPortTemplatesListParams) SetLimit(limit *int64) {
 	o.Limit = limit
 }
 
-// WithModuletypeID adds the moduletypeID to the dcim console server port templates list params
-func (o *DcimConsoleServerPortTemplatesListParams) WithModuletypeID(moduletypeID *string) *DcimConsoleServerPortTemplatesListParams {
-	o.SetModuletypeID(moduletypeID)
-	return o
-}
-
-// SetModuletypeID adds the moduletypeId to the dcim console server port templates list params
-func (o *DcimConsoleServerPortTemplatesListParams) SetModuletypeID(moduletypeID *string) {
-	o.ModuletypeID = moduletypeID
-}
-
-// WithModuletypeIDn adds the moduletypeIDn to the dcim console server port templates list params
-func (o *DcimConsoleServerPortTemplatesListParams) WithModuletypeIDn(moduletypeIDn *string) *DcimConsoleServerPortTemplatesListParams {
-	o.SetModuletypeIDn(moduletypeIDn)
-	return o
-}
-
-// SetModuletypeIDn adds the moduletypeIdN to the dcim console server port templates list params
-func (o *DcimConsoleServerPortTemplatesListParams) SetModuletypeIDn(moduletypeIDn *string) {
-	o.ModuletypeIDn = moduletypeIDn
-}
-
 // WithName adds the name to the dcim console server port templates list params
 func (o *DcimConsoleServerPortTemplatesListParams) WithName(name *string) *DcimConsoleServerPortTemplatesListParams {
 	o.SetName(name)
@@ -423,6 +400,17 @@ func (o *DcimConsoleServerPortTemplatesListParams) WithName(name *string) *DcimC
 // SetName adds the name to the dcim console server port templates list params
 func (o *DcimConsoleServerPortTemplatesListParams) SetName(name *string) {
 	o.Name = name
+}
+
+// WithNameEmpty adds the nameEmpty to the dcim console server port templates list params
+func (o *DcimConsoleServerPortTemplatesListParams) WithNameEmpty(nameEmpty *string) *DcimConsoleServerPortTemplatesListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the dcim console server port templates list params
+func (o *DcimConsoleServerPortTemplatesListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
 }
 
 // WithNameIc adds the nameIc to the dcim console server port templates list params
@@ -831,40 +819,6 @@ func (o *DcimConsoleServerPortTemplatesListParams) WriteToRequest(r runtime.Clie
 		}
 	}
 
-	if o.ModuletypeID != nil {
-
-		// query param moduletype_id
-		var qrModuletypeID string
-
-		if o.ModuletypeID != nil {
-			qrModuletypeID = *o.ModuletypeID
-		}
-		qModuletypeID := qrModuletypeID
-		if qModuletypeID != "" {
-
-			if err := r.SetQueryParam("moduletype_id", qModuletypeID); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.ModuletypeIDn != nil {
-
-		// query param moduletype_id__n
-		var qrModuletypeIDn string
-
-		if o.ModuletypeIDn != nil {
-			qrModuletypeIDn = *o.ModuletypeIDn
-		}
-		qModuletypeIDn := qrModuletypeIDn
-		if qModuletypeIDn != "" {
-
-			if err := r.SetQueryParam("moduletype_id__n", qModuletypeIDn); err != nil {
-				return err
-			}
-		}
-	}
-
 	if o.Name != nil {
 
 		// query param name
@@ -877,6 +831,23 @@ func (o *DcimConsoleServerPortTemplatesListParams) WriteToRequest(r runtime.Clie
 		if qName != "" {
 
 			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
 				return err
 			}
 		}

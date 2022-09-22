@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimPowerPortsDeleteReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerPortsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimPowerPortsDeleteNoContent() *DcimPowerPortsDeleteNoContent {
 	return &DcimPowerPortsDeleteNoContent{}
 }
 
-/* DcimPowerPortsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimPowerPortsDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimPowerPortsDeleteNoContent dcim power ports delete no content
 */
 type DcimPowerPortsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim power ports delete no content response has a 2xx status code
+func (o *DcimPowerPortsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power ports delete no content response has a 3xx status code
+func (o *DcimPowerPortsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power ports delete no content response has a 4xx status code
+func (o *DcimPowerPortsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power ports delete no content response has a 5xx status code
+func (o *DcimPowerPortsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power ports delete no content response a status code equal to that given
+func (o *DcimPowerPortsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimPowerPortsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/power-ports/{id}/][%d] dcimPowerPortsDeleteNoContent ", 204)
 }
 
+func (o *DcimPowerPortsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/power-ports/{id}/][%d] dcimPowerPortsDeleteNoContent ", 204)
+}
+
 func (o *DcimPowerPortsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimPowerPortsDeleteDefault creates a DcimPowerPortsDeleteDefault with default headers values
-func NewDcimPowerPortsDeleteDefault(code int) *DcimPowerPortsDeleteDefault {
-	return &DcimPowerPortsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerPortsDeleteDefault describes a response with status code -1, with default header values.
-
-DcimPowerPortsDeleteDefault dcim power ports delete default
-*/
-type DcimPowerPortsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power ports delete default response
-func (o *DcimPowerPortsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerPortsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/power-ports/{id}/][%d] dcim_power-ports_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerPortsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerPortsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -22,7 +22,6 @@ package tenancy
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *TenancyContactRolesDeleteReader) ReadResponse(response runtime.ClientRe
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactRolesDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewTenancyContactRolesDeleteNoContent() *TenancyContactRolesDeleteNoContent
 	return &TenancyContactRolesDeleteNoContent{}
 }
 
-/* TenancyContactRolesDeleteNoContent describes a response with status code 204, with default header values.
+/*
+TenancyContactRolesDeleteNoContent describes a response with status code 204, with default header values.
 
 TenancyContactRolesDeleteNoContent tenancy contact roles delete no content
 */
 type TenancyContactRolesDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this tenancy contact roles delete no content response has a 2xx status code
+func (o *TenancyContactRolesDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact roles delete no content response has a 3xx status code
+func (o *TenancyContactRolesDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact roles delete no content response has a 4xx status code
+func (o *TenancyContactRolesDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact roles delete no content response has a 5xx status code
+func (o *TenancyContactRolesDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact roles delete no content response a status code equal to that given
+func (o *TenancyContactRolesDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *TenancyContactRolesDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /tenancy/contact-roles/{id}/][%d] tenancyContactRolesDeleteNoContent ", 204)
 }
 
+func (o *TenancyContactRolesDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /tenancy/contact-roles/{id}/][%d] tenancyContactRolesDeleteNoContent ", 204)
+}
+
 func (o *TenancyContactRolesDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewTenancyContactRolesDeleteDefault creates a TenancyContactRolesDeleteDefault with default headers values
-func NewTenancyContactRolesDeleteDefault(code int) *TenancyContactRolesDeleteDefault {
-	return &TenancyContactRolesDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactRolesDeleteDefault describes a response with status code -1, with default header values.
-
-TenancyContactRolesDeleteDefault tenancy contact roles delete default
-*/
-type TenancyContactRolesDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact roles delete default response
-func (o *TenancyContactRolesDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactRolesDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /tenancy/contact-roles/{id}/][%d] tenancy_contact-roles_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactRolesDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactRolesDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

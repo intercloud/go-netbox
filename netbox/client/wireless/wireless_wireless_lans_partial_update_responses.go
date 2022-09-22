@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // WirelessWirelessLansPartialUpdateReader is a Reader for the WirelessWirelessLansPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *WirelessWirelessLansPartialUpdateReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewWirelessWirelessLansPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewWirelessWirelessLansPartialUpdateOK() *WirelessWirelessLansPartialUpdate
 	return &WirelessWirelessLansPartialUpdateOK{}
 }
 
-/* WirelessWirelessLansPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+WirelessWirelessLansPartialUpdateOK describes a response with status code 200, with default header values.
 
 WirelessWirelessLansPartialUpdateOK wireless wireless lans partial update o k
 */
@@ -69,9 +63,39 @@ type WirelessWirelessLansPartialUpdateOK struct {
 	Payload *models.WirelessLAN
 }
 
+// IsSuccess returns true when this wireless wireless lans partial update o k response has a 2xx status code
+func (o *WirelessWirelessLansPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this wireless wireless lans partial update o k response has a 3xx status code
+func (o *WirelessWirelessLansPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this wireless wireless lans partial update o k response has a 4xx status code
+func (o *WirelessWirelessLansPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this wireless wireless lans partial update o k response has a 5xx status code
+func (o *WirelessWirelessLansPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this wireless wireless lans partial update o k response a status code equal to that given
+func (o *WirelessWirelessLansPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *WirelessWirelessLansPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /wireless/wireless-lans/{id}/][%d] wirelessWirelessLansPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *WirelessWirelessLansPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /wireless/wireless-lans/{id}/][%d] wirelessWirelessLansPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *WirelessWirelessLansPartialUpdateOK) GetPayload() *models.WirelessLAN {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *WirelessWirelessLansPartialUpdateOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewWirelessWirelessLansPartialUpdateDefault creates a WirelessWirelessLansPartialUpdateDefault with default headers values
-func NewWirelessWirelessLansPartialUpdateDefault(code int) *WirelessWirelessLansPartialUpdateDefault {
-	return &WirelessWirelessLansPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* WirelessWirelessLansPartialUpdateDefault describes a response with status code -1, with default header values.
-
-WirelessWirelessLansPartialUpdateDefault wireless wireless lans partial update default
-*/
-type WirelessWirelessLansPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the wireless wireless lans partial update default response
-func (o *WirelessWirelessLansPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *WirelessWirelessLansPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /wireless/wireless-lans/{id}/][%d] wireless_wireless-lans_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *WirelessWirelessLansPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *WirelessWirelessLansPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamVlansBulkUpdateReader is a Reader for the IpamVlansBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *IpamVlansBulkUpdateReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewIpamVlansBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamVlansBulkUpdateOK() *IpamVlansBulkUpdateOK {
 	return &IpamVlansBulkUpdateOK{}
 }
 
-/* IpamVlansBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+IpamVlansBulkUpdateOK describes a response with status code 200, with default header values.
 
 IpamVlansBulkUpdateOK ipam vlans bulk update o k
 */
@@ -69,9 +63,39 @@ type IpamVlansBulkUpdateOK struct {
 	Payload *models.VLAN
 }
 
+// IsSuccess returns true when this ipam vlans bulk update o k response has a 2xx status code
+func (o *IpamVlansBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam vlans bulk update o k response has a 3xx status code
+func (o *IpamVlansBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam vlans bulk update o k response has a 4xx status code
+func (o *IpamVlansBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam vlans bulk update o k response has a 5xx status code
+func (o *IpamVlansBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam vlans bulk update o k response a status code equal to that given
+func (o *IpamVlansBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamVlansBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /ipam/vlans/][%d] ipamVlansBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamVlansBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /ipam/vlans/][%d] ipamVlansBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamVlansBulkUpdateOK) GetPayload() *models.VLAN {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamVlansBulkUpdateOK) readResponse(response runtime.ClientResponse, co
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamVlansBulkUpdateDefault creates a IpamVlansBulkUpdateDefault with default headers values
-func NewIpamVlansBulkUpdateDefault(code int) *IpamVlansBulkUpdateDefault {
-	return &IpamVlansBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamVlansBulkUpdateDefault describes a response with status code -1, with default header values.
-
-IpamVlansBulkUpdateDefault ipam vlans bulk update default
-*/
-type IpamVlansBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam vlans bulk update default response
-func (o *IpamVlansBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamVlansBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /ipam/vlans/][%d] ipam_vlans_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamVlansBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamVlansBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

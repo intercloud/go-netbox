@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationClusterGroupsBulkUpdateReader is a Reader for the VirtualizationClusterGroupsBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *VirtualizationClusterGroupsBulkUpdateReader) ReadResponse(response runt
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationClusterGroupsBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewVirtualizationClusterGroupsBulkUpdateOK() *VirtualizationClusterGroupsBu
 	return &VirtualizationClusterGroupsBulkUpdateOK{}
 }
 
-/* VirtualizationClusterGroupsBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+VirtualizationClusterGroupsBulkUpdateOK describes a response with status code 200, with default header values.
 
 VirtualizationClusterGroupsBulkUpdateOK virtualization cluster groups bulk update o k
 */
@@ -69,9 +63,39 @@ type VirtualizationClusterGroupsBulkUpdateOK struct {
 	Payload *models.ClusterGroup
 }
 
+// IsSuccess returns true when this virtualization cluster groups bulk update o k response has a 2xx status code
+func (o *VirtualizationClusterGroupsBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization cluster groups bulk update o k response has a 3xx status code
+func (o *VirtualizationClusterGroupsBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization cluster groups bulk update o k response has a 4xx status code
+func (o *VirtualizationClusterGroupsBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization cluster groups bulk update o k response has a 5xx status code
+func (o *VirtualizationClusterGroupsBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization cluster groups bulk update o k response a status code equal to that given
+func (o *VirtualizationClusterGroupsBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VirtualizationClusterGroupsBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /virtualization/cluster-groups/][%d] virtualizationClusterGroupsBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *VirtualizationClusterGroupsBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /virtualization/cluster-groups/][%d] virtualizationClusterGroupsBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *VirtualizationClusterGroupsBulkUpdateOK) GetPayload() *models.ClusterGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *VirtualizationClusterGroupsBulkUpdateOK) readResponse(response runtime.
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewVirtualizationClusterGroupsBulkUpdateDefault creates a VirtualizationClusterGroupsBulkUpdateDefault with default headers values
-func NewVirtualizationClusterGroupsBulkUpdateDefault(code int) *VirtualizationClusterGroupsBulkUpdateDefault {
-	return &VirtualizationClusterGroupsBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationClusterGroupsBulkUpdateDefault describes a response with status code -1, with default header values.
-
-VirtualizationClusterGroupsBulkUpdateDefault virtualization cluster groups bulk update default
-*/
-type VirtualizationClusterGroupsBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization cluster groups bulk update default response
-func (o *VirtualizationClusterGroupsBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationClusterGroupsBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /virtualization/cluster-groups/][%d] virtualization_cluster-groups_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationClusterGroupsBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationClusterGroupsBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

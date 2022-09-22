@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDeviceTypesListReader is a Reader for the DcimDeviceTypesList structure.
@@ -50,14 +50,7 @@ func (o *DcimDeviceTypesListReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewDcimDeviceTypesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimDeviceTypesListOK() *DcimDeviceTypesListOK {
 	return &DcimDeviceTypesListOK{}
 }
 
-/* DcimDeviceTypesListOK describes a response with status code 200, with default header values.
+/*
+DcimDeviceTypesListOK describes a response with status code 200, with default header values.
 
 DcimDeviceTypesListOK dcim device types list o k
 */
@@ -74,9 +68,39 @@ type DcimDeviceTypesListOK struct {
 	Payload *DcimDeviceTypesListOKBody
 }
 
+// IsSuccess returns true when this dcim device types list o k response has a 2xx status code
+func (o *DcimDeviceTypesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim device types list o k response has a 3xx status code
+func (o *DcimDeviceTypesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim device types list o k response has a 4xx status code
+func (o *DcimDeviceTypesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim device types list o k response has a 5xx status code
+func (o *DcimDeviceTypesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim device types list o k response a status code equal to that given
+func (o *DcimDeviceTypesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDeviceTypesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/device-types/][%d] dcimDeviceTypesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDeviceTypesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/device-types/][%d] dcimDeviceTypesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDeviceTypesListOK) GetPayload() *DcimDeviceTypesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimDeviceTypesListOK) readResponse(response runtime.ClientResponse, co
 	return nil
 }
 
-// NewDcimDeviceTypesListDefault creates a DcimDeviceTypesListDefault with default headers values
-func NewDcimDeviceTypesListDefault(code int) *DcimDeviceTypesListDefault {
-	return &DcimDeviceTypesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDeviceTypesListDefault describes a response with status code -1, with default header values.
-
-DcimDeviceTypesListDefault dcim device types list default
-*/
-type DcimDeviceTypesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim device types list default response
-func (o *DcimDeviceTypesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDeviceTypesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/device-types/][%d] dcim_device-types_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDeviceTypesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDeviceTypesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimDeviceTypesListOKBody dcim device types list o k body
+/*
+DcimDeviceTypesListOKBody dcim device types list o k body
 swagger:model DcimDeviceTypesListOKBody
 */
 type DcimDeviceTypesListOKBody struct {

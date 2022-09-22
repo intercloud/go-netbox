@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimManufacturersDeleteReader) ReadResponse(response runtime.ClientResp
 		}
 		return result, nil
 	default:
-		result := NewDcimManufacturersDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimManufacturersDeleteNoContent() *DcimManufacturersDeleteNoContent {
 	return &DcimManufacturersDeleteNoContent{}
 }
 
-/* DcimManufacturersDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimManufacturersDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimManufacturersDeleteNoContent dcim manufacturers delete no content
 */
 type DcimManufacturersDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim manufacturers delete no content response has a 2xx status code
+func (o *DcimManufacturersDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim manufacturers delete no content response has a 3xx status code
+func (o *DcimManufacturersDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim manufacturers delete no content response has a 4xx status code
+func (o *DcimManufacturersDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim manufacturers delete no content response has a 5xx status code
+func (o *DcimManufacturersDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim manufacturers delete no content response a status code equal to that given
+func (o *DcimManufacturersDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimManufacturersDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/manufacturers/{id}/][%d] dcimManufacturersDeleteNoContent ", 204)
 }
 
+func (o *DcimManufacturersDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/manufacturers/{id}/][%d] dcimManufacturersDeleteNoContent ", 204)
+}
+
 func (o *DcimManufacturersDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimManufacturersDeleteDefault creates a DcimManufacturersDeleteDefault with default headers values
-func NewDcimManufacturersDeleteDefault(code int) *DcimManufacturersDeleteDefault {
-	return &DcimManufacturersDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimManufacturersDeleteDefault describes a response with status code -1, with default header values.
-
-DcimManufacturersDeleteDefault dcim manufacturers delete default
-*/
-type DcimManufacturersDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim manufacturers delete default response
-func (o *DcimManufacturersDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimManufacturersDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/manufacturers/{id}/][%d] dcim_manufacturers_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimManufacturersDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimManufacturersDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -38,7 +38,7 @@ type CustomLink struct {
 	// Button class
 	//
 	// The class of the first link in a group will be used for the dropdown button
-	// Enum: [outline-dark blue indigo purple pink red orange yellow green teal cyan gray black white ghost-dark]
+	// Enum: [outline-dark ghost-dark blue indigo purple pink red orange yellow green teal cyan secondary]
 	ButtonClass string `json:"button_class,omitempty"`
 
 	// Content type
@@ -47,15 +47,12 @@ type CustomLink struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Display
 	// Read Only: true
 	Display string `json:"display,omitempty"`
-
-	// Enabled
-	Enabled bool `json:"enabled,omitempty"`
 
 	// Group name
 	//
@@ -63,7 +60,7 @@ type CustomLink struct {
 	// Max Length: 50
 	GroupName string `json:"group_name,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -164,7 +161,7 @@ var customLinkTypeButtonClassPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["outline-dark","blue","indigo","purple","pink","red","orange","yellow","green","teal","cyan","gray","black","white","ghost-dark"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["outline-dark","ghost-dark","blue","indigo","purple","pink","red","orange","yellow","green","teal","cyan","secondary"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -176,6 +173,9 @@ const (
 
 	// CustomLinkButtonClassOutlineDashDark captures enum value "outline-dark"
 	CustomLinkButtonClassOutlineDashDark string = "outline-dark"
+
+	// CustomLinkButtonClassGhostDashDark captures enum value "ghost-dark"
+	CustomLinkButtonClassGhostDashDark string = "ghost-dark"
 
 	// CustomLinkButtonClassBlue captures enum value "blue"
 	CustomLinkButtonClassBlue string = "blue"
@@ -207,17 +207,8 @@ const (
 	// CustomLinkButtonClassCyan captures enum value "cyan"
 	CustomLinkButtonClassCyan string = "cyan"
 
-	// CustomLinkButtonClassGray captures enum value "gray"
-	CustomLinkButtonClassGray string = "gray"
-
-	// CustomLinkButtonClassBlack captures enum value "black"
-	CustomLinkButtonClassBlack string = "black"
-
-	// CustomLinkButtonClassWhite captures enum value "white"
-	CustomLinkButtonClassWhite string = "white"
-
-	// CustomLinkButtonClassGhostDashDark captures enum value "ghost-dark"
-	CustomLinkButtonClassGhostDashDark string = "ghost-dark"
+	// CustomLinkButtonClassSecondary captures enum value "secondary"
+	CustomLinkButtonClassSecondary string = "secondary"
 )
 
 // prop value enum
@@ -255,7 +246,7 @@ func (m *CustomLink) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -397,7 +388,7 @@ func (m *CustomLink) ContextValidate(ctx context.Context, formats strfmt.Registr
 
 func (m *CustomLink) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

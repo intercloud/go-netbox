@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimFrontPortsDeleteReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewDcimFrontPortsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimFrontPortsDeleteNoContent() *DcimFrontPortsDeleteNoContent {
 	return &DcimFrontPortsDeleteNoContent{}
 }
 
-/* DcimFrontPortsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimFrontPortsDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimFrontPortsDeleteNoContent dcim front ports delete no content
 */
 type DcimFrontPortsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim front ports delete no content response has a 2xx status code
+func (o *DcimFrontPortsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim front ports delete no content response has a 3xx status code
+func (o *DcimFrontPortsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim front ports delete no content response has a 4xx status code
+func (o *DcimFrontPortsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim front ports delete no content response has a 5xx status code
+func (o *DcimFrontPortsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim front ports delete no content response a status code equal to that given
+func (o *DcimFrontPortsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimFrontPortsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/front-ports/{id}/][%d] dcimFrontPortsDeleteNoContent ", 204)
 }
 
+func (o *DcimFrontPortsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/front-ports/{id}/][%d] dcimFrontPortsDeleteNoContent ", 204)
+}
+
 func (o *DcimFrontPortsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimFrontPortsDeleteDefault creates a DcimFrontPortsDeleteDefault with default headers values
-func NewDcimFrontPortsDeleteDefault(code int) *DcimFrontPortsDeleteDefault {
-	return &DcimFrontPortsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimFrontPortsDeleteDefault describes a response with status code -1, with default header values.
-
-DcimFrontPortsDeleteDefault dcim front ports delete default
-*/
-type DcimFrontPortsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim front ports delete default response
-func (o *DcimFrontPortsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimFrontPortsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/front-ports/{id}/][%d] dcim_front-ports_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimFrontPortsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimFrontPortsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

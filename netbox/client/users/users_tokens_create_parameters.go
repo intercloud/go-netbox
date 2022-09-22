@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewUsersTokensCreateParams creates a new UsersTokensCreateParams object,
@@ -69,10 +69,12 @@ func NewUsersTokensCreateParamsWithHTTPClient(client *http.Client) *UsersTokensC
 	}
 }
 
-/* UsersTokensCreateParams contains all the parameters to send to the API endpoint
-   for the users tokens create operation.
+/*
+UsersTokensCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the users tokens create operation.
+
+	Typically these are written to a http.Request.
 */
 type UsersTokensCreateParams struct {
 

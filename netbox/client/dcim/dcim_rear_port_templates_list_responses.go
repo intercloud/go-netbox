@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRearPortTemplatesListReader is a Reader for the DcimRearPortTemplatesList structure.
@@ -50,14 +50,7 @@ func (o *DcimRearPortTemplatesListReader) ReadResponse(response runtime.ClientRe
 		}
 		return result, nil
 	default:
-		result := NewDcimRearPortTemplatesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimRearPortTemplatesListOK() *DcimRearPortTemplatesListOK {
 	return &DcimRearPortTemplatesListOK{}
 }
 
-/* DcimRearPortTemplatesListOK describes a response with status code 200, with default header values.
+/*
+DcimRearPortTemplatesListOK describes a response with status code 200, with default header values.
 
 DcimRearPortTemplatesListOK dcim rear port templates list o k
 */
@@ -74,9 +68,39 @@ type DcimRearPortTemplatesListOK struct {
 	Payload *DcimRearPortTemplatesListOKBody
 }
 
+// IsSuccess returns true when this dcim rear port templates list o k response has a 2xx status code
+func (o *DcimRearPortTemplatesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rear port templates list o k response has a 3xx status code
+func (o *DcimRearPortTemplatesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rear port templates list o k response has a 4xx status code
+func (o *DcimRearPortTemplatesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rear port templates list o k response has a 5xx status code
+func (o *DcimRearPortTemplatesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rear port templates list o k response a status code equal to that given
+func (o *DcimRearPortTemplatesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRearPortTemplatesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/rear-port-templates/][%d] dcimRearPortTemplatesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRearPortTemplatesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/rear-port-templates/][%d] dcimRearPortTemplatesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRearPortTemplatesListOK) GetPayload() *DcimRearPortTemplatesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimRearPortTemplatesListOK) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-// NewDcimRearPortTemplatesListDefault creates a DcimRearPortTemplatesListDefault with default headers values
-func NewDcimRearPortTemplatesListDefault(code int) *DcimRearPortTemplatesListDefault {
-	return &DcimRearPortTemplatesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRearPortTemplatesListDefault describes a response with status code -1, with default header values.
-
-DcimRearPortTemplatesListDefault dcim rear port templates list default
-*/
-type DcimRearPortTemplatesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rear port templates list default response
-func (o *DcimRearPortTemplatesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRearPortTemplatesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/rear-port-templates/][%d] dcim_rear-port-templates_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRearPortTemplatesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRearPortTemplatesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimRearPortTemplatesListOKBody dcim rear port templates list o k body
+/*
+DcimRearPortTemplatesListOKBody dcim rear port templates list o k body
 swagger:model DcimRearPortTemplatesListOKBody
 */
 type DcimRearPortTemplatesListOKBody struct {

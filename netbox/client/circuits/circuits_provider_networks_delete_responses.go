@@ -22,7 +22,6 @@ package circuits
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *CircuitsProviderNetworksDeleteReader) ReadResponse(response runtime.Cli
 		}
 		return result, nil
 	default:
-		result := NewCircuitsProviderNetworksDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewCircuitsProviderNetworksDeleteNoContent() *CircuitsProviderNetworksDelet
 	return &CircuitsProviderNetworksDeleteNoContent{}
 }
 
-/* CircuitsProviderNetworksDeleteNoContent describes a response with status code 204, with default header values.
+/*
+CircuitsProviderNetworksDeleteNoContent describes a response with status code 204, with default header values.
 
 CircuitsProviderNetworksDeleteNoContent circuits provider networks delete no content
 */
 type CircuitsProviderNetworksDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this circuits provider networks delete no content response has a 2xx status code
+func (o *CircuitsProviderNetworksDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits provider networks delete no content response has a 3xx status code
+func (o *CircuitsProviderNetworksDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits provider networks delete no content response has a 4xx status code
+func (o *CircuitsProviderNetworksDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits provider networks delete no content response has a 5xx status code
+func (o *CircuitsProviderNetworksDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits provider networks delete no content response a status code equal to that given
+func (o *CircuitsProviderNetworksDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *CircuitsProviderNetworksDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /circuits/provider-networks/{id}/][%d] circuitsProviderNetworksDeleteNoContent ", 204)
 }
 
+func (o *CircuitsProviderNetworksDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /circuits/provider-networks/{id}/][%d] circuitsProviderNetworksDeleteNoContent ", 204)
+}
+
 func (o *CircuitsProviderNetworksDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewCircuitsProviderNetworksDeleteDefault creates a CircuitsProviderNetworksDeleteDefault with default headers values
-func NewCircuitsProviderNetworksDeleteDefault(code int) *CircuitsProviderNetworksDeleteDefault {
-	return &CircuitsProviderNetworksDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsProviderNetworksDeleteDefault describes a response with status code -1, with default header values.
-
-CircuitsProviderNetworksDeleteDefault circuits provider networks delete default
-*/
-type CircuitsProviderNetworksDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits provider networks delete default response
-func (o *CircuitsProviderNetworksDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsProviderNetworksDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /circuits/provider-networks/{id}/][%d] circuits_provider-networks_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsProviderNetworksDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsProviderNetworksDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -22,7 +22,6 @@ package ipam
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *IpamRouteTargetsBulkDeleteReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewIpamRouteTargetsBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewIpamRouteTargetsBulkDeleteNoContent() *IpamRouteTargetsBulkDeleteNoConte
 	return &IpamRouteTargetsBulkDeleteNoContent{}
 }
 
-/* IpamRouteTargetsBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamRouteTargetsBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 IpamRouteTargetsBulkDeleteNoContent ipam route targets bulk delete no content
 */
 type IpamRouteTargetsBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this ipam route targets bulk delete no content response has a 2xx status code
+func (o *IpamRouteTargetsBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam route targets bulk delete no content response has a 3xx status code
+func (o *IpamRouteTargetsBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam route targets bulk delete no content response has a 4xx status code
+func (o *IpamRouteTargetsBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam route targets bulk delete no content response has a 5xx status code
+func (o *IpamRouteTargetsBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam route targets bulk delete no content response a status code equal to that given
+func (o *IpamRouteTargetsBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *IpamRouteTargetsBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /ipam/route-targets/][%d] ipamRouteTargetsBulkDeleteNoContent ", 204)
 }
 
+func (o *IpamRouteTargetsBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /ipam/route-targets/][%d] ipamRouteTargetsBulkDeleteNoContent ", 204)
+}
+
 func (o *IpamRouteTargetsBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewIpamRouteTargetsBulkDeleteDefault creates a IpamRouteTargetsBulkDeleteDefault with default headers values
-func NewIpamRouteTargetsBulkDeleteDefault(code int) *IpamRouteTargetsBulkDeleteDefault {
-	return &IpamRouteTargetsBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamRouteTargetsBulkDeleteDefault describes a response with status code -1, with default header values.
-
-IpamRouteTargetsBulkDeleteDefault ipam route targets bulk delete default
-*/
-type IpamRouteTargetsBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam route targets bulk delete default response
-func (o *IpamRouteTargetsBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamRouteTargetsBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/route-targets/][%d] ipam_route-targets_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamRouteTargetsBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamRouteTargetsBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

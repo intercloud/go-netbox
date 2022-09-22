@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPowerOutletsListReader is a Reader for the DcimPowerOutletsList structure.
@@ -50,14 +50,7 @@ func (o *DcimPowerOutletsListReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerOutletsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimPowerOutletsListOK() *DcimPowerOutletsListOK {
 	return &DcimPowerOutletsListOK{}
 }
 
-/* DcimPowerOutletsListOK describes a response with status code 200, with default header values.
+/*
+DcimPowerOutletsListOK describes a response with status code 200, with default header values.
 
 DcimPowerOutletsListOK dcim power outlets list o k
 */
@@ -74,9 +68,39 @@ type DcimPowerOutletsListOK struct {
 	Payload *DcimPowerOutletsListOKBody
 }
 
+// IsSuccess returns true when this dcim power outlets list o k response has a 2xx status code
+func (o *DcimPowerOutletsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power outlets list o k response has a 3xx status code
+func (o *DcimPowerOutletsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power outlets list o k response has a 4xx status code
+func (o *DcimPowerOutletsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power outlets list o k response has a 5xx status code
+func (o *DcimPowerOutletsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power outlets list o k response a status code equal to that given
+func (o *DcimPowerOutletsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimPowerOutletsListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/power-outlets/][%d] dcimPowerOutletsListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimPowerOutletsListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/power-outlets/][%d] dcimPowerOutletsListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimPowerOutletsListOK) GetPayload() *DcimPowerOutletsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimPowerOutletsListOK) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-// NewDcimPowerOutletsListDefault creates a DcimPowerOutletsListDefault with default headers values
-func NewDcimPowerOutletsListDefault(code int) *DcimPowerOutletsListDefault {
-	return &DcimPowerOutletsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerOutletsListDefault describes a response with status code -1, with default header values.
-
-DcimPowerOutletsListDefault dcim power outlets list default
-*/
-type DcimPowerOutletsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power outlets list default response
-func (o *DcimPowerOutletsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerOutletsListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/power-outlets/][%d] dcim_power-outlets_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerOutletsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerOutletsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimPowerOutletsListOKBody dcim power outlets list o k body
+/*
+DcimPowerOutletsListOKBody dcim power outlets list o k body
 swagger:model DcimPowerOutletsListOKBody
 */
 type DcimPowerOutletsListOKBody struct {

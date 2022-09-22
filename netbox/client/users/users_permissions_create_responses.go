@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersPermissionsCreateReader is a Reader for the UsersPermissionsCreate structure.
@@ -45,14 +45,7 @@ func (o *UsersPermissionsCreateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewUsersPermissionsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersPermissionsCreateCreated() *UsersPermissionsCreateCreated {
 	return &UsersPermissionsCreateCreated{}
 }
 
-/* UsersPermissionsCreateCreated describes a response with status code 201, with default header values.
+/*
+UsersPermissionsCreateCreated describes a response with status code 201, with default header values.
 
 UsersPermissionsCreateCreated users permissions create created
 */
@@ -69,9 +63,39 @@ type UsersPermissionsCreateCreated struct {
 	Payload *models.ObjectPermission
 }
 
+// IsSuccess returns true when this users permissions create created response has a 2xx status code
+func (o *UsersPermissionsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users permissions create created response has a 3xx status code
+func (o *UsersPermissionsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users permissions create created response has a 4xx status code
+func (o *UsersPermissionsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users permissions create created response has a 5xx status code
+func (o *UsersPermissionsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users permissions create created response a status code equal to that given
+func (o *UsersPermissionsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *UsersPermissionsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /users/permissions/][%d] usersPermissionsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *UsersPermissionsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /users/permissions/][%d] usersPermissionsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *UsersPermissionsCreateCreated) GetPayload() *models.ObjectPermission {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersPermissionsCreateCreated) readResponse(response runtime.ClientResp
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersPermissionsCreateDefault creates a UsersPermissionsCreateDefault with default headers values
-func NewUsersPermissionsCreateDefault(code int) *UsersPermissionsCreateDefault {
-	return &UsersPermissionsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersPermissionsCreateDefault describes a response with status code -1, with default header values.
-
-UsersPermissionsCreateDefault users permissions create default
-*/
-type UsersPermissionsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users permissions create default response
-func (o *UsersPermissionsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersPermissionsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /users/permissions/][%d] users_permissions_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersPermissionsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersPermissionsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

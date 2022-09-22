@@ -21,6 +21,8 @@ package ipam
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -235,24 +237,6 @@ type ClientService interface {
 
 	IpamRouteTargetsUpdate(params *IpamRouteTargetsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsUpdateOK, error)
 
-	IpamServiceTemplatesBulkDelete(params *IpamServiceTemplatesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesBulkDeleteNoContent, error)
-
-	IpamServiceTemplatesBulkPartialUpdate(params *IpamServiceTemplatesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesBulkPartialUpdateOK, error)
-
-	IpamServiceTemplatesBulkUpdate(params *IpamServiceTemplatesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesBulkUpdateOK, error)
-
-	IpamServiceTemplatesCreate(params *IpamServiceTemplatesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesCreateCreated, error)
-
-	IpamServiceTemplatesDelete(params *IpamServiceTemplatesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesDeleteNoContent, error)
-
-	IpamServiceTemplatesList(params *IpamServiceTemplatesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesListOK, error)
-
-	IpamServiceTemplatesPartialUpdate(params *IpamServiceTemplatesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesPartialUpdateOK, error)
-
-	IpamServiceTemplatesRead(params *IpamServiceTemplatesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesReadOK, error)
-
-	IpamServiceTemplatesUpdate(params *IpamServiceTemplatesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesUpdateOK, error)
-
 	IpamServicesBulkDelete(params *IpamServicesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesBulkDeleteNoContent, error)
 
 	IpamServicesBulkPartialUpdate(params *IpamServicesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesBulkPartialUpdateOK, error)
@@ -270,10 +254,6 @@ type ClientService interface {
 	IpamServicesRead(params *IpamServicesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesReadOK, error)
 
 	IpamServicesUpdate(params *IpamServicesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesUpdateOK, error)
-
-	IpamVlanGroupsAvailableVlansCreate(params *IpamVlanGroupsAvailableVlansCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsAvailableVlansCreateCreated, error)
-
-	IpamVlanGroupsAvailableVlansList(params *IpamVlanGroupsAvailableVlansListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsAvailableVlansListOK, error)
 
 	IpamVlanGroupsBulkDelete(params *IpamVlanGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsBulkDeleteNoContent, error)
 
@@ -333,7 +313,7 @@ type ClientService interface {
 }
 
 /*
-  IpamAggregatesBulkDelete ipam aggregates bulk delete API
+IpamAggregatesBulkDelete ipam aggregates bulk delete API
 */
 func (a *Client) IpamAggregatesBulkDelete(params *IpamAggregatesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -366,12 +346,13 @@ func (a *Client) IpamAggregatesBulkDelete(params *IpamAggregatesBulkDeleteParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesBulkPartialUpdate ipam aggregates bulk partial update API
+IpamAggregatesBulkPartialUpdate ipam aggregates bulk partial update API
 */
 func (a *Client) IpamAggregatesBulkPartialUpdate(params *IpamAggregatesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -404,12 +385,13 @@ func (a *Client) IpamAggregatesBulkPartialUpdate(params *IpamAggregatesBulkParti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesBulkUpdate ipam aggregates bulk update API
+IpamAggregatesBulkUpdate ipam aggregates bulk update API
 */
 func (a *Client) IpamAggregatesBulkUpdate(params *IpamAggregatesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -442,12 +424,13 @@ func (a *Client) IpamAggregatesBulkUpdate(params *IpamAggregatesBulkUpdateParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesCreate ipam aggregates create API
+IpamAggregatesCreate ipam aggregates create API
 */
 func (a *Client) IpamAggregatesCreate(params *IpamAggregatesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -480,12 +463,13 @@ func (a *Client) IpamAggregatesCreate(params *IpamAggregatesCreateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesDelete ipam aggregates delete API
+IpamAggregatesDelete ipam aggregates delete API
 */
 func (a *Client) IpamAggregatesDelete(params *IpamAggregatesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -518,12 +502,13 @@ func (a *Client) IpamAggregatesDelete(params *IpamAggregatesDeleteParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamAggregatesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamAggregatesList(params *IpamAggregatesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesListOK, error) {
 	// TODO: Validate the params before sending
@@ -556,12 +541,13 @@ func (a *Client) IpamAggregatesList(params *IpamAggregatesListParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesPartialUpdate ipam aggregates partial update API
+IpamAggregatesPartialUpdate ipam aggregates partial update API
 */
 func (a *Client) IpamAggregatesPartialUpdate(params *IpamAggregatesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -594,12 +580,13 @@ func (a *Client) IpamAggregatesPartialUpdate(params *IpamAggregatesPartialUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesRead ipam aggregates read API
+IpamAggregatesRead ipam aggregates read API
 */
 func (a *Client) IpamAggregatesRead(params *IpamAggregatesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -632,12 +619,13 @@ func (a *Client) IpamAggregatesRead(params *IpamAggregatesReadParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAggregatesUpdate ipam aggregates update API
+IpamAggregatesUpdate ipam aggregates update API
 */
 func (a *Client) IpamAggregatesUpdate(params *IpamAggregatesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAggregatesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -670,12 +658,13 @@ func (a *Client) IpamAggregatesUpdate(params *IpamAggregatesUpdateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAggregatesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_aggregates_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsBulkDelete ipam asns bulk delete API
+IpamAsnsBulkDelete ipam asns bulk delete API
 */
 func (a *Client) IpamAsnsBulkDelete(params *IpamAsnsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -708,12 +697,13 @@ func (a *Client) IpamAsnsBulkDelete(params *IpamAsnsBulkDeleteParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsBulkPartialUpdate ipam asns bulk partial update API
+IpamAsnsBulkPartialUpdate ipam asns bulk partial update API
 */
 func (a *Client) IpamAsnsBulkPartialUpdate(params *IpamAsnsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -746,12 +736,13 @@ func (a *Client) IpamAsnsBulkPartialUpdate(params *IpamAsnsBulkPartialUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsBulkUpdate ipam asns bulk update API
+IpamAsnsBulkUpdate ipam asns bulk update API
 */
 func (a *Client) IpamAsnsBulkUpdate(params *IpamAsnsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -784,12 +775,13 @@ func (a *Client) IpamAsnsBulkUpdate(params *IpamAsnsBulkUpdateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsCreate ipam asns create API
+IpamAsnsCreate ipam asns create API
 */
 func (a *Client) IpamAsnsCreate(params *IpamAsnsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -822,12 +814,13 @@ func (a *Client) IpamAsnsCreate(params *IpamAsnsCreateParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsDelete ipam asns delete API
+IpamAsnsDelete ipam asns delete API
 */
 func (a *Client) IpamAsnsDelete(params *IpamAsnsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -860,12 +853,13 @@ func (a *Client) IpamAsnsDelete(params *IpamAsnsDeleteParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamAsnsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamAsnsList(params *IpamAsnsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsListOK, error) {
 	// TODO: Validate the params before sending
@@ -898,12 +892,13 @@ func (a *Client) IpamAsnsList(params *IpamAsnsListParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsPartialUpdate ipam asns partial update API
+IpamAsnsPartialUpdate ipam asns partial update API
 */
 func (a *Client) IpamAsnsPartialUpdate(params *IpamAsnsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -936,12 +931,13 @@ func (a *Client) IpamAsnsPartialUpdate(params *IpamAsnsPartialUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsRead ipam asns read API
+IpamAsnsRead ipam asns read API
 */
 func (a *Client) IpamAsnsRead(params *IpamAsnsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -974,12 +970,13 @@ func (a *Client) IpamAsnsRead(params *IpamAsnsReadParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamAsnsUpdate ipam asns update API
+IpamAsnsUpdate ipam asns update API
 */
 func (a *Client) IpamAsnsUpdate(params *IpamAsnsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamAsnsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1012,12 +1009,13 @@ func (a *Client) IpamAsnsUpdate(params *IpamAsnsUpdateParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamAsnsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_asns_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsBulkDelete ipam fhrp group assignments bulk delete API
+IpamFhrpGroupAssignmentsBulkDelete ipam fhrp group assignments bulk delete API
 */
 func (a *Client) IpamFhrpGroupAssignmentsBulkDelete(params *IpamFhrpGroupAssignmentsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1050,12 +1048,13 @@ func (a *Client) IpamFhrpGroupAssignmentsBulkDelete(params *IpamFhrpGroupAssignm
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsBulkPartialUpdate ipam fhrp group assignments bulk partial update API
+IpamFhrpGroupAssignmentsBulkPartialUpdate ipam fhrp group assignments bulk partial update API
 */
 func (a *Client) IpamFhrpGroupAssignmentsBulkPartialUpdate(params *IpamFhrpGroupAssignmentsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1088,12 +1087,13 @@ func (a *Client) IpamFhrpGroupAssignmentsBulkPartialUpdate(params *IpamFhrpGroup
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsBulkUpdate ipam fhrp group assignments bulk update API
+IpamFhrpGroupAssignmentsBulkUpdate ipam fhrp group assignments bulk update API
 */
 func (a *Client) IpamFhrpGroupAssignmentsBulkUpdate(params *IpamFhrpGroupAssignmentsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1126,12 +1126,13 @@ func (a *Client) IpamFhrpGroupAssignmentsBulkUpdate(params *IpamFhrpGroupAssignm
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsCreate ipam fhrp group assignments create API
+IpamFhrpGroupAssignmentsCreate ipam fhrp group assignments create API
 */
 func (a *Client) IpamFhrpGroupAssignmentsCreate(params *IpamFhrpGroupAssignmentsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1164,12 +1165,13 @@ func (a *Client) IpamFhrpGroupAssignmentsCreate(params *IpamFhrpGroupAssignments
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsDelete ipam fhrp group assignments delete API
+IpamFhrpGroupAssignmentsDelete ipam fhrp group assignments delete API
 */
 func (a *Client) IpamFhrpGroupAssignmentsDelete(params *IpamFhrpGroupAssignmentsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1202,12 +1204,13 @@ func (a *Client) IpamFhrpGroupAssignmentsDelete(params *IpamFhrpGroupAssignments
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamFhrpGroupAssignmentsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamFhrpGroupAssignmentsList(params *IpamFhrpGroupAssignmentsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsListOK, error) {
 	// TODO: Validate the params before sending
@@ -1240,12 +1243,13 @@ func (a *Client) IpamFhrpGroupAssignmentsList(params *IpamFhrpGroupAssignmentsLi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsPartialUpdate ipam fhrp group assignments partial update API
+IpamFhrpGroupAssignmentsPartialUpdate ipam fhrp group assignments partial update API
 */
 func (a *Client) IpamFhrpGroupAssignmentsPartialUpdate(params *IpamFhrpGroupAssignmentsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1278,12 +1282,13 @@ func (a *Client) IpamFhrpGroupAssignmentsPartialUpdate(params *IpamFhrpGroupAssi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsRead ipam fhrp group assignments read API
+IpamFhrpGroupAssignmentsRead ipam fhrp group assignments read API
 */
 func (a *Client) IpamFhrpGroupAssignmentsRead(params *IpamFhrpGroupAssignmentsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1316,12 +1321,13 @@ func (a *Client) IpamFhrpGroupAssignmentsRead(params *IpamFhrpGroupAssignmentsRe
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupAssignmentsUpdate ipam fhrp group assignments update API
+IpamFhrpGroupAssignmentsUpdate ipam fhrp group assignments update API
 */
 func (a *Client) IpamFhrpGroupAssignmentsUpdate(params *IpamFhrpGroupAssignmentsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupAssignmentsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1354,12 +1360,13 @@ func (a *Client) IpamFhrpGroupAssignmentsUpdate(params *IpamFhrpGroupAssignments
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupAssignmentsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-group-assignments_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsBulkDelete ipam fhrp groups bulk delete API
+IpamFhrpGroupsBulkDelete ipam fhrp groups bulk delete API
 */
 func (a *Client) IpamFhrpGroupsBulkDelete(params *IpamFhrpGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1392,12 +1399,13 @@ func (a *Client) IpamFhrpGroupsBulkDelete(params *IpamFhrpGroupsBulkDeleteParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsBulkPartialUpdate ipam fhrp groups bulk partial update API
+IpamFhrpGroupsBulkPartialUpdate ipam fhrp groups bulk partial update API
 */
 func (a *Client) IpamFhrpGroupsBulkPartialUpdate(params *IpamFhrpGroupsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1430,12 +1438,13 @@ func (a *Client) IpamFhrpGroupsBulkPartialUpdate(params *IpamFhrpGroupsBulkParti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsBulkUpdate ipam fhrp groups bulk update API
+IpamFhrpGroupsBulkUpdate ipam fhrp groups bulk update API
 */
 func (a *Client) IpamFhrpGroupsBulkUpdate(params *IpamFhrpGroupsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1468,12 +1477,13 @@ func (a *Client) IpamFhrpGroupsBulkUpdate(params *IpamFhrpGroupsBulkUpdateParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsCreate ipam fhrp groups create API
+IpamFhrpGroupsCreate ipam fhrp groups create API
 */
 func (a *Client) IpamFhrpGroupsCreate(params *IpamFhrpGroupsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1506,12 +1516,13 @@ func (a *Client) IpamFhrpGroupsCreate(params *IpamFhrpGroupsCreateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsDelete ipam fhrp groups delete API
+IpamFhrpGroupsDelete ipam fhrp groups delete API
 */
 func (a *Client) IpamFhrpGroupsDelete(params *IpamFhrpGroupsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1544,12 +1555,13 @@ func (a *Client) IpamFhrpGroupsDelete(params *IpamFhrpGroupsDeleteParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamFhrpGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamFhrpGroupsList(params *IpamFhrpGroupsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsListOK, error) {
 	// TODO: Validate the params before sending
@@ -1582,12 +1594,13 @@ func (a *Client) IpamFhrpGroupsList(params *IpamFhrpGroupsListParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsPartialUpdate ipam fhrp groups partial update API
+IpamFhrpGroupsPartialUpdate ipam fhrp groups partial update API
 */
 func (a *Client) IpamFhrpGroupsPartialUpdate(params *IpamFhrpGroupsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1620,12 +1633,13 @@ func (a *Client) IpamFhrpGroupsPartialUpdate(params *IpamFhrpGroupsPartialUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsRead ipam fhrp groups read API
+IpamFhrpGroupsRead ipam fhrp groups read API
 */
 func (a *Client) IpamFhrpGroupsRead(params *IpamFhrpGroupsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1658,12 +1672,13 @@ func (a *Client) IpamFhrpGroupsRead(params *IpamFhrpGroupsReadParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamFhrpGroupsUpdate ipam fhrp groups update API
+IpamFhrpGroupsUpdate ipam fhrp groups update API
 */
 func (a *Client) IpamFhrpGroupsUpdate(params *IpamFhrpGroupsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamFhrpGroupsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1696,12 +1711,13 @@ func (a *Client) IpamFhrpGroupsUpdate(params *IpamFhrpGroupsUpdateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamFhrpGroupsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_fhrp-groups_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesBulkDelete ipam ip addresses bulk delete API
+IpamIPAddressesBulkDelete ipam ip addresses bulk delete API
 */
 func (a *Client) IpamIPAddressesBulkDelete(params *IpamIPAddressesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1734,12 +1750,13 @@ func (a *Client) IpamIPAddressesBulkDelete(params *IpamIPAddressesBulkDeletePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesBulkPartialUpdate ipam ip addresses bulk partial update API
+IpamIPAddressesBulkPartialUpdate ipam ip addresses bulk partial update API
 */
 func (a *Client) IpamIPAddressesBulkPartialUpdate(params *IpamIPAddressesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1772,12 +1789,13 @@ func (a *Client) IpamIPAddressesBulkPartialUpdate(params *IpamIPAddressesBulkPar
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesBulkUpdate ipam ip addresses bulk update API
+IpamIPAddressesBulkUpdate ipam ip addresses bulk update API
 */
 func (a *Client) IpamIPAddressesBulkUpdate(params *IpamIPAddressesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1810,12 +1828,13 @@ func (a *Client) IpamIPAddressesBulkUpdate(params *IpamIPAddressesBulkUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesCreate ipam ip addresses create API
+IpamIPAddressesCreate ipam ip addresses create API
 */
 func (a *Client) IpamIPAddressesCreate(params *IpamIPAddressesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -1848,12 +1867,13 @@ func (a *Client) IpamIPAddressesCreate(params *IpamIPAddressesCreateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesDelete ipam ip addresses delete API
+IpamIPAddressesDelete ipam ip addresses delete API
 */
 func (a *Client) IpamIPAddressesDelete(params *IpamIPAddressesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -1886,12 +1906,13 @@ func (a *Client) IpamIPAddressesDelete(params *IpamIPAddressesDeleteParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamIPAddressesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamIPAddressesList(params *IpamIPAddressesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesListOK, error) {
 	// TODO: Validate the params before sending
@@ -1924,12 +1945,13 @@ func (a *Client) IpamIPAddressesList(params *IpamIPAddressesListParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesPartialUpdate ipam ip addresses partial update API
+IpamIPAddressesPartialUpdate ipam ip addresses partial update API
 */
 func (a *Client) IpamIPAddressesPartialUpdate(params *IpamIPAddressesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1962,12 +1984,13 @@ func (a *Client) IpamIPAddressesPartialUpdate(params *IpamIPAddressesPartialUpda
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesRead ipam ip addresses read API
+IpamIPAddressesRead ipam ip addresses read API
 */
 func (a *Client) IpamIPAddressesRead(params *IpamIPAddressesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -2000,12 +2023,13 @@ func (a *Client) IpamIPAddressesRead(params *IpamIPAddressesReadParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPAddressesUpdate ipam ip addresses update API
+IpamIPAddressesUpdate ipam ip addresses update API
 */
 func (a *Client) IpamIPAddressesUpdate(params *IpamIPAddressesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPAddressesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2038,12 +2062,13 @@ func (a *Client) IpamIPAddressesUpdate(params *IpamIPAddressesUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPAddressesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-addresses_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesAvailableIpsCreate ipam ip ranges available ips create API
+IpamIPRangesAvailableIpsCreate ipam ip ranges available ips create API
 */
 func (a *Client) IpamIPRangesAvailableIpsCreate(params *IpamIPRangesAvailableIpsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesAvailableIpsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -2076,12 +2101,13 @@ func (a *Client) IpamIPRangesAvailableIpsCreate(params *IpamIPRangesAvailableIps
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesAvailableIpsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_available-ips_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesAvailableIpsList ipam ip ranges available ips list API
+IpamIPRangesAvailableIpsList ipam ip ranges available ips list API
 */
 func (a *Client) IpamIPRangesAvailableIpsList(params *IpamIPRangesAvailableIpsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesAvailableIpsListOK, error) {
 	// TODO: Validate the params before sending
@@ -2114,12 +2140,13 @@ func (a *Client) IpamIPRangesAvailableIpsList(params *IpamIPRangesAvailableIpsLi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesAvailableIpsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_available-ips_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesBulkDelete ipam ip ranges bulk delete API
+IpamIPRangesBulkDelete ipam ip ranges bulk delete API
 */
 func (a *Client) IpamIPRangesBulkDelete(params *IpamIPRangesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -2152,12 +2179,13 @@ func (a *Client) IpamIPRangesBulkDelete(params *IpamIPRangesBulkDeleteParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesBulkPartialUpdate ipam ip ranges bulk partial update API
+IpamIPRangesBulkPartialUpdate ipam ip ranges bulk partial update API
 */
 func (a *Client) IpamIPRangesBulkPartialUpdate(params *IpamIPRangesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2190,12 +2218,13 @@ func (a *Client) IpamIPRangesBulkPartialUpdate(params *IpamIPRangesBulkPartialUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesBulkUpdate ipam ip ranges bulk update API
+IpamIPRangesBulkUpdate ipam ip ranges bulk update API
 */
 func (a *Client) IpamIPRangesBulkUpdate(params *IpamIPRangesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2228,12 +2257,13 @@ func (a *Client) IpamIPRangesBulkUpdate(params *IpamIPRangesBulkUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesCreate ipam ip ranges create API
+IpamIPRangesCreate ipam ip ranges create API
 */
 func (a *Client) IpamIPRangesCreate(params *IpamIPRangesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -2266,12 +2296,13 @@ func (a *Client) IpamIPRangesCreate(params *IpamIPRangesCreateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesDelete ipam ip ranges delete API
+IpamIPRangesDelete ipam ip ranges delete API
 */
 func (a *Client) IpamIPRangesDelete(params *IpamIPRangesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -2304,12 +2335,13 @@ func (a *Client) IpamIPRangesDelete(params *IpamIPRangesDeleteParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamIPRangesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamIPRangesList(params *IpamIPRangesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesListOK, error) {
 	// TODO: Validate the params before sending
@@ -2342,12 +2374,13 @@ func (a *Client) IpamIPRangesList(params *IpamIPRangesListParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesPartialUpdate ipam ip ranges partial update API
+IpamIPRangesPartialUpdate ipam ip ranges partial update API
 */
 func (a *Client) IpamIPRangesPartialUpdate(params *IpamIPRangesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2380,12 +2413,13 @@ func (a *Client) IpamIPRangesPartialUpdate(params *IpamIPRangesPartialUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesRead ipam ip ranges read API
+IpamIPRangesRead ipam ip ranges read API
 */
 func (a *Client) IpamIPRangesRead(params *IpamIPRangesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -2418,12 +2452,13 @@ func (a *Client) IpamIPRangesRead(params *IpamIPRangesReadParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamIPRangesUpdate ipam ip ranges update API
+IpamIPRangesUpdate ipam ip ranges update API
 */
 func (a *Client) IpamIPRangesUpdate(params *IpamIPRangesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamIPRangesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2456,12 +2491,13 @@ func (a *Client) IpamIPRangesUpdate(params *IpamIPRangesUpdateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamIPRangesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_ip-ranges_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesAvailableIpsCreate ipam prefixes available ips create API
+IpamPrefixesAvailableIpsCreate ipam prefixes available ips create API
 */
 func (a *Client) IpamPrefixesAvailableIpsCreate(params *IpamPrefixesAvailableIpsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesAvailableIpsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -2494,12 +2530,13 @@ func (a *Client) IpamPrefixesAvailableIpsCreate(params *IpamPrefixesAvailableIps
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesAvailableIpsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_available-ips_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesAvailableIpsList ipam prefixes available ips list API
+IpamPrefixesAvailableIpsList ipam prefixes available ips list API
 */
 func (a *Client) IpamPrefixesAvailableIpsList(params *IpamPrefixesAvailableIpsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesAvailableIpsListOK, error) {
 	// TODO: Validate the params before sending
@@ -2532,12 +2569,13 @@ func (a *Client) IpamPrefixesAvailableIpsList(params *IpamPrefixesAvailableIpsLi
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesAvailableIpsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_available-ips_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesAvailablePrefixesCreate ipam prefixes available prefixes create API
+IpamPrefixesAvailablePrefixesCreate ipam prefixes available prefixes create API
 */
 func (a *Client) IpamPrefixesAvailablePrefixesCreate(params *IpamPrefixesAvailablePrefixesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesAvailablePrefixesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -2570,12 +2608,13 @@ func (a *Client) IpamPrefixesAvailablePrefixesCreate(params *IpamPrefixesAvailab
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesAvailablePrefixesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_available-prefixes_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesAvailablePrefixesList ipam prefixes available prefixes list API
+IpamPrefixesAvailablePrefixesList ipam prefixes available prefixes list API
 */
 func (a *Client) IpamPrefixesAvailablePrefixesList(params *IpamPrefixesAvailablePrefixesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesAvailablePrefixesListOK, error) {
 	// TODO: Validate the params before sending
@@ -2608,12 +2647,13 @@ func (a *Client) IpamPrefixesAvailablePrefixesList(params *IpamPrefixesAvailable
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesAvailablePrefixesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_available-prefixes_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesBulkDelete ipam prefixes bulk delete API
+IpamPrefixesBulkDelete ipam prefixes bulk delete API
 */
 func (a *Client) IpamPrefixesBulkDelete(params *IpamPrefixesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -2646,12 +2686,13 @@ func (a *Client) IpamPrefixesBulkDelete(params *IpamPrefixesBulkDeleteParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesBulkPartialUpdate ipam prefixes bulk partial update API
+IpamPrefixesBulkPartialUpdate ipam prefixes bulk partial update API
 */
 func (a *Client) IpamPrefixesBulkPartialUpdate(params *IpamPrefixesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2684,12 +2725,13 @@ func (a *Client) IpamPrefixesBulkPartialUpdate(params *IpamPrefixesBulkPartialUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesBulkUpdate ipam prefixes bulk update API
+IpamPrefixesBulkUpdate ipam prefixes bulk update API
 */
 func (a *Client) IpamPrefixesBulkUpdate(params *IpamPrefixesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2722,12 +2764,13 @@ func (a *Client) IpamPrefixesBulkUpdate(params *IpamPrefixesBulkUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesCreate ipam prefixes create API
+IpamPrefixesCreate ipam prefixes create API
 */
 func (a *Client) IpamPrefixesCreate(params *IpamPrefixesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -2760,12 +2803,13 @@ func (a *Client) IpamPrefixesCreate(params *IpamPrefixesCreateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesDelete ipam prefixes delete API
+IpamPrefixesDelete ipam prefixes delete API
 */
 func (a *Client) IpamPrefixesDelete(params *IpamPrefixesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -2798,12 +2842,13 @@ func (a *Client) IpamPrefixesDelete(params *IpamPrefixesDeleteParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamPrefixesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamPrefixesList(params *IpamPrefixesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesListOK, error) {
 	// TODO: Validate the params before sending
@@ -2836,12 +2881,13 @@ func (a *Client) IpamPrefixesList(params *IpamPrefixesListParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesPartialUpdate ipam prefixes partial update API
+IpamPrefixesPartialUpdate ipam prefixes partial update API
 */
 func (a *Client) IpamPrefixesPartialUpdate(params *IpamPrefixesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2874,12 +2920,13 @@ func (a *Client) IpamPrefixesPartialUpdate(params *IpamPrefixesPartialUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesRead ipam prefixes read API
+IpamPrefixesRead ipam prefixes read API
 */
 func (a *Client) IpamPrefixesRead(params *IpamPrefixesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -2912,12 +2959,13 @@ func (a *Client) IpamPrefixesRead(params *IpamPrefixesReadParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamPrefixesUpdate ipam prefixes update API
+IpamPrefixesUpdate ipam prefixes update API
 */
 func (a *Client) IpamPrefixesUpdate(params *IpamPrefixesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamPrefixesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -2950,12 +2998,13 @@ func (a *Client) IpamPrefixesUpdate(params *IpamPrefixesUpdateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamPrefixesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_prefixes_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsBulkDelete ipam rirs bulk delete API
+IpamRirsBulkDelete ipam rirs bulk delete API
 */
 func (a *Client) IpamRirsBulkDelete(params *IpamRirsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -2988,12 +3037,13 @@ func (a *Client) IpamRirsBulkDelete(params *IpamRirsBulkDeleteParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsBulkPartialUpdate ipam rirs bulk partial update API
+IpamRirsBulkPartialUpdate ipam rirs bulk partial update API
 */
 func (a *Client) IpamRirsBulkPartialUpdate(params *IpamRirsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3026,12 +3076,13 @@ func (a *Client) IpamRirsBulkPartialUpdate(params *IpamRirsBulkPartialUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsBulkUpdate ipam rirs bulk update API
+IpamRirsBulkUpdate ipam rirs bulk update API
 */
 func (a *Client) IpamRirsBulkUpdate(params *IpamRirsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3064,12 +3115,13 @@ func (a *Client) IpamRirsBulkUpdate(params *IpamRirsBulkUpdateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsCreate ipam rirs create API
+IpamRirsCreate ipam rirs create API
 */
 func (a *Client) IpamRirsCreate(params *IpamRirsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -3102,12 +3154,13 @@ func (a *Client) IpamRirsCreate(params *IpamRirsCreateParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsDelete ipam rirs delete API
+IpamRirsDelete ipam rirs delete API
 */
 func (a *Client) IpamRirsDelete(params *IpamRirsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -3140,12 +3193,13 @@ func (a *Client) IpamRirsDelete(params *IpamRirsDeleteParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamRirsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamRirsList(params *IpamRirsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsListOK, error) {
 	// TODO: Validate the params before sending
@@ -3178,12 +3232,13 @@ func (a *Client) IpamRirsList(params *IpamRirsListParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsPartialUpdate ipam rirs partial update API
+IpamRirsPartialUpdate ipam rirs partial update API
 */
 func (a *Client) IpamRirsPartialUpdate(params *IpamRirsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3216,12 +3271,13 @@ func (a *Client) IpamRirsPartialUpdate(params *IpamRirsPartialUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsRead ipam rirs read API
+IpamRirsRead ipam rirs read API
 */
 func (a *Client) IpamRirsRead(params *IpamRirsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -3254,12 +3310,13 @@ func (a *Client) IpamRirsRead(params *IpamRirsReadParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRirsUpdate ipam rirs update API
+IpamRirsUpdate ipam rirs update API
 */
 func (a *Client) IpamRirsUpdate(params *IpamRirsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRirsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3292,12 +3349,13 @@ func (a *Client) IpamRirsUpdate(params *IpamRirsUpdateParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRirsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_rirs_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesBulkDelete ipam roles bulk delete API
+IpamRolesBulkDelete ipam roles bulk delete API
 */
 func (a *Client) IpamRolesBulkDelete(params *IpamRolesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -3330,12 +3388,13 @@ func (a *Client) IpamRolesBulkDelete(params *IpamRolesBulkDeleteParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesBulkPartialUpdate ipam roles bulk partial update API
+IpamRolesBulkPartialUpdate ipam roles bulk partial update API
 */
 func (a *Client) IpamRolesBulkPartialUpdate(params *IpamRolesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3368,12 +3427,13 @@ func (a *Client) IpamRolesBulkPartialUpdate(params *IpamRolesBulkPartialUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesBulkUpdate ipam roles bulk update API
+IpamRolesBulkUpdate ipam roles bulk update API
 */
 func (a *Client) IpamRolesBulkUpdate(params *IpamRolesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3406,12 +3466,13 @@ func (a *Client) IpamRolesBulkUpdate(params *IpamRolesBulkUpdateParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesCreate ipam roles create API
+IpamRolesCreate ipam roles create API
 */
 func (a *Client) IpamRolesCreate(params *IpamRolesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -3444,12 +3505,13 @@ func (a *Client) IpamRolesCreate(params *IpamRolesCreateParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesDelete ipam roles delete API
+IpamRolesDelete ipam roles delete API
 */
 func (a *Client) IpamRolesDelete(params *IpamRolesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -3482,12 +3544,13 @@ func (a *Client) IpamRolesDelete(params *IpamRolesDeleteParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamRolesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamRolesList(params *IpamRolesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesListOK, error) {
 	// TODO: Validate the params before sending
@@ -3520,12 +3583,13 @@ func (a *Client) IpamRolesList(params *IpamRolesListParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesPartialUpdate ipam roles partial update API
+IpamRolesPartialUpdate ipam roles partial update API
 */
 func (a *Client) IpamRolesPartialUpdate(params *IpamRolesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3558,12 +3622,13 @@ func (a *Client) IpamRolesPartialUpdate(params *IpamRolesPartialUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesRead ipam roles read API
+IpamRolesRead ipam roles read API
 */
 func (a *Client) IpamRolesRead(params *IpamRolesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -3596,12 +3661,13 @@ func (a *Client) IpamRolesRead(params *IpamRolesReadParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRolesUpdate ipam roles update API
+IpamRolesUpdate ipam roles update API
 */
 func (a *Client) IpamRolesUpdate(params *IpamRolesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRolesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3634,12 +3700,13 @@ func (a *Client) IpamRolesUpdate(params *IpamRolesUpdateParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRolesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_roles_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsBulkDelete ipam route targets bulk delete API
+IpamRouteTargetsBulkDelete ipam route targets bulk delete API
 */
 func (a *Client) IpamRouteTargetsBulkDelete(params *IpamRouteTargetsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -3672,12 +3739,13 @@ func (a *Client) IpamRouteTargetsBulkDelete(params *IpamRouteTargetsBulkDeletePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsBulkPartialUpdate ipam route targets bulk partial update API
+IpamRouteTargetsBulkPartialUpdate ipam route targets bulk partial update API
 */
 func (a *Client) IpamRouteTargetsBulkPartialUpdate(params *IpamRouteTargetsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3710,12 +3778,13 @@ func (a *Client) IpamRouteTargetsBulkPartialUpdate(params *IpamRouteTargetsBulkP
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsBulkUpdate ipam route targets bulk update API
+IpamRouteTargetsBulkUpdate ipam route targets bulk update API
 */
 func (a *Client) IpamRouteTargetsBulkUpdate(params *IpamRouteTargetsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3748,12 +3817,13 @@ func (a *Client) IpamRouteTargetsBulkUpdate(params *IpamRouteTargetsBulkUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsCreate ipam route targets create API
+IpamRouteTargetsCreate ipam route targets create API
 */
 func (a *Client) IpamRouteTargetsCreate(params *IpamRouteTargetsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -3786,12 +3856,13 @@ func (a *Client) IpamRouteTargetsCreate(params *IpamRouteTargetsCreateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsDelete ipam route targets delete API
+IpamRouteTargetsDelete ipam route targets delete API
 */
 func (a *Client) IpamRouteTargetsDelete(params *IpamRouteTargetsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -3824,12 +3895,13 @@ func (a *Client) IpamRouteTargetsDelete(params *IpamRouteTargetsDeleteParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamRouteTargetsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamRouteTargetsList(params *IpamRouteTargetsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsListOK, error) {
 	// TODO: Validate the params before sending
@@ -3862,12 +3934,13 @@ func (a *Client) IpamRouteTargetsList(params *IpamRouteTargetsListParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsPartialUpdate ipam route targets partial update API
+IpamRouteTargetsPartialUpdate ipam route targets partial update API
 */
 func (a *Client) IpamRouteTargetsPartialUpdate(params *IpamRouteTargetsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3900,12 +3973,13 @@ func (a *Client) IpamRouteTargetsPartialUpdate(params *IpamRouteTargetsPartialUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsRead ipam route targets read API
+IpamRouteTargetsRead ipam route targets read API
 */
 func (a *Client) IpamRouteTargetsRead(params *IpamRouteTargetsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -3938,12 +4012,13 @@ func (a *Client) IpamRouteTargetsRead(params *IpamRouteTargetsReadParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamRouteTargetsUpdate ipam route targets update API
+IpamRouteTargetsUpdate ipam route targets update API
 */
 func (a *Client) IpamRouteTargetsUpdate(params *IpamRouteTargetsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamRouteTargetsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -3976,354 +4051,13 @@ func (a *Client) IpamRouteTargetsUpdate(params *IpamRouteTargetsUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamRouteTargetsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_route-targets_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServiceTemplatesBulkDelete ipam service templates bulk delete API
-*/
-func (a *Client) IpamServiceTemplatesBulkDelete(params *IpamServiceTemplatesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesBulkDeleteNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesBulkDeleteParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_bulk_delete",
-		Method:             "DELETE",
-		PathPattern:        "/ipam/service-templates/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesBulkDeleteReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesBulkDeleteNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesBulkPartialUpdate ipam service templates bulk partial update API
-*/
-func (a *Client) IpamServiceTemplatesBulkPartialUpdate(params *IpamServiceTemplatesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesBulkPartialUpdateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesBulkPartialUpdateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_bulk_partial_update",
-		Method:             "PATCH",
-		PathPattern:        "/ipam/service-templates/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesBulkPartialUpdateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesBulkPartialUpdateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesBulkUpdate ipam service templates bulk update API
-*/
-func (a *Client) IpamServiceTemplatesBulkUpdate(params *IpamServiceTemplatesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesBulkUpdateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesBulkUpdateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_bulk_update",
-		Method:             "PUT",
-		PathPattern:        "/ipam/service-templates/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesBulkUpdateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesBulkUpdateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesCreate ipam service templates create API
-*/
-func (a *Client) IpamServiceTemplatesCreate(params *IpamServiceTemplatesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesCreateCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesCreateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_create",
-		Method:             "POST",
-		PathPattern:        "/ipam/service-templates/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesCreateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesCreateCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesDelete ipam service templates delete API
-*/
-func (a *Client) IpamServiceTemplatesDelete(params *IpamServiceTemplatesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesDeleteNoContent, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesDeleteParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_delete",
-		Method:             "DELETE",
-		PathPattern:        "/ipam/service-templates/{id}/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesDeleteReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesDeleteNoContent)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesList Overrides ListModelMixin to allow processing ExportTemplates.
-*/
-func (a *Client) IpamServiceTemplatesList(params *IpamServiceTemplatesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_list",
-		Method:             "GET",
-		PathPattern:        "/ipam/service-templates/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesListReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesListOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesPartialUpdate ipam service templates partial update API
-*/
-func (a *Client) IpamServiceTemplatesPartialUpdate(params *IpamServiceTemplatesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesPartialUpdateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesPartialUpdateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_partial_update",
-		Method:             "PATCH",
-		PathPattern:        "/ipam/service-templates/{id}/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesPartialUpdateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesPartialUpdateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesRead ipam service templates read API
-*/
-func (a *Client) IpamServiceTemplatesRead(params *IpamServiceTemplatesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesReadOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesReadParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_read",
-		Method:             "GET",
-		PathPattern:        "/ipam/service-templates/{id}/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesReadReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesReadOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServiceTemplatesUpdate ipam service templates update API
-*/
-func (a *Client) IpamServiceTemplatesUpdate(params *IpamServiceTemplatesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServiceTemplatesUpdateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamServiceTemplatesUpdateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_service-templates_update",
-		Method:             "PUT",
-		PathPattern:        "/ipam/service-templates/{id}/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamServiceTemplatesUpdateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamServiceTemplatesUpdateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamServiceTemplatesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamServicesBulkDelete ipam services bulk delete API
+IpamServicesBulkDelete ipam services bulk delete API
 */
 func (a *Client) IpamServicesBulkDelete(params *IpamServicesBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -4356,12 +4090,13 @@ func (a *Client) IpamServicesBulkDelete(params *IpamServicesBulkDeleteParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesBulkPartialUpdate ipam services bulk partial update API
+IpamServicesBulkPartialUpdate ipam services bulk partial update API
 */
 func (a *Client) IpamServicesBulkPartialUpdate(params *IpamServicesBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -4394,12 +4129,13 @@ func (a *Client) IpamServicesBulkPartialUpdate(params *IpamServicesBulkPartialUp
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesBulkUpdate ipam services bulk update API
+IpamServicesBulkUpdate ipam services bulk update API
 */
 func (a *Client) IpamServicesBulkUpdate(params *IpamServicesBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -4432,12 +4168,13 @@ func (a *Client) IpamServicesBulkUpdate(params *IpamServicesBulkUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesCreate ipam services create API
+IpamServicesCreate ipam services create API
 */
 func (a *Client) IpamServicesCreate(params *IpamServicesCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -4470,12 +4207,13 @@ func (a *Client) IpamServicesCreate(params *IpamServicesCreateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesDelete ipam services delete API
+IpamServicesDelete ipam services delete API
 */
 func (a *Client) IpamServicesDelete(params *IpamServicesDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -4508,12 +4246,13 @@ func (a *Client) IpamServicesDelete(params *IpamServicesDeleteParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamServicesList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamServicesList(params *IpamServicesListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesListOK, error) {
 	// TODO: Validate the params before sending
@@ -4546,12 +4285,13 @@ func (a *Client) IpamServicesList(params *IpamServicesListParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesPartialUpdate ipam services partial update API
+IpamServicesPartialUpdate ipam services partial update API
 */
 func (a *Client) IpamServicesPartialUpdate(params *IpamServicesPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -4584,12 +4324,13 @@ func (a *Client) IpamServicesPartialUpdate(params *IpamServicesPartialUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesRead ipam services read API
+IpamServicesRead ipam services read API
 */
 func (a *Client) IpamServicesRead(params *IpamServicesReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesReadOK, error) {
 	// TODO: Validate the params before sending
@@ -4622,12 +4363,13 @@ func (a *Client) IpamServicesRead(params *IpamServicesReadParams, authInfo runti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamServicesUpdate ipam services update API
+IpamServicesUpdate ipam services update API
 */
 func (a *Client) IpamServicesUpdate(params *IpamServicesUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamServicesUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -4660,88 +4402,13 @@ func (a *Client) IpamServicesUpdate(params *IpamServicesUpdateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamServicesUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_services_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsAvailableVlansCreate ipam vlan groups available vlans create API
-*/
-func (a *Client) IpamVlanGroupsAvailableVlansCreate(params *IpamVlanGroupsAvailableVlansCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsAvailableVlansCreateCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamVlanGroupsAvailableVlansCreateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_vlan-groups_available-vlans_create",
-		Method:             "POST",
-		PathPattern:        "/ipam/vlan-groups/{id}/available-vlans/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamVlanGroupsAvailableVlansCreateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamVlanGroupsAvailableVlansCreateCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsAvailableVlansCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamVlanGroupsAvailableVlansList ipam vlan groups available vlans list API
-*/
-func (a *Client) IpamVlanGroupsAvailableVlansList(params *IpamVlanGroupsAvailableVlansListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsAvailableVlansListOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewIpamVlanGroupsAvailableVlansListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "ipam_vlan-groups_available-vlans_list",
-		Method:             "GET",
-		PathPattern:        "/ipam/vlan-groups/{id}/available-vlans/",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &IpamVlanGroupsAvailableVlansListReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*IpamVlanGroupsAvailableVlansListOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsAvailableVlansListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-  IpamVlanGroupsBulkDelete ipam vlan groups bulk delete API
+IpamVlanGroupsBulkDelete ipam vlan groups bulk delete API
 */
 func (a *Client) IpamVlanGroupsBulkDelete(params *IpamVlanGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -4774,12 +4441,13 @@ func (a *Client) IpamVlanGroupsBulkDelete(params *IpamVlanGroupsBulkDeleteParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsBulkPartialUpdate ipam vlan groups bulk partial update API
+IpamVlanGroupsBulkPartialUpdate ipam vlan groups bulk partial update API
 */
 func (a *Client) IpamVlanGroupsBulkPartialUpdate(params *IpamVlanGroupsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -4812,12 +4480,13 @@ func (a *Client) IpamVlanGroupsBulkPartialUpdate(params *IpamVlanGroupsBulkParti
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsBulkUpdate ipam vlan groups bulk update API
+IpamVlanGroupsBulkUpdate ipam vlan groups bulk update API
 */
 func (a *Client) IpamVlanGroupsBulkUpdate(params *IpamVlanGroupsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -4850,12 +4519,13 @@ func (a *Client) IpamVlanGroupsBulkUpdate(params *IpamVlanGroupsBulkUpdateParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsCreate ipam vlan groups create API
+IpamVlanGroupsCreate ipam vlan groups create API
 */
 func (a *Client) IpamVlanGroupsCreate(params *IpamVlanGroupsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -4888,12 +4558,13 @@ func (a *Client) IpamVlanGroupsCreate(params *IpamVlanGroupsCreateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsDelete ipam vlan groups delete API
+IpamVlanGroupsDelete ipam vlan groups delete API
 */
 func (a *Client) IpamVlanGroupsDelete(params *IpamVlanGroupsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -4926,12 +4597,13 @@ func (a *Client) IpamVlanGroupsDelete(params *IpamVlanGroupsDeleteParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamVlanGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamVlanGroupsList(params *IpamVlanGroupsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsListOK, error) {
 	// TODO: Validate the params before sending
@@ -4964,12 +4636,13 @@ func (a *Client) IpamVlanGroupsList(params *IpamVlanGroupsListParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsPartialUpdate ipam vlan groups partial update API
+IpamVlanGroupsPartialUpdate ipam vlan groups partial update API
 */
 func (a *Client) IpamVlanGroupsPartialUpdate(params *IpamVlanGroupsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5002,12 +4675,13 @@ func (a *Client) IpamVlanGroupsPartialUpdate(params *IpamVlanGroupsPartialUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsRead ipam vlan groups read API
+IpamVlanGroupsRead ipam vlan groups read API
 */
 func (a *Client) IpamVlanGroupsRead(params *IpamVlanGroupsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -5040,12 +4714,13 @@ func (a *Client) IpamVlanGroupsRead(params *IpamVlanGroupsReadParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlanGroupsUpdate ipam vlan groups update API
+IpamVlanGroupsUpdate ipam vlan groups update API
 */
 func (a *Client) IpamVlanGroupsUpdate(params *IpamVlanGroupsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlanGroupsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5078,12 +4753,13 @@ func (a *Client) IpamVlanGroupsUpdate(params *IpamVlanGroupsUpdateParams, authIn
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlanGroupsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlan-groups_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansBulkDelete ipam vlans bulk delete API
+IpamVlansBulkDelete ipam vlans bulk delete API
 */
 func (a *Client) IpamVlansBulkDelete(params *IpamVlansBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -5116,12 +4792,13 @@ func (a *Client) IpamVlansBulkDelete(params *IpamVlansBulkDeleteParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansBulkPartialUpdate ipam vlans bulk partial update API
+IpamVlansBulkPartialUpdate ipam vlans bulk partial update API
 */
 func (a *Client) IpamVlansBulkPartialUpdate(params *IpamVlansBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5154,12 +4831,13 @@ func (a *Client) IpamVlansBulkPartialUpdate(params *IpamVlansBulkPartialUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansBulkUpdate ipam vlans bulk update API
+IpamVlansBulkUpdate ipam vlans bulk update API
 */
 func (a *Client) IpamVlansBulkUpdate(params *IpamVlansBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5192,12 +4870,13 @@ func (a *Client) IpamVlansBulkUpdate(params *IpamVlansBulkUpdateParams, authInfo
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansCreate ipam vlans create API
+IpamVlansCreate ipam vlans create API
 */
 func (a *Client) IpamVlansCreate(params *IpamVlansCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -5230,12 +4909,13 @@ func (a *Client) IpamVlansCreate(params *IpamVlansCreateParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansDelete ipam vlans delete API
+IpamVlansDelete ipam vlans delete API
 */
 func (a *Client) IpamVlansDelete(params *IpamVlansDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -5268,12 +4948,13 @@ func (a *Client) IpamVlansDelete(params *IpamVlansDeleteParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamVlansList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamVlansList(params *IpamVlansListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansListOK, error) {
 	// TODO: Validate the params before sending
@@ -5306,12 +4987,13 @@ func (a *Client) IpamVlansList(params *IpamVlansListParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansPartialUpdate ipam vlans partial update API
+IpamVlansPartialUpdate ipam vlans partial update API
 */
 func (a *Client) IpamVlansPartialUpdate(params *IpamVlansPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5344,12 +5026,13 @@ func (a *Client) IpamVlansPartialUpdate(params *IpamVlansPartialUpdateParams, au
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansRead ipam vlans read API
+IpamVlansRead ipam vlans read API
 */
 func (a *Client) IpamVlansRead(params *IpamVlansReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansReadOK, error) {
 	// TODO: Validate the params before sending
@@ -5382,12 +5065,13 @@ func (a *Client) IpamVlansRead(params *IpamVlansReadParams, authInfo runtime.Cli
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVlansUpdate ipam vlans update API
+IpamVlansUpdate ipam vlans update API
 */
 func (a *Client) IpamVlansUpdate(params *IpamVlansUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVlansUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5420,12 +5104,13 @@ func (a *Client) IpamVlansUpdate(params *IpamVlansUpdateParams, authInfo runtime
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVlansUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vlans_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsBulkDelete ipam vrfs bulk delete API
+IpamVrfsBulkDelete ipam vrfs bulk delete API
 */
 func (a *Client) IpamVrfsBulkDelete(params *IpamVrfsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -5458,12 +5143,13 @@ func (a *Client) IpamVrfsBulkDelete(params *IpamVrfsBulkDeleteParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsBulkPartialUpdate ipam vrfs bulk partial update API
+IpamVrfsBulkPartialUpdate ipam vrfs bulk partial update API
 */
 func (a *Client) IpamVrfsBulkPartialUpdate(params *IpamVrfsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5496,12 +5182,13 @@ func (a *Client) IpamVrfsBulkPartialUpdate(params *IpamVrfsBulkPartialUpdatePara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsBulkUpdate ipam vrfs bulk update API
+IpamVrfsBulkUpdate ipam vrfs bulk update API
 */
 func (a *Client) IpamVrfsBulkUpdate(params *IpamVrfsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5534,12 +5221,13 @@ func (a *Client) IpamVrfsBulkUpdate(params *IpamVrfsBulkUpdateParams, authInfo r
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsCreate ipam vrfs create API
+IpamVrfsCreate ipam vrfs create API
 */
 func (a *Client) IpamVrfsCreate(params *IpamVrfsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -5572,12 +5260,13 @@ func (a *Client) IpamVrfsCreate(params *IpamVrfsCreateParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsDelete ipam vrfs delete API
+IpamVrfsDelete ipam vrfs delete API
 */
 func (a *Client) IpamVrfsDelete(params *IpamVrfsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -5610,12 +5299,13 @@ func (a *Client) IpamVrfsDelete(params *IpamVrfsDeleteParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsList Overrides ListModelMixin to allow processing ExportTemplates.
+IpamVrfsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) IpamVrfsList(params *IpamVrfsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsListOK, error) {
 	// TODO: Validate the params before sending
@@ -5648,12 +5338,13 @@ func (a *Client) IpamVrfsList(params *IpamVrfsListParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsPartialUpdate ipam vrfs partial update API
+IpamVrfsPartialUpdate ipam vrfs partial update API
 */
 func (a *Client) IpamVrfsPartialUpdate(params *IpamVrfsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5686,12 +5377,13 @@ func (a *Client) IpamVrfsPartialUpdate(params *IpamVrfsPartialUpdateParams, auth
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsRead ipam vrfs read API
+IpamVrfsRead ipam vrfs read API
 */
 func (a *Client) IpamVrfsRead(params *IpamVrfsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -5724,12 +5416,13 @@ func (a *Client) IpamVrfsRead(params *IpamVrfsReadParams, authInfo runtime.Clien
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  IpamVrfsUpdate ipam vrfs update API
+IpamVrfsUpdate ipam vrfs update API
 */
 func (a *Client) IpamVrfsUpdate(params *IpamVrfsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpamVrfsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -5762,8 +5455,9 @@ func (a *Client) IpamVrfsUpdate(params *IpamVrfsUpdateParams, authInfo runtime.C
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*IpamVrfsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ipam_vrfs_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

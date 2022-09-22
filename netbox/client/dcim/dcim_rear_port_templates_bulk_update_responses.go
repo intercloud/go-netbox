@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRearPortTemplatesBulkUpdateReader is a Reader for the DcimRearPortTemplatesBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimRearPortTemplatesBulkUpdateReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 	default:
-		result := NewDcimRearPortTemplatesBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimRearPortTemplatesBulkUpdateOK() *DcimRearPortTemplatesBulkUpdateOK {
 	return &DcimRearPortTemplatesBulkUpdateOK{}
 }
 
-/* DcimRearPortTemplatesBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimRearPortTemplatesBulkUpdateOK describes a response with status code 200, with default header values.
 
 DcimRearPortTemplatesBulkUpdateOK dcim rear port templates bulk update o k
 */
@@ -69,9 +63,39 @@ type DcimRearPortTemplatesBulkUpdateOK struct {
 	Payload *models.RearPortTemplate
 }
 
+// IsSuccess returns true when this dcim rear port templates bulk update o k response has a 2xx status code
+func (o *DcimRearPortTemplatesBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rear port templates bulk update o k response has a 3xx status code
+func (o *DcimRearPortTemplatesBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rear port templates bulk update o k response has a 4xx status code
+func (o *DcimRearPortTemplatesBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rear port templates bulk update o k response has a 5xx status code
+func (o *DcimRearPortTemplatesBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rear port templates bulk update o k response a status code equal to that given
+func (o *DcimRearPortTemplatesBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRearPortTemplatesBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /dcim/rear-port-templates/][%d] dcimRearPortTemplatesBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRearPortTemplatesBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /dcim/rear-port-templates/][%d] dcimRearPortTemplatesBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRearPortTemplatesBulkUpdateOK) GetPayload() *models.RearPortTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimRearPortTemplatesBulkUpdateOK) readResponse(response runtime.Client
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimRearPortTemplatesBulkUpdateDefault creates a DcimRearPortTemplatesBulkUpdateDefault with default headers values
-func NewDcimRearPortTemplatesBulkUpdateDefault(code int) *DcimRearPortTemplatesBulkUpdateDefault {
-	return &DcimRearPortTemplatesBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRearPortTemplatesBulkUpdateDefault describes a response with status code -1, with default header values.
-
-DcimRearPortTemplatesBulkUpdateDefault dcim rear port templates bulk update default
-*/
-type DcimRearPortTemplatesBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rear port templates bulk update default response
-func (o *DcimRearPortTemplatesBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRearPortTemplatesBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /dcim/rear-port-templates/][%d] dcim_rear-port-templates_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRearPortTemplatesBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRearPortTemplatesBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

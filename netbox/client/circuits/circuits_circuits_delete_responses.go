@@ -22,7 +22,6 @@ package circuits
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *CircuitsCircuitsDeleteReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewCircuitsCircuitsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewCircuitsCircuitsDeleteNoContent() *CircuitsCircuitsDeleteNoContent {
 	return &CircuitsCircuitsDeleteNoContent{}
 }
 
-/* CircuitsCircuitsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+CircuitsCircuitsDeleteNoContent describes a response with status code 204, with default header values.
 
 CircuitsCircuitsDeleteNoContent circuits circuits delete no content
 */
 type CircuitsCircuitsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this circuits circuits delete no content response has a 2xx status code
+func (o *CircuitsCircuitsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits circuits delete no content response has a 3xx status code
+func (o *CircuitsCircuitsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits circuits delete no content response has a 4xx status code
+func (o *CircuitsCircuitsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits circuits delete no content response has a 5xx status code
+func (o *CircuitsCircuitsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits circuits delete no content response a status code equal to that given
+func (o *CircuitsCircuitsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *CircuitsCircuitsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /circuits/circuits/{id}/][%d] circuitsCircuitsDeleteNoContent ", 204)
 }
 
+func (o *CircuitsCircuitsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /circuits/circuits/{id}/][%d] circuitsCircuitsDeleteNoContent ", 204)
+}
+
 func (o *CircuitsCircuitsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewCircuitsCircuitsDeleteDefault creates a CircuitsCircuitsDeleteDefault with default headers values
-func NewCircuitsCircuitsDeleteDefault(code int) *CircuitsCircuitsDeleteDefault {
-	return &CircuitsCircuitsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsCircuitsDeleteDefault describes a response with status code -1, with default header values.
-
-CircuitsCircuitsDeleteDefault circuits circuits delete default
-*/
-type CircuitsCircuitsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits circuits delete default response
-func (o *CircuitsCircuitsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsCircuitsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /circuits/circuits/{id}/][%d] circuits_circuits_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsCircuitsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsCircuitsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

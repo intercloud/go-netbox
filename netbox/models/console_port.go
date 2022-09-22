@@ -61,8 +61,8 @@ type ConsolePort struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -79,7 +79,7 @@ type ConsolePort struct {
 	// Read Only: true
 	Display string `json:"display,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -111,9 +111,6 @@ type ConsolePort struct {
 	// Treat as if a cable is connected
 	MarkConnected bool `json:"mark_connected,omitempty"`
 
-	// module
-	Module *ComponentNestedModule `json:"module,omitempty"`
-
 	// Name
 	// Required: true
 	// Max Length: 64
@@ -124,7 +121,7 @@ type ConsolePort struct {
 	Speed *ConsolePortSpeed `json:"speed,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// type
 	Type *ConsolePortType `json:"type,omitempty"`
@@ -160,10 +157,6 @@ func (m *ConsolePort) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastUpdated(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateModule(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -217,7 +210,7 @@ func (m *ConsolePort) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -275,25 +268,6 @@ func (m *ConsolePort) validateLastUpdated(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("last_updated", "body", "date-time", m.LastUpdated.String(), formats); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *ConsolePort) validateModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.Module) { // not required
-		return nil
-	}
-
-	if m.Module != nil {
-		if err := m.Module.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("module")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -444,10 +418,6 @@ func (m *ConsolePort) ContextValidate(ctx context.Context, formats strfmt.Regist
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateModule(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSpeed(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -520,7 +490,7 @@ func (m *ConsolePort) contextValidateConnectedEndpointType(ctx context.Context, 
 
 func (m *ConsolePort) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 
@@ -579,22 +549,6 @@ func (m *ConsolePort) contextValidateLinkPeerType(ctx context.Context, formats s
 
 	if err := validate.ReadOnly(ctx, "link_peer_type", "body", string(m.LinkPeerType)); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *ConsolePort) contextValidateModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Module != nil {
-		if err := m.Module.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("module")
-			}
-			return err
-		}
 	}
 
 	return nil

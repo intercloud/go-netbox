@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRacksReadReader is a Reader for the DcimRacksRead structure.
@@ -45,14 +45,7 @@ func (o *DcimRacksReadReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return result, nil
 	default:
-		result := NewDcimRacksReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimRacksReadOK() *DcimRacksReadOK {
 	return &DcimRacksReadOK{}
 }
 
-/* DcimRacksReadOK describes a response with status code 200, with default header values.
+/*
+DcimRacksReadOK describes a response with status code 200, with default header values.
 
 DcimRacksReadOK dcim racks read o k
 */
@@ -69,9 +63,39 @@ type DcimRacksReadOK struct {
 	Payload *models.Rack
 }
 
+// IsSuccess returns true when this dcim racks read o k response has a 2xx status code
+func (o *DcimRacksReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim racks read o k response has a 3xx status code
+func (o *DcimRacksReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim racks read o k response has a 4xx status code
+func (o *DcimRacksReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim racks read o k response has a 5xx status code
+func (o *DcimRacksReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim racks read o k response a status code equal to that given
+func (o *DcimRacksReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRacksReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/racks/{id}/][%d] dcimRacksReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRacksReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/racks/{id}/][%d] dcimRacksReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRacksReadOK) GetPayload() *models.Rack {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimRacksReadOK) readResponse(response runtime.ClientResponse, consumer
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimRacksReadDefault creates a DcimRacksReadDefault with default headers values
-func NewDcimRacksReadDefault(code int) *DcimRacksReadDefault {
-	return &DcimRacksReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRacksReadDefault describes a response with status code -1, with default header values.
-
-DcimRacksReadDefault dcim racks read default
-*/
-type DcimRacksReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim racks read default response
-func (o *DcimRacksReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRacksReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/racks/{id}/][%d] dcim_racks_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRacksReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRacksReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewVirtualizationInterfacesBulkPartialUpdateParams creates a new VirtualizationInterfacesBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewVirtualizationInterfacesBulkPartialUpdateParamsWithHTTPClient(client *ht
 	}
 }
 
-/* VirtualizationInterfacesBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the virtualization interfaces bulk partial update operation.
+/*
+VirtualizationInterfacesBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the virtualization interfaces bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type VirtualizationInterfacesBulkPartialUpdateParams struct {
 

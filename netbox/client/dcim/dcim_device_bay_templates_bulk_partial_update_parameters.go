@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimDeviceBayTemplatesBulkPartialUpdateParams creates a new DcimDeviceBayTemplatesBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewDcimDeviceBayTemplatesBulkPartialUpdateParamsWithHTTPClient(client *http
 	}
 }
 
-/* DcimDeviceBayTemplatesBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim device bay templates bulk partial update operation.
+/*
+DcimDeviceBayTemplatesBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim device bay templates bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimDeviceBayTemplatesBulkPartialUpdateParams struct {
 

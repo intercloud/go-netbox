@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // CircuitsCircuitsListReader is a Reader for the CircuitsCircuitsList structure.
@@ -50,14 +50,7 @@ func (o *CircuitsCircuitsListReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewCircuitsCircuitsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewCircuitsCircuitsListOK() *CircuitsCircuitsListOK {
 	return &CircuitsCircuitsListOK{}
 }
 
-/* CircuitsCircuitsListOK describes a response with status code 200, with default header values.
+/*
+CircuitsCircuitsListOK describes a response with status code 200, with default header values.
 
 CircuitsCircuitsListOK circuits circuits list o k
 */
@@ -74,9 +68,39 @@ type CircuitsCircuitsListOK struct {
 	Payload *CircuitsCircuitsListOKBody
 }
 
+// IsSuccess returns true when this circuits circuits list o k response has a 2xx status code
+func (o *CircuitsCircuitsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits circuits list o k response has a 3xx status code
+func (o *CircuitsCircuitsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits circuits list o k response has a 4xx status code
+func (o *CircuitsCircuitsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits circuits list o k response has a 5xx status code
+func (o *CircuitsCircuitsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits circuits list o k response a status code equal to that given
+func (o *CircuitsCircuitsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CircuitsCircuitsListOK) Error() string {
 	return fmt.Sprintf("[GET /circuits/circuits/][%d] circuitsCircuitsListOK  %+v", 200, o.Payload)
 }
+
+func (o *CircuitsCircuitsListOK) String() string {
+	return fmt.Sprintf("[GET /circuits/circuits/][%d] circuitsCircuitsListOK  %+v", 200, o.Payload)
+}
+
 func (o *CircuitsCircuitsListOK) GetPayload() *CircuitsCircuitsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *CircuitsCircuitsListOK) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-// NewCircuitsCircuitsListDefault creates a CircuitsCircuitsListDefault with default headers values
-func NewCircuitsCircuitsListDefault(code int) *CircuitsCircuitsListDefault {
-	return &CircuitsCircuitsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsCircuitsListDefault describes a response with status code -1, with default header values.
-
-CircuitsCircuitsListDefault circuits circuits list default
-*/
-type CircuitsCircuitsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits circuits list default response
-func (o *CircuitsCircuitsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsCircuitsListDefault) Error() string {
-	return fmt.Sprintf("[GET /circuits/circuits/][%d] circuits_circuits_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsCircuitsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsCircuitsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*CircuitsCircuitsListOKBody circuits circuits list o k body
+/*
+CircuitsCircuitsListOKBody circuits circuits list o k body
 swagger:model CircuitsCircuitsListOKBody
 */
 type CircuitsCircuitsListOKBody struct {

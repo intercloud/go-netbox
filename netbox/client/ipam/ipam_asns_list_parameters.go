@@ -68,10 +68,12 @@ func NewIpamAsnsListParamsWithHTTPClient(client *http.Client) *IpamAsnsListParam
 	}
 }
 
-/* IpamAsnsListParams contains all the parameters to send to the API endpoint
-   for the ipam asns list operation.
+/*
+IpamAsnsListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam asns list operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamAsnsListParams struct {
 
@@ -101,36 +103,6 @@ type IpamAsnsListParams struct {
 
 	// CreatedLte.
 	CreatedLte *string
-
-	// Description.
-	Description *string
-
-	// DescriptionIc.
-	DescriptionIc *string
-
-	// DescriptionIe.
-	DescriptionIe *string
-
-	// DescriptionIew.
-	DescriptionIew *string
-
-	// DescriptionIsw.
-	DescriptionIsw *string
-
-	// Descriptionn.
-	Descriptionn *string
-
-	// DescriptionNic.
-	DescriptionNic *string
-
-	// DescriptionNie.
-	DescriptionNie *string
-
-	// DescriptionNiew.
-	DescriptionNiew *string
-
-	// DescriptionNisw.
-	DescriptionNisw *string
 
 	// ID.
 	ID *string
@@ -197,12 +169,6 @@ type IpamAsnsListParams struct {
 
 	// SiteIDn.
 	SiteIDn *string
-
-	// Tag.
-	Tag *string
-
-	// Tagn.
-	Tagn *string
 
 	// Tenant.
 	Tenant *string
@@ -378,116 +344,6 @@ func (o *IpamAsnsListParams) WithCreatedLte(createdLte *string) *IpamAsnsListPar
 // SetCreatedLte adds the createdLte to the ipam asns list params
 func (o *IpamAsnsListParams) SetCreatedLte(createdLte *string) {
 	o.CreatedLte = createdLte
-}
-
-// WithDescription adds the description to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescription(description *string) *IpamAsnsListParams {
-	o.SetDescription(description)
-	return o
-}
-
-// SetDescription adds the description to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescription(description *string) {
-	o.Description = description
-}
-
-// WithDescriptionIc adds the descriptionIc to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionIc(descriptionIc *string) *IpamAsnsListParams {
-	o.SetDescriptionIc(descriptionIc)
-	return o
-}
-
-// SetDescriptionIc adds the descriptionIc to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionIc(descriptionIc *string) {
-	o.DescriptionIc = descriptionIc
-}
-
-// WithDescriptionIe adds the descriptionIe to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionIe(descriptionIe *string) *IpamAsnsListParams {
-	o.SetDescriptionIe(descriptionIe)
-	return o
-}
-
-// SetDescriptionIe adds the descriptionIe to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionIe(descriptionIe *string) {
-	o.DescriptionIe = descriptionIe
-}
-
-// WithDescriptionIew adds the descriptionIew to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionIew(descriptionIew *string) *IpamAsnsListParams {
-	o.SetDescriptionIew(descriptionIew)
-	return o
-}
-
-// SetDescriptionIew adds the descriptionIew to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionIew(descriptionIew *string) {
-	o.DescriptionIew = descriptionIew
-}
-
-// WithDescriptionIsw adds the descriptionIsw to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionIsw(descriptionIsw *string) *IpamAsnsListParams {
-	o.SetDescriptionIsw(descriptionIsw)
-	return o
-}
-
-// SetDescriptionIsw adds the descriptionIsw to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionIsw(descriptionIsw *string) {
-	o.DescriptionIsw = descriptionIsw
-}
-
-// WithDescriptionn adds the descriptionn to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionn(descriptionn *string) *IpamAsnsListParams {
-	o.SetDescriptionn(descriptionn)
-	return o
-}
-
-// SetDescriptionn adds the descriptionN to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionn(descriptionn *string) {
-	o.Descriptionn = descriptionn
-}
-
-// WithDescriptionNic adds the descriptionNic to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionNic(descriptionNic *string) *IpamAsnsListParams {
-	o.SetDescriptionNic(descriptionNic)
-	return o
-}
-
-// SetDescriptionNic adds the descriptionNic to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionNic(descriptionNic *string) {
-	o.DescriptionNic = descriptionNic
-}
-
-// WithDescriptionNie adds the descriptionNie to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionNie(descriptionNie *string) *IpamAsnsListParams {
-	o.SetDescriptionNie(descriptionNie)
-	return o
-}
-
-// SetDescriptionNie adds the descriptionNie to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionNie(descriptionNie *string) {
-	o.DescriptionNie = descriptionNie
-}
-
-// WithDescriptionNiew adds the descriptionNiew to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionNiew(descriptionNiew *string) *IpamAsnsListParams {
-	o.SetDescriptionNiew(descriptionNiew)
-	return o
-}
-
-// SetDescriptionNiew adds the descriptionNiew to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionNiew(descriptionNiew *string) {
-	o.DescriptionNiew = descriptionNiew
-}
-
-// WithDescriptionNisw adds the descriptionNisw to the ipam asns list params
-func (o *IpamAsnsListParams) WithDescriptionNisw(descriptionNisw *string) *IpamAsnsListParams {
-	o.SetDescriptionNisw(descriptionNisw)
-	return o
-}
-
-// SetDescriptionNisw adds the descriptionNisw to the ipam asns list params
-func (o *IpamAsnsListParams) SetDescriptionNisw(descriptionNisw *string) {
-	o.DescriptionNisw = descriptionNisw
 }
 
 // WithID adds the id to the ipam asns list params
@@ -708,28 +564,6 @@ func (o *IpamAsnsListParams) WithSiteIDn(siteIDn *string) *IpamAsnsListParams {
 // SetSiteIDn adds the siteIdN to the ipam asns list params
 func (o *IpamAsnsListParams) SetSiteIDn(siteIDn *string) {
 	o.SiteIDn = siteIDn
-}
-
-// WithTag adds the tag to the ipam asns list params
-func (o *IpamAsnsListParams) WithTag(tag *string) *IpamAsnsListParams {
-	o.SetTag(tag)
-	return o
-}
-
-// SetTag adds the tag to the ipam asns list params
-func (o *IpamAsnsListParams) SetTag(tag *string) {
-	o.Tag = tag
-}
-
-// WithTagn adds the tagn to the ipam asns list params
-func (o *IpamAsnsListParams) WithTagn(tagn *string) *IpamAsnsListParams {
-	o.SetTagn(tagn)
-	return o
-}
-
-// SetTagn adds the tagN to the ipam asns list params
-func (o *IpamAsnsListParams) SetTagn(tagn *string) {
-	o.Tagn = tagn
 }
 
 // WithTenant adds the tenant to the ipam asns list params
@@ -976,176 +810,6 @@ func (o *IpamAsnsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qCreatedLte != "" {
 
 			if err := r.SetQueryParam("created__lte", qCreatedLte); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Description != nil {
-
-		// query param description
-		var qrDescription string
-
-		if o.Description != nil {
-			qrDescription = *o.Description
-		}
-		qDescription := qrDescription
-		if qDescription != "" {
-
-			if err := r.SetQueryParam("description", qDescription); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIc != nil {
-
-		// query param description__ic
-		var qrDescriptionIc string
-
-		if o.DescriptionIc != nil {
-			qrDescriptionIc = *o.DescriptionIc
-		}
-		qDescriptionIc := qrDescriptionIc
-		if qDescriptionIc != "" {
-
-			if err := r.SetQueryParam("description__ic", qDescriptionIc); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIe != nil {
-
-		// query param description__ie
-		var qrDescriptionIe string
-
-		if o.DescriptionIe != nil {
-			qrDescriptionIe = *o.DescriptionIe
-		}
-		qDescriptionIe := qrDescriptionIe
-		if qDescriptionIe != "" {
-
-			if err := r.SetQueryParam("description__ie", qDescriptionIe); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIew != nil {
-
-		// query param description__iew
-		var qrDescriptionIew string
-
-		if o.DescriptionIew != nil {
-			qrDescriptionIew = *o.DescriptionIew
-		}
-		qDescriptionIew := qrDescriptionIew
-		if qDescriptionIew != "" {
-
-			if err := r.SetQueryParam("description__iew", qDescriptionIew); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionIsw != nil {
-
-		// query param description__isw
-		var qrDescriptionIsw string
-
-		if o.DescriptionIsw != nil {
-			qrDescriptionIsw = *o.DescriptionIsw
-		}
-		qDescriptionIsw := qrDescriptionIsw
-		if qDescriptionIsw != "" {
-
-			if err := r.SetQueryParam("description__isw", qDescriptionIsw); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Descriptionn != nil {
-
-		// query param description__n
-		var qrDescriptionn string
-
-		if o.Descriptionn != nil {
-			qrDescriptionn = *o.Descriptionn
-		}
-		qDescriptionn := qrDescriptionn
-		if qDescriptionn != "" {
-
-			if err := r.SetQueryParam("description__n", qDescriptionn); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNic != nil {
-
-		// query param description__nic
-		var qrDescriptionNic string
-
-		if o.DescriptionNic != nil {
-			qrDescriptionNic = *o.DescriptionNic
-		}
-		qDescriptionNic := qrDescriptionNic
-		if qDescriptionNic != "" {
-
-			if err := r.SetQueryParam("description__nic", qDescriptionNic); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNie != nil {
-
-		// query param description__nie
-		var qrDescriptionNie string
-
-		if o.DescriptionNie != nil {
-			qrDescriptionNie = *o.DescriptionNie
-		}
-		qDescriptionNie := qrDescriptionNie
-		if qDescriptionNie != "" {
-
-			if err := r.SetQueryParam("description__nie", qDescriptionNie); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNiew != nil {
-
-		// query param description__niew
-		var qrDescriptionNiew string
-
-		if o.DescriptionNiew != nil {
-			qrDescriptionNiew = *o.DescriptionNiew
-		}
-		qDescriptionNiew := qrDescriptionNiew
-		if qDescriptionNiew != "" {
-
-			if err := r.SetQueryParam("description__niew", qDescriptionNiew); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.DescriptionNisw != nil {
-
-		// query param description__nisw
-		var qrDescriptionNisw string
-
-		if o.DescriptionNisw != nil {
-			qrDescriptionNisw = *o.DescriptionNisw
-		}
-		qDescriptionNisw := qrDescriptionNisw
-		if qDescriptionNisw != "" {
-
-			if err := r.SetQueryParam("description__nisw", qDescriptionNisw); err != nil {
 				return err
 			}
 		}
@@ -1486,40 +1150,6 @@ func (o *IpamAsnsListParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		if qSiteIDn != "" {
 
 			if err := r.SetQueryParam("site_id__n", qSiteIDn); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Tag != nil {
-
-		// query param tag
-		var qrTag string
-
-		if o.Tag != nil {
-			qrTag = *o.Tag
-		}
-		qTag := qrTag
-		if qTag != "" {
-
-			if err := r.SetQueryParam("tag", qTag); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.Tagn != nil {
-
-		// query param tag__n
-		var qrTagn string
-
-		if o.Tagn != nil {
-			qrTagn = *o.Tagn
-		}
-		qTagn := qrTagn
-		if qTagn != "" {
-
-			if err := r.SetQueryParam("tag__n", qTagn); err != nil {
 				return err
 			}
 		}

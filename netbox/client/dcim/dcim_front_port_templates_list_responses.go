@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimFrontPortTemplatesListReader is a Reader for the DcimFrontPortTemplatesList structure.
@@ -50,14 +50,7 @@ func (o *DcimFrontPortTemplatesListReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimFrontPortTemplatesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimFrontPortTemplatesListOK() *DcimFrontPortTemplatesListOK {
 	return &DcimFrontPortTemplatesListOK{}
 }
 
-/* DcimFrontPortTemplatesListOK describes a response with status code 200, with default header values.
+/*
+DcimFrontPortTemplatesListOK describes a response with status code 200, with default header values.
 
 DcimFrontPortTemplatesListOK dcim front port templates list o k
 */
@@ -74,9 +68,39 @@ type DcimFrontPortTemplatesListOK struct {
 	Payload *DcimFrontPortTemplatesListOKBody
 }
 
+// IsSuccess returns true when this dcim front port templates list o k response has a 2xx status code
+func (o *DcimFrontPortTemplatesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim front port templates list o k response has a 3xx status code
+func (o *DcimFrontPortTemplatesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim front port templates list o k response has a 4xx status code
+func (o *DcimFrontPortTemplatesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim front port templates list o k response has a 5xx status code
+func (o *DcimFrontPortTemplatesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim front port templates list o k response a status code equal to that given
+func (o *DcimFrontPortTemplatesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimFrontPortTemplatesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/front-port-templates/][%d] dcimFrontPortTemplatesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimFrontPortTemplatesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/front-port-templates/][%d] dcimFrontPortTemplatesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimFrontPortTemplatesListOK) GetPayload() *DcimFrontPortTemplatesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimFrontPortTemplatesListOK) readResponse(response runtime.ClientRespo
 	return nil
 }
 
-// NewDcimFrontPortTemplatesListDefault creates a DcimFrontPortTemplatesListDefault with default headers values
-func NewDcimFrontPortTemplatesListDefault(code int) *DcimFrontPortTemplatesListDefault {
-	return &DcimFrontPortTemplatesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimFrontPortTemplatesListDefault describes a response with status code -1, with default header values.
-
-DcimFrontPortTemplatesListDefault dcim front port templates list default
-*/
-type DcimFrontPortTemplatesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim front port templates list default response
-func (o *DcimFrontPortTemplatesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimFrontPortTemplatesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/front-port-templates/][%d] dcim_front-port-templates_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimFrontPortTemplatesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimFrontPortTemplatesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimFrontPortTemplatesListOKBody dcim front port templates list o k body
+/*
+DcimFrontPortTemplatesListOKBody dcim front port templates list o k body
 swagger:model DcimFrontPortTemplatesListOKBody
 */
 type DcimFrontPortTemplatesListOKBody struct {

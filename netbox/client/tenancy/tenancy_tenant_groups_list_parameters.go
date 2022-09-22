@@ -68,10 +68,12 @@ func NewTenancyTenantGroupsListParamsWithHTTPClient(client *http.Client) *Tenanc
 	}
 }
 
-/* TenancyTenantGroupsListParams contains all the parameters to send to the API endpoint
-   for the tenancy tenant groups list operation.
+/*
+TenancyTenantGroupsListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the tenancy tenant groups list operation.
+
+	Typically these are written to a http.Request.
 */
 type TenancyTenantGroupsListParams struct {
 
@@ -86,6 +88,9 @@ type TenancyTenantGroupsListParams struct {
 
 	// Description.
 	Description *string
+
+	// DescriptionEmpty.
+	DescriptionEmpty *string
 
 	// DescriptionIc.
 	DescriptionIc *string
@@ -150,6 +155,9 @@ type TenancyTenantGroupsListParams struct {
 	// Name.
 	Name *string
 
+	// NameEmpty.
+	NameEmpty *string
+
 	// NameIc.
 	NameIc *string
 
@@ -200,6 +208,9 @@ type TenancyTenantGroupsListParams struct {
 
 	// Slug.
 	Slug *string
+
+	// SlugEmpty.
+	SlugEmpty *string
 
 	// SlugIc.
 	SlugIc *string
@@ -329,6 +340,17 @@ func (o *TenancyTenantGroupsListParams) WithDescription(description *string) *Te
 // SetDescription adds the description to the tenancy tenant groups list params
 func (o *TenancyTenantGroupsListParams) SetDescription(description *string) {
 	o.Description = description
+}
+
+// WithDescriptionEmpty adds the descriptionEmpty to the tenancy tenant groups list params
+func (o *TenancyTenantGroupsListParams) WithDescriptionEmpty(descriptionEmpty *string) *TenancyTenantGroupsListParams {
+	o.SetDescriptionEmpty(descriptionEmpty)
+	return o
+}
+
+// SetDescriptionEmpty adds the descriptionEmpty to the tenancy tenant groups list params
+func (o *TenancyTenantGroupsListParams) SetDescriptionEmpty(descriptionEmpty *string) {
+	o.DescriptionEmpty = descriptionEmpty
 }
 
 // WithDescriptionIc adds the descriptionIc to the tenancy tenant groups list params
@@ -551,6 +573,17 @@ func (o *TenancyTenantGroupsListParams) SetName(name *string) {
 	o.Name = name
 }
 
+// WithNameEmpty adds the nameEmpty to the tenancy tenant groups list params
+func (o *TenancyTenantGroupsListParams) WithNameEmpty(nameEmpty *string) *TenancyTenantGroupsListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the tenancy tenant groups list params
+func (o *TenancyTenantGroupsListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
+}
+
 // WithNameIc adds the nameIc to the tenancy tenant groups list params
 func (o *TenancyTenantGroupsListParams) WithNameIc(nameIc *string) *TenancyTenantGroupsListParams {
 	o.SetNameIc(nameIc)
@@ -725,6 +758,17 @@ func (o *TenancyTenantGroupsListParams) WithSlug(slug *string) *TenancyTenantGro
 // SetSlug adds the slug to the tenancy tenant groups list params
 func (o *TenancyTenantGroupsListParams) SetSlug(slug *string) {
 	o.Slug = slug
+}
+
+// WithSlugEmpty adds the slugEmpty to the tenancy tenant groups list params
+func (o *TenancyTenantGroupsListParams) WithSlugEmpty(slugEmpty *string) *TenancyTenantGroupsListParams {
+	o.SetSlugEmpty(slugEmpty)
+	return o
+}
+
+// SetSlugEmpty adds the slugEmpty to the tenancy tenant groups list params
+func (o *TenancyTenantGroupsListParams) SetSlugEmpty(slugEmpty *string) {
+	o.SlugEmpty = slugEmpty
 }
 
 // WithSlugIc adds the slugIc to the tenancy tenant groups list params
@@ -919,6 +963,23 @@ func (o *TenancyTenantGroupsListParams) WriteToRequest(r runtime.ClientRequest, 
 		if qDescription != "" {
 
 			if err := r.SetQueryParam("description", qDescription); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.DescriptionEmpty != nil {
+
+		// query param description__empty
+		var qrDescriptionEmpty string
+
+		if o.DescriptionEmpty != nil {
+			qrDescriptionEmpty = *o.DescriptionEmpty
+		}
+		qDescriptionEmpty := qrDescriptionEmpty
+		if qDescriptionEmpty != "" {
+
+			if err := r.SetQueryParam("description__empty", qDescriptionEmpty); err != nil {
 				return err
 			}
 		}
@@ -1264,6 +1325,23 @@ func (o *TenancyTenantGroupsListParams) WriteToRequest(r runtime.ClientRequest, 
 		}
 	}
 
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.NameIc != nil {
 
 		// query param name__ic
@@ -1531,6 +1609,23 @@ func (o *TenancyTenantGroupsListParams) WriteToRequest(r runtime.ClientRequest, 
 		if qSlug != "" {
 
 			if err := r.SetQueryParam("slug", qSlug); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SlugEmpty != nil {
+
+		// query param slug__empty
+		var qrSlugEmpty string
+
+		if o.SlugEmpty != nil {
+			qrSlugEmpty = *o.SlugEmpty
+		}
+		qSlugEmpty := qrSlugEmpty
+		if qSlugEmpty != "" {
+
+			if err := r.SetQueryParam("slug__empty", qSlugEmpty); err != nil {
 				return err
 			}
 		}

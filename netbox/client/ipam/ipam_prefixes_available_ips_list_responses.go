@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamPrefixesAvailableIpsListReader is a Reader for the IpamPrefixesAvailableIpsList structure.
@@ -45,14 +45,7 @@ func (o *IpamPrefixesAvailableIpsListReader) ReadResponse(response runtime.Clien
 		}
 		return result, nil
 	default:
-		result := NewIpamPrefixesAvailableIpsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamPrefixesAvailableIpsListOK() *IpamPrefixesAvailableIpsListOK {
 	return &IpamPrefixesAvailableIpsListOK{}
 }
 
-/* IpamPrefixesAvailableIpsListOK describes a response with status code 200, with default header values.
+/*
+IpamPrefixesAvailableIpsListOK describes a response with status code 200, with default header values.
 
 IpamPrefixesAvailableIpsListOK ipam prefixes available ips list o k
 */
@@ -69,53 +63,44 @@ type IpamPrefixesAvailableIpsListOK struct {
 	Payload []*models.AvailableIP
 }
 
+// IsSuccess returns true when this ipam prefixes available ips list o k response has a 2xx status code
+func (o *IpamPrefixesAvailableIpsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam prefixes available ips list o k response has a 3xx status code
+func (o *IpamPrefixesAvailableIpsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam prefixes available ips list o k response has a 4xx status code
+func (o *IpamPrefixesAvailableIpsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam prefixes available ips list o k response has a 5xx status code
+func (o *IpamPrefixesAvailableIpsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam prefixes available ips list o k response a status code equal to that given
+func (o *IpamPrefixesAvailableIpsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamPrefixesAvailableIpsListOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/prefixes/{id}/available-ips/][%d] ipamPrefixesAvailableIpsListOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamPrefixesAvailableIpsListOK) String() string {
+	return fmt.Sprintf("[GET /ipam/prefixes/{id}/available-ips/][%d] ipamPrefixesAvailableIpsListOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamPrefixesAvailableIpsListOK) GetPayload() []*models.AvailableIP {
 	return o.Payload
 }
 
 func (o *IpamPrefixesAvailableIpsListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamPrefixesAvailableIpsListDefault creates a IpamPrefixesAvailableIpsListDefault with default headers values
-func NewIpamPrefixesAvailableIpsListDefault(code int) *IpamPrefixesAvailableIpsListDefault {
-	return &IpamPrefixesAvailableIpsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamPrefixesAvailableIpsListDefault describes a response with status code -1, with default header values.
-
-IpamPrefixesAvailableIpsListDefault ipam prefixes available ips list default
-*/
-type IpamPrefixesAvailableIpsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam prefixes available ips list default response
-func (o *IpamPrefixesAvailableIpsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamPrefixesAvailableIpsListDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/prefixes/{id}/available-ips/][%d] ipam_prefixes_available-ips_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamPrefixesAvailableIpsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamPrefixesAvailableIpsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {

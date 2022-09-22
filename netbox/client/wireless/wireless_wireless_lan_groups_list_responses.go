@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // WirelessWirelessLanGroupsListReader is a Reader for the WirelessWirelessLanGroupsList structure.
@@ -50,14 +50,7 @@ func (o *WirelessWirelessLanGroupsListReader) ReadResponse(response runtime.Clie
 		}
 		return result, nil
 	default:
-		result := NewWirelessWirelessLanGroupsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewWirelessWirelessLanGroupsListOK() *WirelessWirelessLanGroupsListOK {
 	return &WirelessWirelessLanGroupsListOK{}
 }
 
-/* WirelessWirelessLanGroupsListOK describes a response with status code 200, with default header values.
+/*
+WirelessWirelessLanGroupsListOK describes a response with status code 200, with default header values.
 
 WirelessWirelessLanGroupsListOK wireless wireless lan groups list o k
 */
@@ -74,9 +68,39 @@ type WirelessWirelessLanGroupsListOK struct {
 	Payload *WirelessWirelessLanGroupsListOKBody
 }
 
+// IsSuccess returns true when this wireless wireless lan groups list o k response has a 2xx status code
+func (o *WirelessWirelessLanGroupsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this wireless wireless lan groups list o k response has a 3xx status code
+func (o *WirelessWirelessLanGroupsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this wireless wireless lan groups list o k response has a 4xx status code
+func (o *WirelessWirelessLanGroupsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this wireless wireless lan groups list o k response has a 5xx status code
+func (o *WirelessWirelessLanGroupsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this wireless wireless lan groups list o k response a status code equal to that given
+func (o *WirelessWirelessLanGroupsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *WirelessWirelessLanGroupsListOK) Error() string {
 	return fmt.Sprintf("[GET /wireless/wireless-lan-groups/][%d] wirelessWirelessLanGroupsListOK  %+v", 200, o.Payload)
 }
+
+func (o *WirelessWirelessLanGroupsListOK) String() string {
+	return fmt.Sprintf("[GET /wireless/wireless-lan-groups/][%d] wirelessWirelessLanGroupsListOK  %+v", 200, o.Payload)
+}
+
 func (o *WirelessWirelessLanGroupsListOK) GetPayload() *WirelessWirelessLanGroupsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *WirelessWirelessLanGroupsListOK) readResponse(response runtime.ClientRe
 	return nil
 }
 
-// NewWirelessWirelessLanGroupsListDefault creates a WirelessWirelessLanGroupsListDefault with default headers values
-func NewWirelessWirelessLanGroupsListDefault(code int) *WirelessWirelessLanGroupsListDefault {
-	return &WirelessWirelessLanGroupsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* WirelessWirelessLanGroupsListDefault describes a response with status code -1, with default header values.
-
-WirelessWirelessLanGroupsListDefault wireless wireless lan groups list default
-*/
-type WirelessWirelessLanGroupsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the wireless wireless lan groups list default response
-func (o *WirelessWirelessLanGroupsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *WirelessWirelessLanGroupsListDefault) Error() string {
-	return fmt.Sprintf("[GET /wireless/wireless-lan-groups/][%d] wireless_wireless-lan-groups_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *WirelessWirelessLanGroupsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *WirelessWirelessLanGroupsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*WirelessWirelessLanGroupsListOKBody wireless wireless lan groups list o k body
+/*
+WirelessWirelessLanGroupsListOKBody wireless wireless lan groups list o k body
 swagger:model WirelessWirelessLanGroupsListOKBody
 */
 type WirelessWirelessLanGroupsListOKBody struct {

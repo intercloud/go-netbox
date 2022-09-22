@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersGroupsBulkUpdateReader is a Reader for the UsersGroupsBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *UsersGroupsBulkUpdateReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 	default:
-		result := NewUsersGroupsBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersGroupsBulkUpdateOK() *UsersGroupsBulkUpdateOK {
 	return &UsersGroupsBulkUpdateOK{}
 }
 
-/* UsersGroupsBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+UsersGroupsBulkUpdateOK describes a response with status code 200, with default header values.
 
 UsersGroupsBulkUpdateOK users groups bulk update o k
 */
@@ -69,9 +63,39 @@ type UsersGroupsBulkUpdateOK struct {
 	Payload *models.Group
 }
 
+// IsSuccess returns true when this users groups bulk update o k response has a 2xx status code
+func (o *UsersGroupsBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users groups bulk update o k response has a 3xx status code
+func (o *UsersGroupsBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users groups bulk update o k response has a 4xx status code
+func (o *UsersGroupsBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users groups bulk update o k response has a 5xx status code
+func (o *UsersGroupsBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users groups bulk update o k response a status code equal to that given
+func (o *UsersGroupsBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UsersGroupsBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /users/groups/][%d] usersGroupsBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *UsersGroupsBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /users/groups/][%d] usersGroupsBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *UsersGroupsBulkUpdateOK) GetPayload() *models.Group {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersGroupsBulkUpdateOK) readResponse(response runtime.ClientResponse, 
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersGroupsBulkUpdateDefault creates a UsersGroupsBulkUpdateDefault with default headers values
-func NewUsersGroupsBulkUpdateDefault(code int) *UsersGroupsBulkUpdateDefault {
-	return &UsersGroupsBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersGroupsBulkUpdateDefault describes a response with status code -1, with default header values.
-
-UsersGroupsBulkUpdateDefault users groups bulk update default
-*/
-type UsersGroupsBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users groups bulk update default response
-func (o *UsersGroupsBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersGroupsBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /users/groups/][%d] users_groups_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersGroupsBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersGroupsBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDeviceTypesBulkPartialUpdateReader is a Reader for the DcimDeviceTypesBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimDeviceTypesBulkPartialUpdateReader) ReadResponse(response runtime.C
 		}
 		return result, nil
 	default:
-		result := NewDcimDeviceTypesBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimDeviceTypesBulkPartialUpdateOK() *DcimDeviceTypesBulkPartialUpdateOK
 	return &DcimDeviceTypesBulkPartialUpdateOK{}
 }
 
-/* DcimDeviceTypesBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimDeviceTypesBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimDeviceTypesBulkPartialUpdateOK dcim device types bulk partial update o k
 */
@@ -69,9 +63,39 @@ type DcimDeviceTypesBulkPartialUpdateOK struct {
 	Payload *models.DeviceType
 }
 
+// IsSuccess returns true when this dcim device types bulk partial update o k response has a 2xx status code
+func (o *DcimDeviceTypesBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim device types bulk partial update o k response has a 3xx status code
+func (o *DcimDeviceTypesBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim device types bulk partial update o k response has a 4xx status code
+func (o *DcimDeviceTypesBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim device types bulk partial update o k response has a 5xx status code
+func (o *DcimDeviceTypesBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim device types bulk partial update o k response a status code equal to that given
+func (o *DcimDeviceTypesBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDeviceTypesBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/device-types/][%d] dcimDeviceTypesBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDeviceTypesBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/device-types/][%d] dcimDeviceTypesBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDeviceTypesBulkPartialUpdateOK) GetPayload() *models.DeviceType {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimDeviceTypesBulkPartialUpdateOK) readResponse(response runtime.Clien
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimDeviceTypesBulkPartialUpdateDefault creates a DcimDeviceTypesBulkPartialUpdateDefault with default headers values
-func NewDcimDeviceTypesBulkPartialUpdateDefault(code int) *DcimDeviceTypesBulkPartialUpdateDefault {
-	return &DcimDeviceTypesBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDeviceTypesBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimDeviceTypesBulkPartialUpdateDefault dcim device types bulk partial update default
-*/
-type DcimDeviceTypesBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim device types bulk partial update default response
-func (o *DcimDeviceTypesBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDeviceTypesBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/device-types/][%d] dcim_device-types_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDeviceTypesBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDeviceTypesBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

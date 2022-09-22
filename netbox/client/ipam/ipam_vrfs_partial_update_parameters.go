@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamVrfsPartialUpdateParams creates a new IpamVrfsPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewIpamVrfsPartialUpdateParamsWithHTTPClient(client *http.Client) *IpamVrfs
 	}
 }
 
-/* IpamVrfsPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam vrfs partial update operation.
+/*
+IpamVrfsPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam vrfs partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamVrfsPartialUpdateParams struct {
 

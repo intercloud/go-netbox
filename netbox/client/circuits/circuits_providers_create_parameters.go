@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewCircuitsProvidersCreateParams creates a new CircuitsProvidersCreateParams object,
@@ -69,15 +69,17 @@ func NewCircuitsProvidersCreateParamsWithHTTPClient(client *http.Client) *Circui
 	}
 }
 
-/* CircuitsProvidersCreateParams contains all the parameters to send to the API endpoint
-   for the circuits providers create operation.
+/*
+CircuitsProvidersCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the circuits providers create operation.
+
+	Typically these are written to a http.Request.
 */
 type CircuitsProvidersCreateParams struct {
 
 	// Data.
-	Data *models.WritableProvider
+	Data *models.Provider
 
 	timeout    time.Duration
 	Context    context.Context
@@ -133,13 +135,13 @@ func (o *CircuitsProvidersCreateParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithData adds the data to the circuits providers create params
-func (o *CircuitsProvidersCreateParams) WithData(data *models.WritableProvider) *CircuitsProvidersCreateParams {
+func (o *CircuitsProvidersCreateParams) WithData(data *models.Provider) *CircuitsProvidersCreateParams {
 	o.SetData(data)
 	return o
 }
 
 // SetData adds the data to the circuits providers create params
-func (o *CircuitsProvidersCreateParams) SetData(data *models.WritableProvider) {
+func (o *CircuitsProvidersCreateParams) SetData(data *models.Provider) {
 	o.Data = data
 }
 

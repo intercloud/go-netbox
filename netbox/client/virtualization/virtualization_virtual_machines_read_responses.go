@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationVirtualMachinesReadReader is a Reader for the VirtualizationVirtualMachinesRead structure.
@@ -45,14 +45,7 @@ func (o *VirtualizationVirtualMachinesReadReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationVirtualMachinesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewVirtualizationVirtualMachinesReadOK() *VirtualizationVirtualMachinesRead
 	return &VirtualizationVirtualMachinesReadOK{}
 }
 
-/* VirtualizationVirtualMachinesReadOK describes a response with status code 200, with default header values.
+/*
+VirtualizationVirtualMachinesReadOK describes a response with status code 200, with default header values.
 
 VirtualizationVirtualMachinesReadOK virtualization virtual machines read o k
 */
@@ -69,9 +63,39 @@ type VirtualizationVirtualMachinesReadOK struct {
 	Payload *models.VirtualMachineWithConfigContext
 }
 
+// IsSuccess returns true when this virtualization virtual machines read o k response has a 2xx status code
+func (o *VirtualizationVirtualMachinesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization virtual machines read o k response has a 3xx status code
+func (o *VirtualizationVirtualMachinesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization virtual machines read o k response has a 4xx status code
+func (o *VirtualizationVirtualMachinesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization virtual machines read o k response has a 5xx status code
+func (o *VirtualizationVirtualMachinesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization virtual machines read o k response a status code equal to that given
+func (o *VirtualizationVirtualMachinesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VirtualizationVirtualMachinesReadOK) Error() string {
 	return fmt.Sprintf("[GET /virtualization/virtual-machines/{id}/][%d] virtualizationVirtualMachinesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *VirtualizationVirtualMachinesReadOK) String() string {
+	return fmt.Sprintf("[GET /virtualization/virtual-machines/{id}/][%d] virtualizationVirtualMachinesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *VirtualizationVirtualMachinesReadOK) GetPayload() *models.VirtualMachineWithConfigContext {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *VirtualizationVirtualMachinesReadOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewVirtualizationVirtualMachinesReadDefault creates a VirtualizationVirtualMachinesReadDefault with default headers values
-func NewVirtualizationVirtualMachinesReadDefault(code int) *VirtualizationVirtualMachinesReadDefault {
-	return &VirtualizationVirtualMachinesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationVirtualMachinesReadDefault describes a response with status code -1, with default header values.
-
-VirtualizationVirtualMachinesReadDefault virtualization virtual machines read default
-*/
-type VirtualizationVirtualMachinesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization virtual machines read default response
-func (o *VirtualizationVirtualMachinesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationVirtualMachinesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /virtualization/virtual-machines/{id}/][%d] virtualization_virtual-machines_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationVirtualMachinesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationVirtualMachinesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

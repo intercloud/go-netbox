@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamIPRangesBulkPartialUpdateReader is a Reader for the IpamIPRangesBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *IpamIPRangesBulkPartialUpdateReader) ReadResponse(response runtime.Clie
 		}
 		return result, nil
 	default:
-		result := NewIpamIPRangesBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamIPRangesBulkPartialUpdateOK() *IpamIPRangesBulkPartialUpdateOK {
 	return &IpamIPRangesBulkPartialUpdateOK{}
 }
 
-/* IpamIPRangesBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+IpamIPRangesBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 IpamIPRangesBulkPartialUpdateOK ipam Ip ranges bulk partial update o k
 */
@@ -69,9 +63,39 @@ type IpamIPRangesBulkPartialUpdateOK struct {
 	Payload *models.IPRange
 }
 
+// IsSuccess returns true when this ipam Ip ranges bulk partial update o k response has a 2xx status code
+func (o *IpamIPRangesBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam Ip ranges bulk partial update o k response has a 3xx status code
+func (o *IpamIPRangesBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam Ip ranges bulk partial update o k response has a 4xx status code
+func (o *IpamIPRangesBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam Ip ranges bulk partial update o k response has a 5xx status code
+func (o *IpamIPRangesBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam Ip ranges bulk partial update o k response a status code equal to that given
+func (o *IpamIPRangesBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamIPRangesBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /ipam/ip-ranges/][%d] ipamIpRangesBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamIPRangesBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /ipam/ip-ranges/][%d] ipamIpRangesBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamIPRangesBulkPartialUpdateOK) GetPayload() *models.IPRange {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamIPRangesBulkPartialUpdateOK) readResponse(response runtime.ClientRe
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamIPRangesBulkPartialUpdateDefault creates a IpamIPRangesBulkPartialUpdateDefault with default headers values
-func NewIpamIPRangesBulkPartialUpdateDefault(code int) *IpamIPRangesBulkPartialUpdateDefault {
-	return &IpamIPRangesBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamIPRangesBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-IpamIPRangesBulkPartialUpdateDefault ipam ip ranges bulk partial update default
-*/
-type IpamIPRangesBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam ip ranges bulk partial update default response
-func (o *IpamIPRangesBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamIPRangesBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /ipam/ip-ranges/][%d] ipam_ip-ranges_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamIPRangesBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamIPRangesBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

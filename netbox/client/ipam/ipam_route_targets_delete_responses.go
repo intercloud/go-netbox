@@ -22,7 +22,6 @@ package ipam
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *IpamRouteTargetsDeleteReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewIpamRouteTargetsDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewIpamRouteTargetsDeleteNoContent() *IpamRouteTargetsDeleteNoContent {
 	return &IpamRouteTargetsDeleteNoContent{}
 }
 
-/* IpamRouteTargetsDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamRouteTargetsDeleteNoContent describes a response with status code 204, with default header values.
 
 IpamRouteTargetsDeleteNoContent ipam route targets delete no content
 */
 type IpamRouteTargetsDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this ipam route targets delete no content response has a 2xx status code
+func (o *IpamRouteTargetsDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam route targets delete no content response has a 3xx status code
+func (o *IpamRouteTargetsDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam route targets delete no content response has a 4xx status code
+func (o *IpamRouteTargetsDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam route targets delete no content response has a 5xx status code
+func (o *IpamRouteTargetsDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam route targets delete no content response a status code equal to that given
+func (o *IpamRouteTargetsDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *IpamRouteTargetsDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /ipam/route-targets/{id}/][%d] ipamRouteTargetsDeleteNoContent ", 204)
 }
 
+func (o *IpamRouteTargetsDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /ipam/route-targets/{id}/][%d] ipamRouteTargetsDeleteNoContent ", 204)
+}
+
 func (o *IpamRouteTargetsDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewIpamRouteTargetsDeleteDefault creates a IpamRouteTargetsDeleteDefault with default headers values
-func NewIpamRouteTargetsDeleteDefault(code int) *IpamRouteTargetsDeleteDefault {
-	return &IpamRouteTargetsDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamRouteTargetsDeleteDefault describes a response with status code -1, with default header values.
-
-IpamRouteTargetsDeleteDefault ipam route targets delete default
-*/
-type IpamRouteTargetsDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam route targets delete default response
-func (o *IpamRouteTargetsDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamRouteTargetsDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/route-targets/{id}/][%d] ipam_route-targets_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamRouteTargetsDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamRouteTargetsDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

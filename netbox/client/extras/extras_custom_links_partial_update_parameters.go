@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewExtrasCustomLinksPartialUpdateParams creates a new ExtrasCustomLinksPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewExtrasCustomLinksPartialUpdateParamsWithHTTPClient(client *http.Client) 
 	}
 }
 
-/* ExtrasCustomLinksPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the extras custom links partial update operation.
+/*
+ExtrasCustomLinksPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the extras custom links partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type ExtrasCustomLinksPartialUpdateParams struct {
 

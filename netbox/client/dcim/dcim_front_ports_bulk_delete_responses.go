@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimFrontPortsBulkDeleteReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewDcimFrontPortsBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimFrontPortsBulkDeleteNoContent() *DcimFrontPortsBulkDeleteNoContent {
 	return &DcimFrontPortsBulkDeleteNoContent{}
 }
 
-/* DcimFrontPortsBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimFrontPortsBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimFrontPortsBulkDeleteNoContent dcim front ports bulk delete no content
 */
 type DcimFrontPortsBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim front ports bulk delete no content response has a 2xx status code
+func (o *DcimFrontPortsBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim front ports bulk delete no content response has a 3xx status code
+func (o *DcimFrontPortsBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim front ports bulk delete no content response has a 4xx status code
+func (o *DcimFrontPortsBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim front ports bulk delete no content response has a 5xx status code
+func (o *DcimFrontPortsBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim front ports bulk delete no content response a status code equal to that given
+func (o *DcimFrontPortsBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimFrontPortsBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/front-ports/][%d] dcimFrontPortsBulkDeleteNoContent ", 204)
 }
 
+func (o *DcimFrontPortsBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/front-ports/][%d] dcimFrontPortsBulkDeleteNoContent ", 204)
+}
+
 func (o *DcimFrontPortsBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimFrontPortsBulkDeleteDefault creates a DcimFrontPortsBulkDeleteDefault with default headers values
-func NewDcimFrontPortsBulkDeleteDefault(code int) *DcimFrontPortsBulkDeleteDefault {
-	return &DcimFrontPortsBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimFrontPortsBulkDeleteDefault describes a response with status code -1, with default header values.
-
-DcimFrontPortsBulkDeleteDefault dcim front ports bulk delete default
-*/
-type DcimFrontPortsBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim front ports bulk delete default response
-func (o *DcimFrontPortsBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimFrontPortsBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/front-ports/][%d] dcim_front-ports_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimFrontPortsBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimFrontPortsBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

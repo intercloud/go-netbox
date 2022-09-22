@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // WirelessWirelessLinksListReader is a Reader for the WirelessWirelessLinksList structure.
@@ -50,14 +50,7 @@ func (o *WirelessWirelessLinksListReader) ReadResponse(response runtime.ClientRe
 		}
 		return result, nil
 	default:
-		result := NewWirelessWirelessLinksListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewWirelessWirelessLinksListOK() *WirelessWirelessLinksListOK {
 	return &WirelessWirelessLinksListOK{}
 }
 
-/* WirelessWirelessLinksListOK describes a response with status code 200, with default header values.
+/*
+WirelessWirelessLinksListOK describes a response with status code 200, with default header values.
 
 WirelessWirelessLinksListOK wireless wireless links list o k
 */
@@ -74,9 +68,39 @@ type WirelessWirelessLinksListOK struct {
 	Payload *WirelessWirelessLinksListOKBody
 }
 
+// IsSuccess returns true when this wireless wireless links list o k response has a 2xx status code
+func (o *WirelessWirelessLinksListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this wireless wireless links list o k response has a 3xx status code
+func (o *WirelessWirelessLinksListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this wireless wireless links list o k response has a 4xx status code
+func (o *WirelessWirelessLinksListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this wireless wireless links list o k response has a 5xx status code
+func (o *WirelessWirelessLinksListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this wireless wireless links list o k response a status code equal to that given
+func (o *WirelessWirelessLinksListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *WirelessWirelessLinksListOK) Error() string {
 	return fmt.Sprintf("[GET /wireless/wireless-links/][%d] wirelessWirelessLinksListOK  %+v", 200, o.Payload)
 }
+
+func (o *WirelessWirelessLinksListOK) String() string {
+	return fmt.Sprintf("[GET /wireless/wireless-links/][%d] wirelessWirelessLinksListOK  %+v", 200, o.Payload)
+}
+
 func (o *WirelessWirelessLinksListOK) GetPayload() *WirelessWirelessLinksListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *WirelessWirelessLinksListOK) readResponse(response runtime.ClientRespon
 	return nil
 }
 
-// NewWirelessWirelessLinksListDefault creates a WirelessWirelessLinksListDefault with default headers values
-func NewWirelessWirelessLinksListDefault(code int) *WirelessWirelessLinksListDefault {
-	return &WirelessWirelessLinksListDefault{
-		_statusCode: code,
-	}
-}
-
-/* WirelessWirelessLinksListDefault describes a response with status code -1, with default header values.
-
-WirelessWirelessLinksListDefault wireless wireless links list default
-*/
-type WirelessWirelessLinksListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the wireless wireless links list default response
-func (o *WirelessWirelessLinksListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *WirelessWirelessLinksListDefault) Error() string {
-	return fmt.Sprintf("[GET /wireless/wireless-links/][%d] wireless_wireless-links_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *WirelessWirelessLinksListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *WirelessWirelessLinksListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*WirelessWirelessLinksListOKBody wireless wireless links list o k body
+/*
+WirelessWirelessLinksListOKBody wireless wireless links list o k body
 swagger:model WirelessWirelessLinksListOKBody
 */
 type WirelessWirelessLinksListOKBody struct {

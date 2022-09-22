@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimRearPortTemplatesCreateParams creates a new DcimRearPortTemplatesCreateParams object,
@@ -69,10 +69,12 @@ func NewDcimRearPortTemplatesCreateParamsWithHTTPClient(client *http.Client) *Dc
 	}
 }
 
-/* DcimRearPortTemplatesCreateParams contains all the parameters to send to the API endpoint
-   for the dcim rear port templates create operation.
+/*
+DcimRearPortTemplatesCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim rear port templates create operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimRearPortTemplatesCreateParams struct {
 

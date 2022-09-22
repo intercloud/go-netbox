@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasJobResultsListReader is a Reader for the ExtrasJobResultsList structure.
@@ -50,14 +50,7 @@ func (o *ExtrasJobResultsListReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewExtrasJobResultsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewExtrasJobResultsListOK() *ExtrasJobResultsListOK {
 	return &ExtrasJobResultsListOK{}
 }
 
-/* ExtrasJobResultsListOK describes a response with status code 200, with default header values.
+/*
+ExtrasJobResultsListOK describes a response with status code 200, with default header values.
 
 ExtrasJobResultsListOK extras job results list o k
 */
@@ -74,9 +68,39 @@ type ExtrasJobResultsListOK struct {
 	Payload *ExtrasJobResultsListOKBody
 }
 
+// IsSuccess returns true when this extras job results list o k response has a 2xx status code
+func (o *ExtrasJobResultsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras job results list o k response has a 3xx status code
+func (o *ExtrasJobResultsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras job results list o k response has a 4xx status code
+func (o *ExtrasJobResultsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras job results list o k response has a 5xx status code
+func (o *ExtrasJobResultsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras job results list o k response a status code equal to that given
+func (o *ExtrasJobResultsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasJobResultsListOK) Error() string {
 	return fmt.Sprintf("[GET /extras/job-results/][%d] extrasJobResultsListOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasJobResultsListOK) String() string {
+	return fmt.Sprintf("[GET /extras/job-results/][%d] extrasJobResultsListOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasJobResultsListOK) GetPayload() *ExtrasJobResultsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *ExtrasJobResultsListOK) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-// NewExtrasJobResultsListDefault creates a ExtrasJobResultsListDefault with default headers values
-func NewExtrasJobResultsListDefault(code int) *ExtrasJobResultsListDefault {
-	return &ExtrasJobResultsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasJobResultsListDefault describes a response with status code -1, with default header values.
-
-ExtrasJobResultsListDefault extras job results list default
-*/
-type ExtrasJobResultsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras job results list default response
-func (o *ExtrasJobResultsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasJobResultsListDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/job-results/][%d] extras_job-results_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasJobResultsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasJobResultsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*ExtrasJobResultsListOKBody extras job results list o k body
+/*
+ExtrasJobResultsListOKBody extras job results list o k body
 swagger:model ExtrasJobResultsListOKBody
 */
 type ExtrasJobResultsListOKBody struct {

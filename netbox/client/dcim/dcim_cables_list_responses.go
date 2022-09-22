@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimCablesListReader is a Reader for the DcimCablesList structure.
@@ -50,14 +50,7 @@ func (o *DcimCablesListReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 	default:
-		result := NewDcimCablesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimCablesListOK() *DcimCablesListOK {
 	return &DcimCablesListOK{}
 }
 
-/* DcimCablesListOK describes a response with status code 200, with default header values.
+/*
+DcimCablesListOK describes a response with status code 200, with default header values.
 
 DcimCablesListOK dcim cables list o k
 */
@@ -74,9 +68,39 @@ type DcimCablesListOK struct {
 	Payload *DcimCablesListOKBody
 }
 
+// IsSuccess returns true when this dcim cables list o k response has a 2xx status code
+func (o *DcimCablesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim cables list o k response has a 3xx status code
+func (o *DcimCablesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim cables list o k response has a 4xx status code
+func (o *DcimCablesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim cables list o k response has a 5xx status code
+func (o *DcimCablesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim cables list o k response a status code equal to that given
+func (o *DcimCablesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimCablesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/cables/][%d] dcimCablesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimCablesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/cables/][%d] dcimCablesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimCablesListOK) GetPayload() *DcimCablesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimCablesListOK) readResponse(response runtime.ClientResponse, consume
 	return nil
 }
 
-// NewDcimCablesListDefault creates a DcimCablesListDefault with default headers values
-func NewDcimCablesListDefault(code int) *DcimCablesListDefault {
-	return &DcimCablesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimCablesListDefault describes a response with status code -1, with default header values.
-
-DcimCablesListDefault dcim cables list default
-*/
-type DcimCablesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim cables list default response
-func (o *DcimCablesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimCablesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/cables/][%d] dcim_cables_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimCablesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimCablesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimCablesListOKBody dcim cables list o k body
+/*
+DcimCablesListOKBody dcim cables list o k body
 swagger:model DcimCablesListOKBody
 */
 type DcimCablesListOKBody struct {

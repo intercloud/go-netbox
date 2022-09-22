@@ -22,7 +22,6 @@ package dcim
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *DcimPowerOutletTemplatesDeleteReader) ReadResponse(response runtime.Cli
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerOutletTemplatesDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewDcimPowerOutletTemplatesDeleteNoContent() *DcimPowerOutletTemplatesDelet
 	return &DcimPowerOutletTemplatesDeleteNoContent{}
 }
 
-/* DcimPowerOutletTemplatesDeleteNoContent describes a response with status code 204, with default header values.
+/*
+DcimPowerOutletTemplatesDeleteNoContent describes a response with status code 204, with default header values.
 
 DcimPowerOutletTemplatesDeleteNoContent dcim power outlet templates delete no content
 */
 type DcimPowerOutletTemplatesDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this dcim power outlet templates delete no content response has a 2xx status code
+func (o *DcimPowerOutletTemplatesDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power outlet templates delete no content response has a 3xx status code
+func (o *DcimPowerOutletTemplatesDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power outlet templates delete no content response has a 4xx status code
+func (o *DcimPowerOutletTemplatesDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power outlet templates delete no content response has a 5xx status code
+func (o *DcimPowerOutletTemplatesDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power outlet templates delete no content response a status code equal to that given
+func (o *DcimPowerOutletTemplatesDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *DcimPowerOutletTemplatesDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /dcim/power-outlet-templates/{id}/][%d] dcimPowerOutletTemplatesDeleteNoContent ", 204)
 }
 
+func (o *DcimPowerOutletTemplatesDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /dcim/power-outlet-templates/{id}/][%d] dcimPowerOutletTemplatesDeleteNoContent ", 204)
+}
+
 func (o *DcimPowerOutletTemplatesDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewDcimPowerOutletTemplatesDeleteDefault creates a DcimPowerOutletTemplatesDeleteDefault with default headers values
-func NewDcimPowerOutletTemplatesDeleteDefault(code int) *DcimPowerOutletTemplatesDeleteDefault {
-	return &DcimPowerOutletTemplatesDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerOutletTemplatesDeleteDefault describes a response with status code -1, with default header values.
-
-DcimPowerOutletTemplatesDeleteDefault dcim power outlet templates delete default
-*/
-type DcimPowerOutletTemplatesDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power outlet templates delete default response
-func (o *DcimPowerOutletTemplatesDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerOutletTemplatesDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /dcim/power-outlet-templates/{id}/][%d] dcim_power-outlet-templates_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerOutletTemplatesDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerOutletTemplatesDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

@@ -72,8 +72,8 @@ type Interface struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -90,13 +90,10 @@ type Interface struct {
 	// Read Only: true
 	Display string `json:"display,omitempty"`
 
-	// duplex
-	Duplex *InterfaceDuplex `json:"duplex,omitempty"`
-
 	// Enabled
 	Enabled bool `json:"enabled,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -142,9 +139,6 @@ type Interface struct {
 	// mode
 	Mode *InterfaceMode `json:"mode,omitempty"`
 
-	// module
-	Module *ComponentNestedModule `json:"module,omitempty"`
-
 	// MTU
 	// Maximum: 65536
 	// Minimum: 1
@@ -171,17 +165,12 @@ type Interface struct {
 	// rf role
 	RfRole *InterfaceRfRole `json:"rf_role,omitempty"`
 
-	// Speed
-	// Maximum: 2.147483647e+09
-	// Minimum: 0
-	Speed *int64 `json:"speed,omitempty"`
-
 	// tagged vlans
 	// Unique: true
 	TaggedVlans []*NestedVLAN `json:"tagged_vlans"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Transmit power (dBm)
 	// Maximum: 127
@@ -199,9 +188,6 @@ type Interface struct {
 	// Read Only: true
 	// Format: uri
 	URL strfmt.URI `json:"url,omitempty"`
-
-	// vrf
-	Vrf *NestedVRF `json:"vrf,omitempty"`
 
 	// wireless lans
 	// Unique: true
@@ -240,10 +226,6 @@ func (m *Interface) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateDuplex(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateLabel(formats); err != nil {
 		res = append(res, err)
 	}
@@ -257,10 +239,6 @@ func (m *Interface) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateMode(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateModule(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -281,10 +259,6 @@ func (m *Interface) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRfRole(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSpeed(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -309,10 +283,6 @@ func (m *Interface) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateURL(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateVrf(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -373,7 +343,7 @@ func (m *Interface) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -404,25 +374,6 @@ func (m *Interface) validateDevice(formats strfmt.Registry) error {
 				return ve.ValidateName("device")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("device")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Interface) validateDuplex(formats strfmt.Registry) error {
-	if swag.IsZero(m.Duplex) { // not required
-		return nil
-	}
-
-	if m.Duplex != nil {
-		if err := m.Duplex.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("duplex")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("duplex")
 			}
 			return err
 		}
@@ -485,25 +436,6 @@ func (m *Interface) validateMode(formats strfmt.Registry) error {
 				return ve.ValidateName("mode")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mode")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Interface) validateModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.Module) { // not required
-		return nil
-	}
-
-	if m.Module != nil {
-		if err := m.Module.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("module")
 			}
 			return err
 		}
@@ -597,22 +529,6 @@ func (m *Interface) validateRfRole(formats strfmt.Registry) error {
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *Interface) validateSpeed(formats strfmt.Registry) error {
-	if swag.IsZero(m.Speed) { // not required
-		return nil
-	}
-
-	if err := validate.MinimumInt("speed", "body", *m.Speed, 0, false); err != nil {
-		return err
-	}
-
-	if err := validate.MaximumInt("speed", "body", *m.Speed, 2.147483647e+09, false); err != nil {
-		return err
 	}
 
 	return nil
@@ -741,25 +657,6 @@ func (m *Interface) validateURL(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Interface) validateVrf(formats strfmt.Registry) error {
-	if swag.IsZero(m.Vrf) { // not required
-		return nil
-	}
-
-	if m.Vrf != nil {
-		if err := m.Vrf.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vrf")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vrf")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Interface) validateWirelessLans(formats strfmt.Registry) error {
 	if swag.IsZero(m.WirelessLans) { // not required
 		return nil
@@ -857,10 +754,6 @@ func (m *Interface) ContextValidate(ctx context.Context, formats strfmt.Registry
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateDuplex(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateID(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -882,10 +775,6 @@ func (m *Interface) ContextValidate(ctx context.Context, formats strfmt.Registry
 	}
 
 	if err := m.contextValidateMode(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateModule(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -918,10 +807,6 @@ func (m *Interface) ContextValidate(ctx context.Context, formats strfmt.Registry
 	}
 
 	if err := m.contextValidateURL(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateVrf(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1023,7 +908,7 @@ func (m *Interface) contextValidateCountIpaddresses(ctx context.Context, formats
 
 func (m *Interface) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 
@@ -1050,22 +935,6 @@ func (m *Interface) contextValidateDisplay(ctx context.Context, formats strfmt.R
 
 	if err := validate.ReadOnly(ctx, "display", "body", string(m.Display)); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *Interface) contextValidateDuplex(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Duplex != nil {
-		if err := m.Duplex.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("duplex")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("duplex")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -1127,22 +996,6 @@ func (m *Interface) contextValidateMode(ctx context.Context, formats strfmt.Regi
 				return ve.ValidateName("mode")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("mode")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *Interface) contextValidateModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Module != nil {
-		if err := m.Module.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("module")
 			}
 			return err
 		}
@@ -1280,22 +1133,6 @@ func (m *Interface) contextValidateURL(ctx context.Context, formats strfmt.Regis
 	return nil
 }
 
-func (m *Interface) contextValidateVrf(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Vrf != nil {
-		if err := m.Vrf.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vrf")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vrf")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *Interface) contextValidateWirelessLans(ctx context.Context, formats strfmt.Registry) error {
 
 	for i := 0; i < len(m.WirelessLans); i++ {
@@ -1343,155 +1180,6 @@ func (m *Interface) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *Interface) UnmarshalBinary(b []byte) error {
 	var res Interface
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*m = res
-	return nil
-}
-
-// InterfaceDuplex Duplex
-//
-// swagger:model InterfaceDuplex
-type InterfaceDuplex struct {
-
-	// label
-	// Required: true
-	// Enum: [Half Full Auto]
-	Label *string `json:"label"`
-
-	// value
-	// Required: true
-	// Enum: [half full auto]
-	Value *string `json:"value"`
-}
-
-// Validate validates this interface duplex
-func (m *InterfaceDuplex) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateLabel(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateValue(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-var interfaceDuplexTypeLabelPropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["Half","Full","Auto"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		interfaceDuplexTypeLabelPropEnum = append(interfaceDuplexTypeLabelPropEnum, v)
-	}
-}
-
-const (
-
-	// InterfaceDuplexLabelHalf captures enum value "Half"
-	InterfaceDuplexLabelHalf string = "Half"
-
-	// InterfaceDuplexLabelFull captures enum value "Full"
-	InterfaceDuplexLabelFull string = "Full"
-
-	// InterfaceDuplexLabelAuto captures enum value "Auto"
-	InterfaceDuplexLabelAuto string = "Auto"
-)
-
-// prop value enum
-func (m *InterfaceDuplex) validateLabelEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, interfaceDuplexTypeLabelPropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *InterfaceDuplex) validateLabel(formats strfmt.Registry) error {
-
-	if err := validate.Required("duplex"+"."+"label", "body", m.Label); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateLabelEnum("duplex"+"."+"label", "body", *m.Label); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-var interfaceDuplexTypeValuePropEnum []interface{}
-
-func init() {
-	var res []string
-	if err := json.Unmarshal([]byte(`["half","full","auto"]`), &res); err != nil {
-		panic(err)
-	}
-	for _, v := range res {
-		interfaceDuplexTypeValuePropEnum = append(interfaceDuplexTypeValuePropEnum, v)
-	}
-}
-
-const (
-
-	// InterfaceDuplexValueHalf captures enum value "half"
-	InterfaceDuplexValueHalf string = "half"
-
-	// InterfaceDuplexValueFull captures enum value "full"
-	InterfaceDuplexValueFull string = "full"
-
-	// InterfaceDuplexValueAuto captures enum value "auto"
-	InterfaceDuplexValueAuto string = "auto"
-)
-
-// prop value enum
-func (m *InterfaceDuplex) validateValueEnum(path, location string, value string) error {
-	if err := validate.EnumCase(path, location, value, interfaceDuplexTypeValuePropEnum, true); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (m *InterfaceDuplex) validateValue(formats strfmt.Registry) error {
-
-	if err := validate.Required("duplex"+"."+"value", "body", m.Value); err != nil {
-		return err
-	}
-
-	// value enum
-	if err := m.validateValueEnum("duplex"+"."+"value", "body", *m.Value); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// ContextValidate validates this interface duplex based on context it is used
-func (m *InterfaceDuplex) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (m *InterfaceDuplex) MarshalBinary() ([]byte, error) {
-	if m == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(m)
-}
-
-// UnmarshalBinary interface implementation
-func (m *InterfaceDuplex) UnmarshalBinary(b []byte) error {
-	var res InterfaceDuplex
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

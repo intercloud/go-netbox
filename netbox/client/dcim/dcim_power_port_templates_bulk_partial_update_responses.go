@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPowerPortTemplatesBulkPartialUpdateReader is a Reader for the DcimPowerPortTemplatesBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimPowerPortTemplatesBulkPartialUpdateReader) ReadResponse(response ru
 		}
 		return result, nil
 	default:
-		result := NewDcimPowerPortTemplatesBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimPowerPortTemplatesBulkPartialUpdateOK() *DcimPowerPortTemplatesBulkP
 	return &DcimPowerPortTemplatesBulkPartialUpdateOK{}
 }
 
-/* DcimPowerPortTemplatesBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimPowerPortTemplatesBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimPowerPortTemplatesBulkPartialUpdateOK dcim power port templates bulk partial update o k
 */
@@ -69,9 +63,39 @@ type DcimPowerPortTemplatesBulkPartialUpdateOK struct {
 	Payload *models.PowerPortTemplate
 }
 
+// IsSuccess returns true when this dcim power port templates bulk partial update o k response has a 2xx status code
+func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim power port templates bulk partial update o k response has a 3xx status code
+func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim power port templates bulk partial update o k response has a 4xx status code
+func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim power port templates bulk partial update o k response has a 5xx status code
+func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim power port templates bulk partial update o k response a status code equal to that given
+func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/power-port-templates/][%d] dcimPowerPortTemplatesBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/power-port-templates/][%d] dcimPowerPortTemplatesBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) GetPayload() *models.PowerPortTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimPowerPortTemplatesBulkPartialUpdateOK) readResponse(response runtim
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimPowerPortTemplatesBulkPartialUpdateDefault creates a DcimPowerPortTemplatesBulkPartialUpdateDefault with default headers values
-func NewDcimPowerPortTemplatesBulkPartialUpdateDefault(code int) *DcimPowerPortTemplatesBulkPartialUpdateDefault {
-	return &DcimPowerPortTemplatesBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPowerPortTemplatesBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimPowerPortTemplatesBulkPartialUpdateDefault dcim power port templates bulk partial update default
-*/
-type DcimPowerPortTemplatesBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim power port templates bulk partial update default response
-func (o *DcimPowerPortTemplatesBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPowerPortTemplatesBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/power-port-templates/][%d] dcim_power-port-templates_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPowerPortTemplatesBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPowerPortTemplatesBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -68,10 +68,12 @@ func NewDcimVirtualChassisListParamsWithHTTPClient(client *http.Client) *DcimVir
 	}
 }
 
-/* DcimVirtualChassisListParams contains all the parameters to send to the API endpoint
-   for the dcim virtual chassis list operation.
+/*
+DcimVirtualChassisListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim virtual chassis list operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimVirtualChassisListParams struct {
 
@@ -86,6 +88,9 @@ type DcimVirtualChassisListParams struct {
 
 	// Domain.
 	Domain *string
+
+	// DomainEmpty.
+	DomainEmpty *string
 
 	// DomainIc.
 	DomainIc *string
@@ -161,6 +166,9 @@ type DcimVirtualChassisListParams struct {
 
 	// Name.
 	Name *string
+
+	// NameEmpty.
+	NameEmpty *string
 
 	// NameIc.
 	NameIc *string
@@ -347,6 +355,17 @@ func (o *DcimVirtualChassisListParams) WithDomain(domain *string) *DcimVirtualCh
 // SetDomain adds the domain to the dcim virtual chassis list params
 func (o *DcimVirtualChassisListParams) SetDomain(domain *string) {
 	o.Domain = domain
+}
+
+// WithDomainEmpty adds the domainEmpty to the dcim virtual chassis list params
+func (o *DcimVirtualChassisListParams) WithDomainEmpty(domainEmpty *string) *DcimVirtualChassisListParams {
+	o.SetDomainEmpty(domainEmpty)
+	return o
+}
+
+// SetDomainEmpty adds the domainEmpty to the dcim virtual chassis list params
+func (o *DcimVirtualChassisListParams) SetDomainEmpty(domainEmpty *string) {
+	o.DomainEmpty = domainEmpty
 }
 
 // WithDomainIc adds the domainIc to the dcim virtual chassis list params
@@ -611,6 +630,17 @@ func (o *DcimVirtualChassisListParams) WithName(name *string) *DcimVirtualChassi
 // SetName adds the name to the dcim virtual chassis list params
 func (o *DcimVirtualChassisListParams) SetName(name *string) {
 	o.Name = name
+}
+
+// WithNameEmpty adds the nameEmpty to the dcim virtual chassis list params
+func (o *DcimVirtualChassisListParams) WithNameEmpty(nameEmpty *string) *DcimVirtualChassisListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the dcim virtual chassis list params
+func (o *DcimVirtualChassisListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
 }
 
 // WithNameIc adds the nameIc to the dcim virtual chassis list params
@@ -1003,6 +1033,23 @@ func (o *DcimVirtualChassisListParams) WriteToRequest(r runtime.ClientRequest, r
 		if qDomain != "" {
 
 			if err := r.SetQueryParam("domain", qDomain); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.DomainEmpty != nil {
+
+		// query param domain__empty
+		var qrDomainEmpty string
+
+		if o.DomainEmpty != nil {
+			qrDomainEmpty = *o.DomainEmpty
+		}
+		qDomainEmpty := qrDomainEmpty
+		if qDomainEmpty != "" {
+
+			if err := r.SetQueryParam("domain__empty", qDomainEmpty); err != nil {
 				return err
 			}
 		}
@@ -1411,6 +1458,23 @@ func (o *DcimVirtualChassisListParams) WriteToRequest(r runtime.ClientRequest, r
 		if qName != "" {
 
 			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
 				return err
 			}
 		}

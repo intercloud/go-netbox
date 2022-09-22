@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewExtrasCustomFieldsUpdateParams creates a new ExtrasCustomFieldsUpdateParams object,
@@ -70,10 +70,12 @@ func NewExtrasCustomFieldsUpdateParamsWithHTTPClient(client *http.Client) *Extra
 	}
 }
 
-/* ExtrasCustomFieldsUpdateParams contains all the parameters to send to the API endpoint
-   for the extras custom fields update operation.
+/*
+ExtrasCustomFieldsUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the extras custom fields update operation.
+
+	Typically these are written to a http.Request.
 */
 type ExtrasCustomFieldsUpdateParams struct {
 

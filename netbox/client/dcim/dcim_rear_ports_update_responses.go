@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRearPortsUpdateReader is a Reader for the DcimRearPortsUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimRearPortsUpdateReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewDcimRearPortsUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimRearPortsUpdateOK() *DcimRearPortsUpdateOK {
 	return &DcimRearPortsUpdateOK{}
 }
 
-/* DcimRearPortsUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimRearPortsUpdateOK describes a response with status code 200, with default header values.
 
 DcimRearPortsUpdateOK dcim rear ports update o k
 */
@@ -69,9 +63,39 @@ type DcimRearPortsUpdateOK struct {
 	Payload *models.RearPort
 }
 
+// IsSuccess returns true when this dcim rear ports update o k response has a 2xx status code
+func (o *DcimRearPortsUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rear ports update o k response has a 3xx status code
+func (o *DcimRearPortsUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rear ports update o k response has a 4xx status code
+func (o *DcimRearPortsUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rear ports update o k response has a 5xx status code
+func (o *DcimRearPortsUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rear ports update o k response a status code equal to that given
+func (o *DcimRearPortsUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRearPortsUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /dcim/rear-ports/{id}/][%d] dcimRearPortsUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRearPortsUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /dcim/rear-ports/{id}/][%d] dcimRearPortsUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRearPortsUpdateOK) GetPayload() *models.RearPort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimRearPortsUpdateOK) readResponse(response runtime.ClientResponse, co
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimRearPortsUpdateDefault creates a DcimRearPortsUpdateDefault with default headers values
-func NewDcimRearPortsUpdateDefault(code int) *DcimRearPortsUpdateDefault {
-	return &DcimRearPortsUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRearPortsUpdateDefault describes a response with status code -1, with default header values.
-
-DcimRearPortsUpdateDefault dcim rear ports update default
-*/
-type DcimRearPortsUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rear ports update default response
-func (o *DcimRearPortsUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRearPortsUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /dcim/rear-ports/{id}/][%d] dcim_rear-ports_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRearPortsUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRearPortsUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

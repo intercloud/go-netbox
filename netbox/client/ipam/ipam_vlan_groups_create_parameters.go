@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamVlanGroupsCreateParams creates a new IpamVlanGroupsCreateParams object,
@@ -69,10 +69,12 @@ func NewIpamVlanGroupsCreateParamsWithHTTPClient(client *http.Client) *IpamVlanG
 	}
 }
 
-/* IpamVlanGroupsCreateParams contains all the parameters to send to the API endpoint
-   for the ipam vlan groups create operation.
+/*
+IpamVlanGroupsCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam vlan groups create operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamVlanGroupsCreateParams struct {
 

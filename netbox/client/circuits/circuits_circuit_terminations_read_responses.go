@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // CircuitsCircuitTerminationsReadReader is a Reader for the CircuitsCircuitTerminationsRead structure.
@@ -45,14 +45,7 @@ func (o *CircuitsCircuitTerminationsReadReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 	default:
-		result := NewCircuitsCircuitTerminationsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewCircuitsCircuitTerminationsReadOK() *CircuitsCircuitTerminationsReadOK {
 	return &CircuitsCircuitTerminationsReadOK{}
 }
 
-/* CircuitsCircuitTerminationsReadOK describes a response with status code 200, with default header values.
+/*
+CircuitsCircuitTerminationsReadOK describes a response with status code 200, with default header values.
 
 CircuitsCircuitTerminationsReadOK circuits circuit terminations read o k
 */
@@ -69,9 +63,39 @@ type CircuitsCircuitTerminationsReadOK struct {
 	Payload *models.CircuitTermination
 }
 
+// IsSuccess returns true when this circuits circuit terminations read o k response has a 2xx status code
+func (o *CircuitsCircuitTerminationsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits circuit terminations read o k response has a 3xx status code
+func (o *CircuitsCircuitTerminationsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits circuit terminations read o k response has a 4xx status code
+func (o *CircuitsCircuitTerminationsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits circuit terminations read o k response has a 5xx status code
+func (o *CircuitsCircuitTerminationsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits circuit terminations read o k response a status code equal to that given
+func (o *CircuitsCircuitTerminationsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CircuitsCircuitTerminationsReadOK) Error() string {
 	return fmt.Sprintf("[GET /circuits/circuit-terminations/{id}/][%d] circuitsCircuitTerminationsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *CircuitsCircuitTerminationsReadOK) String() string {
+	return fmt.Sprintf("[GET /circuits/circuit-terminations/{id}/][%d] circuitsCircuitTerminationsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *CircuitsCircuitTerminationsReadOK) GetPayload() *models.CircuitTermination {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *CircuitsCircuitTerminationsReadOK) readResponse(response runtime.Client
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewCircuitsCircuitTerminationsReadDefault creates a CircuitsCircuitTerminationsReadDefault with default headers values
-func NewCircuitsCircuitTerminationsReadDefault(code int) *CircuitsCircuitTerminationsReadDefault {
-	return &CircuitsCircuitTerminationsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsCircuitTerminationsReadDefault describes a response with status code -1, with default header values.
-
-CircuitsCircuitTerminationsReadDefault circuits circuit terminations read default
-*/
-type CircuitsCircuitTerminationsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits circuit terminations read default response
-func (o *CircuitsCircuitTerminationsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsCircuitTerminationsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /circuits/circuit-terminations/{id}/][%d] circuits_circuit-terminations_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsCircuitTerminationsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsCircuitTerminationsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

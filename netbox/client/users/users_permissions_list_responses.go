@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersPermissionsListReader is a Reader for the UsersPermissionsList structure.
@@ -50,14 +50,7 @@ func (o *UsersPermissionsListReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewUsersPermissionsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewUsersPermissionsListOK() *UsersPermissionsListOK {
 	return &UsersPermissionsListOK{}
 }
 
-/* UsersPermissionsListOK describes a response with status code 200, with default header values.
+/*
+UsersPermissionsListOK describes a response with status code 200, with default header values.
 
 UsersPermissionsListOK users permissions list o k
 */
@@ -74,9 +68,39 @@ type UsersPermissionsListOK struct {
 	Payload *UsersPermissionsListOKBody
 }
 
+// IsSuccess returns true when this users permissions list o k response has a 2xx status code
+func (o *UsersPermissionsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users permissions list o k response has a 3xx status code
+func (o *UsersPermissionsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users permissions list o k response has a 4xx status code
+func (o *UsersPermissionsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users permissions list o k response has a 5xx status code
+func (o *UsersPermissionsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users permissions list o k response a status code equal to that given
+func (o *UsersPermissionsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UsersPermissionsListOK) Error() string {
 	return fmt.Sprintf("[GET /users/permissions/][%d] usersPermissionsListOK  %+v", 200, o.Payload)
 }
+
+func (o *UsersPermissionsListOK) String() string {
+	return fmt.Sprintf("[GET /users/permissions/][%d] usersPermissionsListOK  %+v", 200, o.Payload)
+}
+
 func (o *UsersPermissionsListOK) GetPayload() *UsersPermissionsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *UsersPermissionsListOK) readResponse(response runtime.ClientResponse, c
 	return nil
 }
 
-// NewUsersPermissionsListDefault creates a UsersPermissionsListDefault with default headers values
-func NewUsersPermissionsListDefault(code int) *UsersPermissionsListDefault {
-	return &UsersPermissionsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersPermissionsListDefault describes a response with status code -1, with default header values.
-
-UsersPermissionsListDefault users permissions list default
-*/
-type UsersPermissionsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users permissions list default response
-func (o *UsersPermissionsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersPermissionsListDefault) Error() string {
-	return fmt.Sprintf("[GET /users/permissions/][%d] users_permissions_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersPermissionsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersPermissionsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*UsersPermissionsListOKBody users permissions list o k body
+/*
+UsersPermissionsListOKBody users permissions list o k body
 swagger:model UsersPermissionsListOKBody
 */
 type UsersPermissionsListOKBody struct {

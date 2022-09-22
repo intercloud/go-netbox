@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyContactGroupsPartialUpdateReader is a Reader for the TenancyContactGroupsPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *TenancyContactGroupsPartialUpdateReader) ReadResponse(response runtime.
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactGroupsPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyContactGroupsPartialUpdateOK() *TenancyContactGroupsPartialUpdate
 	return &TenancyContactGroupsPartialUpdateOK{}
 }
 
-/* TenancyContactGroupsPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+TenancyContactGroupsPartialUpdateOK describes a response with status code 200, with default header values.
 
 TenancyContactGroupsPartialUpdateOK tenancy contact groups partial update o k
 */
@@ -69,9 +63,39 @@ type TenancyContactGroupsPartialUpdateOK struct {
 	Payload *models.ContactGroup
 }
 
+// IsSuccess returns true when this tenancy contact groups partial update o k response has a 2xx status code
+func (o *TenancyContactGroupsPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact groups partial update o k response has a 3xx status code
+func (o *TenancyContactGroupsPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact groups partial update o k response has a 4xx status code
+func (o *TenancyContactGroupsPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact groups partial update o k response has a 5xx status code
+func (o *TenancyContactGroupsPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact groups partial update o k response a status code equal to that given
+func (o *TenancyContactGroupsPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyContactGroupsPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /tenancy/contact-groups/{id}/][%d] tenancyContactGroupsPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyContactGroupsPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /tenancy/contact-groups/{id}/][%d] tenancyContactGroupsPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyContactGroupsPartialUpdateOK) GetPayload() *models.ContactGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyContactGroupsPartialUpdateOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyContactGroupsPartialUpdateDefault creates a TenancyContactGroupsPartialUpdateDefault with default headers values
-func NewTenancyContactGroupsPartialUpdateDefault(code int) *TenancyContactGroupsPartialUpdateDefault {
-	return &TenancyContactGroupsPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactGroupsPartialUpdateDefault describes a response with status code -1, with default header values.
-
-TenancyContactGroupsPartialUpdateDefault tenancy contact groups partial update default
-*/
-type TenancyContactGroupsPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact groups partial update default response
-func (o *TenancyContactGroupsPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactGroupsPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /tenancy/contact-groups/{id}/][%d] tenancy_contact-groups_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactGroupsPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactGroupsPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

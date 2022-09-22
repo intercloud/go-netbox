@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewExtrasConfigContextsBulkPartialUpdateParams creates a new ExtrasConfigContextsBulkPartialUpdateParams object,
@@ -69,10 +69,12 @@ func NewExtrasConfigContextsBulkPartialUpdateParamsWithHTTPClient(client *http.C
 	}
 }
 
-/* ExtrasConfigContextsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the extras config contexts bulk partial update operation.
+/*
+ExtrasConfigContextsBulkPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the extras config contexts bulk partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type ExtrasConfigContextsBulkPartialUpdateParams struct {
 

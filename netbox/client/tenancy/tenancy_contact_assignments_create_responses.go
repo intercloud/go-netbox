@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyContactAssignmentsCreateReader is a Reader for the TenancyContactAssignmentsCreate structure.
@@ -45,14 +45,7 @@ func (o *TenancyContactAssignmentsCreateReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 	default:
-		result := NewTenancyContactAssignmentsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyContactAssignmentsCreateCreated() *TenancyContactAssignmentsCreat
 	return &TenancyContactAssignmentsCreateCreated{}
 }
 
-/* TenancyContactAssignmentsCreateCreated describes a response with status code 201, with default header values.
+/*
+TenancyContactAssignmentsCreateCreated describes a response with status code 201, with default header values.
 
 TenancyContactAssignmentsCreateCreated tenancy contact assignments create created
 */
@@ -69,9 +63,39 @@ type TenancyContactAssignmentsCreateCreated struct {
 	Payload *models.ContactAssignment
 }
 
+// IsSuccess returns true when this tenancy contact assignments create created response has a 2xx status code
+func (o *TenancyContactAssignmentsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy contact assignments create created response has a 3xx status code
+func (o *TenancyContactAssignmentsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy contact assignments create created response has a 4xx status code
+func (o *TenancyContactAssignmentsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy contact assignments create created response has a 5xx status code
+func (o *TenancyContactAssignmentsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy contact assignments create created response a status code equal to that given
+func (o *TenancyContactAssignmentsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *TenancyContactAssignmentsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /tenancy/contact-assignments/][%d] tenancyContactAssignmentsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *TenancyContactAssignmentsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /tenancy/contact-assignments/][%d] tenancyContactAssignmentsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *TenancyContactAssignmentsCreateCreated) GetPayload() *models.ContactAssignment {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyContactAssignmentsCreateCreated) readResponse(response runtime.C
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyContactAssignmentsCreateDefault creates a TenancyContactAssignmentsCreateDefault with default headers values
-func NewTenancyContactAssignmentsCreateDefault(code int) *TenancyContactAssignmentsCreateDefault {
-	return &TenancyContactAssignmentsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyContactAssignmentsCreateDefault describes a response with status code -1, with default header values.
-
-TenancyContactAssignmentsCreateDefault tenancy contact assignments create default
-*/
-type TenancyContactAssignmentsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy contact assignments create default response
-func (o *TenancyContactAssignmentsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyContactAssignmentsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /tenancy/contact-assignments/][%d] tenancy_contact-assignments_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyContactAssignmentsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyContactAssignmentsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

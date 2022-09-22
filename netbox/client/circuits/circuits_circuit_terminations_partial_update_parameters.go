@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewCircuitsCircuitTerminationsPartialUpdateParams creates a new CircuitsCircuitTerminationsPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewCircuitsCircuitTerminationsPartialUpdateParamsWithHTTPClient(client *htt
 	}
 }
 
-/* CircuitsCircuitTerminationsPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the circuits circuit terminations partial update operation.
+/*
+CircuitsCircuitTerminationsPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the circuits circuit terminations partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type CircuitsCircuitTerminationsPartialUpdateParams struct {
 

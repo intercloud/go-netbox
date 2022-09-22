@@ -22,7 +22,6 @@ package wireless
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *WirelessWirelessLansBulkDeleteReader) ReadResponse(response runtime.Cli
 		}
 		return result, nil
 	default:
-		result := NewWirelessWirelessLansBulkDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewWirelessWirelessLansBulkDeleteNoContent() *WirelessWirelessLansBulkDelet
 	return &WirelessWirelessLansBulkDeleteNoContent{}
 }
 
-/* WirelessWirelessLansBulkDeleteNoContent describes a response with status code 204, with default header values.
+/*
+WirelessWirelessLansBulkDeleteNoContent describes a response with status code 204, with default header values.
 
 WirelessWirelessLansBulkDeleteNoContent wireless wireless lans bulk delete no content
 */
 type WirelessWirelessLansBulkDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this wireless wireless lans bulk delete no content response has a 2xx status code
+func (o *WirelessWirelessLansBulkDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this wireless wireless lans bulk delete no content response has a 3xx status code
+func (o *WirelessWirelessLansBulkDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this wireless wireless lans bulk delete no content response has a 4xx status code
+func (o *WirelessWirelessLansBulkDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this wireless wireless lans bulk delete no content response has a 5xx status code
+func (o *WirelessWirelessLansBulkDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this wireless wireless lans bulk delete no content response a status code equal to that given
+func (o *WirelessWirelessLansBulkDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *WirelessWirelessLansBulkDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /wireless/wireless-lans/][%d] wirelessWirelessLansBulkDeleteNoContent ", 204)
 }
 
+func (o *WirelessWirelessLansBulkDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /wireless/wireless-lans/][%d] wirelessWirelessLansBulkDeleteNoContent ", 204)
+}
+
 func (o *WirelessWirelessLansBulkDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewWirelessWirelessLansBulkDeleteDefault creates a WirelessWirelessLansBulkDeleteDefault with default headers values
-func NewWirelessWirelessLansBulkDeleteDefault(code int) *WirelessWirelessLansBulkDeleteDefault {
-	return &WirelessWirelessLansBulkDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* WirelessWirelessLansBulkDeleteDefault describes a response with status code -1, with default header values.
-
-WirelessWirelessLansBulkDeleteDefault wireless wireless lans bulk delete default
-*/
-type WirelessWirelessLansBulkDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the wireless wireless lans bulk delete default response
-func (o *WirelessWirelessLansBulkDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *WirelessWirelessLansBulkDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /wireless/wireless-lans/][%d] wireless_wireless-lans_bulk_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *WirelessWirelessLansBulkDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *WirelessWirelessLansBulkDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

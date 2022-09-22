@@ -68,10 +68,12 @@ func NewDcimRearPortsListParamsWithHTTPClient(client *http.Client) *DcimRearPort
 	}
 }
 
-/* DcimRearPortsListParams contains all the parameters to send to the API endpoint
-   for the dcim rear ports list operation.
+/*
+DcimRearPortsListParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim rear ports list operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimRearPortsListParams struct {
 
@@ -80,6 +82,9 @@ type DcimRearPortsListParams struct {
 
 	// Color.
 	Color *string
+
+	// ColorEmpty.
+	ColorEmpty *string
 
 	// ColorIc.
 	ColorIc *string
@@ -119,6 +124,9 @@ type DcimRearPortsListParams struct {
 
 	// Description.
 	Description *string
+
+	// DescriptionEmpty.
+	DescriptionEmpty *string
 
 	// DescriptionIc.
 	DescriptionIc *string
@@ -180,6 +188,9 @@ type DcimRearPortsListParams struct {
 	// Label.
 	Label *string
 
+	// LabelEmpty.
+	LabelEmpty *string
+
 	// LabelIc.
 	LabelIc *string
 
@@ -234,14 +245,11 @@ type DcimRearPortsListParams struct {
 	// LocationIDn.
 	LocationIDn *string
 
-	// ModuleID.
-	ModuleID *string
-
-	// ModuleIDn.
-	ModuleIDn *string
-
 	// Name.
 	Name *string
+
+	// NameEmpty.
+	NameEmpty *string
 
 	// NameIc.
 	NameIc *string
@@ -432,6 +440,17 @@ func (o *DcimRearPortsListParams) SetColor(color *string) {
 	o.Color = color
 }
 
+// WithColorEmpty adds the colorEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) WithColorEmpty(colorEmpty *string) *DcimRearPortsListParams {
+	o.SetColorEmpty(colorEmpty)
+	return o
+}
+
+// SetColorEmpty adds the colorEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) SetColorEmpty(colorEmpty *string) {
+	o.ColorEmpty = colorEmpty
+}
+
 // WithColorIc adds the colorIc to the dcim rear ports list params
 func (o *DcimRearPortsListParams) WithColorIc(colorIc *string) *DcimRearPortsListParams {
 	o.SetColorIc(colorIc)
@@ -573,6 +592,17 @@ func (o *DcimRearPortsListParams) WithDescription(description *string) *DcimRear
 // SetDescription adds the description to the dcim rear ports list params
 func (o *DcimRearPortsListParams) SetDescription(description *string) {
 	o.Description = description
+}
+
+// WithDescriptionEmpty adds the descriptionEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) WithDescriptionEmpty(descriptionEmpty *string) *DcimRearPortsListParams {
+	o.SetDescriptionEmpty(descriptionEmpty)
+	return o
+}
+
+// SetDescriptionEmpty adds the descriptionEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) SetDescriptionEmpty(descriptionEmpty *string) {
+	o.DescriptionEmpty = descriptionEmpty
 }
 
 // WithDescriptionIc adds the descriptionIc to the dcim rear ports list params
@@ -795,6 +825,17 @@ func (o *DcimRearPortsListParams) SetLabel(label *string) {
 	o.Label = label
 }
 
+// WithLabelEmpty adds the labelEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) WithLabelEmpty(labelEmpty *string) *DcimRearPortsListParams {
+	o.SetLabelEmpty(labelEmpty)
+	return o
+}
+
+// SetLabelEmpty adds the labelEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) SetLabelEmpty(labelEmpty *string) {
+	o.LabelEmpty = labelEmpty
+}
+
 // WithLabelIc adds the labelIc to the dcim rear ports list params
 func (o *DcimRearPortsListParams) WithLabelIc(labelIc *string) *DcimRearPortsListParams {
 	o.SetLabelIc(labelIc)
@@ -982,28 +1023,6 @@ func (o *DcimRearPortsListParams) SetLocationIDn(locationIDn *string) {
 	o.LocationIDn = locationIDn
 }
 
-// WithModuleID adds the moduleID to the dcim rear ports list params
-func (o *DcimRearPortsListParams) WithModuleID(moduleID *string) *DcimRearPortsListParams {
-	o.SetModuleID(moduleID)
-	return o
-}
-
-// SetModuleID adds the moduleId to the dcim rear ports list params
-func (o *DcimRearPortsListParams) SetModuleID(moduleID *string) {
-	o.ModuleID = moduleID
-}
-
-// WithModuleIDn adds the moduleIDn to the dcim rear ports list params
-func (o *DcimRearPortsListParams) WithModuleIDn(moduleIDn *string) *DcimRearPortsListParams {
-	o.SetModuleIDn(moduleIDn)
-	return o
-}
-
-// SetModuleIDn adds the moduleIdN to the dcim rear ports list params
-func (o *DcimRearPortsListParams) SetModuleIDn(moduleIDn *string) {
-	o.ModuleIDn = moduleIDn
-}
-
 // WithName adds the name to the dcim rear ports list params
 func (o *DcimRearPortsListParams) WithName(name *string) *DcimRearPortsListParams {
 	o.SetName(name)
@@ -1013,6 +1032,17 @@ func (o *DcimRearPortsListParams) WithName(name *string) *DcimRearPortsListParam
 // SetName adds the name to the dcim rear ports list params
 func (o *DcimRearPortsListParams) SetName(name *string) {
 	o.Name = name
+}
+
+// WithNameEmpty adds the nameEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) WithNameEmpty(nameEmpty *string) *DcimRearPortsListParams {
+	o.SetNameEmpty(nameEmpty)
+	return o
+}
+
+// SetNameEmpty adds the nameEmpty to the dcim rear ports list params
+func (o *DcimRearPortsListParams) SetNameEmpty(nameEmpty *string) {
+	o.NameEmpty = nameEmpty
 }
 
 // WithNameIc adds the nameIc to the dcim rear ports list params
@@ -1464,6 +1494,23 @@ func (o *DcimRearPortsListParams) WriteToRequest(r runtime.ClientRequest, reg st
 		}
 	}
 
+	if o.ColorEmpty != nil {
+
+		// query param color__empty
+		var qrColorEmpty string
+
+		if o.ColorEmpty != nil {
+			qrColorEmpty = *o.ColorEmpty
+		}
+		qColorEmpty := qrColorEmpty
+		if qColorEmpty != "" {
+
+			if err := r.SetQueryParam("color__empty", qColorEmpty); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.ColorIc != nil {
 
 		// query param color__ic
@@ -1680,6 +1727,23 @@ func (o *DcimRearPortsListParams) WriteToRequest(r runtime.ClientRequest, reg st
 		if qDescription != "" {
 
 			if err := r.SetQueryParam("description", qDescription); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.DescriptionEmpty != nil {
+
+		// query param description__empty
+		var qrDescriptionEmpty string
+
+		if o.DescriptionEmpty != nil {
+			qrDescriptionEmpty = *o.DescriptionEmpty
+		}
+		qDescriptionEmpty := qrDescriptionEmpty
+		if qDescriptionEmpty != "" {
+
+			if err := r.SetQueryParam("description__empty", qDescriptionEmpty); err != nil {
 				return err
 			}
 		}
@@ -2025,6 +2089,23 @@ func (o *DcimRearPortsListParams) WriteToRequest(r runtime.ClientRequest, reg st
 		}
 	}
 
+	if o.LabelEmpty != nil {
+
+		// query param label__empty
+		var qrLabelEmpty string
+
+		if o.LabelEmpty != nil {
+			qrLabelEmpty = *o.LabelEmpty
+		}
+		qLabelEmpty := qrLabelEmpty
+		if qLabelEmpty != "" {
+
+			if err := r.SetQueryParam("label__empty", qLabelEmpty); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.LabelIc != nil {
 
 		// query param label__ic
@@ -2314,40 +2395,6 @@ func (o *DcimRearPortsListParams) WriteToRequest(r runtime.ClientRequest, reg st
 		}
 	}
 
-	if o.ModuleID != nil {
-
-		// query param module_id
-		var qrModuleID string
-
-		if o.ModuleID != nil {
-			qrModuleID = *o.ModuleID
-		}
-		qModuleID := qrModuleID
-		if qModuleID != "" {
-
-			if err := r.SetQueryParam("module_id", qModuleID); err != nil {
-				return err
-			}
-		}
-	}
-
-	if o.ModuleIDn != nil {
-
-		// query param module_id__n
-		var qrModuleIDn string
-
-		if o.ModuleIDn != nil {
-			qrModuleIDn = *o.ModuleIDn
-		}
-		qModuleIDn := qrModuleIDn
-		if qModuleIDn != "" {
-
-			if err := r.SetQueryParam("module_id__n", qModuleIDn); err != nil {
-				return err
-			}
-		}
-	}
-
 	if o.Name != nil {
 
 		// query param name
@@ -2360,6 +2407,23 @@ func (o *DcimRearPortsListParams) WriteToRequest(r runtime.ClientRequest, reg st
 		if qName != "" {
 
 			if err := r.SetQueryParam("name", qName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NameEmpty != nil {
+
+		// query param name__empty
+		var qrNameEmpty string
+
+		if o.NameEmpty != nil {
+			qrNameEmpty = *o.NameEmpty
+		}
+		qNameEmpty := qrNameEmpty
+		if qNameEmpty != "" {
+
+			if err := r.SetQueryParam("name__empty", qNameEmpty); err != nil {
 				return err
 			}
 		}

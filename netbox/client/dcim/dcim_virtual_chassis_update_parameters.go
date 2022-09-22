@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimVirtualChassisUpdateParams creates a new DcimVirtualChassisUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimVirtualChassisUpdateParamsWithHTTPClient(client *http.Client) *DcimV
 	}
 }
 
-/* DcimVirtualChassisUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim virtual chassis update operation.
+/*
+DcimVirtualChassisUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim virtual chassis update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimVirtualChassisUpdateParams struct {
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamFhrpGroupsCreateReader is a Reader for the IpamFhrpGroupsCreate structure.
@@ -45,14 +45,7 @@ func (o *IpamFhrpGroupsCreateReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewIpamFhrpGroupsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamFhrpGroupsCreateCreated() *IpamFhrpGroupsCreateCreated {
 	return &IpamFhrpGroupsCreateCreated{}
 }
 
-/* IpamFhrpGroupsCreateCreated describes a response with status code 201, with default header values.
+/*
+IpamFhrpGroupsCreateCreated describes a response with status code 201, with default header values.
 
 IpamFhrpGroupsCreateCreated ipam fhrp groups create created
 */
@@ -69,9 +63,39 @@ type IpamFhrpGroupsCreateCreated struct {
 	Payload *models.FHRPGroup
 }
 
+// IsSuccess returns true when this ipam fhrp groups create created response has a 2xx status code
+func (o *IpamFhrpGroupsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam fhrp groups create created response has a 3xx status code
+func (o *IpamFhrpGroupsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam fhrp groups create created response has a 4xx status code
+func (o *IpamFhrpGroupsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam fhrp groups create created response has a 5xx status code
+func (o *IpamFhrpGroupsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam fhrp groups create created response a status code equal to that given
+func (o *IpamFhrpGroupsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *IpamFhrpGroupsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /ipam/fhrp-groups/][%d] ipamFhrpGroupsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *IpamFhrpGroupsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /ipam/fhrp-groups/][%d] ipamFhrpGroupsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *IpamFhrpGroupsCreateCreated) GetPayload() *models.FHRPGroup {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamFhrpGroupsCreateCreated) readResponse(response runtime.ClientRespon
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamFhrpGroupsCreateDefault creates a IpamFhrpGroupsCreateDefault with default headers values
-func NewIpamFhrpGroupsCreateDefault(code int) *IpamFhrpGroupsCreateDefault {
-	return &IpamFhrpGroupsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamFhrpGroupsCreateDefault describes a response with status code -1, with default header values.
-
-IpamFhrpGroupsCreateDefault ipam fhrp groups create default
-*/
-type IpamFhrpGroupsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam fhrp groups create default response
-func (o *IpamFhrpGroupsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamFhrpGroupsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /ipam/fhrp-groups/][%d] ipam_fhrp-groups_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamFhrpGroupsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamFhrpGroupsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamVlansBulkUpdateParams creates a new IpamVlansBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewIpamVlansBulkUpdateParamsWithHTTPClient(client *http.Client) *IpamVlansB
 	}
 }
 
-/* IpamVlansBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam vlans bulk update operation.
+/*
+IpamVlansBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam vlans bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamVlansBulkUpdateParams struct {
 

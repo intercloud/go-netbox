@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimManufacturersPartialUpdateParams creates a new DcimManufacturersPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimManufacturersPartialUpdateParamsWithHTTPClient(client *http.Client) 
 	}
 }
 
-/* DcimManufacturersPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim manufacturers partial update operation.
+/*
+DcimManufacturersPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim manufacturers partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimManufacturersPartialUpdateParams struct {
 

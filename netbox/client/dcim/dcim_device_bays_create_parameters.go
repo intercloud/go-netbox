@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimDeviceBaysCreateParams creates a new DcimDeviceBaysCreateParams object,
@@ -69,10 +69,12 @@ func NewDcimDeviceBaysCreateParamsWithHTTPClient(client *http.Client) *DcimDevic
 	}
 }
 
-/* DcimDeviceBaysCreateParams contains all the parameters to send to the API endpoint
-   for the dcim device bays create operation.
+/*
+DcimDeviceBaysCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim device bays create operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimDeviceBaysCreateParams struct {
 

@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewUsersUsersUpdateParams creates a new UsersUsersUpdateParams object,
@@ -70,10 +70,12 @@ func NewUsersUsersUpdateParamsWithHTTPClient(client *http.Client) *UsersUsersUpd
 	}
 }
 
-/* UsersUsersUpdateParams contains all the parameters to send to the API endpoint
-   for the users users update operation.
+/*
+UsersUsersUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the users users update operation.
+
+	Typically these are written to a http.Request.
 */
 type UsersUsersUpdateParams struct {
 

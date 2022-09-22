@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamIPAddressesCreateReader is a Reader for the IpamIPAddressesCreate structure.
@@ -45,14 +45,7 @@ func (o *IpamIPAddressesCreateReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 	default:
-		result := NewIpamIPAddressesCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamIPAddressesCreateCreated() *IpamIPAddressesCreateCreated {
 	return &IpamIPAddressesCreateCreated{}
 }
 
-/* IpamIPAddressesCreateCreated describes a response with status code 201, with default header values.
+/*
+IpamIPAddressesCreateCreated describes a response with status code 201, with default header values.
 
 IpamIPAddressesCreateCreated ipam Ip addresses create created
 */
@@ -69,9 +63,39 @@ type IpamIPAddressesCreateCreated struct {
 	Payload *models.IPAddress
 }
 
+// IsSuccess returns true when this ipam Ip addresses create created response has a 2xx status code
+func (o *IpamIPAddressesCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam Ip addresses create created response has a 3xx status code
+func (o *IpamIPAddressesCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam Ip addresses create created response has a 4xx status code
+func (o *IpamIPAddressesCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam Ip addresses create created response has a 5xx status code
+func (o *IpamIPAddressesCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam Ip addresses create created response a status code equal to that given
+func (o *IpamIPAddressesCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *IpamIPAddressesCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /ipam/ip-addresses/][%d] ipamIpAddressesCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *IpamIPAddressesCreateCreated) String() string {
+	return fmt.Sprintf("[POST /ipam/ip-addresses/][%d] ipamIpAddressesCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *IpamIPAddressesCreateCreated) GetPayload() *models.IPAddress {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamIPAddressesCreateCreated) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamIPAddressesCreateDefault creates a IpamIPAddressesCreateDefault with default headers values
-func NewIpamIPAddressesCreateDefault(code int) *IpamIPAddressesCreateDefault {
-	return &IpamIPAddressesCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamIPAddressesCreateDefault describes a response with status code -1, with default header values.
-
-IpamIPAddressesCreateDefault ipam ip addresses create default
-*/
-type IpamIPAddressesCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam ip addresses create default response
-func (o *IpamIPAddressesCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamIPAddressesCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /ipam/ip-addresses/][%d] ipam_ip-addresses_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamIPAddressesCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamIPAddressesCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

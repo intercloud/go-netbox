@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamRolesBulkUpdateParams creates a new IpamRolesBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewIpamRolesBulkUpdateParamsWithHTTPClient(client *http.Client) *IpamRolesB
 	}
 }
 
-/* IpamRolesBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the ipam roles bulk update operation.
+/*
+IpamRolesBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam roles bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamRolesBulkUpdateParams struct {
 

@@ -50,8 +50,8 @@ type FrontPort struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -68,7 +68,7 @@ type FrontPort struct {
 	// Read Only: true
 	Display string `json:"display,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -100,9 +100,6 @@ type FrontPort struct {
 	// Treat as if a cable is connected
 	MarkConnected bool `json:"mark_connected,omitempty"`
 
-	// module
-	Module *ComponentNestedModule `json:"module,omitempty"`
-
 	// Name
 	// Required: true
 	// Max Length: 64
@@ -119,7 +116,7 @@ type FrontPort struct {
 	RearPortPosition int64 `json:"rear_port_position,omitempty"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// type
 	// Required: true
@@ -160,10 +157,6 @@ func (m *FrontPort) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateLastUpdated(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateModule(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -237,7 +230,7 @@ func (m *FrontPort) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -295,25 +288,6 @@ func (m *FrontPort) validateLastUpdated(formats strfmt.Registry) error {
 
 	if err := validate.FormatOf("last_updated", "body", "date-time", m.LastUpdated.String(), formats); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *FrontPort) validateModule(formats strfmt.Registry) error {
-	if swag.IsZero(m.Module) { // not required
-		return nil
-	}
-
-	if m.Module != nil {
-		if err := m.Module.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("module")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -470,10 +444,6 @@ func (m *FrontPort) ContextValidate(ctx context.Context, formats strfmt.Registry
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateModule(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateRearPort(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -523,7 +493,7 @@ func (m *FrontPort) contextValidateCable(ctx context.Context, formats strfmt.Reg
 
 func (m *FrontPort) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 
@@ -582,22 +552,6 @@ func (m *FrontPort) contextValidateLinkPeerType(ctx context.Context, formats str
 
 	if err := validate.ReadOnly(ctx, "link_peer_type", "body", string(m.LinkPeerType)); err != nil {
 		return err
-	}
-
-	return nil
-}
-
-func (m *FrontPort) contextValidateModule(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Module != nil {
-		if err := m.Module.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("module")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("module")
-			}
-			return err
-		}
 	}
 
 	return nil
@@ -689,12 +643,12 @@ type FrontPortType struct {
 
 	// label
 	// Required: true
-	// Enum: [8P8C 8P6C 8P4C 8P2C 6P6C 6P4C 6P2C 4P4C 4P2C GG45 TERA 4P TERA 2P TERA 1P 110 Punch BNC F Connector N Connector MRJ21 FC LC LC/PC LC/UPC LC/APC LSH LSH/PC LSH/UPC LSH/APC MPO MTRJ SC SC/PC SC/UPC SC/APC ST CS SN SMA 905 SMA 906 URM-P2 URM-P4 URM-P8 Splice]
+	// Enum: [8P8C 8P6C 8P4C 8P2C 6P6C 6P4C 6P2C 4P4C 4P2C GG45 TERA 4P TERA 2P TERA 1P 110 Punch BNC F Connector N Connector MRJ21 FC LC LC/APC LSH LSH/APC MPO MTRJ SC SC/APC ST CS SN SMA 905 SMA 906 URM-P2 URM-P4 URM-P8 Splice]
 	Label *string `json:"label"`
 
 	// value
 	// Required: true
-	// Enum: [8p8c 8p6c 8p4c 8p2c 6p6c 6p4c 6p2c 4p4c 4p2c gg45 tera-4p tera-2p tera-1p 110-punch bnc f n mrj21 fc lc lc-pc lc-upc lc-apc lsh lsh-pc lsh-upc lsh-apc mpo mtrj sc sc-pc sc-upc sc-apc st cs sn sma-905 sma-906 urm-p2 urm-p4 urm-p8 splice]
+	// Enum: [8p8c 8p6c 8p4c 8p2c 6p6c 6p4c 6p2c 4p4c 4p2c gg45 tera-4p tera-2p tera-1p 110-punch bnc f n mrj21 fc lc lc-apc lsh lsh-apc mpo mtrj sc sc-apc st cs sn sma-905 sma-906 urm-p2 urm-p4 urm-p8 splice]
 	Value *string `json:"value"`
 }
 
@@ -720,7 +674,7 @@ var frontPortTypeTypeLabelPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["8P8C","8P6C","8P4C","8P2C","6P6C","6P4C","6P2C","4P4C","4P2C","GG45","TERA 4P","TERA 2P","TERA 1P","110 Punch","BNC","F Connector","N Connector","MRJ21","FC","LC","LC/PC","LC/UPC","LC/APC","LSH","LSH/PC","LSH/UPC","LSH/APC","MPO","MTRJ","SC","SC/PC","SC/UPC","SC/APC","ST","CS","SN","SMA 905","SMA 906","URM-P2","URM-P4","URM-P8","Splice"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["8P8C","8P6C","8P4C","8P2C","6P6C","6P4C","6P2C","4P4C","4P2C","GG45","TERA 4P","TERA 2P","TERA 1P","110 Punch","BNC","F Connector","N Connector","MRJ21","FC","LC","LC/APC","LSH","LSH/APC","MPO","MTRJ","SC","SC/APC","ST","CS","SN","SMA 905","SMA 906","URM-P2","URM-P4","URM-P8","Splice"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -790,23 +744,11 @@ const (
 	// FrontPortTypeLabelLC captures enum value "LC"
 	FrontPortTypeLabelLC string = "LC"
 
-	// FrontPortTypeLabelLCPC captures enum value "LC/PC"
-	FrontPortTypeLabelLCPC string = "LC/PC"
-
-	// FrontPortTypeLabelLCUPC captures enum value "LC/UPC"
-	FrontPortTypeLabelLCUPC string = "LC/UPC"
-
 	// FrontPortTypeLabelLCAPC captures enum value "LC/APC"
 	FrontPortTypeLabelLCAPC string = "LC/APC"
 
 	// FrontPortTypeLabelLSH captures enum value "LSH"
 	FrontPortTypeLabelLSH string = "LSH"
-
-	// FrontPortTypeLabelLSHPC captures enum value "LSH/PC"
-	FrontPortTypeLabelLSHPC string = "LSH/PC"
-
-	// FrontPortTypeLabelLSHUPC captures enum value "LSH/UPC"
-	FrontPortTypeLabelLSHUPC string = "LSH/UPC"
 
 	// FrontPortTypeLabelLSHAPC captures enum value "LSH/APC"
 	FrontPortTypeLabelLSHAPC string = "LSH/APC"
@@ -819,12 +761,6 @@ const (
 
 	// FrontPortTypeLabelSC captures enum value "SC"
 	FrontPortTypeLabelSC string = "SC"
-
-	// FrontPortTypeLabelSCPC captures enum value "SC/PC"
-	FrontPortTypeLabelSCPC string = "SC/PC"
-
-	// FrontPortTypeLabelSCUPC captures enum value "SC/UPC"
-	FrontPortTypeLabelSCUPC string = "SC/UPC"
 
 	// FrontPortTypeLabelSCAPC captures enum value "SC/APC"
 	FrontPortTypeLabelSCAPC string = "SC/APC"
@@ -883,7 +819,7 @@ var frontPortTypeTypeValuePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["8p8c","8p6c","8p4c","8p2c","6p6c","6p4c","6p2c","4p4c","4p2c","gg45","tera-4p","tera-2p","tera-1p","110-punch","bnc","f","n","mrj21","fc","lc","lc-pc","lc-upc","lc-apc","lsh","lsh-pc","lsh-upc","lsh-apc","mpo","mtrj","sc","sc-pc","sc-upc","sc-apc","st","cs","sn","sma-905","sma-906","urm-p2","urm-p4","urm-p8","splice"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["8p8c","8p6c","8p4c","8p2c","6p6c","6p4c","6p2c","4p4c","4p2c","gg45","tera-4p","tera-2p","tera-1p","110-punch","bnc","f","n","mrj21","fc","lc","lc-apc","lsh","lsh-apc","mpo","mtrj","sc","sc-apc","st","cs","sn","sma-905","sma-906","urm-p2","urm-p4","urm-p8","splice"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -953,23 +889,11 @@ const (
 	// FrontPortTypeValueLc captures enum value "lc"
 	FrontPortTypeValueLc string = "lc"
 
-	// FrontPortTypeValueLcDashPc captures enum value "lc-pc"
-	FrontPortTypeValueLcDashPc string = "lc-pc"
-
-	// FrontPortTypeValueLcDashUpc captures enum value "lc-upc"
-	FrontPortTypeValueLcDashUpc string = "lc-upc"
-
 	// FrontPortTypeValueLcDashApc captures enum value "lc-apc"
 	FrontPortTypeValueLcDashApc string = "lc-apc"
 
 	// FrontPortTypeValueLsh captures enum value "lsh"
 	FrontPortTypeValueLsh string = "lsh"
-
-	// FrontPortTypeValueLshDashPc captures enum value "lsh-pc"
-	FrontPortTypeValueLshDashPc string = "lsh-pc"
-
-	// FrontPortTypeValueLshDashUpc captures enum value "lsh-upc"
-	FrontPortTypeValueLshDashUpc string = "lsh-upc"
 
 	// FrontPortTypeValueLshDashApc captures enum value "lsh-apc"
 	FrontPortTypeValueLshDashApc string = "lsh-apc"
@@ -982,12 +906,6 @@ const (
 
 	// FrontPortTypeValueSc captures enum value "sc"
 	FrontPortTypeValueSc string = "sc"
-
-	// FrontPortTypeValueScDashPc captures enum value "sc-pc"
-	FrontPortTypeValueScDashPc string = "sc-pc"
-
-	// FrontPortTypeValueScDashUpc captures enum value "sc-upc"
-	FrontPortTypeValueScDashUpc string = "sc-upc"
 
 	// FrontPortTypeValueScDashApc captures enum value "sc-apc"
 	FrontPortTypeValueScDashApc string = "sc-apc"

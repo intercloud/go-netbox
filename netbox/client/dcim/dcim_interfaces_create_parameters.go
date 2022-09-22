@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimInterfacesCreateParams creates a new DcimInterfacesCreateParams object,
@@ -69,10 +69,12 @@ func NewDcimInterfacesCreateParamsWithHTTPClient(client *http.Client) *DcimInter
 	}
 }
 
-/* DcimInterfacesCreateParams contains all the parameters to send to the API endpoint
-   for the dcim interfaces create operation.
+/*
+DcimInterfacesCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim interfaces create operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimInterfacesCreateParams struct {
 

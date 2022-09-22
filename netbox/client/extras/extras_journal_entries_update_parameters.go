@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewExtrasJournalEntriesUpdateParams creates a new ExtrasJournalEntriesUpdateParams object,
@@ -70,10 +70,12 @@ func NewExtrasJournalEntriesUpdateParamsWithHTTPClient(client *http.Client) *Ext
 	}
 }
 
-/* ExtrasJournalEntriesUpdateParams contains all the parameters to send to the API endpoint
-   for the extras journal entries update operation.
+/*
+ExtrasJournalEntriesUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the extras journal entries update operation.
+
+	Typically these are written to a http.Request.
 */
 type ExtrasJournalEntriesUpdateParams struct {
 

@@ -21,6 +21,8 @@ package wireless
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"fmt"
+
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 )
@@ -101,7 +103,7 @@ type ClientService interface {
 }
 
 /*
-  WirelessWirelessLanGroupsBulkDelete wireless wireless lan groups bulk delete API
+WirelessWirelessLanGroupsBulkDelete wireless wireless lan groups bulk delete API
 */
 func (a *Client) WirelessWirelessLanGroupsBulkDelete(params *WirelessWirelessLanGroupsBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -134,12 +136,13 @@ func (a *Client) WirelessWirelessLanGroupsBulkDelete(params *WirelessWirelessLan
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsBulkPartialUpdate wireless wireless lan groups bulk partial update API
+WirelessWirelessLanGroupsBulkPartialUpdate wireless wireless lan groups bulk partial update API
 */
 func (a *Client) WirelessWirelessLanGroupsBulkPartialUpdate(params *WirelessWirelessLanGroupsBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -172,12 +175,13 @@ func (a *Client) WirelessWirelessLanGroupsBulkPartialUpdate(params *WirelessWire
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsBulkUpdate wireless wireless lan groups bulk update API
+WirelessWirelessLanGroupsBulkUpdate wireless wireless lan groups bulk update API
 */
 func (a *Client) WirelessWirelessLanGroupsBulkUpdate(params *WirelessWirelessLanGroupsBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -210,12 +214,13 @@ func (a *Client) WirelessWirelessLanGroupsBulkUpdate(params *WirelessWirelessLan
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsCreate wireless wireless lan groups create API
+WirelessWirelessLanGroupsCreate wireless wireless lan groups create API
 */
 func (a *Client) WirelessWirelessLanGroupsCreate(params *WirelessWirelessLanGroupsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -248,12 +253,13 @@ func (a *Client) WirelessWirelessLanGroupsCreate(params *WirelessWirelessLanGrou
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsDelete wireless wireless lan groups delete API
+WirelessWirelessLanGroupsDelete wireless wireless lan groups delete API
 */
 func (a *Client) WirelessWirelessLanGroupsDelete(params *WirelessWirelessLanGroupsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -286,12 +292,13 @@ func (a *Client) WirelessWirelessLanGroupsDelete(params *WirelessWirelessLanGrou
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
+WirelessWirelessLanGroupsList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) WirelessWirelessLanGroupsList(params *WirelessWirelessLanGroupsListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsListOK, error) {
 	// TODO: Validate the params before sending
@@ -324,12 +331,13 @@ func (a *Client) WirelessWirelessLanGroupsList(params *WirelessWirelessLanGroups
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsPartialUpdate wireless wireless lan groups partial update API
+WirelessWirelessLanGroupsPartialUpdate wireless wireless lan groups partial update API
 */
 func (a *Client) WirelessWirelessLanGroupsPartialUpdate(params *WirelessWirelessLanGroupsPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -362,12 +370,13 @@ func (a *Client) WirelessWirelessLanGroupsPartialUpdate(params *WirelessWireless
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsRead wireless wireless lan groups read API
+WirelessWirelessLanGroupsRead wireless wireless lan groups read API
 */
 func (a *Client) WirelessWirelessLanGroupsRead(params *WirelessWirelessLanGroupsReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsReadOK, error) {
 	// TODO: Validate the params before sending
@@ -400,12 +409,13 @@ func (a *Client) WirelessWirelessLanGroupsRead(params *WirelessWirelessLanGroups
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLanGroupsUpdate wireless wireless lan groups update API
+WirelessWirelessLanGroupsUpdate wireless wireless lan groups update API
 */
 func (a *Client) WirelessWirelessLanGroupsUpdate(params *WirelessWirelessLanGroupsUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLanGroupsUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -438,12 +448,13 @@ func (a *Client) WirelessWirelessLanGroupsUpdate(params *WirelessWirelessLanGrou
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLanGroupsUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lan-groups_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansBulkDelete wireless wireless lans bulk delete API
+WirelessWirelessLansBulkDelete wireless wireless lans bulk delete API
 */
 func (a *Client) WirelessWirelessLansBulkDelete(params *WirelessWirelessLansBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -476,12 +487,13 @@ func (a *Client) WirelessWirelessLansBulkDelete(params *WirelessWirelessLansBulk
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansBulkPartialUpdate wireless wireless lans bulk partial update API
+WirelessWirelessLansBulkPartialUpdate wireless wireless lans bulk partial update API
 */
 func (a *Client) WirelessWirelessLansBulkPartialUpdate(params *WirelessWirelessLansBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -514,12 +526,13 @@ func (a *Client) WirelessWirelessLansBulkPartialUpdate(params *WirelessWirelessL
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansBulkUpdate wireless wireless lans bulk update API
+WirelessWirelessLansBulkUpdate wireless wireless lans bulk update API
 */
 func (a *Client) WirelessWirelessLansBulkUpdate(params *WirelessWirelessLansBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -552,12 +565,13 @@ func (a *Client) WirelessWirelessLansBulkUpdate(params *WirelessWirelessLansBulk
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansCreate wireless wireless lans create API
+WirelessWirelessLansCreate wireless wireless lans create API
 */
 func (a *Client) WirelessWirelessLansCreate(params *WirelessWirelessLansCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -590,12 +604,13 @@ func (a *Client) WirelessWirelessLansCreate(params *WirelessWirelessLansCreatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansDelete wireless wireless lans delete API
+WirelessWirelessLansDelete wireless wireless lans delete API
 */
 func (a *Client) WirelessWirelessLansDelete(params *WirelessWirelessLansDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -628,12 +643,13 @@ func (a *Client) WirelessWirelessLansDelete(params *WirelessWirelessLansDeletePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansList Overrides ListModelMixin to allow processing ExportTemplates.
+WirelessWirelessLansList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) WirelessWirelessLansList(params *WirelessWirelessLansListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansListOK, error) {
 	// TODO: Validate the params before sending
@@ -666,12 +682,13 @@ func (a *Client) WirelessWirelessLansList(params *WirelessWirelessLansListParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansPartialUpdate wireless wireless lans partial update API
+WirelessWirelessLansPartialUpdate wireless wireless lans partial update API
 */
 func (a *Client) WirelessWirelessLansPartialUpdate(params *WirelessWirelessLansPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -704,12 +721,13 @@ func (a *Client) WirelessWirelessLansPartialUpdate(params *WirelessWirelessLansP
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansRead wireless wireless lans read API
+WirelessWirelessLansRead wireless wireless lans read API
 */
 func (a *Client) WirelessWirelessLansRead(params *WirelessWirelessLansReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansReadOK, error) {
 	// TODO: Validate the params before sending
@@ -742,12 +760,13 @@ func (a *Client) WirelessWirelessLansRead(params *WirelessWirelessLansReadParams
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLansUpdate wireless wireless lans update API
+WirelessWirelessLansUpdate wireless wireless lans update API
 */
 func (a *Client) WirelessWirelessLansUpdate(params *WirelessWirelessLansUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLansUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -780,12 +799,13 @@ func (a *Client) WirelessWirelessLansUpdate(params *WirelessWirelessLansUpdatePa
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLansUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-lans_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksBulkDelete wireless wireless links bulk delete API
+WirelessWirelessLinksBulkDelete wireless wireless links bulk delete API
 */
 func (a *Client) WirelessWirelessLinksBulkDelete(params *WirelessWirelessLinksBulkDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksBulkDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -818,12 +838,13 @@ func (a *Client) WirelessWirelessLinksBulkDelete(params *WirelessWirelessLinksBu
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksBulkDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_bulk_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksBulkPartialUpdate wireless wireless links bulk partial update API
+WirelessWirelessLinksBulkPartialUpdate wireless wireless links bulk partial update API
 */
 func (a *Client) WirelessWirelessLinksBulkPartialUpdate(params *WirelessWirelessLinksBulkPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksBulkPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -856,12 +877,13 @@ func (a *Client) WirelessWirelessLinksBulkPartialUpdate(params *WirelessWireless
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksBulkPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_bulk_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksBulkUpdate wireless wireless links bulk update API
+WirelessWirelessLinksBulkUpdate wireless wireless links bulk update API
 */
 func (a *Client) WirelessWirelessLinksBulkUpdate(params *WirelessWirelessLinksBulkUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksBulkUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -894,12 +916,13 @@ func (a *Client) WirelessWirelessLinksBulkUpdate(params *WirelessWirelessLinksBu
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksBulkUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_bulk_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksCreate wireless wireless links create API
+WirelessWirelessLinksCreate wireless wireless links create API
 */
 func (a *Client) WirelessWirelessLinksCreate(params *WirelessWirelessLinksCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksCreateCreated, error) {
 	// TODO: Validate the params before sending
@@ -932,12 +955,13 @@ func (a *Client) WirelessWirelessLinksCreate(params *WirelessWirelessLinksCreate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_create: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksDelete wireless wireless links delete API
+WirelessWirelessLinksDelete wireless wireless links delete API
 */
 func (a *Client) WirelessWirelessLinksDelete(params *WirelessWirelessLinksDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksDeleteNoContent, error) {
 	// TODO: Validate the params before sending
@@ -970,12 +994,13 @@ func (a *Client) WirelessWirelessLinksDelete(params *WirelessWirelessLinksDelete
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_delete: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksList Overrides ListModelMixin to allow processing ExportTemplates.
+WirelessWirelessLinksList Overrides ListModelMixin to allow processing ExportTemplates.
 */
 func (a *Client) WirelessWirelessLinksList(params *WirelessWirelessLinksListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksListOK, error) {
 	// TODO: Validate the params before sending
@@ -1008,12 +1033,13 @@ func (a *Client) WirelessWirelessLinksList(params *WirelessWirelessLinksListPara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksListDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_list: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksPartialUpdate wireless wireless links partial update API
+WirelessWirelessLinksPartialUpdate wireless wireless links partial update API
 */
 func (a *Client) WirelessWirelessLinksPartialUpdate(params *WirelessWirelessLinksPartialUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksPartialUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1046,12 +1072,13 @@ func (a *Client) WirelessWirelessLinksPartialUpdate(params *WirelessWirelessLink
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksPartialUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_partial_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksRead wireless wireless links read API
+WirelessWirelessLinksRead wireless wireless links read API
 */
 func (a *Client) WirelessWirelessLinksRead(params *WirelessWirelessLinksReadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksReadOK, error) {
 	// TODO: Validate the params before sending
@@ -1084,12 +1111,13 @@ func (a *Client) WirelessWirelessLinksRead(params *WirelessWirelessLinksReadPara
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksReadDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_read: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
-  WirelessWirelessLinksUpdate wireless wireless links update API
+WirelessWirelessLinksUpdate wireless wireless links update API
 */
 func (a *Client) WirelessWirelessLinksUpdate(params *WirelessWirelessLinksUpdateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WirelessWirelessLinksUpdateOK, error) {
 	// TODO: Validate the params before sending
@@ -1122,8 +1150,9 @@ func (a *Client) WirelessWirelessLinksUpdate(params *WirelessWirelessLinksUpdate
 		return success, nil
 	}
 	// unexpected success response
-	unexpectedSuccess := result.(*WirelessWirelessLinksUpdateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for wireless_wireless-links_update: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 // SetTransport changes the transport on the client

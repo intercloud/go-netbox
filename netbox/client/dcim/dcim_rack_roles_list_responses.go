@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRackRolesListReader is a Reader for the DcimRackRolesList structure.
@@ -50,14 +50,7 @@ func (o *DcimRackRolesListReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewDcimRackRolesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewDcimRackRolesListOK() *DcimRackRolesListOK {
 	return &DcimRackRolesListOK{}
 }
 
-/* DcimRackRolesListOK describes a response with status code 200, with default header values.
+/*
+DcimRackRolesListOK describes a response with status code 200, with default header values.
 
 DcimRackRolesListOK dcim rack roles list o k
 */
@@ -74,9 +68,39 @@ type DcimRackRolesListOK struct {
 	Payload *DcimRackRolesListOKBody
 }
 
+// IsSuccess returns true when this dcim rack roles list o k response has a 2xx status code
+func (o *DcimRackRolesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rack roles list o k response has a 3xx status code
+func (o *DcimRackRolesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rack roles list o k response has a 4xx status code
+func (o *DcimRackRolesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rack roles list o k response has a 5xx status code
+func (o *DcimRackRolesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rack roles list o k response a status code equal to that given
+func (o *DcimRackRolesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRackRolesListOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/rack-roles/][%d] dcimRackRolesListOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRackRolesListOK) String() string {
+	return fmt.Sprintf("[GET /dcim/rack-roles/][%d] dcimRackRolesListOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRackRolesListOK) GetPayload() *DcimRackRolesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *DcimRackRolesListOK) readResponse(response runtime.ClientResponse, cons
 	return nil
 }
 
-// NewDcimRackRolesListDefault creates a DcimRackRolesListDefault with default headers values
-func NewDcimRackRolesListDefault(code int) *DcimRackRolesListDefault {
-	return &DcimRackRolesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRackRolesListDefault describes a response with status code -1, with default header values.
-
-DcimRackRolesListDefault dcim rack roles list default
-*/
-type DcimRackRolesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rack roles list default response
-func (o *DcimRackRolesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRackRolesListDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/rack-roles/][%d] dcim_rack-roles_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRackRolesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRackRolesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*DcimRackRolesListOKBody dcim rack roles list o k body
+/*
+DcimRackRolesListOKBody dcim rack roles list o k body
 swagger:model DcimRackRolesListOKBody
 */
 type DcimRackRolesListOKBody struct {

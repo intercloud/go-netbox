@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamIPRangesListReader is a Reader for the IpamIPRangesList structure.
@@ -50,14 +50,7 @@ func (o *IpamIPRangesListReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return result, nil
 	default:
-		result := NewIpamIPRangesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewIpamIPRangesListOK() *IpamIPRangesListOK {
 	return &IpamIPRangesListOK{}
 }
 
-/* IpamIPRangesListOK describes a response with status code 200, with default header values.
+/*
+IpamIPRangesListOK describes a response with status code 200, with default header values.
 
 IpamIPRangesListOK ipam Ip ranges list o k
 */
@@ -74,9 +68,39 @@ type IpamIPRangesListOK struct {
 	Payload *IpamIPRangesListOKBody
 }
 
+// IsSuccess returns true when this ipam Ip ranges list o k response has a 2xx status code
+func (o *IpamIPRangesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam Ip ranges list o k response has a 3xx status code
+func (o *IpamIPRangesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam Ip ranges list o k response has a 4xx status code
+func (o *IpamIPRangesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam Ip ranges list o k response has a 5xx status code
+func (o *IpamIPRangesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam Ip ranges list o k response a status code equal to that given
+func (o *IpamIPRangesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamIPRangesListOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/ip-ranges/][%d] ipamIpRangesListOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamIPRangesListOK) String() string {
+	return fmt.Sprintf("[GET /ipam/ip-ranges/][%d] ipamIpRangesListOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamIPRangesListOK) GetPayload() *IpamIPRangesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *IpamIPRangesListOK) readResponse(response runtime.ClientResponse, consu
 	return nil
 }
 
-// NewIpamIPRangesListDefault creates a IpamIPRangesListDefault with default headers values
-func NewIpamIPRangesListDefault(code int) *IpamIPRangesListDefault {
-	return &IpamIPRangesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamIPRangesListDefault describes a response with status code -1, with default header values.
-
-IpamIPRangesListDefault ipam ip ranges list default
-*/
-type IpamIPRangesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam ip ranges list default response
-func (o *IpamIPRangesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamIPRangesListDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/ip-ranges/][%d] ipam_ip-ranges_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamIPRangesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamIPRangesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*IpamIPRangesListOKBody ipam IP ranges list o k body
+/*
+IpamIPRangesListOKBody ipam IP ranges list o k body
 swagger:model IpamIPRangesListOKBody
 */
 type IpamIPRangesListOKBody struct {

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasJournalEntriesCreateReader is a Reader for the ExtrasJournalEntriesCreate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasJournalEntriesCreateReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewExtrasJournalEntriesCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasJournalEntriesCreateCreated() *ExtrasJournalEntriesCreateCreated {
 	return &ExtrasJournalEntriesCreateCreated{}
 }
 
-/* ExtrasJournalEntriesCreateCreated describes a response with status code 201, with default header values.
+/*
+ExtrasJournalEntriesCreateCreated describes a response with status code 201, with default header values.
 
 ExtrasJournalEntriesCreateCreated extras journal entries create created
 */
@@ -69,9 +63,39 @@ type ExtrasJournalEntriesCreateCreated struct {
 	Payload *models.JournalEntry
 }
 
+// IsSuccess returns true when this extras journal entries create created response has a 2xx status code
+func (o *ExtrasJournalEntriesCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras journal entries create created response has a 3xx status code
+func (o *ExtrasJournalEntriesCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras journal entries create created response has a 4xx status code
+func (o *ExtrasJournalEntriesCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras journal entries create created response has a 5xx status code
+func (o *ExtrasJournalEntriesCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras journal entries create created response a status code equal to that given
+func (o *ExtrasJournalEntriesCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *ExtrasJournalEntriesCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /extras/journal-entries/][%d] extrasJournalEntriesCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *ExtrasJournalEntriesCreateCreated) String() string {
+	return fmt.Sprintf("[POST /extras/journal-entries/][%d] extrasJournalEntriesCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *ExtrasJournalEntriesCreateCreated) GetPayload() *models.JournalEntry {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasJournalEntriesCreateCreated) readResponse(response runtime.Client
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasJournalEntriesCreateDefault creates a ExtrasJournalEntriesCreateDefault with default headers values
-func NewExtrasJournalEntriesCreateDefault(code int) *ExtrasJournalEntriesCreateDefault {
-	return &ExtrasJournalEntriesCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasJournalEntriesCreateDefault describes a response with status code -1, with default header values.
-
-ExtrasJournalEntriesCreateDefault extras journal entries create default
-*/
-type ExtrasJournalEntriesCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras journal entries create default response
-func (o *ExtrasJournalEntriesCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasJournalEntriesCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /extras/journal-entries/][%d] extras_journal-entries_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasJournalEntriesCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasJournalEntriesCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

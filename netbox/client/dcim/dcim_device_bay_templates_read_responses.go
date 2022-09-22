@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDeviceBayTemplatesReadReader is a Reader for the DcimDeviceBayTemplatesRead structure.
@@ -45,14 +45,7 @@ func (o *DcimDeviceBayTemplatesReadReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimDeviceBayTemplatesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimDeviceBayTemplatesReadOK() *DcimDeviceBayTemplatesReadOK {
 	return &DcimDeviceBayTemplatesReadOK{}
 }
 
-/* DcimDeviceBayTemplatesReadOK describes a response with status code 200, with default header values.
+/*
+DcimDeviceBayTemplatesReadOK describes a response with status code 200, with default header values.
 
 DcimDeviceBayTemplatesReadOK dcim device bay templates read o k
 */
@@ -69,9 +63,39 @@ type DcimDeviceBayTemplatesReadOK struct {
 	Payload *models.DeviceBayTemplate
 }
 
+// IsSuccess returns true when this dcim device bay templates read o k response has a 2xx status code
+func (o *DcimDeviceBayTemplatesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim device bay templates read o k response has a 3xx status code
+func (o *DcimDeviceBayTemplatesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim device bay templates read o k response has a 4xx status code
+func (o *DcimDeviceBayTemplatesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim device bay templates read o k response has a 5xx status code
+func (o *DcimDeviceBayTemplatesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim device bay templates read o k response a status code equal to that given
+func (o *DcimDeviceBayTemplatesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDeviceBayTemplatesReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/device-bay-templates/{id}/][%d] dcimDeviceBayTemplatesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDeviceBayTemplatesReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/device-bay-templates/{id}/][%d] dcimDeviceBayTemplatesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDeviceBayTemplatesReadOK) GetPayload() *models.DeviceBayTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimDeviceBayTemplatesReadOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimDeviceBayTemplatesReadDefault creates a DcimDeviceBayTemplatesReadDefault with default headers values
-func NewDcimDeviceBayTemplatesReadDefault(code int) *DcimDeviceBayTemplatesReadDefault {
-	return &DcimDeviceBayTemplatesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDeviceBayTemplatesReadDefault describes a response with status code -1, with default header values.
-
-DcimDeviceBayTemplatesReadDefault dcim device bay templates read default
-*/
-type DcimDeviceBayTemplatesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim device bay templates read default response
-func (o *DcimDeviceBayTemplatesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDeviceBayTemplatesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/device-bay-templates/{id}/][%d] dcim_device-bay-templates_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDeviceBayTemplatesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDeviceBayTemplatesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

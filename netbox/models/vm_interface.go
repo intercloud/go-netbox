@@ -49,8 +49,8 @@ type VMInterface struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -66,7 +66,7 @@ type VMInterface struct {
 	// Enabled
 	Enabled bool `json:"enabled,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -100,7 +100,7 @@ type VMInterface struct {
 	TaggedVlans []*NestedVLAN `json:"tagged_vlans"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// untagged vlan
 	UntaggedVlan *NestedVLAN `json:"untagged_vlan,omitempty"`
@@ -113,9 +113,6 @@ type VMInterface struct {
 	// virtual machine
 	// Required: true
 	VirtualMachine *NestedVirtualMachine `json:"virtual_machine"`
-
-	// vrf
-	Vrf *NestedVRF `json:"vrf,omitempty"`
 }
 
 // Validate validates this VM interface
@@ -174,10 +171,6 @@ func (m *VMInterface) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateVrf(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -208,7 +201,7 @@ func (m *VMInterface) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -417,25 +410,6 @@ func (m *VMInterface) validateVirtualMachine(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *VMInterface) validateVrf(formats strfmt.Registry) error {
-	if swag.IsZero(m.Vrf) { // not required
-		return nil
-	}
-
-	if m.Vrf != nil {
-		if err := m.Vrf.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vrf")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vrf")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 // ContextValidate validate this VM interface based on the context it is used
 func (m *VMInterface) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -496,10 +470,6 @@ func (m *VMInterface) ContextValidate(ctx context.Context, formats strfmt.Regist
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateVrf(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -542,7 +512,7 @@ func (m *VMInterface) contextValidateCountIpaddresses(ctx context.Context, forma
 
 func (m *VMInterface) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 
@@ -681,22 +651,6 @@ func (m *VMInterface) contextValidateVirtualMachine(ctx context.Context, formats
 				return ve.ValidateName("virtual_machine")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("virtual_machine")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *VMInterface) contextValidateVrf(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Vrf != nil {
-		if err := m.Vrf.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("vrf")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("vrf")
 			}
 			return err
 		}

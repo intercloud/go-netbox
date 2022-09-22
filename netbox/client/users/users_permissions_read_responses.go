@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersPermissionsReadReader is a Reader for the UsersPermissionsRead structure.
@@ -45,14 +45,7 @@ func (o *UsersPermissionsReadReader) ReadResponse(response runtime.ClientRespons
 		}
 		return result, nil
 	default:
-		result := NewUsersPermissionsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersPermissionsReadOK() *UsersPermissionsReadOK {
 	return &UsersPermissionsReadOK{}
 }
 
-/* UsersPermissionsReadOK describes a response with status code 200, with default header values.
+/*
+UsersPermissionsReadOK describes a response with status code 200, with default header values.
 
 UsersPermissionsReadOK users permissions read o k
 */
@@ -69,9 +63,39 @@ type UsersPermissionsReadOK struct {
 	Payload *models.ObjectPermission
 }
 
+// IsSuccess returns true when this users permissions read o k response has a 2xx status code
+func (o *UsersPermissionsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users permissions read o k response has a 3xx status code
+func (o *UsersPermissionsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users permissions read o k response has a 4xx status code
+func (o *UsersPermissionsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users permissions read o k response has a 5xx status code
+func (o *UsersPermissionsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users permissions read o k response a status code equal to that given
+func (o *UsersPermissionsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UsersPermissionsReadOK) Error() string {
 	return fmt.Sprintf("[GET /users/permissions/{id}/][%d] usersPermissionsReadOK  %+v", 200, o.Payload)
 }
+
+func (o *UsersPermissionsReadOK) String() string {
+	return fmt.Sprintf("[GET /users/permissions/{id}/][%d] usersPermissionsReadOK  %+v", 200, o.Payload)
+}
+
 func (o *UsersPermissionsReadOK) GetPayload() *models.ObjectPermission {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersPermissionsReadOK) readResponse(response runtime.ClientResponse, c
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersPermissionsReadDefault creates a UsersPermissionsReadDefault with default headers values
-func NewUsersPermissionsReadDefault(code int) *UsersPermissionsReadDefault {
-	return &UsersPermissionsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersPermissionsReadDefault describes a response with status code -1, with default header values.
-
-UsersPermissionsReadDefault users permissions read default
-*/
-type UsersPermissionsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users permissions read default response
-func (o *UsersPermissionsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersPermissionsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /users/permissions/{id}/][%d] users_permissions_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersPermissionsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersPermissionsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

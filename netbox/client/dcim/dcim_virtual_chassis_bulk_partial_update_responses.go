@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimVirtualChassisBulkPartialUpdateReader is a Reader for the DcimVirtualChassisBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimVirtualChassisBulkPartialUpdateReader) ReadResponse(response runtim
 		}
 		return result, nil
 	default:
-		result := NewDcimVirtualChassisBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimVirtualChassisBulkPartialUpdateOK() *DcimVirtualChassisBulkPartialUp
 	return &DcimVirtualChassisBulkPartialUpdateOK{}
 }
 
-/* DcimVirtualChassisBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimVirtualChassisBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimVirtualChassisBulkPartialUpdateOK dcim virtual chassis bulk partial update o k
 */
@@ -69,9 +63,39 @@ type DcimVirtualChassisBulkPartialUpdateOK struct {
 	Payload *models.VirtualChassis
 }
 
+// IsSuccess returns true when this dcim virtual chassis bulk partial update o k response has a 2xx status code
+func (o *DcimVirtualChassisBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim virtual chassis bulk partial update o k response has a 3xx status code
+func (o *DcimVirtualChassisBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim virtual chassis bulk partial update o k response has a 4xx status code
+func (o *DcimVirtualChassisBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim virtual chassis bulk partial update o k response has a 5xx status code
+func (o *DcimVirtualChassisBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim virtual chassis bulk partial update o k response a status code equal to that given
+func (o *DcimVirtualChassisBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimVirtualChassisBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/virtual-chassis/][%d] dcimVirtualChassisBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimVirtualChassisBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/virtual-chassis/][%d] dcimVirtualChassisBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimVirtualChassisBulkPartialUpdateOK) GetPayload() *models.VirtualChassis {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimVirtualChassisBulkPartialUpdateOK) readResponse(response runtime.Cl
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimVirtualChassisBulkPartialUpdateDefault creates a DcimVirtualChassisBulkPartialUpdateDefault with default headers values
-func NewDcimVirtualChassisBulkPartialUpdateDefault(code int) *DcimVirtualChassisBulkPartialUpdateDefault {
-	return &DcimVirtualChassisBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimVirtualChassisBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimVirtualChassisBulkPartialUpdateDefault dcim virtual chassis bulk partial update default
-*/
-type DcimVirtualChassisBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim virtual chassis bulk partial update default response
-func (o *DcimVirtualChassisBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimVirtualChassisBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/virtual-chassis/][%d] dcim_virtual-chassis_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimVirtualChassisBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimVirtualChassisBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

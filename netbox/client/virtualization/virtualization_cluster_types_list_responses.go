@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationClusterTypesListReader is a Reader for the VirtualizationClusterTypesList structure.
@@ -50,14 +50,7 @@ func (o *VirtualizationClusterTypesListReader) ReadResponse(response runtime.Cli
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationClusterTypesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewVirtualizationClusterTypesListOK() *VirtualizationClusterTypesListOK {
 	return &VirtualizationClusterTypesListOK{}
 }
 
-/* VirtualizationClusterTypesListOK describes a response with status code 200, with default header values.
+/*
+VirtualizationClusterTypesListOK describes a response with status code 200, with default header values.
 
 VirtualizationClusterTypesListOK virtualization cluster types list o k
 */
@@ -74,9 +68,39 @@ type VirtualizationClusterTypesListOK struct {
 	Payload *VirtualizationClusterTypesListOKBody
 }
 
+// IsSuccess returns true when this virtualization cluster types list o k response has a 2xx status code
+func (o *VirtualizationClusterTypesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization cluster types list o k response has a 3xx status code
+func (o *VirtualizationClusterTypesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization cluster types list o k response has a 4xx status code
+func (o *VirtualizationClusterTypesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization cluster types list o k response has a 5xx status code
+func (o *VirtualizationClusterTypesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization cluster types list o k response a status code equal to that given
+func (o *VirtualizationClusterTypesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VirtualizationClusterTypesListOK) Error() string {
 	return fmt.Sprintf("[GET /virtualization/cluster-types/][%d] virtualizationClusterTypesListOK  %+v", 200, o.Payload)
 }
+
+func (o *VirtualizationClusterTypesListOK) String() string {
+	return fmt.Sprintf("[GET /virtualization/cluster-types/][%d] virtualizationClusterTypesListOK  %+v", 200, o.Payload)
+}
+
 func (o *VirtualizationClusterTypesListOK) GetPayload() *VirtualizationClusterTypesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *VirtualizationClusterTypesListOK) readResponse(response runtime.ClientR
 	return nil
 }
 
-// NewVirtualizationClusterTypesListDefault creates a VirtualizationClusterTypesListDefault with default headers values
-func NewVirtualizationClusterTypesListDefault(code int) *VirtualizationClusterTypesListDefault {
-	return &VirtualizationClusterTypesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationClusterTypesListDefault describes a response with status code -1, with default header values.
-
-VirtualizationClusterTypesListDefault virtualization cluster types list default
-*/
-type VirtualizationClusterTypesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization cluster types list default response
-func (o *VirtualizationClusterTypesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationClusterTypesListDefault) Error() string {
-	return fmt.Sprintf("[GET /virtualization/cluster-types/][%d] virtualization_cluster-types_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationClusterTypesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationClusterTypesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*VirtualizationClusterTypesListOKBody virtualization cluster types list o k body
+/*
+VirtualizationClusterTypesListOKBody virtualization cluster types list o k body
 swagger:model VirtualizationClusterTypesListOKBody
 */
 type VirtualizationClusterTypesListOKBody struct {

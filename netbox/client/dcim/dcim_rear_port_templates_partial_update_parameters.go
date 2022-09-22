@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimRearPortTemplatesPartialUpdateParams creates a new DcimRearPortTemplatesPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewDcimRearPortTemplatesPartialUpdateParamsWithHTTPClient(client *http.Clie
 	}
 }
 
-/* DcimRearPortTemplatesPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim rear port templates partial update operation.
+/*
+DcimRearPortTemplatesPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim rear port templates partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimRearPortTemplatesPartialUpdateParams struct {
 

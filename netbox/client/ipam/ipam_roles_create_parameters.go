@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewIpamRolesCreateParams creates a new IpamRolesCreateParams object,
@@ -69,10 +69,12 @@ func NewIpamRolesCreateParamsWithHTTPClient(client *http.Client) *IpamRolesCreat
 	}
 }
 
-/* IpamRolesCreateParams contains all the parameters to send to the API endpoint
-   for the ipam roles create operation.
+/*
+IpamRolesCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ipam roles create operation.
+
+	Typically these are written to a http.Request.
 */
 type IpamRolesCreateParams struct {
 

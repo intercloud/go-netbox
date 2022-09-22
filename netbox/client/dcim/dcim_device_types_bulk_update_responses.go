@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimDeviceTypesBulkUpdateReader is a Reader for the DcimDeviceTypesBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimDeviceTypesBulkUpdateReader) ReadResponse(response runtime.ClientRe
 		}
 		return result, nil
 	default:
-		result := NewDcimDeviceTypesBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimDeviceTypesBulkUpdateOK() *DcimDeviceTypesBulkUpdateOK {
 	return &DcimDeviceTypesBulkUpdateOK{}
 }
 
-/* DcimDeviceTypesBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimDeviceTypesBulkUpdateOK describes a response with status code 200, with default header values.
 
 DcimDeviceTypesBulkUpdateOK dcim device types bulk update o k
 */
@@ -69,9 +63,39 @@ type DcimDeviceTypesBulkUpdateOK struct {
 	Payload *models.DeviceType
 }
 
+// IsSuccess returns true when this dcim device types bulk update o k response has a 2xx status code
+func (o *DcimDeviceTypesBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim device types bulk update o k response has a 3xx status code
+func (o *DcimDeviceTypesBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim device types bulk update o k response has a 4xx status code
+func (o *DcimDeviceTypesBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim device types bulk update o k response has a 5xx status code
+func (o *DcimDeviceTypesBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim device types bulk update o k response a status code equal to that given
+func (o *DcimDeviceTypesBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimDeviceTypesBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /dcim/device-types/][%d] dcimDeviceTypesBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimDeviceTypesBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /dcim/device-types/][%d] dcimDeviceTypesBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimDeviceTypesBulkUpdateOK) GetPayload() *models.DeviceType {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimDeviceTypesBulkUpdateOK) readResponse(response runtime.ClientRespon
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimDeviceTypesBulkUpdateDefault creates a DcimDeviceTypesBulkUpdateDefault with default headers values
-func NewDcimDeviceTypesBulkUpdateDefault(code int) *DcimDeviceTypesBulkUpdateDefault {
-	return &DcimDeviceTypesBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimDeviceTypesBulkUpdateDefault describes a response with status code -1, with default header values.
-
-DcimDeviceTypesBulkUpdateDefault dcim device types bulk update default
-*/
-type DcimDeviceTypesBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim device types bulk update default response
-func (o *DcimDeviceTypesBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimDeviceTypesBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /dcim/device-types/][%d] dcim_device-types_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimDeviceTypesBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimDeviceTypesBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

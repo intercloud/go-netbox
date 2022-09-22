@@ -31,7 +31,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewVirtualizationClustersPartialUpdateParams creates a new VirtualizationClustersPartialUpdateParams object,
@@ -70,10 +70,12 @@ func NewVirtualizationClustersPartialUpdateParamsWithHTTPClient(client *http.Cli
 	}
 }
 
-/* VirtualizationClustersPartialUpdateParams contains all the parameters to send to the API endpoint
-   for the virtualization clusters partial update operation.
+/*
+VirtualizationClustersPartialUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the virtualization clusters partial update operation.
+
+	Typically these are written to a http.Request.
 */
 type VirtualizationClustersPartialUpdateParams struct {
 

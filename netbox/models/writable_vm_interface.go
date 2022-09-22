@@ -49,8 +49,8 @@ type WritableVMInterface struct {
 
 	// Created
 	// Read Only: true
-	// Format: date-time
-	Created strfmt.DateTime `json:"created,omitempty"`
+	// Format: date
+	Created strfmt.Date `json:"created,omitempty"`
 
 	// Custom fields
 	CustomFields interface{} `json:"custom_fields,omitempty"`
@@ -66,7 +66,7 @@ type WritableVMInterface struct {
 	// Enabled
 	Enabled bool `json:"enabled,omitempty"`
 
-	// ID
+	// Id
 	// Read Only: true
 	ID int64 `json:"id,omitempty"`
 
@@ -101,7 +101,7 @@ type WritableVMInterface struct {
 	TaggedVlans []int64 `json:"tagged_vlans"`
 
 	// tags
-	Tags []*NestedTag `json:"tags,omitempty"`
+	Tags []*NestedTag `json:"tags"`
 
 	// Untagged VLAN
 	UntaggedVlan *int64 `json:"untagged_vlan,omitempty"`
@@ -114,9 +114,6 @@ type WritableVMInterface struct {
 	// Virtual machine
 	// Required: true
 	VirtualMachine *int64 `json:"virtual_machine"`
-
-	// VRF
-	Vrf *int64 `json:"vrf,omitempty"`
 }
 
 // Validate validates this writable VM interface
@@ -174,7 +171,7 @@ func (m *WritableVMInterface) validateCreated(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("created", "body", "date-time", m.Created.String(), formats); err != nil {
+	if err := validate.FormatOf("created", "body", "date", m.Created.String(), formats); err != nil {
 		return err
 	}
 
@@ -404,7 +401,7 @@ func (m *WritableVMInterface) contextValidateCountIpaddresses(ctx context.Contex
 
 func (m *WritableVMInterface) contextValidateCreated(ctx context.Context, formats strfmt.Registry) error {
 
-	if err := validate.ReadOnly(ctx, "created", "body", strfmt.DateTime(m.Created)); err != nil {
+	if err := validate.ReadOnly(ctx, "created", "body", strfmt.Date(m.Created)); err != nil {
 		return err
 	}
 

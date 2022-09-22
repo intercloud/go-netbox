@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // CircuitsProviderNetworksPartialUpdateReader is a Reader for the CircuitsProviderNetworksPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *CircuitsProviderNetworksPartialUpdateReader) ReadResponse(response runt
 		}
 		return result, nil
 	default:
-		result := NewCircuitsProviderNetworksPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewCircuitsProviderNetworksPartialUpdateOK() *CircuitsProviderNetworksParti
 	return &CircuitsProviderNetworksPartialUpdateOK{}
 }
 
-/* CircuitsProviderNetworksPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+CircuitsProviderNetworksPartialUpdateOK describes a response with status code 200, with default header values.
 
 CircuitsProviderNetworksPartialUpdateOK circuits provider networks partial update o k
 */
@@ -69,9 +63,39 @@ type CircuitsProviderNetworksPartialUpdateOK struct {
 	Payload *models.ProviderNetwork
 }
 
+// IsSuccess returns true when this circuits provider networks partial update o k response has a 2xx status code
+func (o *CircuitsProviderNetworksPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this circuits provider networks partial update o k response has a 3xx status code
+func (o *CircuitsProviderNetworksPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this circuits provider networks partial update o k response has a 4xx status code
+func (o *CircuitsProviderNetworksPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this circuits provider networks partial update o k response has a 5xx status code
+func (o *CircuitsProviderNetworksPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this circuits provider networks partial update o k response a status code equal to that given
+func (o *CircuitsProviderNetworksPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CircuitsProviderNetworksPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /circuits/provider-networks/{id}/][%d] circuitsProviderNetworksPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *CircuitsProviderNetworksPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /circuits/provider-networks/{id}/][%d] circuitsProviderNetworksPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *CircuitsProviderNetworksPartialUpdateOK) GetPayload() *models.ProviderNetwork {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *CircuitsProviderNetworksPartialUpdateOK) readResponse(response runtime.
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewCircuitsProviderNetworksPartialUpdateDefault creates a CircuitsProviderNetworksPartialUpdateDefault with default headers values
-func NewCircuitsProviderNetworksPartialUpdateDefault(code int) *CircuitsProviderNetworksPartialUpdateDefault {
-	return &CircuitsProviderNetworksPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* CircuitsProviderNetworksPartialUpdateDefault describes a response with status code -1, with default header values.
-
-CircuitsProviderNetworksPartialUpdateDefault circuits provider networks partial update default
-*/
-type CircuitsProviderNetworksPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the circuits provider networks partial update default response
-func (o *CircuitsProviderNetworksPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *CircuitsProviderNetworksPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /circuits/provider-networks/{id}/][%d] circuits_provider-networks_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *CircuitsProviderNetworksPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *CircuitsProviderNetworksPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // TenancyTenantsBulkPartialUpdateReader is a Reader for the TenancyTenantsBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *TenancyTenantsBulkPartialUpdateReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 	default:
-		result := NewTenancyTenantsBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewTenancyTenantsBulkPartialUpdateOK() *TenancyTenantsBulkPartialUpdateOK {
 	return &TenancyTenantsBulkPartialUpdateOK{}
 }
 
-/* TenancyTenantsBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+TenancyTenantsBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 TenancyTenantsBulkPartialUpdateOK tenancy tenants bulk partial update o k
 */
@@ -69,9 +63,39 @@ type TenancyTenantsBulkPartialUpdateOK struct {
 	Payload *models.Tenant
 }
 
+// IsSuccess returns true when this tenancy tenants bulk partial update o k response has a 2xx status code
+func (o *TenancyTenantsBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this tenancy tenants bulk partial update o k response has a 3xx status code
+func (o *TenancyTenantsBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this tenancy tenants bulk partial update o k response has a 4xx status code
+func (o *TenancyTenantsBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this tenancy tenants bulk partial update o k response has a 5xx status code
+func (o *TenancyTenantsBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this tenancy tenants bulk partial update o k response a status code equal to that given
+func (o *TenancyTenantsBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *TenancyTenantsBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /tenancy/tenants/][%d] tenancyTenantsBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *TenancyTenantsBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /tenancy/tenants/][%d] tenancyTenantsBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *TenancyTenantsBulkPartialUpdateOK) GetPayload() *models.Tenant {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *TenancyTenantsBulkPartialUpdateOK) readResponse(response runtime.Client
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewTenancyTenantsBulkPartialUpdateDefault creates a TenancyTenantsBulkPartialUpdateDefault with default headers values
-func NewTenancyTenantsBulkPartialUpdateDefault(code int) *TenancyTenantsBulkPartialUpdateDefault {
-	return &TenancyTenantsBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* TenancyTenantsBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-TenancyTenantsBulkPartialUpdateDefault tenancy tenants bulk partial update default
-*/
-type TenancyTenantsBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the tenancy tenants bulk partial update default response
-func (o *TenancyTenantsBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *TenancyTenantsBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /tenancy/tenants/][%d] tenancy_tenants_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *TenancyTenantsBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *TenancyTenantsBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

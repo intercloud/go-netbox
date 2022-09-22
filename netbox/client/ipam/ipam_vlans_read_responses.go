@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // IpamVlansReadReader is a Reader for the IpamVlansRead structure.
@@ -45,14 +45,7 @@ func (o *IpamVlansReadReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return result, nil
 	default:
-		result := NewIpamVlansReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewIpamVlansReadOK() *IpamVlansReadOK {
 	return &IpamVlansReadOK{}
 }
 
-/* IpamVlansReadOK describes a response with status code 200, with default header values.
+/*
+IpamVlansReadOK describes a response with status code 200, with default header values.
 
 IpamVlansReadOK ipam vlans read o k
 */
@@ -69,9 +63,39 @@ type IpamVlansReadOK struct {
 	Payload *models.VLAN
 }
 
+// IsSuccess returns true when this ipam vlans read o k response has a 2xx status code
+func (o *IpamVlansReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam vlans read o k response has a 3xx status code
+func (o *IpamVlansReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam vlans read o k response has a 4xx status code
+func (o *IpamVlansReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam vlans read o k response has a 5xx status code
+func (o *IpamVlansReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam vlans read o k response a status code equal to that given
+func (o *IpamVlansReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *IpamVlansReadOK) Error() string {
 	return fmt.Sprintf("[GET /ipam/vlans/{id}/][%d] ipamVlansReadOK  %+v", 200, o.Payload)
 }
+
+func (o *IpamVlansReadOK) String() string {
+	return fmt.Sprintf("[GET /ipam/vlans/{id}/][%d] ipamVlansReadOK  %+v", 200, o.Payload)
+}
+
 func (o *IpamVlansReadOK) GetPayload() *models.VLAN {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *IpamVlansReadOK) readResponse(response runtime.ClientResponse, consumer
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewIpamVlansReadDefault creates a IpamVlansReadDefault with default headers values
-func NewIpamVlansReadDefault(code int) *IpamVlansReadDefault {
-	return &IpamVlansReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamVlansReadDefault describes a response with status code -1, with default header values.
-
-IpamVlansReadDefault ipam vlans read default
-*/
-type IpamVlansReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam vlans read default response
-func (o *IpamVlansReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamVlansReadDefault) Error() string {
-	return fmt.Sprintf("[GET /ipam/vlans/{id}/][%d] ipam_vlans_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamVlansReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamVlansReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

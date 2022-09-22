@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationClusterGroupsListReader is a Reader for the VirtualizationClusterGroupsList structure.
@@ -50,14 +50,7 @@ func (o *VirtualizationClusterGroupsListReader) ReadResponse(response runtime.Cl
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationClusterGroupsListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewVirtualizationClusterGroupsListOK() *VirtualizationClusterGroupsListOK {
 	return &VirtualizationClusterGroupsListOK{}
 }
 
-/* VirtualizationClusterGroupsListOK describes a response with status code 200, with default header values.
+/*
+VirtualizationClusterGroupsListOK describes a response with status code 200, with default header values.
 
 VirtualizationClusterGroupsListOK virtualization cluster groups list o k
 */
@@ -74,9 +68,39 @@ type VirtualizationClusterGroupsListOK struct {
 	Payload *VirtualizationClusterGroupsListOKBody
 }
 
+// IsSuccess returns true when this virtualization cluster groups list o k response has a 2xx status code
+func (o *VirtualizationClusterGroupsListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization cluster groups list o k response has a 3xx status code
+func (o *VirtualizationClusterGroupsListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization cluster groups list o k response has a 4xx status code
+func (o *VirtualizationClusterGroupsListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization cluster groups list o k response has a 5xx status code
+func (o *VirtualizationClusterGroupsListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization cluster groups list o k response a status code equal to that given
+func (o *VirtualizationClusterGroupsListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VirtualizationClusterGroupsListOK) Error() string {
 	return fmt.Sprintf("[GET /virtualization/cluster-groups/][%d] virtualizationClusterGroupsListOK  %+v", 200, o.Payload)
 }
+
+func (o *VirtualizationClusterGroupsListOK) String() string {
+	return fmt.Sprintf("[GET /virtualization/cluster-groups/][%d] virtualizationClusterGroupsListOK  %+v", 200, o.Payload)
+}
+
 func (o *VirtualizationClusterGroupsListOK) GetPayload() *VirtualizationClusterGroupsListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *VirtualizationClusterGroupsListOK) readResponse(response runtime.Client
 	return nil
 }
 
-// NewVirtualizationClusterGroupsListDefault creates a VirtualizationClusterGroupsListDefault with default headers values
-func NewVirtualizationClusterGroupsListDefault(code int) *VirtualizationClusterGroupsListDefault {
-	return &VirtualizationClusterGroupsListDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationClusterGroupsListDefault describes a response with status code -1, with default header values.
-
-VirtualizationClusterGroupsListDefault virtualization cluster groups list default
-*/
-type VirtualizationClusterGroupsListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization cluster groups list default response
-func (o *VirtualizationClusterGroupsListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationClusterGroupsListDefault) Error() string {
-	return fmt.Sprintf("[GET /virtualization/cluster-groups/][%d] virtualization_cluster-groups_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationClusterGroupsListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationClusterGroupsListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*VirtualizationClusterGroupsListOKBody virtualization cluster groups list o k body
+/*
+VirtualizationClusterGroupsListOKBody virtualization cluster groups list o k body
 swagger:model VirtualizationClusterGroupsListOKBody
 */
 type VirtualizationClusterGroupsListOKBody struct {

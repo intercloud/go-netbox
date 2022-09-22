@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimInterfaceTemplatesReadReader is a Reader for the DcimInterfaceTemplatesRead structure.
@@ -45,14 +45,7 @@ func (o *DcimInterfaceTemplatesReadReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewDcimInterfaceTemplatesReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimInterfaceTemplatesReadOK() *DcimInterfaceTemplatesReadOK {
 	return &DcimInterfaceTemplatesReadOK{}
 }
 
-/* DcimInterfaceTemplatesReadOK describes a response with status code 200, with default header values.
+/*
+DcimInterfaceTemplatesReadOK describes a response with status code 200, with default header values.
 
 DcimInterfaceTemplatesReadOK dcim interface templates read o k
 */
@@ -69,9 +63,39 @@ type DcimInterfaceTemplatesReadOK struct {
 	Payload *models.InterfaceTemplate
 }
 
+// IsSuccess returns true when this dcim interface templates read o k response has a 2xx status code
+func (o *DcimInterfaceTemplatesReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim interface templates read o k response has a 3xx status code
+func (o *DcimInterfaceTemplatesReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim interface templates read o k response has a 4xx status code
+func (o *DcimInterfaceTemplatesReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim interface templates read o k response has a 5xx status code
+func (o *DcimInterfaceTemplatesReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim interface templates read o k response a status code equal to that given
+func (o *DcimInterfaceTemplatesReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimInterfaceTemplatesReadOK) Error() string {
 	return fmt.Sprintf("[GET /dcim/interface-templates/{id}/][%d] dcimInterfaceTemplatesReadOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimInterfaceTemplatesReadOK) String() string {
+	return fmt.Sprintf("[GET /dcim/interface-templates/{id}/][%d] dcimInterfaceTemplatesReadOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimInterfaceTemplatesReadOK) GetPayload() *models.InterfaceTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimInterfaceTemplatesReadOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimInterfaceTemplatesReadDefault creates a DcimInterfaceTemplatesReadDefault with default headers values
-func NewDcimInterfaceTemplatesReadDefault(code int) *DcimInterfaceTemplatesReadDefault {
-	return &DcimInterfaceTemplatesReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimInterfaceTemplatesReadDefault describes a response with status code -1, with default header values.
-
-DcimInterfaceTemplatesReadDefault dcim interface templates read default
-*/
-type DcimInterfaceTemplatesReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim interface templates read default response
-func (o *DcimInterfaceTemplatesReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimInterfaceTemplatesReadDefault) Error() string {
-	return fmt.Sprintf("[GET /dcim/interface-templates/{id}/][%d] dcim_interface-templates_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimInterfaceTemplatesReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimInterfaceTemplatesReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

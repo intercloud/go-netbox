@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasWebhooksBulkUpdateReader is a Reader for the ExtrasWebhooksBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasWebhooksBulkUpdateReader) ReadResponse(response runtime.ClientRes
 		}
 		return result, nil
 	default:
-		result := NewExtrasWebhooksBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasWebhooksBulkUpdateOK() *ExtrasWebhooksBulkUpdateOK {
 	return &ExtrasWebhooksBulkUpdateOK{}
 }
 
-/* ExtrasWebhooksBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+ExtrasWebhooksBulkUpdateOK describes a response with status code 200, with default header values.
 
 ExtrasWebhooksBulkUpdateOK extras webhooks bulk update o k
 */
@@ -69,9 +63,39 @@ type ExtrasWebhooksBulkUpdateOK struct {
 	Payload *models.Webhook
 }
 
+// IsSuccess returns true when this extras webhooks bulk update o k response has a 2xx status code
+func (o *ExtrasWebhooksBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras webhooks bulk update o k response has a 3xx status code
+func (o *ExtrasWebhooksBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras webhooks bulk update o k response has a 4xx status code
+func (o *ExtrasWebhooksBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras webhooks bulk update o k response has a 5xx status code
+func (o *ExtrasWebhooksBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras webhooks bulk update o k response a status code equal to that given
+func (o *ExtrasWebhooksBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasWebhooksBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /extras/webhooks/][%d] extrasWebhooksBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasWebhooksBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /extras/webhooks/][%d] extrasWebhooksBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasWebhooksBulkUpdateOK) GetPayload() *models.Webhook {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasWebhooksBulkUpdateOK) readResponse(response runtime.ClientRespons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasWebhooksBulkUpdateDefault creates a ExtrasWebhooksBulkUpdateDefault with default headers values
-func NewExtrasWebhooksBulkUpdateDefault(code int) *ExtrasWebhooksBulkUpdateDefault {
-	return &ExtrasWebhooksBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasWebhooksBulkUpdateDefault describes a response with status code -1, with default header values.
-
-ExtrasWebhooksBulkUpdateDefault extras webhooks bulk update default
-*/
-type ExtrasWebhooksBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras webhooks bulk update default response
-func (o *ExtrasWebhooksBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasWebhooksBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /extras/webhooks/][%d] extras_webhooks_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasWebhooksBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasWebhooksBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

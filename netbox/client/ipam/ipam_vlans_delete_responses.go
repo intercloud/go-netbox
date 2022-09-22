@@ -22,7 +22,6 @@ package ipam
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *IpamVlansDeleteReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return result, nil
 	default:
-		result := NewIpamVlansDeleteDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewIpamVlansDeleteNoContent() *IpamVlansDeleteNoContent {
 	return &IpamVlansDeleteNoContent{}
 }
 
-/* IpamVlansDeleteNoContent describes a response with status code 204, with default header values.
+/*
+IpamVlansDeleteNoContent describes a response with status code 204, with default header values.
 
 IpamVlansDeleteNoContent ipam vlans delete no content
 */
 type IpamVlansDeleteNoContent struct {
 }
 
+// IsSuccess returns true when this ipam vlans delete no content response has a 2xx status code
+func (o *IpamVlansDeleteNoContent) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ipam vlans delete no content response has a 3xx status code
+func (o *IpamVlansDeleteNoContent) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ipam vlans delete no content response has a 4xx status code
+func (o *IpamVlansDeleteNoContent) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ipam vlans delete no content response has a 5xx status code
+func (o *IpamVlansDeleteNoContent) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ipam vlans delete no content response a status code equal to that given
+func (o *IpamVlansDeleteNoContent) IsCode(code int) bool {
+	return code == 204
+}
+
 func (o *IpamVlansDeleteNoContent) Error() string {
 	return fmt.Sprintf("[DELETE /ipam/vlans/{id}/][%d] ipamVlansDeleteNoContent ", 204)
 }
 
+func (o *IpamVlansDeleteNoContent) String() string {
+	return fmt.Sprintf("[DELETE /ipam/vlans/{id}/][%d] ipamVlansDeleteNoContent ", 204)
+}
+
 func (o *IpamVlansDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewIpamVlansDeleteDefault creates a IpamVlansDeleteDefault with default headers values
-func NewIpamVlansDeleteDefault(code int) *IpamVlansDeleteDefault {
-	return &IpamVlansDeleteDefault{
-		_statusCode: code,
-	}
-}
-
-/* IpamVlansDeleteDefault describes a response with status code -1, with default header values.
-
-IpamVlansDeleteDefault ipam vlans delete default
-*/
-type IpamVlansDeleteDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the ipam vlans delete default response
-func (o *IpamVlansDeleteDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *IpamVlansDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /ipam/vlans/{id}/][%d] ipam_vlans_delete default  %+v", o._statusCode, o.Payload)
-}
-func (o *IpamVlansDeleteDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *IpamVlansDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

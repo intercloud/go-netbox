@@ -22,7 +22,6 @@ package status
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *StatusListReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return result, nil
 	default:
-		result := NewStatusListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewStatusListOK() *StatusListOK {
 	return &StatusListOK{}
 }
 
-/* StatusListOK describes a response with status code 200, with default header values.
+/*
+StatusListOK describes a response with status code 200, with default header values.
 
 StatusListOK status list o k
 */
 type StatusListOK struct {
 }
 
+// IsSuccess returns true when this status list o k response has a 2xx status code
+func (o *StatusListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this status list o k response has a 3xx status code
+func (o *StatusListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this status list o k response has a 4xx status code
+func (o *StatusListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this status list o k response has a 5xx status code
+func (o *StatusListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this status list o k response a status code equal to that given
+func (o *StatusListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *StatusListOK) Error() string {
 	return fmt.Sprintf("[GET /status/][%d] statusListOK ", 200)
 }
 
+func (o *StatusListOK) String() string {
+	return fmt.Sprintf("[GET /status/][%d] statusListOK ", 200)
+}
+
 func (o *StatusListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewStatusListDefault creates a StatusListDefault with default headers values
-func NewStatusListDefault(code int) *StatusListDefault {
-	return &StatusListDefault{
-		_statusCode: code,
-	}
-}
-
-/* StatusListDefault describes a response with status code -1, with default header values.
-
-StatusListDefault status list default
-*/
-type StatusListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the status list default response
-func (o *StatusListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *StatusListDefault) Error() string {
-	return fmt.Sprintf("[GET /status/][%d] status_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *StatusListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *StatusListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

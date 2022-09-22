@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasExportTemplatesUpdateReader is a Reader for the ExtrasExportTemplatesUpdate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasExportTemplatesUpdateReader) ReadResponse(response runtime.Client
 		}
 		return result, nil
 	default:
-		result := NewExtrasExportTemplatesUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasExportTemplatesUpdateOK() *ExtrasExportTemplatesUpdateOK {
 	return &ExtrasExportTemplatesUpdateOK{}
 }
 
-/* ExtrasExportTemplatesUpdateOK describes a response with status code 200, with default header values.
+/*
+ExtrasExportTemplatesUpdateOK describes a response with status code 200, with default header values.
 
 ExtrasExportTemplatesUpdateOK extras export templates update o k
 */
@@ -69,9 +63,39 @@ type ExtrasExportTemplatesUpdateOK struct {
 	Payload *models.ExportTemplate
 }
 
+// IsSuccess returns true when this extras export templates update o k response has a 2xx status code
+func (o *ExtrasExportTemplatesUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras export templates update o k response has a 3xx status code
+func (o *ExtrasExportTemplatesUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras export templates update o k response has a 4xx status code
+func (o *ExtrasExportTemplatesUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras export templates update o k response has a 5xx status code
+func (o *ExtrasExportTemplatesUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras export templates update o k response a status code equal to that given
+func (o *ExtrasExportTemplatesUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasExportTemplatesUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /extras/export-templates/{id}/][%d] extrasExportTemplatesUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasExportTemplatesUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /extras/export-templates/{id}/][%d] extrasExportTemplatesUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasExportTemplatesUpdateOK) GetPayload() *models.ExportTemplate {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasExportTemplatesUpdateOK) readResponse(response runtime.ClientResp
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasExportTemplatesUpdateDefault creates a ExtrasExportTemplatesUpdateDefault with default headers values
-func NewExtrasExportTemplatesUpdateDefault(code int) *ExtrasExportTemplatesUpdateDefault {
-	return &ExtrasExportTemplatesUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasExportTemplatesUpdateDefault describes a response with status code -1, with default header values.
-
-ExtrasExportTemplatesUpdateDefault extras export templates update default
-*/
-type ExtrasExportTemplatesUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras export templates update default response
-func (o *ExtrasExportTemplatesUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasExportTemplatesUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /extras/export-templates/{id}/][%d] extras_export-templates_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasExportTemplatesUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasExportTemplatesUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

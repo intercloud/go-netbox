@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasImageAttachmentsUpdateReader is a Reader for the ExtrasImageAttachmentsUpdate structure.
@@ -45,14 +45,7 @@ func (o *ExtrasImageAttachmentsUpdateReader) ReadResponse(response runtime.Clien
 		}
 		return result, nil
 	default:
-		result := NewExtrasImageAttachmentsUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewExtrasImageAttachmentsUpdateOK() *ExtrasImageAttachmentsUpdateOK {
 	return &ExtrasImageAttachmentsUpdateOK{}
 }
 
-/* ExtrasImageAttachmentsUpdateOK describes a response with status code 200, with default header values.
+/*
+ExtrasImageAttachmentsUpdateOK describes a response with status code 200, with default header values.
 
 ExtrasImageAttachmentsUpdateOK extras image attachments update o k
 */
@@ -69,9 +63,39 @@ type ExtrasImageAttachmentsUpdateOK struct {
 	Payload *models.ImageAttachment
 }
 
+// IsSuccess returns true when this extras image attachments update o k response has a 2xx status code
+func (o *ExtrasImageAttachmentsUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras image attachments update o k response has a 3xx status code
+func (o *ExtrasImageAttachmentsUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras image attachments update o k response has a 4xx status code
+func (o *ExtrasImageAttachmentsUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras image attachments update o k response has a 5xx status code
+func (o *ExtrasImageAttachmentsUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras image attachments update o k response a status code equal to that given
+func (o *ExtrasImageAttachmentsUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasImageAttachmentsUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /extras/image-attachments/{id}/][%d] extrasImageAttachmentsUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasImageAttachmentsUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /extras/image-attachments/{id}/][%d] extrasImageAttachmentsUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasImageAttachmentsUpdateOK) GetPayload() *models.ImageAttachment {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *ExtrasImageAttachmentsUpdateOK) readResponse(response runtime.ClientRes
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewExtrasImageAttachmentsUpdateDefault creates a ExtrasImageAttachmentsUpdateDefault with default headers values
-func NewExtrasImageAttachmentsUpdateDefault(code int) *ExtrasImageAttachmentsUpdateDefault {
-	return &ExtrasImageAttachmentsUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasImageAttachmentsUpdateDefault describes a response with status code -1, with default header values.
-
-ExtrasImageAttachmentsUpdateDefault extras image attachments update default
-*/
-type ExtrasImageAttachmentsUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras image attachments update default response
-func (o *ExtrasImageAttachmentsUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasImageAttachmentsUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /extras/image-attachments/{id}/][%d] extras_image-attachments_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasImageAttachmentsUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasImageAttachmentsUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // VirtualizationVirtualMachinesPartialUpdateReader is a Reader for the VirtualizationVirtualMachinesPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *VirtualizationVirtualMachinesPartialUpdateReader) ReadResponse(response
 		}
 		return result, nil
 	default:
-		result := NewVirtualizationVirtualMachinesPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewVirtualizationVirtualMachinesPartialUpdateOK() *VirtualizationVirtualMac
 	return &VirtualizationVirtualMachinesPartialUpdateOK{}
 }
 
-/* VirtualizationVirtualMachinesPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+VirtualizationVirtualMachinesPartialUpdateOK describes a response with status code 200, with default header values.
 
 VirtualizationVirtualMachinesPartialUpdateOK virtualization virtual machines partial update o k
 */
@@ -69,9 +63,39 @@ type VirtualizationVirtualMachinesPartialUpdateOK struct {
 	Payload *models.VirtualMachineWithConfigContext
 }
 
+// IsSuccess returns true when this virtualization virtual machines partial update o k response has a 2xx status code
+func (o *VirtualizationVirtualMachinesPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this virtualization virtual machines partial update o k response has a 3xx status code
+func (o *VirtualizationVirtualMachinesPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this virtualization virtual machines partial update o k response has a 4xx status code
+func (o *VirtualizationVirtualMachinesPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this virtualization virtual machines partial update o k response has a 5xx status code
+func (o *VirtualizationVirtualMachinesPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this virtualization virtual machines partial update o k response a status code equal to that given
+func (o *VirtualizationVirtualMachinesPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *VirtualizationVirtualMachinesPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /virtualization/virtual-machines/{id}/][%d] virtualizationVirtualMachinesPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *VirtualizationVirtualMachinesPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /virtualization/virtual-machines/{id}/][%d] virtualizationVirtualMachinesPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *VirtualizationVirtualMachinesPartialUpdateOK) GetPayload() *models.VirtualMachineWithConfigContext {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *VirtualizationVirtualMachinesPartialUpdateOK) readResponse(response run
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewVirtualizationVirtualMachinesPartialUpdateDefault creates a VirtualizationVirtualMachinesPartialUpdateDefault with default headers values
-func NewVirtualizationVirtualMachinesPartialUpdateDefault(code int) *VirtualizationVirtualMachinesPartialUpdateDefault {
-	return &VirtualizationVirtualMachinesPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* VirtualizationVirtualMachinesPartialUpdateDefault describes a response with status code -1, with default header values.
-
-VirtualizationVirtualMachinesPartialUpdateDefault virtualization virtual machines partial update default
-*/
-type VirtualizationVirtualMachinesPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the virtualization virtual machines partial update default response
-func (o *VirtualizationVirtualMachinesPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *VirtualizationVirtualMachinesPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /virtualization/virtual-machines/{id}/][%d] virtualization_virtual-machines_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *VirtualizationVirtualMachinesPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *VirtualizationVirtualMachinesPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

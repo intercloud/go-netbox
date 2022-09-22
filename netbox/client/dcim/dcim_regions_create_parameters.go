@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimRegionsCreateParams creates a new DcimRegionsCreateParams object,
@@ -69,10 +69,12 @@ func NewDcimRegionsCreateParamsWithHTTPClient(client *http.Client) *DcimRegionsC
 	}
 }
 
-/* DcimRegionsCreateParams contains all the parameters to send to the API endpoint
-   for the dcim regions create operation.
+/*
+DcimRegionsCreateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim regions create operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimRegionsCreateParams struct {
 

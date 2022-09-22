@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasObjectChangesListReader is a Reader for the ExtrasObjectChangesList structure.
@@ -50,14 +50,7 @@ func (o *ExtrasObjectChangesListReader) ReadResponse(response runtime.ClientResp
 		}
 		return result, nil
 	default:
-		result := NewExtrasObjectChangesListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewExtrasObjectChangesListOK() *ExtrasObjectChangesListOK {
 	return &ExtrasObjectChangesListOK{}
 }
 
-/* ExtrasObjectChangesListOK describes a response with status code 200, with default header values.
+/*
+ExtrasObjectChangesListOK describes a response with status code 200, with default header values.
 
 ExtrasObjectChangesListOK extras object changes list o k
 */
@@ -74,9 +68,39 @@ type ExtrasObjectChangesListOK struct {
 	Payload *ExtrasObjectChangesListOKBody
 }
 
+// IsSuccess returns true when this extras object changes list o k response has a 2xx status code
+func (o *ExtrasObjectChangesListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras object changes list o k response has a 3xx status code
+func (o *ExtrasObjectChangesListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras object changes list o k response has a 4xx status code
+func (o *ExtrasObjectChangesListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras object changes list o k response has a 5xx status code
+func (o *ExtrasObjectChangesListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras object changes list o k response a status code equal to that given
+func (o *ExtrasObjectChangesListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasObjectChangesListOK) Error() string {
 	return fmt.Sprintf("[GET /extras/object-changes/][%d] extrasObjectChangesListOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasObjectChangesListOK) String() string {
+	return fmt.Sprintf("[GET /extras/object-changes/][%d] extrasObjectChangesListOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasObjectChangesListOK) GetPayload() *ExtrasObjectChangesListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *ExtrasObjectChangesListOK) readResponse(response runtime.ClientResponse
 	return nil
 }
 
-// NewExtrasObjectChangesListDefault creates a ExtrasObjectChangesListDefault with default headers values
-func NewExtrasObjectChangesListDefault(code int) *ExtrasObjectChangesListDefault {
-	return &ExtrasObjectChangesListDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasObjectChangesListDefault describes a response with status code -1, with default header values.
-
-ExtrasObjectChangesListDefault extras object changes list default
-*/
-type ExtrasObjectChangesListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras object changes list default response
-func (o *ExtrasObjectChangesListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasObjectChangesListDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/object-changes/][%d] extras_object-changes_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasObjectChangesListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasObjectChangesListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*ExtrasObjectChangesListOKBody extras object changes list o k body
+/*
+ExtrasObjectChangesListOKBody extras object changes list o k body
 swagger:model ExtrasObjectChangesListOKBody
 */
 type ExtrasObjectChangesListOKBody struct {

@@ -22,7 +22,6 @@ package extras
 
 import (
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
@@ -43,14 +42,7 @@ func (o *ExtrasScriptsReadReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return result, nil
 	default:
-		result := NewExtrasScriptsReadDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -59,57 +51,48 @@ func NewExtrasScriptsReadOK() *ExtrasScriptsReadOK {
 	return &ExtrasScriptsReadOK{}
 }
 
-/* ExtrasScriptsReadOK describes a response with status code 200, with default header values.
+/*
+ExtrasScriptsReadOK describes a response with status code 200, with default header values.
 
 ExtrasScriptsReadOK extras scripts read o k
 */
 type ExtrasScriptsReadOK struct {
 }
 
+// IsSuccess returns true when this extras scripts read o k response has a 2xx status code
+func (o *ExtrasScriptsReadOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras scripts read o k response has a 3xx status code
+func (o *ExtrasScriptsReadOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras scripts read o k response has a 4xx status code
+func (o *ExtrasScriptsReadOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras scripts read o k response has a 5xx status code
+func (o *ExtrasScriptsReadOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras scripts read o k response a status code equal to that given
+func (o *ExtrasScriptsReadOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasScriptsReadOK) Error() string {
 	return fmt.Sprintf("[GET /extras/scripts/{id}/][%d] extrasScriptsReadOK ", 200)
 }
 
+func (o *ExtrasScriptsReadOK) String() string {
+	return fmt.Sprintf("[GET /extras/scripts/{id}/][%d] extrasScriptsReadOK ", 200)
+}
+
 func (o *ExtrasScriptsReadOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	return nil
-}
-
-// NewExtrasScriptsReadDefault creates a ExtrasScriptsReadDefault with default headers values
-func NewExtrasScriptsReadDefault(code int) *ExtrasScriptsReadDefault {
-	return &ExtrasScriptsReadDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasScriptsReadDefault describes a response with status code -1, with default header values.
-
-ExtrasScriptsReadDefault extras scripts read default
-*/
-type ExtrasScriptsReadDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras scripts read default response
-func (o *ExtrasScriptsReadDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasScriptsReadDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/scripts/{id}/][%d] extras_scripts_read default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasScriptsReadDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasScriptsReadDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

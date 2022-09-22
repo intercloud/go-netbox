@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimRearPortsBulkPartialUpdateReader is a Reader for the DcimRearPortsBulkPartialUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimRearPortsBulkPartialUpdateReader) ReadResponse(response runtime.Cli
 		}
 		return result, nil
 	default:
-		result := NewDcimRearPortsBulkPartialUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimRearPortsBulkPartialUpdateOK() *DcimRearPortsBulkPartialUpdateOK {
 	return &DcimRearPortsBulkPartialUpdateOK{}
 }
 
-/* DcimRearPortsBulkPartialUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimRearPortsBulkPartialUpdateOK describes a response with status code 200, with default header values.
 
 DcimRearPortsBulkPartialUpdateOK dcim rear ports bulk partial update o k
 */
@@ -69,9 +63,39 @@ type DcimRearPortsBulkPartialUpdateOK struct {
 	Payload *models.RearPort
 }
 
+// IsSuccess returns true when this dcim rear ports bulk partial update o k response has a 2xx status code
+func (o *DcimRearPortsBulkPartialUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim rear ports bulk partial update o k response has a 3xx status code
+func (o *DcimRearPortsBulkPartialUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim rear ports bulk partial update o k response has a 4xx status code
+func (o *DcimRearPortsBulkPartialUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim rear ports bulk partial update o k response has a 5xx status code
+func (o *DcimRearPortsBulkPartialUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim rear ports bulk partial update o k response a status code equal to that given
+func (o *DcimRearPortsBulkPartialUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimRearPortsBulkPartialUpdateOK) Error() string {
 	return fmt.Sprintf("[PATCH /dcim/rear-ports/][%d] dcimRearPortsBulkPartialUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimRearPortsBulkPartialUpdateOK) String() string {
+	return fmt.Sprintf("[PATCH /dcim/rear-ports/][%d] dcimRearPortsBulkPartialUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimRearPortsBulkPartialUpdateOK) GetPayload() *models.RearPort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimRearPortsBulkPartialUpdateOK) readResponse(response runtime.ClientR
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimRearPortsBulkPartialUpdateDefault creates a DcimRearPortsBulkPartialUpdateDefault with default headers values
-func NewDcimRearPortsBulkPartialUpdateDefault(code int) *DcimRearPortsBulkPartialUpdateDefault {
-	return &DcimRearPortsBulkPartialUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimRearPortsBulkPartialUpdateDefault describes a response with status code -1, with default header values.
-
-DcimRearPortsBulkPartialUpdateDefault dcim rear ports bulk partial update default
-*/
-type DcimRearPortsBulkPartialUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim rear ports bulk partial update default response
-func (o *DcimRearPortsBulkPartialUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimRearPortsBulkPartialUpdateDefault) Error() string {
-	return fmt.Sprintf("[PATCH /dcim/rear-ports/][%d] dcim_rear-ports_bulk_partial_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimRearPortsBulkPartialUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimRearPortsBulkPartialUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

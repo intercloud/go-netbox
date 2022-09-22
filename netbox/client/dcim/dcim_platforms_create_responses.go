@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimPlatformsCreateReader is a Reader for the DcimPlatformsCreate structure.
@@ -45,14 +45,7 @@ func (o *DcimPlatformsCreateReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 	default:
-		result := NewDcimPlatformsCreateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimPlatformsCreateCreated() *DcimPlatformsCreateCreated {
 	return &DcimPlatformsCreateCreated{}
 }
 
-/* DcimPlatformsCreateCreated describes a response with status code 201, with default header values.
+/*
+DcimPlatformsCreateCreated describes a response with status code 201, with default header values.
 
 DcimPlatformsCreateCreated dcim platforms create created
 */
@@ -69,9 +63,39 @@ type DcimPlatformsCreateCreated struct {
 	Payload *models.Platform
 }
 
+// IsSuccess returns true when this dcim platforms create created response has a 2xx status code
+func (o *DcimPlatformsCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim platforms create created response has a 3xx status code
+func (o *DcimPlatformsCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim platforms create created response has a 4xx status code
+func (o *DcimPlatformsCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim platforms create created response has a 5xx status code
+func (o *DcimPlatformsCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim platforms create created response a status code equal to that given
+func (o *DcimPlatformsCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *DcimPlatformsCreateCreated) Error() string {
 	return fmt.Sprintf("[POST /dcim/platforms/][%d] dcimPlatformsCreateCreated  %+v", 201, o.Payload)
 }
+
+func (o *DcimPlatformsCreateCreated) String() string {
+	return fmt.Sprintf("[POST /dcim/platforms/][%d] dcimPlatformsCreateCreated  %+v", 201, o.Payload)
+}
+
 func (o *DcimPlatformsCreateCreated) GetPayload() *models.Platform {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimPlatformsCreateCreated) readResponse(response runtime.ClientRespons
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimPlatformsCreateDefault creates a DcimPlatformsCreateDefault with default headers values
-func NewDcimPlatformsCreateDefault(code int) *DcimPlatformsCreateDefault {
-	return &DcimPlatformsCreateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimPlatformsCreateDefault describes a response with status code -1, with default header values.
-
-DcimPlatformsCreateDefault dcim platforms create default
-*/
-type DcimPlatformsCreateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim platforms create default response
-func (o *DcimPlatformsCreateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimPlatformsCreateDefault) Error() string {
-	return fmt.Sprintf("[POST /dcim/platforms/][%d] dcim_platforms_create default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimPlatformsCreateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimPlatformsCreateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

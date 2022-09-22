@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // UsersPermissionsBulkUpdateReader is a Reader for the UsersPermissionsBulkUpdate structure.
@@ -45,14 +45,7 @@ func (o *UsersPermissionsBulkUpdateReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 	default:
-		result := NewUsersPermissionsBulkUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewUsersPermissionsBulkUpdateOK() *UsersPermissionsBulkUpdateOK {
 	return &UsersPermissionsBulkUpdateOK{}
 }
 
-/* UsersPermissionsBulkUpdateOK describes a response with status code 200, with default header values.
+/*
+UsersPermissionsBulkUpdateOK describes a response with status code 200, with default header values.
 
 UsersPermissionsBulkUpdateOK users permissions bulk update o k
 */
@@ -69,9 +63,39 @@ type UsersPermissionsBulkUpdateOK struct {
 	Payload *models.ObjectPermission
 }
 
+// IsSuccess returns true when this users permissions bulk update o k response has a 2xx status code
+func (o *UsersPermissionsBulkUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this users permissions bulk update o k response has a 3xx status code
+func (o *UsersPermissionsBulkUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this users permissions bulk update o k response has a 4xx status code
+func (o *UsersPermissionsBulkUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this users permissions bulk update o k response has a 5xx status code
+func (o *UsersPermissionsBulkUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this users permissions bulk update o k response a status code equal to that given
+func (o *UsersPermissionsBulkUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *UsersPermissionsBulkUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /users/permissions/][%d] usersPermissionsBulkUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *UsersPermissionsBulkUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /users/permissions/][%d] usersPermissionsBulkUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *UsersPermissionsBulkUpdateOK) GetPayload() *models.ObjectPermission {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *UsersPermissionsBulkUpdateOK) readResponse(response runtime.ClientRespo
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewUsersPermissionsBulkUpdateDefault creates a UsersPermissionsBulkUpdateDefault with default headers values
-func NewUsersPermissionsBulkUpdateDefault(code int) *UsersPermissionsBulkUpdateDefault {
-	return &UsersPermissionsBulkUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* UsersPermissionsBulkUpdateDefault describes a response with status code -1, with default header values.
-
-UsersPermissionsBulkUpdateDefault users permissions bulk update default
-*/
-type UsersPermissionsBulkUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the users permissions bulk update default response
-func (o *UsersPermissionsBulkUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *UsersPermissionsBulkUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /users/permissions/][%d] users_permissions_bulk_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *UsersPermissionsBulkUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *UsersPermissionsBulkUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

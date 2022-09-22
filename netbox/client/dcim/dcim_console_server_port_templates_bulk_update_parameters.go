@@ -30,7 +30,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // NewDcimConsoleServerPortTemplatesBulkUpdateParams creates a new DcimConsoleServerPortTemplatesBulkUpdateParams object,
@@ -69,10 +69,12 @@ func NewDcimConsoleServerPortTemplatesBulkUpdateParamsWithHTTPClient(client *htt
 	}
 }
 
-/* DcimConsoleServerPortTemplatesBulkUpdateParams contains all the parameters to send to the API endpoint
-   for the dcim console server port templates bulk update operation.
+/*
+DcimConsoleServerPortTemplatesBulkUpdateParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the dcim console server port templates bulk update operation.
+
+	Typically these are written to a http.Request.
 */
 type DcimConsoleServerPortTemplatesBulkUpdateParams struct {
 

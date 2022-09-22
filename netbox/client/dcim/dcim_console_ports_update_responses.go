@@ -27,7 +27,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // DcimConsolePortsUpdateReader is a Reader for the DcimConsolePortsUpdate structure.
@@ -45,14 +45,7 @@ func (o *DcimConsolePortsUpdateReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		result := NewDcimConsolePortsUpdateDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -61,7 +54,8 @@ func NewDcimConsolePortsUpdateOK() *DcimConsolePortsUpdateOK {
 	return &DcimConsolePortsUpdateOK{}
 }
 
-/* DcimConsolePortsUpdateOK describes a response with status code 200, with default header values.
+/*
+DcimConsolePortsUpdateOK describes a response with status code 200, with default header values.
 
 DcimConsolePortsUpdateOK dcim console ports update o k
 */
@@ -69,9 +63,39 @@ type DcimConsolePortsUpdateOK struct {
 	Payload *models.ConsolePort
 }
 
+// IsSuccess returns true when this dcim console ports update o k response has a 2xx status code
+func (o *DcimConsolePortsUpdateOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dcim console ports update o k response has a 3xx status code
+func (o *DcimConsolePortsUpdateOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dcim console ports update o k response has a 4xx status code
+func (o *DcimConsolePortsUpdateOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dcim console ports update o k response has a 5xx status code
+func (o *DcimConsolePortsUpdateOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dcim console ports update o k response a status code equal to that given
+func (o *DcimConsolePortsUpdateOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *DcimConsolePortsUpdateOK) Error() string {
 	return fmt.Sprintf("[PUT /dcim/console-ports/{id}/][%d] dcimConsolePortsUpdateOK  %+v", 200, o.Payload)
 }
+
+func (o *DcimConsolePortsUpdateOK) String() string {
+	return fmt.Sprintf("[PUT /dcim/console-ports/{id}/][%d] dcimConsolePortsUpdateOK  %+v", 200, o.Payload)
+}
+
 func (o *DcimConsolePortsUpdateOK) GetPayload() *models.ConsolePort {
 	return o.Payload
 }
@@ -82,45 +106,6 @@ func (o *DcimConsolePortsUpdateOK) readResponse(response runtime.ClientResponse,
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-// NewDcimConsolePortsUpdateDefault creates a DcimConsolePortsUpdateDefault with default headers values
-func NewDcimConsolePortsUpdateDefault(code int) *DcimConsolePortsUpdateDefault {
-	return &DcimConsolePortsUpdateDefault{
-		_statusCode: code,
-	}
-}
-
-/* DcimConsolePortsUpdateDefault describes a response with status code -1, with default header values.
-
-DcimConsolePortsUpdateDefault dcim console ports update default
-*/
-type DcimConsolePortsUpdateDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the dcim console ports update default response
-func (o *DcimConsolePortsUpdateDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *DcimConsolePortsUpdateDefault) Error() string {
-	return fmt.Sprintf("[PUT /dcim/console-ports/{id}/][%d] dcim_console-ports_update default  %+v", o._statusCode, o.Payload)
-}
-func (o *DcimConsolePortsUpdateDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *DcimConsolePortsUpdateDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -32,7 +32,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/netbox-community/go-netbox/netbox/models"
+	"github.com/intercloud/go-netbox/netbox/models"
 )
 
 // ExtrasCustomLinksListReader is a Reader for the ExtrasCustomLinksList structure.
@@ -50,14 +50,7 @@ func (o *ExtrasCustomLinksListReader) ReadResponse(response runtime.ClientRespon
 		}
 		return result, nil
 	default:
-		result := NewExtrasCustomLinksListDefault(response.Code())
-		if err := result.readResponse(response, consumer, o.formats); err != nil {
-			return nil, err
-		}
-		if response.Code()/100 == 2 {
-			return result, nil
-		}
-		return nil, result
+		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
 	}
 }
 
@@ -66,7 +59,8 @@ func NewExtrasCustomLinksListOK() *ExtrasCustomLinksListOK {
 	return &ExtrasCustomLinksListOK{}
 }
 
-/* ExtrasCustomLinksListOK describes a response with status code 200, with default header values.
+/*
+ExtrasCustomLinksListOK describes a response with status code 200, with default header values.
 
 ExtrasCustomLinksListOK extras custom links list o k
 */
@@ -74,9 +68,39 @@ type ExtrasCustomLinksListOK struct {
 	Payload *ExtrasCustomLinksListOKBody
 }
 
+// IsSuccess returns true when this extras custom links list o k response has a 2xx status code
+func (o *ExtrasCustomLinksListOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this extras custom links list o k response has a 3xx status code
+func (o *ExtrasCustomLinksListOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this extras custom links list o k response has a 4xx status code
+func (o *ExtrasCustomLinksListOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this extras custom links list o k response has a 5xx status code
+func (o *ExtrasCustomLinksListOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this extras custom links list o k response a status code equal to that given
+func (o *ExtrasCustomLinksListOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ExtrasCustomLinksListOK) Error() string {
 	return fmt.Sprintf("[GET /extras/custom-links/][%d] extrasCustomLinksListOK  %+v", 200, o.Payload)
 }
+
+func (o *ExtrasCustomLinksListOK) String() string {
+	return fmt.Sprintf("[GET /extras/custom-links/][%d] extrasCustomLinksListOK  %+v", 200, o.Payload)
+}
+
 func (o *ExtrasCustomLinksListOK) GetPayload() *ExtrasCustomLinksListOKBody {
 	return o.Payload
 }
@@ -93,46 +117,8 @@ func (o *ExtrasCustomLinksListOK) readResponse(response runtime.ClientResponse, 
 	return nil
 }
 
-// NewExtrasCustomLinksListDefault creates a ExtrasCustomLinksListDefault with default headers values
-func NewExtrasCustomLinksListDefault(code int) *ExtrasCustomLinksListDefault {
-	return &ExtrasCustomLinksListDefault{
-		_statusCode: code,
-	}
-}
-
-/* ExtrasCustomLinksListDefault describes a response with status code -1, with default header values.
-
-ExtrasCustomLinksListDefault extras custom links list default
-*/
-type ExtrasCustomLinksListDefault struct {
-	_statusCode int
-
-	Payload interface{}
-}
-
-// Code gets the status code for the extras custom links list default response
-func (o *ExtrasCustomLinksListDefault) Code() int {
-	return o._statusCode
-}
-
-func (o *ExtrasCustomLinksListDefault) Error() string {
-	return fmt.Sprintf("[GET /extras/custom-links/][%d] extras_custom-links_list default  %+v", o._statusCode, o.Payload)
-}
-func (o *ExtrasCustomLinksListDefault) GetPayload() interface{} {
-	return o.Payload
-}
-
-func (o *ExtrasCustomLinksListDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
-		return err
-	}
-
-	return nil
-}
-
-/*ExtrasCustomLinksListOKBody extras custom links list o k body
+/*
+ExtrasCustomLinksListOKBody extras custom links list o k body
 swagger:model ExtrasCustomLinksListOKBody
 */
 type ExtrasCustomLinksListOKBody struct {
