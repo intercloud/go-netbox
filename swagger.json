@@ -55533,7 +55533,7 @@
                 },
                 "_occupied": {
                     "title": "occupied",
-                    "type": "string",
+                    "type": "boolean",
                     "readOnly": true
                 }
             },
@@ -58633,7 +58633,7 @@
                 },
                 "_occupied": {
                     "title": "occupied",
-                    "type": "string",
+                    "type": "boolean",
                     "readOnly": true
                 }
             },
