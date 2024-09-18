@@ -1280,11 +1280,22 @@ func Test_netbox_ExtrasAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ExtrasAPIService ExtrasObjectChangesList", func(t *testing.T) {
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsBulkDestroy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasObjectChangesList(context.Background()).Execute()
+		httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsBulkDestroy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsBulkPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsBulkPartialUpdate(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1292,13 +1303,204 @@ func Test_netbox_ExtrasAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test ExtrasAPIService ExtrasObjectChangesRetrieve", func(t *testing.T) {
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsBulkUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsBulkUpdate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsCreate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsCreate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsDestroy", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var id int32
 
-		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasObjectChangesRetrieve(context.Background(), id).Execute()
+		httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsDestroy(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsPartialUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationGroupsUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationGroupsUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsBulkDestroy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsBulkDestroy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsBulkPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsBulkPartialUpdate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsBulkUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsBulkUpdate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsCreate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsCreate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsDestroy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsDestroy(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsPartialUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasNotificationsUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasNotificationsUpdate(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -1518,6 +1720,120 @@ func Test_netbox_ExtrasAPIService(t *testing.T) {
 		var id string
 
 		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasScriptsUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsBulkDestroy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsBulkDestroy(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsBulkPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsBulkPartialUpdate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsBulkUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsBulkUpdate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsCreate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsCreate(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsDestroy", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsDestroy(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsList", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsList(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsPartialUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsPartialUpdate(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsRetrieve", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsRetrieve(context.Background(), id).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ExtrasAPIService ExtrasSubscriptionsUpdate", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var id int32
+
+		resp, httpRes, err := apiClient.ExtrasAPI.ExtrasSubscriptionsUpdate(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
