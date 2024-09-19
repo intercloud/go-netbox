@@ -39,8 +39,8 @@ build:
 	$(EXEC) goimports -w .
 
 # Build without fetching a new version of openapi.yaml from netbox-docker
-.PHONY: build
-build:
+.PHONY: build-no-fetch
+build-no-fetch:
 	$(EXEC) ./scripts/set-versions.sh $(NETBOX_VERSION) $(NETBOX_DOCKER_VERSION)
 	$(EXEC) ./scripts/fix-spec.py
 	./scripts/generate-code.sh

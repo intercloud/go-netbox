@@ -106726,7 +106726,6 @@ components:
           format: int64
           readOnly: true
       required:
-      - devicetype_count
       - display
       - id
       - name
@@ -122498,7 +122497,6 @@ components:
           readOnly: true
       required:
       - created
-      - devicetype_count
       - display
       - display_url
       - id
