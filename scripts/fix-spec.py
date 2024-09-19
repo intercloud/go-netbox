@@ -27,7 +27,8 @@ if 'components' in data and 'schemas' in data['components']:
 
             for ntype in nullable_types:
                 if ntype in schema['properties']:
-                    schema['properties'][ntype]['nullable'] = True
+                    if 'nullable' in schema['properties'][ntype]:
+                        schema['properties'][ntype]['nullable'] = True
 
             # Fix non-nullable types
             # See: https://github.com/OpenAPITools/openapi-generator/issues/18006
@@ -40,6 +41,11 @@ if 'components' in data and 'schemas' in data['components']:
                 if ntype in schema['properties']:
                     if schema['properties'][ntype]['format'] == 'binary':
                         schema['properties'][ntype].pop('nullable')
+
+            # Fix required 'device_count' not returned by Netbox API
+            if 'required' in schema:
+                if 'device_count' in schema['required']:
+                    schema['required'].remove('device_count')
 
 # Save the spec file
 with open(SPEC_PATH, 'w') as file:

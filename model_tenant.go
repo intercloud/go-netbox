@@ -35,7 +35,7 @@ type Tenant struct {
 	Created              NullableTime             `json:"created"`
 	LastUpdated          NullableTime             `json:"last_updated"`
 	CircuitCount         int64                    `json:"circuit_count"`
-	DeviceCount          int64                    `json:"device_count"`
+	DeviceCount          *int64                   `json:"device_count,omitempty"`
 	IpaddressCount       int64                    `json:"ipaddress_count"`
 	PrefixCount          int64                    `json:"prefix_count"`
 	RackCount            int64                    `json:"rack_count"`
@@ -53,7 +53,7 @@ type _Tenant Tenant
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTenant(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, deviceCount int64, ipaddressCount int64, prefixCount int64, rackCount int64, siteCount int64, virtualmachineCount int64, vlanCount int64, vrfCount int64, clusterCount int64) *Tenant {
+func NewTenant(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, ipaddressCount int64, prefixCount int64, rackCount int64, siteCount int64, virtualmachineCount int64, vlanCount int64, vrfCount int64, clusterCount int64) *Tenant {
 	this := Tenant{}
 	this.Id = id
 	this.Url = url
@@ -64,7 +64,6 @@ func NewTenant(id int32, url string, displayUrl string, display string, name str
 	this.Created = created
 	this.LastUpdated = lastUpdated
 	this.CircuitCount = circuitCount
-	this.DeviceCount = deviceCount
 	this.IpaddressCount = ipaddressCount
 	this.PrefixCount = prefixCount
 	this.RackCount = rackCount
@@ -475,28 +474,36 @@ func (o *Tenant) SetCircuitCount(v int64) {
 	o.CircuitCount = v
 }
 
-// GetDeviceCount returns the DeviceCount field value
+// GetDeviceCount returns the DeviceCount field value if set, zero value otherwise.
 func (o *Tenant) GetDeviceCount() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		var ret int64
 		return ret
 	}
-
-	return o.DeviceCount
+	return *o.DeviceCount
 }
 
-// GetDeviceCountOk returns a tuple with the DeviceCount field value
+// GetDeviceCountOk returns a tuple with the DeviceCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetDeviceCountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		return nil, false
 	}
-	return &o.DeviceCount, true
+	return o.DeviceCount, true
 }
 
-// SetDeviceCount sets field value
+// HasDeviceCount returns a boolean if a field has been set.
+func (o *Tenant) HasDeviceCount() bool {
+	if o != nil && !IsNil(o.DeviceCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceCount gets a reference to the given int64 and assigns it to the DeviceCount field.
 func (o *Tenant) SetDeviceCount(v int64) {
-	o.DeviceCount = v
+	o.DeviceCount = &v
 }
 
 // GetIpaddressCount returns the IpaddressCount field value
@@ -725,7 +732,9 @@ func (o Tenant) ToMap() (map[string]interface{}, error) {
 	toSerialize["created"] = o.Created.Get()
 	toSerialize["last_updated"] = o.LastUpdated.Get()
 	toSerialize["circuit_count"] = o.CircuitCount
-	toSerialize["device_count"] = o.DeviceCount
+	if !IsNil(o.DeviceCount) {
+		toSerialize["device_count"] = o.DeviceCount
+	}
 	toSerialize["ipaddress_count"] = o.IpaddressCount
 	toSerialize["prefix_count"] = o.PrefixCount
 	toSerialize["rack_count"] = o.RackCount
@@ -756,7 +765,6 @@ func (o *Tenant) UnmarshalJSON(data []byte) (err error) {
 		"created",
 		"last_updated",
 		"circuit_count",
-		"device_count",
 		"ipaddress_count",
 		"prefix_count",
 		"rack_count",

@@ -37,7 +37,7 @@ type Cluster struct {
 	CustomFields         map[string]interface{}    `json:"custom_fields,omitempty"`
 	Created              NullableTime              `json:"created"`
 	LastUpdated          NullableTime              `json:"last_updated"`
-	DeviceCount          int64                     `json:"device_count"`
+	DeviceCount          *int64                    `json:"device_count,omitempty"`
 	VirtualmachineCount  int64                     `json:"virtualmachine_count"`
 	AdditionalProperties map[string]interface{}
 }
@@ -48,7 +48,7 @@ type _Cluster Cluster
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCluster(id int32, url string, displayUrl string, display string, name string, type_ BriefClusterType, created NullableTime, lastUpdated NullableTime, deviceCount int64, virtualmachineCount int64) *Cluster {
+func NewCluster(id int32, url string, displayUrl string, display string, name string, type_ BriefClusterType, created NullableTime, lastUpdated NullableTime, virtualmachineCount int64) *Cluster {
 	this := Cluster{}
 	this.Id = id
 	this.Url = url
@@ -58,7 +58,6 @@ func NewCluster(id int32, url string, displayUrl string, display string, name st
 	this.Type = type_
 	this.Created = created
 	this.LastUpdated = lastUpdated
-	this.DeviceCount = deviceCount
 	this.VirtualmachineCount = virtualmachineCount
 	return &this
 }
@@ -556,28 +555,36 @@ func (o *Cluster) SetLastUpdated(v time.Time) {
 	o.LastUpdated.Set(&v)
 }
 
-// GetDeviceCount returns the DeviceCount field value
+// GetDeviceCount returns the DeviceCount field value if set, zero value otherwise.
 func (o *Cluster) GetDeviceCount() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		var ret int64
 		return ret
 	}
-
-	return o.DeviceCount
+	return *o.DeviceCount
 }
 
-// GetDeviceCountOk returns a tuple with the DeviceCount field value
+// GetDeviceCountOk returns a tuple with the DeviceCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Cluster) GetDeviceCountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		return nil, false
 	}
-	return &o.DeviceCount, true
+	return o.DeviceCount, true
 }
 
-// SetDeviceCount sets field value
+// HasDeviceCount returns a boolean if a field has been set.
+func (o *Cluster) HasDeviceCount() bool {
+	if o != nil && !IsNil(o.DeviceCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceCount gets a reference to the given int64 and assigns it to the DeviceCount field.
 func (o *Cluster) SetDeviceCount(v int64) {
-	o.DeviceCount = v
+	o.DeviceCount = &v
 }
 
 // GetVirtualmachineCount returns the VirtualmachineCount field value
@@ -646,7 +653,9 @@ func (o Cluster) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["created"] = o.Created.Get()
 	toSerialize["last_updated"] = o.LastUpdated.Get()
-	toSerialize["device_count"] = o.DeviceCount
+	if !IsNil(o.DeviceCount) {
+		toSerialize["device_count"] = o.DeviceCount
+	}
 	toSerialize["virtualmachine_count"] = o.VirtualmachineCount
 
 	for key, value := range o.AdditionalProperties {
@@ -669,7 +678,6 @@ func (o *Cluster) UnmarshalJSON(data []byte) (err error) {
 		"type",
 		"created",
 		"last_updated",
-		"device_count",
 		"virtualmachine_count",
 	}
 

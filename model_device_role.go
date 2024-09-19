@@ -36,7 +36,7 @@ type DeviceRole struct {
 	CustomFields         map[string]interface{}      `json:"custom_fields,omitempty"`
 	Created              NullableTime                `json:"created"`
 	LastUpdated          NullableTime                `json:"last_updated"`
-	DeviceCount          int64                       `json:"device_count"`
+	DeviceCount          *int64                      `json:"device_count,omitempty"`
 	VirtualmachineCount  int64                       `json:"virtualmachine_count"`
 	AdditionalProperties map[string]interface{}
 }
@@ -47,7 +47,7 @@ type _DeviceRole DeviceRole
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeviceRole(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, deviceCount int64, virtualmachineCount int64) *DeviceRole {
+func NewDeviceRole(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, virtualmachineCount int64) *DeviceRole {
 	this := DeviceRole{}
 	this.Id = id
 	this.Url = url
@@ -57,7 +57,6 @@ func NewDeviceRole(id int32, url string, displayUrl string, display string, name
 	this.Slug = slug
 	this.Created = created
 	this.LastUpdated = lastUpdated
-	this.DeviceCount = deviceCount
 	this.VirtualmachineCount = virtualmachineCount
 	return &this
 }
@@ -469,28 +468,36 @@ func (o *DeviceRole) SetLastUpdated(v time.Time) {
 	o.LastUpdated.Set(&v)
 }
 
-// GetDeviceCount returns the DeviceCount field value
+// GetDeviceCount returns the DeviceCount field value if set, zero value otherwise.
 func (o *DeviceRole) GetDeviceCount() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		var ret int64
 		return ret
 	}
-
-	return o.DeviceCount
+	return *o.DeviceCount
 }
 
-// GetDeviceCountOk returns a tuple with the DeviceCount field value
+// GetDeviceCountOk returns a tuple with the DeviceCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DeviceRole) GetDeviceCountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		return nil, false
 	}
-	return &o.DeviceCount, true
+	return o.DeviceCount, true
 }
 
-// SetDeviceCount sets field value
+// HasDeviceCount returns a boolean if a field has been set.
+func (o *DeviceRole) HasDeviceCount() bool {
+	if o != nil && !IsNil(o.DeviceCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceCount gets a reference to the given int64 and assigns it to the DeviceCount field.
 func (o *DeviceRole) SetDeviceCount(v int64) {
-	o.DeviceCount = v
+	o.DeviceCount = &v
 }
 
 // GetVirtualmachineCount returns the VirtualmachineCount field value
@@ -553,7 +560,9 @@ func (o DeviceRole) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["created"] = o.Created.Get()
 	toSerialize["last_updated"] = o.LastUpdated.Get()
-	toSerialize["device_count"] = o.DeviceCount
+	if !IsNil(o.DeviceCount) {
+		toSerialize["device_count"] = o.DeviceCount
+	}
 	toSerialize["virtualmachine_count"] = o.VirtualmachineCount
 
 	for key, value := range o.AdditionalProperties {
@@ -576,7 +585,6 @@ func (o *DeviceRole) UnmarshalJSON(data []byte) (err error) {
 		"slug",
 		"created",
 		"last_updated",
-		"device_count",
 		"virtualmachine_count",
 	}
 

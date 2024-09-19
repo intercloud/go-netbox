@@ -26,7 +26,7 @@ type BriefPlatform struct {
 	Name                 string  `json:"name"`
 	Slug                 string  `json:"slug"`
 	Description          *string `json:"description,omitempty"`
-	DeviceCount          int64   `json:"device_count"`
+	DeviceCount          *int64  `json:"device_count,omitempty"`
 	VirtualmachineCount  int64   `json:"virtualmachine_count"`
 	AdditionalProperties map[string]interface{}
 }
@@ -37,14 +37,13 @@ type _BriefPlatform BriefPlatform
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBriefPlatform(id int32, url string, display string, name string, slug string, deviceCount int64, virtualmachineCount int64) *BriefPlatform {
+func NewBriefPlatform(id int32, url string, display string, name string, slug string, virtualmachineCount int64) *BriefPlatform {
 	this := BriefPlatform{}
 	this.Id = id
 	this.Url = url
 	this.Display = display
 	this.Name = name
 	this.Slug = slug
-	this.DeviceCount = deviceCount
 	this.VirtualmachineCount = virtualmachineCount
 	return &this
 }
@@ -209,28 +208,36 @@ func (o *BriefPlatform) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetDeviceCount returns the DeviceCount field value
+// GetDeviceCount returns the DeviceCount field value if set, zero value otherwise.
 func (o *BriefPlatform) GetDeviceCount() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		var ret int64
 		return ret
 	}
-
-	return o.DeviceCount
+	return *o.DeviceCount
 }
 
-// GetDeviceCountOk returns a tuple with the DeviceCount field value
+// GetDeviceCountOk returns a tuple with the DeviceCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *BriefPlatform) GetDeviceCountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DeviceCount) {
 		return nil, false
 	}
-	return &o.DeviceCount, true
+	return o.DeviceCount, true
 }
 
-// SetDeviceCount sets field value
+// HasDeviceCount returns a boolean if a field has been set.
+func (o *BriefPlatform) HasDeviceCount() bool {
+	if o != nil && !IsNil(o.DeviceCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceCount gets a reference to the given int64 and assigns it to the DeviceCount field.
 func (o *BriefPlatform) SetDeviceCount(v int64) {
-	o.DeviceCount = v
+	o.DeviceCount = &v
 }
 
 // GetVirtualmachineCount returns the VirtualmachineCount field value
@@ -275,7 +282,9 @@ func (o BriefPlatform) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["device_count"] = o.DeviceCount
+	if !IsNil(o.DeviceCount) {
+		toSerialize["device_count"] = o.DeviceCount
+	}
 	toSerialize["virtualmachine_count"] = o.VirtualmachineCount
 
 	for key, value := range o.AdditionalProperties {
@@ -295,7 +304,6 @@ func (o *BriefPlatform) UnmarshalJSON(data []byte) (err error) {
 		"display",
 		"name",
 		"slug",
-		"device_count",
 		"virtualmachine_count",
 	}
 

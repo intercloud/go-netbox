@@ -21,14 +21,14 @@ Name | Type | Description | Notes
 **Created** | **NullableTime** |  | [readonly] 
 **LastUpdated** | **NullableTime** |  | [readonly] 
 **RackCount** | **int32** |  | [readonly] [default to 0]
-**DeviceCount** | **int32** |  | [readonly] [default to 0]
+**DeviceCount** | Pointer to **int32** |  | [optional] [readonly] [default to 0]
 **Depth** | **int32** |  | [readonly] 
 
 ## Methods
 
 ### NewLocation
 
-`func NewLocation(id int32, url string, displayUrl string, display string, name string, slug string, site BriefSite, created NullableTime, lastUpdated NullableTime, rackCount int32, deviceCount int32, depth int32, ) *Location`
+`func NewLocation(id int32, url string, displayUrl string, display string, name string, slug string, site BriefSite, created NullableTime, lastUpdated NullableTime, rackCount int32, depth int32, ) *Location`
 
 NewLocation instantiates a new Location object
 This constructor will assign default values to properties that have it defined,
@@ -477,6 +477,11 @@ and a boolean to check if the value has been set.
 
 SetDeviceCount sets DeviceCount field to given value.
 
+### HasDeviceCount
+
+`func (o *Location) HasDeviceCount() bool`
+
+HasDeviceCount returns a boolean if a field has been set.
 
 ### GetDepth
 
