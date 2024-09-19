@@ -40,7 +40,7 @@ type Tenant struct {
 	PrefixCount          int64                    `json:"prefix_count"`
 	RackCount            int64                    `json:"rack_count"`
 	SiteCount            int64                    `json:"site_count"`
-	VirtualmachineCount  int64                    `json:"virtualmachine_count"`
+	VirtualmachineCount  *int64                   `json:"virtualmachine_count,omitempty"`
 	VlanCount            int64                    `json:"vlan_count"`
 	VrfCount             int64                    `json:"vrf_count"`
 	ClusterCount         int64                    `json:"cluster_count"`
@@ -53,7 +53,7 @@ type _Tenant Tenant
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTenant(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, ipaddressCount int64, prefixCount int64, rackCount int64, siteCount int64, virtualmachineCount int64, vlanCount int64, vrfCount int64, clusterCount int64) *Tenant {
+func NewTenant(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, ipaddressCount int64, prefixCount int64, rackCount int64, siteCount int64, vlanCount int64, vrfCount int64, clusterCount int64) *Tenant {
 	this := Tenant{}
 	this.Id = id
 	this.Url = url
@@ -68,7 +68,6 @@ func NewTenant(id int32, url string, displayUrl string, display string, name str
 	this.PrefixCount = prefixCount
 	this.RackCount = rackCount
 	this.SiteCount = siteCount
-	this.VirtualmachineCount = virtualmachineCount
 	this.VlanCount = vlanCount
 	this.VrfCount = vrfCount
 	this.ClusterCount = clusterCount
@@ -602,28 +601,36 @@ func (o *Tenant) SetSiteCount(v int64) {
 	o.SiteCount = v
 }
 
-// GetVirtualmachineCount returns the VirtualmachineCount field value
+// GetVirtualmachineCount returns the VirtualmachineCount field value if set, zero value otherwise.
 func (o *Tenant) GetVirtualmachineCount() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.VirtualmachineCount) {
 		var ret int64
 		return ret
 	}
-
-	return o.VirtualmachineCount
+	return *o.VirtualmachineCount
 }
 
-// GetVirtualmachineCountOk returns a tuple with the VirtualmachineCount field value
+// GetVirtualmachineCountOk returns a tuple with the VirtualmachineCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Tenant) GetVirtualmachineCountOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.VirtualmachineCount) {
 		return nil, false
 	}
-	return &o.VirtualmachineCount, true
+	return o.VirtualmachineCount, true
 }
 
-// SetVirtualmachineCount sets field value
+// HasVirtualmachineCount returns a boolean if a field has been set.
+func (o *Tenant) HasVirtualmachineCount() bool {
+	if o != nil && !IsNil(o.VirtualmachineCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetVirtualmachineCount gets a reference to the given int64 and assigns it to the VirtualmachineCount field.
 func (o *Tenant) SetVirtualmachineCount(v int64) {
-	o.VirtualmachineCount = v
+	o.VirtualmachineCount = &v
 }
 
 // GetVlanCount returns the VlanCount field value
@@ -739,7 +746,9 @@ func (o Tenant) ToMap() (map[string]interface{}, error) {
 	toSerialize["prefix_count"] = o.PrefixCount
 	toSerialize["rack_count"] = o.RackCount
 	toSerialize["site_count"] = o.SiteCount
-	toSerialize["virtualmachine_count"] = o.VirtualmachineCount
+	if !IsNil(o.VirtualmachineCount) {
+		toSerialize["virtualmachine_count"] = o.VirtualmachineCount
+	}
 	toSerialize["vlan_count"] = o.VlanCount
 	toSerialize["vrf_count"] = o.VrfCount
 	toSerialize["cluster_count"] = o.ClusterCount
@@ -769,7 +778,6 @@ func (o *Tenant) UnmarshalJSON(data []byte) (err error) {
 		"prefix_count",
 		"rack_count",
 		"site_count",
-		"virtualmachine_count",
 		"vlan_count",
 		"vrf_count",
 		"cluster_count",

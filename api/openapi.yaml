@@ -105446,7 +105446,6 @@ components:
       - id
       - name
       - url
-      - virtualmachine_count
     BriefClusterGroup:
       type: object
       description: Adds support for custom fields and tags.
@@ -105941,7 +105940,6 @@ components:
       - name
       - slug
       - url
-      - virtualmachine_count
     BriefDeviceRoleRequest:
       type: object
       description: Adds support for custom fields and tags.
@@ -106867,7 +106865,6 @@ components:
       - name
       - slug
       - url
-      - virtualmachine_count
     BriefPlatformRequest:
       type: object
       description: Adds support for custom fields and tags.
@@ -109545,7 +109542,6 @@ components:
       - name
       - type
       - url
-      - virtualmachine_count
     ClusterGroup:
       type: object
       description: Adds support for custom fields and tags.
@@ -113080,7 +113076,6 @@ components:
       - name
       - slug
       - url
-      - virtualmachine_count
     DeviceRoleRequest:
       type: object
       description: Adds support for custom fields and tags.
@@ -136599,7 +136594,6 @@ components:
       - name
       - slug
       - url
-      - virtualmachine_count
     PlatformRequest:
       type: object
       description: Adds support for custom fields and tags.
@@ -144070,7 +144064,6 @@ components:
       - rack_count
       - slug
       - url
-      - virtualmachine_count
       - vlan_count
     SiteGroup:
       type: object
@@ -144529,7 +144522,6 @@ components:
       - site_count
       - slug
       - url
-      - virtualmachine_count
       - vlan_count
       - vrf_count
     TenantGroup:

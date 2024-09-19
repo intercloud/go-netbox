@@ -21,13 +21,13 @@ Name | Type | Description | Notes
 **Created** | **NullableTime** |  | [readonly] 
 **LastUpdated** | **NullableTime** |  | [readonly] 
 **DeviceCount** | Pointer to **int64** |  | [optional] [readonly] 
-**VirtualmachineCount** | **int64** |  | [readonly] 
+**VirtualmachineCount** | Pointer to **int64** |  | [optional] [readonly] 
 
 ## Methods
 
 ### NewCluster
 
-`func NewCluster(id int32, url string, displayUrl string, display string, name string, type_ BriefClusterType, created NullableTime, lastUpdated NullableTime, virtualmachineCount int64, ) *Cluster`
+`func NewCluster(id int32, url string, displayUrl string, display string, name string, type_ BriefClusterType, created NullableTime, lastUpdated NullableTime, ) *Cluster`
 
 NewCluster instantiates a new Cluster object
 This constructor will assign default values to properties that have it defined,
@@ -496,6 +496,11 @@ and a boolean to check if the value has been set.
 
 SetVirtualmachineCount sets VirtualmachineCount field to given value.
 
+### HasVirtualmachineCount
+
+`func (o *Cluster) HasVirtualmachineCount() bool`
+
+HasVirtualmachineCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

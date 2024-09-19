@@ -31,14 +31,14 @@ Name | Type | Description | Notes
 **DeviceCount** | Pointer to **int64** |  | [optional] [readonly] 
 **PrefixCount** | **int64** |  | [readonly] 
 **RackCount** | **int64** |  | [readonly] 
-**VirtualmachineCount** | **int64** |  | [readonly] 
+**VirtualmachineCount** | Pointer to **int64** |  | [optional] [readonly] 
 **VlanCount** | **int64** |  | [readonly] 
 
 ## Methods
 
 ### NewSite
 
-`func NewSite(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, prefixCount int64, rackCount int64, virtualmachineCount int64, vlanCount int64, ) *Site`
+`func NewSite(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, prefixCount int64, rackCount int64, vlanCount int64, ) *Site`
 
 NewSite instantiates a new Site object
 This constructor will assign default values to properties that have it defined,
@@ -772,6 +772,11 @@ and a boolean to check if the value has been set.
 
 SetVirtualmachineCount sets VirtualmachineCount field to given value.
 
+### HasVirtualmachineCount
+
+`func (o *Site) HasVirtualmachineCount() bool`
+
+HasVirtualmachineCount returns a boolean if a field has been set.
 
 ### GetVlanCount
 
