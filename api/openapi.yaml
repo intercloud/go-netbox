@@ -105936,7 +105936,6 @@ components:
           format: int64
           readOnly: true
       required:
-      - device_count
       - display
       - id
       - name
@@ -105993,7 +105992,6 @@ components:
           format: int64
           readOnly: true
       required:
-      - device_count
       - display
       - id
       - manufacturer
@@ -106865,7 +106863,6 @@ components:
           format: int64
           readOnly: true
       required:
-      - device_count
       - display
       - id
       - name
@@ -107258,7 +107255,6 @@ components:
           format: int64
           readOnly: true
       required:
-      - device_count
       - display
       - id
       - name
@@ -109543,7 +109539,6 @@ components:
           readOnly: true
       required:
       - created
-      - device_count
       - display
       - display_url
       - id
@@ -113079,7 +113074,6 @@ components:
           readOnly: true
       required:
       - created
-      - device_count
       - display
       - display_url
       - id
@@ -113337,7 +113331,6 @@ components:
       - console_server_port_template_count
       - created
       - device_bay_template_count
-      - device_count
       - display
       - display_url
       - front_port_template_count
@@ -122378,7 +122371,6 @@ components:
       required:
       - _depth
       - created
-      - device_count
       - display
       - display_url
       - id
@@ -136602,7 +136594,6 @@ components:
           readOnly: true
       required:
       - created
-      - device_count
       - display
       - display_url
       - id
@@ -141339,7 +141330,6 @@ components:
           readOnly: true
       required:
       - created
-      - device_count
       - display
       - display_url
       - id
@@ -144073,7 +144063,6 @@ components:
       required:
       - circuit_count
       - created
-      - device_count
       - display
       - display_url
       - id
@@ -144531,7 +144520,6 @@ components:
       - circuit_count
       - cluster_count
       - created
-      - device_count
       - display
       - display_url
       - id

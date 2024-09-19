@@ -38,6 +38,15 @@ build:
 	$(EXEC) go mod tidy
 	$(EXEC) goimports -w .
 
+# Build without fetching a new version of openapi.yaml from netbox-docker
+.PHONY: build
+build:
+	$(EXEC) ./scripts/set-versions.sh $(NETBOX_VERSION) $(NETBOX_DOCKER_VERSION)
+	$(EXEC) ./scripts/fix-spec.py
+	./scripts/generate-code.sh
+	$(EXEC) go mod tidy
+	$(EXEC) goimports -w .
+
 .PHONY: test
 test:
 	$(EXEC) go test -v ./...

@@ -20,14 +20,14 @@ Name | Type | Description | Notes
 **CustomFields** | Pointer to **map[string]interface{}** |  | [optional] 
 **Created** | **NullableTime** |  | [readonly] 
 **LastUpdated** | **NullableTime** |  | [readonly] 
-**DeviceCount** | **int64** |  | [readonly] 
+**DeviceCount** | Pointer to **int64** |  | [optional] [readonly] 
 **VirtualmachineCount** | **int64** |  | [readonly] 
 
 ## Methods
 
 ### NewCluster
 
-`func NewCluster(id int32, url string, displayUrl string, display string, name string, type_ BriefClusterType, created NullableTime, lastUpdated NullableTime, deviceCount int64, virtualmachineCount int64, ) *Cluster`
+`func NewCluster(id int32, url string, displayUrl string, display string, name string, type_ BriefClusterType, created NullableTime, lastUpdated NullableTime, virtualmachineCount int64, ) *Cluster`
 
 NewCluster instantiates a new Cluster object
 This constructor will assign default values to properties that have it defined,
@@ -471,6 +471,11 @@ and a boolean to check if the value has been set.
 
 SetDeviceCount sets DeviceCount field to given value.
 
+### HasDeviceCount
+
+`func (o *Cluster) HasDeviceCount() bool`
+
+HasDeviceCount returns a boolean if a field has been set.
 
 ### GetVirtualmachineCount
 

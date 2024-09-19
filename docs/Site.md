@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **Created** | **NullableTime** |  | [readonly] 
 **LastUpdated** | **NullableTime** |  | [readonly] 
 **CircuitCount** | **int64** |  | [readonly] 
-**DeviceCount** | **int64** |  | [readonly] 
+**DeviceCount** | Pointer to **int64** |  | [optional] [readonly] 
 **PrefixCount** | **int64** |  | [readonly] 
 **RackCount** | **int64** |  | [readonly] 
 **VirtualmachineCount** | **int64** |  | [readonly] 
@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 
 ### NewSite
 
-`func NewSite(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, deviceCount int64, prefixCount int64, rackCount int64, virtualmachineCount int64, vlanCount int64, ) *Site`
+`func NewSite(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, prefixCount int64, rackCount int64, virtualmachineCount int64, vlanCount int64, ) *Site`
 
 NewSite instantiates a new Site object
 This constructor will assign default values to properties that have it defined,
@@ -707,6 +707,11 @@ and a boolean to check if the value has been set.
 
 SetDeviceCount sets DeviceCount field to given value.
 
+### HasDeviceCount
+
+`func (o *Site) HasDeviceCount() bool`
+
+HasDeviceCount returns a boolean if a field has been set.
 
 ### GetPrefixCount
 

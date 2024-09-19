@@ -37,14 +37,14 @@ Name | Type | Description | Notes
 **CustomFields** | Pointer to **map[string]interface{}** |  | [optional] 
 **Created** | **NullableTime** |  | [readonly] 
 **LastUpdated** | **NullableTime** |  | [readonly] 
-**DeviceCount** | **int64** |  | [readonly] 
+**DeviceCount** | Pointer to **int64** |  | [optional] [readonly] 
 **PowerfeedCount** | **int64** |  | [readonly] 
 
 ## Methods
 
 ### NewRack
 
-`func NewRack(id int32, url string, displayUrl string, display string, name string, site BriefSite, created NullableTime, lastUpdated NullableTime, deviceCount int64, powerfeedCount int64, ) *Rack`
+`func NewRack(id int32, url string, displayUrl string, display string, name string, site BriefSite, created NullableTime, lastUpdated NullableTime, powerfeedCount int64, ) *Rack`
 
 NewRack instantiates a new Rack object
 This constructor will assign default values to properties that have it defined,
@@ -1023,6 +1023,11 @@ and a boolean to check if the value has been set.
 
 SetDeviceCount sets DeviceCount field to given value.
 
+### HasDeviceCount
+
+`func (o *Rack) HasDeviceCount() bool`
+
+HasDeviceCount returns a boolean if a field has been set.
 
 ### GetPowerfeedCount
 
