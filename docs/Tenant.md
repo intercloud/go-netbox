@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **PrefixCount** | **int64** |  | [readonly] 
 **RackCount** | **int64** |  | [readonly] 
 **SiteCount** | **int64** |  | [readonly] 
-**VirtualmachineCount** | **int64** |  | [readonly] 
+**VirtualmachineCount** | Pointer to **int64** |  | [optional] [readonly] 
 **VlanCount** | **int64** |  | [readonly] 
 **VrfCount** | **int64** |  | [readonly] 
 **ClusterCount** | **int64** |  | [readonly] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewTenant
 
-`func NewTenant(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, ipaddressCount int64, prefixCount int64, rackCount int64, siteCount int64, virtualmachineCount int64, vlanCount int64, vrfCount int64, clusterCount int64, ) *Tenant`
+`func NewTenant(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, circuitCount int64, ipaddressCount int64, prefixCount int64, rackCount int64, siteCount int64, vlanCount int64, vrfCount int64, clusterCount int64, ) *Tenant`
 
 NewTenant instantiates a new Tenant object
 This constructor will assign default values to properties that have it defined,
@@ -506,6 +506,11 @@ and a boolean to check if the value has been set.
 
 SetVirtualmachineCount sets VirtualmachineCount field to given value.
 
+### HasVirtualmachineCount
+
+`func (o *Tenant) HasVirtualmachineCount() bool`
+
+HasVirtualmachineCount returns a boolean if a field has been set.
 
 ### GetVlanCount
 

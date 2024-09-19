@@ -1,6 +1,6 @@
 # go-netbox
 
-[![GoDoc](https://pkg.go.dev/badge/github.com/netbox-community/go-netbox/v4)](https://pkg.go.dev/github.com/netbox-community/go-netbox/v4) [![Build Status](https://github.com/netbox-community/go-netbox/workflows/main/badge.svg?branch=master)](https://github.com/netbox-community/go-netbox/actions) [![Report Card](https://goreportcard.com/badge/github.com/netbox-community/go-netbox)](https://goreportcard.com/report/github.com/netbox-community/go-netbox)
+[![GoDoc](https://pkg.go.dev/badge/github.com/intercloud/go-netbox/v4)](https://pkg.go.dev/github.com/intercloud/go-netbox/v4) [![Build Status](https://github.com/intercloud/go-netbox/workflows/main/badge.svg?branch=master)](https://github.com/intercloud/go-netbox/actions) [![Report Card](https://goreportcard.com/badge/github.com/intercloud/go-netbox)](https://goreportcard.com/report/github.com/intercloud/go-netbox)
 
 _go-netbox_ is —to nobody's surprise— the official [Go](https://go.dev) API client for the [Netbox](https://github.com/netbox-community/netbox) IPAM and DCIM service.
 
@@ -11,10 +11,10 @@ This project follows [Semantic Versioning](https://semver.org). The version of t
 Use `go get` to add the library as a dependency to your project. Do not forget to run `go mod init` first if necessary.
 
 ```shell
-go get github.com/netbox-community/go-netbox/v4
+go get github.com/intercloud/go-netbox/v4
 
 # Or install a specific version
-go get github.com/netbox-community/go-netbox/v4@v4.0.3-0
+go get github.com/intercloud/go-netbox/v4@v4.1.1-5
 ```
 
 **Note:** dependencies should be managed with [Go modules](https://go.dev/doc/modules/managing-dependencies).
@@ -32,7 +32,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/netbox-community/go-netbox/v4"
+	"github.com/intercloud/go-netbox/v4"
 )
 
 func main() {
@@ -58,7 +58,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/netbox-community/go-netbox/v4"
+	"github.com/intercloud/go-netbox/v4"
 )
 
 func main() {
@@ -80,7 +80,7 @@ func main() {
 }
 ```
 
-See [docs](docs) or [reference](https://pkg.go.dev/github.com/netbox-community/go-netbox) for more information on all possible usages.
+See [docs](docs) or [reference](https://pkg.go.dev/github.com/intercloud/go-netbox) for more information on all possible usages.
 
 ## Development
 

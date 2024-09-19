@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **CustomFields** | Pointer to **map[string]interface{}** |  | [optional] 
 **Created** | **NullableTime** |  | [readonly] 
 **LastUpdated** | **NullableTime** |  | [readonly] 
-**DevicetypeCount** | **int64** |  | [readonly] 
+**DevicetypeCount** | Pointer to **int64** |  | [optional] [readonly] 
 **InventoryitemCount** | **int64** |  | [readonly] 
 **PlatformCount** | **int64** |  | [readonly] 
 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewManufacturer
 
-`func NewManufacturer(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, devicetypeCount int64, inventoryitemCount int64, platformCount int64, ) *Manufacturer`
+`func NewManufacturer(id int32, url string, displayUrl string, display string, name string, slug string, created NullableTime, lastUpdated NullableTime, inventoryitemCount int64, platformCount int64, ) *Manufacturer`
 
 NewManufacturer instantiates a new Manufacturer object
 This constructor will assign default values to properties that have it defined,
@@ -312,6 +312,11 @@ and a boolean to check if the value has been set.
 
 SetDevicetypeCount sets DevicetypeCount field to given value.
 
+### HasDevicetypeCount
+
+`func (o *Manufacturer) HasDevicetypeCount() bool`
+
+HasDevicetypeCount returns a boolean if a field has been set.
 
 ### GetInventoryitemCount
 

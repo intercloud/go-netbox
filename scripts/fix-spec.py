@@ -40,12 +40,19 @@ if 'components' in data and 'schemas' in data['components']:
             for ntype in non_nullable_types:
                 if ntype in schema['properties']:
                     if schema['properties'][ntype]['format'] == 'binary':
-                        schema['properties'][ntype].pop('nullable')
+                        if 'nullable' in schema['properties'][ntype]:
+                            schema['properties'][ntype].pop('nullable')
 
-            # Fix required 'device_count' not returned by Netbox API
+            # Fix required '*_count' not returned by Netbox API
             if 'required' in schema:
                 if 'device_count' in schema['required']:
                     schema['required'].remove('device_count')
+
+                if 'devicetype_count' in schema['required']:
+                    schema['required'].remove('devicetype_count')
+
+                if 'virtualmachine_count' in schema['required']:
+                    schema['required'].remove('virtualmachine_count')
 
 # Save the spec file
 with open(SPEC_PATH, 'w') as file:
